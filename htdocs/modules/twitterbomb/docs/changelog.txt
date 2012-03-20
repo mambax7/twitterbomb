@@ -1,0 +1,22 @@
+========================================
+ 2012/01/09 14:00:00 Version 1.26 STABLE
+========================================
+ - Changed /admin/index.php - Fixed WSOD on Dashboard with $log[0]-getVar to ->getVar  (Wishcraft)
+ - Changed /include/function.php - Fixed twitterbomb_searchtwitter() Line 140 - 155 - Exceptions  (Wishcraft)
+ - Changed /cron/tweet.php - Changed Exceptions and Closure of Routine as well as population of $cids (Wishcraft)
+ 
+========================================
+ 2011/11/09 20:11:00 Version 1.25 STABLE
+========================================
+ - Changed $pathImageAdmin renamed to $GLOBALS['twitterbombImageAdmin']  (Wishcraft)
+ - Changed $pathImageIcon renamed to $GLOBALS['twitterbombImageIcon']  (Wishcraft)
+ - Changed $GLOBALS['xoopsModule'] in module renamed to $GLOBALS['twitterbombModule'] (Wishcraft)
+ - Changed $GLOBALS['xoopsModuleConfig'] in module renamed to $GLOBALS['twitterbombModuleConfig'] (Wishcraft)
+ - Changed XOOPS 2.5.x Admin GUI  (Wishcraft)
+ - Changed XOOPS 2.5.x Admin GUI Language Constants for Statistics language/english/admin.php  (Wishcraft)
+ - Changed Admin Menu Language Constants for Statistics language/english/modinfo.php (GUI)  (Wishcraft)
+ - Added header for index and associate PHP files /header.php (Wishcraft)
+ - Added header for control panel and associate PHP files admin/header.php (Wishcraft)
+ - Changed twitterbomb_searchtwitter() - Fixed Exceptions and added '-' to exclude exception as smart string include/functions.php  (Wishcraft)
+ - Changed twitterbomb_searchtwitter() - Changed Exception Seperator from Pipe '|' to Space ' '  (Wishcraft)
+ - Changed twitterbomb_adminMenu() - Changed to include addNavigation from XOOPS 2.5 Admin GUI  (Wishcraft)
