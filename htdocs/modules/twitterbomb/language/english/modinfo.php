@@ -436,10 +436,10 @@
 		define('_MI_TWEETBOMB_LINK_ADMENU9', 'admin/index.php?op=retweet&fct=list');
 		define('_MI_TWEETBOMB_TITLE_ADMENU10', 'Search & Reply');
 		define('_MI_TWEETBOMB_ICON_ADMENU10', '../../'.$GLOBALS['twitterbombModule']->getInfo('icons32').'/twitterbomb.reply.png');
-		define('_MI_TWEETBOMB_LINK_ADMENU10', 'admin/index.php?op=reply&fct=list');
+		define('_MI_TWEETBOMB_LINK_ADMENU10', 'admin/index.php?op=replies&fct=list');
 		define('_MI_TWEETBOMB_TITLE_ADMENU11', 'Mention & Reply');
-		define('_MI_TWEETBOMB_ICON_ADMENU11', '../../'.$GLOBALS['twitterbombModule']->getInfo('icons32').'/twitterbomb.mention.png');
-		define('_MI_TWEETBOMB_LINK_ADMENU11', 'admin/index.php?op=mention&fct=list');				
+		define('_MI_TWEETBOMB_ICON_ADMENU11', '../../'.$GLOBALS['twitterbombModule']->getInfo('icons32').'/twitterbomb.mentions.png');
+		define('_MI_TWEETBOMB_LINK_ADMENU11', 'admin/index.php?op=mentions&fct=list');				
 		define('_MI_TWEETBOMB_TITLE_ADMENU12', 'Preferences');
 		define('_MI_TWEETBOMB_ICON_ADMENU12', '../../'.$GLOBALS['twitterbombModule']->getInfo('icons32').'/twitterbomb.preferences.png');
 		define('_MI_TWEETBOMB_LINK_ADMENU12', '../system/admin.php?fct=preferences&op=showmod&mod='.$GLOBALS['twitterbombModule']->getVar('mid'));

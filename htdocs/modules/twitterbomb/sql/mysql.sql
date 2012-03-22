@@ -229,9 +229,11 @@ CREATE TABLE `twitterbomb_replies` (
   `keywords` VARCHAR(500) DEFAULT NULL,
   `type` enum('bomb','reply') default 'reply',
   `uid` INT(13) UNSIGNED DEFAULT '0',
+  `replies` INT(13) UNSIGNED DEFAULT '0',
   `created` INT(13) UNSIGNED DEFAULT '0',
   `updated` INT(13) UNSIGNED DEFAULT '0',
   `actioned` INT(13) UNSIGNED DEFAULT '0',
+  `replied` INT(13) UNSIGNED DEFAULT '0',
   PRIMARY KEY  (`rpid`),
   KEY `COMMON` (`cid`,`catid`,`keywords`(45),`type`,`uid`,`created`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
@@ -244,9 +246,10 @@ CREATE TABLE `twitterbomb_mentions` (
   `keywords` VARCHAR(500) DEFAULT NULL,
   `rpids` VARCHAR(750) DEFAULT NULL,  
   `uid` INT(13) UNSIGNED DEFAULT '0',
+  `mentions` INT(13) UNSIGNED DEFAULT '0',
   `created` INT(13) UNSIGNED DEFAULT '0',
   `updated` INT(13) UNSIGNED DEFAULT '0',
-  `actioned` INT(13) UNSIGNED DEFAULT '0',
+  `mentioned` INT(13) UNSIGNED DEFAULT '0',
   PRIMARY KEY  (`mid`),
   KEY `COMMON` (`cid`,`catid`,`keywords`(45),`type`,`uid`,`created`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;

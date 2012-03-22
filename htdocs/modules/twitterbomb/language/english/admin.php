@@ -366,6 +366,86 @@
 	
 	// About
 	define('_AM_TWITTERBOMB_ABOUT_MAKEDONATE', 'Make a donation to chronolabs co-op');
+	
+	// Version 1.28
+	// Table headers
+	define('_AM_TWEETBOMB_TH_MID', 'Mention ID');
+	define('_AM_TWEETBOMB_TH_RPID', 'Reply ID');
+	define('_AM_TWEETBOMB_TH_URLID', 'URL');
+	define('_AM_TWEETBOMB_TH_REPLY', 'Reply');
+	define('_AM_TWEETBOMB_TH_KEYWORDS', 'Keywords');
+	define('_AM_TWEETBOMB_TH_USER', 'User/Hashtag');
+	define('_AM_TWEETBOMB_TH_MENTIONS', 'Num. of Mentions');
+	define('_AM_TWEETBOMB_TH_REPLIES', 'Num. of Replies');
+	
+	// Smarty Template Constants
+	define('_AM_TWEETBOMB_EDITNEW_REPLIES_H1', 'Edit/New Reply');
+	define('_AM_TWEETBOMB_EDITNEW_REPLIES_P', 'From here you can create or edit in full your campaign.');
+	define('_AM_TWEETBOMB_REPLIES_H1', 'Replies');
+	define('_AM_TWEETBOMB_REPLIES_P', 'From here you can browse and edit your replies paginated.');
+	define('_AM_TWEETBOMB_NEW_REPLIES_H1', 'New Reply');
+	define('_AM_TWEETBOMB_NEW_REPLIES_P', 'Create a new Reply');
+	define('_AM_TWEETBOMB_EDITNEW_MENTIONS_H1', 'Edit/New Mention');
+	define('_AM_TWEETBOMB_EDITNEW_MENTIONS_P', 'From here you can create or edit in full your campaign.');
+	define('_AM_TWEETBOMB_MENTIONS_H1', 'Mentions');
+	define('_AM_TWEETBOMB_MENTIONS_P', 'From here you can browse and edit your mentions paginated.');
+	define('_AM_TWEETBOMB_NEW_MENTIONS_H1', 'New Mention');
+	define('_AM_TWEETBOMB_NEW_MENTIONS_P', 'Create a new Mention');
+	
+	// Admin redirection messages
+	define('_AM_MSG_REPLIES_FAILEDTOSAVE', 'Reply Failed to Save!');
+	define('_AM_MSG_REPLIES_SAVEDOKEY', 'Reply Saved Okey!');
+	define('_AM_MSG_REPLIES_FAILEDTODELETE', 'Reply Failed to Delete.');
+	define('_AM_MSG_REPLIES_DELETED', 'Reply Deleted');
+	define('_AM_MSG_REPLIES_DELETE', 'Do you wish to delete the reply "%s"?');
+	define('_AM_MSG_MENTIONS_FAILEDTOSAVE', 'Mention Failed to Save!');
+	define('_AM_MSG_MENTIONS_SAVEDOKEY', 'Mention Saved Okey!');
+	define('_AM_MSG_MENTIONS_FAILEDTODELETE', 'Mention Failed to Delete.');
+	define('_AM_MSG_MENTIONS_DELETED', 'Mention Deleted');
+	define('_AM_MSG_MENTIONS_DELETE', 'Do you wish to delete the mention user/hashtag "%s"?');
+
+	//Forms Definitions
+	define('_AM_TWEETBOMB_FORM_ISNEW_REPLIES', 'New Search and Reply');
+	define('_AM_TWEETBOMB_FORM_EDIT_REPLIES', 'Edit Search and Reply');
+	define('_AM_TWEETBOMB_FORM_CID_REPLIES', 'Campaign');
+	define('_AM_TWEETBOMB_FORM_DESC_CID_REPLIES', ''); 
+	define('_AM_TWEETBOMB_FORM_CATID_REPLIES', 'Category');
+	define('_AM_TWEETBOMB_FORM_DESC_CATID_REPLIES', '');
+	define('_AM_TWEETBOMB_FORM_TYPE_REPLIES', 'Reply Type');
+	define('_AM_TWEETBOMB_FORM_DESC_TYPE_REPLIES', '');
+	define('_AM_TWEETBOMB_FORM_REPLY_REPLIES', 'Reply Tweet');
+	define('_AM_TWEETBOMB_FORM_DESC_REPLY_REPLIES', '');
+	define('_AM_TWEETBOMB_FORM_KEYWORDS_REPLIES', 'Keywords must have');
+	define('_AM_TWEETBOMB_FORM_DESC_KEYWORDS_REPLIES', '"-keyword" will exclude and "keyword" will be inclusive and select.');
+	define('_AM_TWEETBOMB_FORM_URLS_REPLIES', 'URL to Include');
+	define('_AM_TWEETBOMB_FORM_DESC_URLS_REPLIES', '');
+	define('_AM_TWEETBOMB_FORM_RCID_REPLIES', 'Reply Bomb to Use');
+	define('_AM_TWEETBOMB_FORM_DESC_RCID_REPLIES', '');
+	define('_AM_TWEETBOMB_FORM_UID_REPLIES', 'Owner');
+	define('_AM_TWEETBOMB_FORM_CREATED_REPLIES', 'Created');
+	define('_AM_TWEETBOMB_FORM_ACTIONED_REPLIES', 'Actioned');
+	define('_AM_TWEETBOMB_FORM_UPDATED_REPLIES', 'Updated');
+	define('_AM_TWEETBOMB_FORM_REPLIED_REPLIES', 'Last Replied');
+	define('_AM_TWEETBOMB_FORM_REPLIES_REPLIES', 'Number of Replies');
+	define('_AM_TWEETBOMB_FORM_ISNEW_MENTIONS', 'New Search and Mention');
+	define('_AM_TWEETBOMB_FORM_EDIT_MENTIONS', 'Edit Search and Mention');
+	define('_AM_TWEETBOMB_FORM_CID_MENTIONS', 'Campaign');
+	define('_AM_TWEETBOMB_FORM_DESC_CID_MENTIONS', ''); 
+	define('_AM_TWEETBOMB_FORM_CATID_MENTIONS', 'Category');
+	define('_AM_TWEETBOMB_FORM_DESC_CATID_MENTIONS', '');
+	define('_AM_TWEETBOMB_FORM_USER_MENTIONS', 'Twitter Username/Hashtag');
+	define('_AM_TWEETBOMB_FORM_DESC_USER_MENTIONS', 'Must include @ or # at the front!');
+	define('_AM_TWEETBOMB_FORM_KEYWORDS_MENTIONS', 'Keywords must have');
+	define('_AM_TWEETBOMB_FORM_DESC_KEYWORDS_MENTIONS', '"-keyword" will exclude and "keyword" will be inclusive and select.');
+	define('_AM_TWEETBOMB_FORM_RPIDS_MENTIONS', 'Replies to Use');
+	define('_AM_TWEETBOMB_FORM_DESC_RPIDS_MENTIONS', '');
+	define('_AM_TWEETBOMB_FORM_UID_MENTIONS', 'Owner');
+	define('_AM_TWEETBOMB_FORM_CREATED_MENTIONS', 'Created');
+	define('_AM_TWEETBOMB_FORM_ACTIONED_MENTIONS', 'Actioned');
+	define('_AM_TWEETBOMB_FORM_UPDATED_MENTIONS', 'Updated');
+	define('_AM_TWEETBOMB_FORM_MENTIONED_MENTIONS', 'Last Mentioned');
+	define('_AM_TWEETBOMB_FORM_MENTIONS_MENTIONS', 'Number of Mentions');
+	
 ?>
 	
 	

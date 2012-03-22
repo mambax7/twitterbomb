@@ -179,7 +179,7 @@
 		$ele['keywords'] = new XoopsFormTextArea(_AM_TWEETBOMB_FORM_KEYWORDS_REPLIES, $id.'[keywords]', $object->getVar('keywords'), 4, 26);
 		$ele['keywords']->setDescription(_AM_TWEETBOMB_FORM_DESC_KEYWORDS_REPLIES);
 		$ele['urlid'] = new TwitterBombFormSelectUrls(_AM_TWEETBOMB_FORM_URLS_REPLIES, $id.'[urlid]', $object->getVar('urlid'));
-		$ele['urlid']->setDescription(_AM_TWEETBOMB_FORM_DESC_urlid_REPLIES);
+		$ele['urlid']->setDescription(_AM_TWEETBOMB_FORM_DESC_URLS_REPLIES);
 		$ele['rcid'] = new TwitterBombFormSelectCampaigns(_AM_TWEETBOMB_FORM_RCID_REPLIES, $id.'[rcid]', $object->getVar('rcid'), 1, false, 'bomb');
 		$ele['rcid']->setDescription(_AM_TWEETBOMB_FORM_DESC_RCID_REPLIES);
 						
@@ -195,7 +195,13 @@
 		}
 		if ($object->getVar('updated')>0) {
 			$ele['updated'] = new XoopsFormLabel(_AM_TWEETBOMB_FORM_UPDATED_REPLIES, date(_DATESTRING, $object->getVar('updated')));
+		}
+		if ($object->getVar('replied')>0) {
+			$ele['replied'] = new XoopsFormLabel(_AM_TWEETBOMB_FORM_REPLIED_REPLIES, date(_DATESTRING, $object->getVar('replied')));
 		}			
+		if ($object->getVar('replies')>0) {
+			$ele['replies'] = new XoopsFormLabel(_AM_TWEETBOMB_FORM_REPLIES_REPLIES, $object->getVar('replies'));
+		}						
 		$ele['submit'] = new XoopsFormButton('', 'submit', _SUBMIT, 'submit');
 		
 		$required = array('catid', 'type');
@@ -251,6 +257,12 @@
 		}
 		if ($object->getVar('updated')>0) {
 			$ele['updated'] = new XoopsFormLabel(_AM_TWEETBOMB_FORM_UPDATED_MENTIONS, date(_DATESTRING, $object->getVar('updated')));
+		}
+		if ($object->getVar('mentioned')>0) {
+			$ele['mentioned'] = new XoopsFormLabel(_AM_TWEETBOMB_FORM_MENTIONED_MENTIONS, date(_DATESTRING, $object->getVar('mentioned')));
+		}			
+		if ($object->getVar('mentions')>0) {
+			$ele['mentions'] = new XoopsFormLabel(_AM_TWEETBOMB_FORM_MENTIONS_MENTIONS, $object->getVar('mentions'));
 		}			
 		$ele['submit'] = new XoopsFormButton('', 'submit', _SUBMIT, 'submit');
 		

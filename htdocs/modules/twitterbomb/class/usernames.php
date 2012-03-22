@@ -29,7 +29,7 @@ class TwitterbombUsernames extends XoopsObject
 		$this->initVar('created', XOBJ_DTYPE_INT, null, false);
 		$this->initVar('updated', XOBJ_DTYPE_INT, null, false);
 		$this->initVar('actioned', XOBJ_DTYPE_INT, null, false);
-		$this->initVar('type', XOBJ_DTYPE_ENUM, 'bomb', false, false, false, array('bomb', 'scheduler'));
+		$this->initVar('type', XOBJ_DTYPE_ENUM, 'bomb', false, false, false, array('bomb', 'scheduler','reply','mentions'));
 		$this->initVar('source_nick', XOBJ_DTYPE_TXTBOX, null, false, 64);
 		$this->initVar('tweeted', XOBJ_DTYPE_INT, null, false);
 	}

@@ -18,7 +18,7 @@ function xoops_module_update_twitterbomb(&$module) {
 	
 	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_scheduler')."` ADD COLUMN `pregmatch_replace` VARCHAR(500) DEFAULT NULL";
 	
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')."` ADD COLUMN `type` ENUM('bomb','secheduler') DEFAULT 'bomb'";
+	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')."` ADD COLUMN `type` ENUM('bomb','secheduler','reply','mentions') DEFAULT 'bomb'";
 	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')."` ADD COLUMN `source_nick` VARCHAR(64) DEFAULT NULL";
 	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')."` ADD COLUMN `tweeted` INT(13) UNSIGNED DEFAULT '0'";
 	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')."` ADD COLUMN `id` VARCHAR(128) DEFAULT NULL";
@@ -259,9 +259,11 @@ $sql[] = "CREATE TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_scheduler')."
   `keywords` VARCHAR(500) DEFAULT NULL,
   `type` enum('bomb','reply') default 'reply',
   `uid` INT(13) UNSIGNED DEFAULT '0',
+  `replies` INT(13) UNSIGNED DEFAULT '0',
   `created` INT(13) UNSIGNED DEFAULT '0',
   `updated` INT(13) UNSIGNED DEFAULT '0',
   `actioned` INT(13) UNSIGNED DEFAULT '0',
+  `replied` INT(13) UNSIGNED DEFAULT '0',
   PRIMARY KEY  (`rpid`),
   KEY `COMMON` (`cid`,`catid`,`keywords`(45),`type`,`uid`,`created`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8";
@@ -274,8 +276,10 @@ $sql[] = "CREATE TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_scheduler')."
   `keywords` VARCHAR(500) DEFAULT NULL,
   `rpids` VARCHAR(750) DEFAULT NULL,  
   `uid` INT(13) UNSIGNED DEFAULT '0',
+  `mentions` INT(13) UNSIGNED DEFAULT '0',
   `created` INT(13) UNSIGNED DEFAULT '0',
   `updated` INT(13) UNSIGNED DEFAULT '0',
+  `mentioned` INT(13) UNSIGNED DEFAULT '0',
   PRIMARY KEY  (`mid`),
   KEY `COMMON` (`cid`,`catid`,`keywords`(45),`type`,`uid`,`created`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8";

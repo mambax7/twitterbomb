@@ -23,9 +23,12 @@ class TwitterbombReplies extends XoopsObject
 		$this->initVar('keywords', XOBJ_DTYPE_TXTBOX, null, true, 500);    
 		$this->initVar('uid', XOBJ_DTYPE_INT, null, false);
 		$this->initVar('type', XOBJ_DTYPE_ENUM, 'reply', false, false, false, array('bomb','reply'));
+		$this->initVar('replies', XOBJ_DTYPE_INT, null, false);
 		$this->initVar('created', XOBJ_DTYPE_INT, null, false);
 		$this->initVar('updated', XOBJ_DTYPE_INT, null, false);
-		$this->initVar('actioned', XOBJ_DTYPE_INT, null, false);		
+		$this->initVar('actioned', XOBJ_DTYPE_INT, null, false);
+		$this->initVar('replied', XOBJ_DTYPE_INT, null, false);		
+		
 	}
 
 	function getForm() {

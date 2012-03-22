@@ -32,9 +32,9 @@
 
 		 	$indexAdmin = new ModuleAdmin();	
 		    $indexAdmin->addInfoBox(_AM_TWEETBOMB_ADMIN_COUNTS);
-		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_CAMPAIGNSBOMB."</label>", $campaign_handler->getCount(new Criteria('`type`', 'bomb', '=')), 'Green');
-		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_CAMPAIGNSSCHEDULER."</label>", $campaign_handler->getCount(new Criteria('`type`', 'scheduler', '=')), 'Green');
-		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_CAMPAIGNSRETWEET."</label>", $campaign_handler->getCount(new Criteria('`type`', 'retweet', '=')), 'Green');
+		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_REPLIESSBOMB."</label>", $campaign_handler->getCount(new Criteria('`type`', 'bomb', '=')), 'Green');
+		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_REPLIESSSCHEDULER."</label>", $campaign_handler->getCount(new Criteria('`type`', 'scheduler', '=')), 'Green');
+		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_REPLIESSRETWEET."</label>", $campaign_handler->getCount(new Criteria('`type`', 'retweet', '=')), 'Green');
 
 		    $criteria_a = new CriteriaCompo(new Criteria('timed', '0'));
 			$criteria_b = new CriteriaCompo(new Criteria('timed', '1'));
@@ -43,8 +43,8 @@
 			$criteria = new CriteriaCompo($criteria_a);
 			$criteria->add($criteria_b, 'OR');
 
-		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_CAMPAIGNSACTIVE."</label>", $campaign_handler->getCount($criteria), 'Orange');
-		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_CAMPAIGNSINACTIVE."</label>", ($campaign_handler->getCount(NULL)-$campaign_handler->getCount($criteria)), 'Orange');
+		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_REPLIESSACTIVE."</label>", $campaign_handler->getCount($criteria), 'Orange');
+		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_REPLIESSINACTIVE."</label>", ($campaign_handler->getCount(NULL)-$campaign_handler->getCount($criteria)), 'Orange');
 		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_CATEGORIES."</label>", $category_handler->getCount(NULL), 'Green');
 		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_KEYWORDS."</label>", $keywords_handler->getCount(NULL), 'Green');
 			$indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_URLS."</label>", $urls_handler->getCount(NULL), 'Green');
@@ -227,10 +227,10 @@
 						$campaign->setVar('timed', FALSE);
 						
 					if (!$id=$campaign_handler->insert($campaign)) {
-						redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_CAMPAIGN_FAILEDTOSAVE);
+						redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_REPLIES_FAILEDTOSAVE);
 						exit(0);
 					} else {
-						redirect_header('index.php?op='.$op.'&fct=edit&id='.$id, 10, _AM_MSG_CAMPAIGN_SAVEDOKEY);
+						redirect_header('index.php?op='.$op.'&fct=edit&id='.$id, 10, _AM_MSG_REPLIES_SAVEDOKEY);
 						exit(0);
 					}
 					break;
@@ -245,11 +245,11 @@
 						if (empty($_POST[$id]['timed']))
 							$campaign->setVar('timed', FALSE);
 						if (!$campaign_handler->insert($campaign)) {
-							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_CAMPAIGN_FAILEDTOSAVE);
+							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_REPLIES_FAILEDTOSAVE);
 							exit(0);
 						} 
 					}
-					redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_CAMPAIGN_SAVEDOKEY);
+					redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_REPLIES_SAVEDOKEY);
 					exit(0);
 					break;				
 				case "delete":	
@@ -259,15 +259,15 @@
 					if (isset($_POST['id'])&&$id=intval($_POST['id'])) {
 						$campaign = $campaign_handler->get($id);
 						if (!$campaign_handler->delete($campaign)) {
-							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_CAMPAIGN_FAILEDTODELETE);
+							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_REPLIES_FAILEDTODELETE);
 							exit(0);
 						} else {
-							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_CAMPAIGN_DELETED);
+							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_REPLIES_DELETED);
 							exit(0);
 						}
 					} else {
 						$campaign = $campaign_handler->get(intval($_REQUEST['id']));
-						xoops_confirm(array('id'=>$_REQUEST['id'], 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_CAMPAIGN_DELETE, $campaign->getVar('name')));
+						xoops_confirm(array('id'=>$_REQUEST['id'], 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_REPLIES_DELETE, $campaign->getVar('name')));
 					}
 					break;
 			}
@@ -1200,7 +1200,255 @@
 					}
 					break;
 			}
-			break;								
+			break;
+		case "mentions":	
+			switch ($fct)
+			{
+				default:
+				case "list":				
+					twitterbomb_adminMenu(11);
+					
+					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
+					
+					$mentions_handler =& xoops_getmodulehandler('mentions', 'twitterbomb');
+
+					$criteria = $mentions_handler->getFilterCriteria($filter);
+					$ttl = $mentions_handler->getCount($criteria);
+					$sort = !empty($_REQUEST['sort'])?''.$_REQUEST['sort'].'':'created';
+					
+					$pagenav = new XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
+					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
+			
+					foreach (array(	'cid','catid','mid','user','keywords','mentions','created','updated','mentioned','mentions') as $id => $key) {
+						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?($order=='DESC'?'ASC':'DESC'):$order).'&op='.$op.'&filter='.$filter.'">'.(defined('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key)))?constant('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))):'_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))).'</a>');
+						$GLOBALS['xoopsTpl']->assign('filter_'.strtolower(str_replace('-','_',$key)).'_th', $mentions_handler->getFilterForm($filter, $key, $sort, $op, $fct));
+					}
+					
+					$GLOBALS['xoopsTpl']->assign('limit', $limit);
+					$GLOBALS['xoopsTpl']->assign('start', $start);
+					$GLOBALS['xoopsTpl']->assign('order', $order);
+					$GLOBALS['xoopsTpl']->assign('sort', $sort);
+					$GLOBALS['xoopsTpl']->assign('filter', $filter);
+					$GLOBALS['xoopsTpl']->assign('xoConfig', $GLOBALS['xoopsModuleConfig']);
+										
+					$criteria->setStart($start);
+					$criteria->setLimit($limit);
+					$criteria->setSort('`'.$sort.'`');
+					$criteria->setOrder($order);
+						
+					$mentionss = $mentions_handler->getObjects($criteria, true);
+					foreach($mentionss as $cid => $mentions) {
+						$GLOBALS['xoopsTpl']->append('mentions', $mentions->toArray());
+					}
+					$GLOBALS['xoopsTpl']->assign('form', tweetbomb_mentions_get_form(false));
+					$GLOBALS['xoopsTpl']->assign('php_self', $_SERVER['PHP_SELF']);
+					$GLOBALS['xoopsTpl']->display('db:twitterbomb_cpanel_mentions_list.html');
+					break;		
+					
+				case "new":
+				case "edit":
+					
+					twitterbomb_adminMenu(11);
+					
+					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
+					
+					$mentions_handler =& xoops_getmodulehandler('mentions', 'twitterbomb');
+					if (isset($_REQUEST['id'])) {
+						$mentions = $mentions_handler->get(intval($_REQUEST['id']));
+					} else {
+						$mentions = $mentions_handler->create();
+					}
+					
+					$GLOBALS['xoopsTpl']->assign('form', $mentions->getForm());
+					$GLOBALS['xoopsTpl']->assign('php_self', $_SERVER['PHP_SELF']);
+					$GLOBALS['xoopsTpl']->display('db:twitterbomb_cpanel_mentions_edit.html');
+					break;
+				case "save":
+					
+					$mentions_handler =& xoops_getmodulehandler('mentions', 'twitterbomb');
+					$id=0;
+					if ($id=intval($_REQUEST['id'])) {
+						$mentions = $mentions_handler->get($id);
+					} else {
+						$mentions = $mentions_handler->create();
+					}
+					$mentions->setVars($_POST[$id]);
+					$mentions->setVar('start', strtotime($_POST[$id]['start']));
+					$mentions->setVar('end', strtotime($_POST[$id]['end']));
+					
+					if (empty($_POST[$id]['timed']))
+						$mentions->setVar('timed', FALSE);
+						
+					if (!$id=$mentions_handler->insert($mentions)) {
+						redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_REPLIES_FAILEDTOSAVE);
+						exit(0);
+					} else {
+						redirect_header('index.php?op='.$op.'&fct=edit&id='.$id, 10, _AM_MSG_REPLIES_SAVEDOKEY);
+						exit(0);
+					}
+					break;
+				case "savelist":
+					
+					$mentions_handler =& xoops_getmodulehandler('mentions', 'twitterbomb');
+					foreach($_REQUEST['id'] as $id) {
+						$mentions = $mentions_handler->get($id);
+						$mentions->setVars($_POST[$id]);
+						$mentions->setVar('start', strtotime($_POST[$id]['start']));
+						$mentions->setVar('end', strtotime($_POST[$id]['end']));
+						if (empty($_POST[$id]['timed']))
+							$mentions->setVar('timed', FALSE);
+						if (!$mentions_handler->insert($mentions)) {
+							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_REPLIES_FAILEDTOSAVE);
+							exit(0);
+						} 
+					}
+					redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_REPLIES_SAVEDOKEY);
+					exit(0);
+					break;				
+				case "delete":	
+								
+					$mentions_handler =& xoops_getmodulehandler('mentions', 'twitterbomb');
+					$id=0;
+					if (isset($_POST['id'])&&$id=intval($_POST['id'])) {
+						$mentions = $mentions_handler->get($id);
+						if (!$mentions_handler->delete($mentions)) {
+							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_REPLIES_FAILEDTODELETE);
+							exit(0);
+						} else {
+							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_REPLIES_DELETED);
+							exit(0);
+						}
+					} else {
+						$mentions = $mentions_handler->get(intval($_REQUEST['id']));
+						xoops_confirm(array('id'=>$_REQUEST['id'], 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_REPLIES_DELETE, $mentions->getVar('user')));
+					}
+					break;
+			}
+			break;
+		case "replies":	
+			switch ($fct)
+			{
+				default:
+				case "list":				
+					twitterbomb_adminMenu(12);
+					
+					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
+					
+					$replies_handler =& xoops_getmodulehandler('replies', 'twitterbomb');
+
+					$criteria = $replies_handler->getFilterCriteria($filter);
+					$ttl = $replies_handler->getCount($criteria);
+					$sort = !empty($_REQUEST['sort'])?''.$_REQUEST['sort'].'':'created';
+					
+					$pagenav = new XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
+					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
+			
+					foreach (array(	'cid','catid','rpid','urlid','rcid','reply','keywords','uid','type','created','updated','replies','replied') as $id => $key) {
+						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?($order=='DESC'?'ASC':'DESC'):$order).'&op='.$op.'&filter='.$filter.'">'.(defined('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key)))?constant('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))):'_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))).'</a>');
+						$GLOBALS['xoopsTpl']->assign('filter_'.strtolower(str_replace('-','_',$key)).'_th', $replies_handler->getFilterForm($filter, $key, $sort, $op, $fct));
+					}
+					
+					$GLOBALS['xoopsTpl']->assign('limit', $limit);
+					$GLOBALS['xoopsTpl']->assign('start', $start);
+					$GLOBALS['xoopsTpl']->assign('order', $order);
+					$GLOBALS['xoopsTpl']->assign('sort', $sort);
+					$GLOBALS['xoopsTpl']->assign('filter', $filter);
+					$GLOBALS['xoopsTpl']->assign('xoConfig', $GLOBALS['xoopsModuleConfig']);
+										
+					$criteria->setStart($start);
+					$criteria->setLimit($limit);
+					$criteria->setSort('`'.$sort.'`');
+					$criteria->setOrder($order);
+						
+					$repliess = $replies_handler->getObjects($criteria, true);
+					foreach($repliess as $cid => $replies) {
+						$GLOBALS['xoopsTpl']->append('replies', $replies->toArray());
+					}
+					$GLOBALS['xoopsTpl']->assign('form', tweetbomb_replies_get_form(false));
+					$GLOBALS['xoopsTpl']->assign('php_self', $_SERVER['PHP_SELF']);
+					$GLOBALS['xoopsTpl']->display('db:twitterbomb_cpanel_replies_list.html');
+					break;		
+					
+				case "new":
+				case "edit":
+					
+					twitterbomb_adminMenu(12);
+					
+					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
+					
+					$replies_handler =& xoops_getmodulehandler('replies', 'twitterbomb');
+					if (isset($_REQUEST['id'])) {
+						$replies = $replies_handler->get(intval($_REQUEST['id']));
+					} else {
+						$replies = $replies_handler->create();
+					}
+					
+					$GLOBALS['xoopsTpl']->assign('form', $replies->getForm());
+					$GLOBALS['xoopsTpl']->assign('php_self', $_SERVER['PHP_SELF']);
+					$GLOBALS['xoopsTpl']->display('db:twitterbomb_cpanel_replies_edit.html');
+					break;
+				case "save":
+					
+					$replies_handler =& xoops_getmodulehandler('replies', 'twitterbomb');
+					$id=0;
+					if ($id=intval($_REQUEST['id'])) {
+						$replies = $replies_handler->get($id);
+					} else {
+						$replies = $replies_handler->create();
+					}
+					$replies->setVars($_POST[$id]);
+					$replies->setVar('start', strtotime($_POST[$id]['start']));
+					$replies->setVar('end', strtotime($_POST[$id]['end']));
+					
+					if (empty($_POST[$id]['timed']))
+						$replies->setVar('timed', FALSE);
+						
+					if (!$id=$replies_handler->insert($replies)) {
+						redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_REPLIES_FAILEDTOSAVE);
+						exit(0);
+					} else {
+						redirect_header('index.php?op='.$op.'&fct=edit&id='.$id, 10, _AM_MSG_REPLIES_SAVEDOKEY);
+						exit(0);
+					}
+					break;
+				case "savelist":
+					
+					$replies_handler =& xoops_getmodulehandler('replies', 'twitterbomb');
+					foreach($_REQUEST['id'] as $id) {
+						$replies = $replies_handler->get($id);
+						$replies->setVars($_POST[$id]);
+						$replies->setVar('start', strtotime($_POST[$id]['start']));
+						$replies->setVar('end', strtotime($_POST[$id]['end']));
+						if (empty($_POST[$id]['timed']))
+							$replies->setVar('timed', FALSE);
+						if (!$replies_handler->insert($replies)) {
+							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_REPLIES_FAILEDTOSAVE);
+							exit(0);
+						} 
+					}
+					redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_REPLIES_SAVEDOKEY);
+					exit(0);
+					break;				
+				case "delete":	
+								
+					$replies_handler =& xoops_getmodulehandler('replies', 'twitterbomb');
+					$id=0;
+					if (isset($_POST['id'])&&$id=intval($_POST['id'])) {
+						$replies = $replies_handler->get($id);
+						if (!$replies_handler->delete($replies)) {
+							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_REPLIES_FAILEDTODELETE);
+							exit(0);
+						} else {
+							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_REPLIES_DELETED);
+							exit(0);
+						}
+					} else {
+						$replies = $replies_handler->get(intval($_REQUEST['id']));
+						xoops_confirm(array('id'=>$_REQUEST['id'], 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_REPLIES_DELETE, $replies->getVar('reply')));
+					}
+					break;
+			}
+			break;														
 	}
 	
 	twitterbomb_footer_adminMenu();

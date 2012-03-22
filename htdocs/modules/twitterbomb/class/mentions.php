@@ -21,9 +21,10 @@ class TwitterbombMentions extends XoopsObject
 		$this->initVar('rpids', XOBJ_DTYPE_ARRAY(), array(), false);
 		$this->initVar('keywords', XOBJ_DTYPE_TXTBOX, null, true, 500);    
 		$this->initVar('uid', XOBJ_DTYPE_INT, null, false);
+		$this->initVar('mentions', XOBJ_DTYPE_INT, null, false);
 		$this->initVar('created', XOBJ_DTYPE_INT, null, false);
 		$this->initVar('updated', XOBJ_DTYPE_INT, null, false);
-		$this->initVar('actioned', XOBJ_DTYPE_INT, null, false);
+		$this->initVar('mentioned', XOBJ_DTYPE_INT, null, false);
 	}
 
 	function getForm() {

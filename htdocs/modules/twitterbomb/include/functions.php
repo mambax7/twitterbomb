@@ -473,6 +473,14 @@ if (!function_exists('tweetbomb_getFilterElement')) {
 		$components = tweetbomb_getFilterURLComponents($filter, $field, $sort);
 		include_once('formobjects.twitterbomb.php');
 		switch ($field) {
+			case 'urlid':
+				$ele = new TwitterBombFormSelectUrls('', 'filter_'.$field.'', $components['value']);
+		    	$ele->setExtra('onchange="window.open(\''.$_SERVER['PHP_SELF'].'?'.$components['extra'].'&filter='.$components['filter'].(!empty($components['filter'])?'|':'').$field.',\'+this.options[this.selectedIndex].value'.(!empty($components['operator'])?'+\','.$components['operator'].'\'':'').',\'_self\')"');
+		    	break;
+			case 'rcid':
+				$ele = new TwitterBombFormSelectCampaigns('', 'filter_'.$field.'', $components['value'], 1, false, 'bomb');
+		    	$ele->setExtra('onchange="window.open(\''.$_SERVER['PHP_SELF'].'?'.$components['extra'].'&filter='.$components['filter'].(!empty($components['filter'])?'|':'').$field.',\'+this.options[this.selectedIndex].value'.(!empty($components['operator'])?'+\','.$components['operator'].'\'':'').',\'_self\')"');
+		    	break;
 			case 'cid':
 				$ele = new TwitterBombFormSelectCampaigns('', 'filter_'.$field.'', $components['value']);
 		    	$ele->setExtra('onchange="window.open(\''.$_SERVER['PHP_SELF'].'?'.$components['extra'].'&filter='.$components['filter'].(!empty($components['filter'])?'|':'').$field.',\'+this.options[this.selectedIndex].value'.(!empty($components['operator'])?'+\','.$components['operator'].'\'':'').',\'_self\')"');
@@ -529,7 +537,12 @@ if (!function_exists('tweetbomb_getFilterElement')) {
 		    case 'search':
 		    case 'skip':
 		    case 'longitude':
-			case 'latitude':		    	
+			case 'latitude':
+			case 'replies':
+			case 'mentions':
+			case 'user':
+			case 'reply':
+			case 'keywords':		    	
 		    	$ele = new XoopsFormElementTray('');
 				$ele->addElement(new XoopsFormText('', 'filter_'.$field.'', 11, 40, $components['value']));
 				$button = new XoopsFormButton('', 'button_'.$field.'', '[+]');

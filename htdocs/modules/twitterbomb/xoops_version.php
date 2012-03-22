@@ -96,6 +96,8 @@ $modversion['tables'][7] = "twitterbomb_oauth";
 $modversion['tables'][8] = "twitterbomb_following";
 $modversion['tables'][9] = "twitterbomb_retweet";
 $modversion['tables'][10] = "twitterbomb_log";
+$modversion['tables'][11] = "twitterbomb_replies";
+$modversion['tables'][12] = "twitterbomb_mentions";
 
 // Blocks
 $modversion['blocks'][1]['file'] = "twitterbomb_block_bomb.php";
@@ -180,6 +182,22 @@ $modversion['blocks'][9]['edit_func'] = "b_twitterbomb_block_retweet_edit";
 $modversion['blocks'][9]['options'] = "0|10";
 $modversion['blocks'][9]['template'] = "twitterbomb_block_tweets.html" ;
 
+$modversion['blocks'][10]['file'] = "twitterbomb_block_replies.php";
+$modversion['blocks'][10]['name'] = 'Recently Replied Tweets' ;
+$modversion['blocks'][10]['description'] = "Shows recently replies items";
+$modversion['blocks'][10]['show_func'] = "b_twitterbomb_block_replies_show";
+$modversion['blocks'][10]['edit_func'] = "b_twitterbomb_block_replies_edit";
+$modversion['blocks'][10]['options'] = "0|10";
+$modversion['blocks'][10]['template'] = "twitterbomb_block_tweets.html" ;
+
+$modversion['blocks'][11]['file'] = "twitterbomb_block_mentions.php";
+$modversion['blocks'][11]['name'] = 'Recently Mentioned Tweets' ;
+$modversion['blocks'][11]['description'] = "Shows recently mentioned items";
+$modversion['blocks'][11]['show_func'] = "b_twitterbomb_block_mentions_show";
+$modversion['blocks'][11]['edit_func'] = "b_twitterbomb_block_mentions_edit";
+$modversion['blocks'][11]['options'] = "0|10";
+$modversion['blocks'][11]['template'] = "twitterbomb_block_tweets.html" ;
+
 // Templates
 $modversion['templates'][1]['file'] = 'twitterbomb_rss.html';
 $modversion['templates'][1]['description'] = 'Main Twitter Bomb RSS Feed';
@@ -231,6 +249,14 @@ $modversion['templates'][24]['file'] = 'twitterbomb_cpanel_retweet_edit.html';
 $modversion['templates'][24]['description'] = 'Main Control Panel Twitter Bomb Retweets Edit';
 $modversion['templates'][25]['file'] = 'twitterbomb_cpanel_retweet_list.html';
 $modversion['templates'][25]['description'] = 'Main Control Panel Twitter Bomb Retweets List';
+$modversion['templates'][26]['file'] = 'twitterbomb_cpanel_mentions_edit.html';
+$modversion['templates'][26]['description'] = 'Main Control Panel Twitter Bomb Mentions Edit';
+$modversion['templates'][27]['file'] = 'twitterbomb_cpanel_mentions_list.html';
+$modversion['templates'][27]['description'] = 'Main Control Panel Twitter Bomb Mentions List';
+$modversion['templates'][28]['file'] = 'twitterbomb_cpanel_replies_edit.html';
+$modversion['templates'][28]['description'] = 'Main Control Panel Twitter Bomb Replies Edit';
+$modversion['templates'][29]['file'] = 'twitterbomb_cpanel_replies_list.html';
+$modversion['templates'][29]['description'] = 'Main Control Panel Twitter Bomb Replies List';
 
 // Menu
 $i = 0;
