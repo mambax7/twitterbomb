@@ -39,11 +39,12 @@ class TwitterbombReplies extends XoopsObject
 		$ret = parent::toArray();
 		$ele = array();
 		$ele['id'] = new XoopsFormHidden('id['.$ret['rpid'].']', $this->getVar('rpid'));
-		$ele['cid'] = new TwitterBombFormSelectCampaigns('', $ret['rpid'].'[cid]', $this->getVar('cid'));
+		$ele['cid'] = new TwitterBombFormSelectCampaigns('', $ret['rpid'].'[cid]', $this->getVar('cid'), 1, false, true, 'reply');
 		$ele['catid'] = new TwitterBombFormSelectCategories('', $ret['rpid'].'[catid]', $this->getVar('catid'));
 		$ele['urlid'] = new TwitterBombFormSelectUrls('', $ret['rpid'].'[urlid]', $this->getVar('urlid'));
-		$ele['rcid'] = new TwitterBombFormSelectCampaigns('', $ret['rpid'].'[rcid]', $this->getVar('rcid'), 1, false, 0, 'bomb');
-		$ele['reply'] = new XoopsFormText('', $ret['rpid'].'[reply]', 26,64, $this->getVar('reply'));
+		$ele['rcid'] = new TwitterBombFormSelectCampaigns('', $ret['rpid'].'[rcid]', $this->getVar('rcid'), 1, false, true, 'bomb');
+		$ele['type'] = new TwitterBombFormSelectType('', $ret['rpid'].'[type]', $this->getVar('type'), 1, false, false, 'bomb,reply');
+		$ele['reply'] = new XoopsFormText('', $ret['rpid'].'[reply]', 26,140, $this->getVar('reply'));
 		$ele['keywords'] = new XoopsFormTextArea('', $ret['rpid'].'[keywords]', 26, 4, $this->getVar('keywords'));
 		
 		if ($ret['uid']>0) {
@@ -52,6 +53,16 @@ class TwitterbombReplies extends XoopsObject
 			$ele['uid'] = new XoopsFormLabel('', '<a href="'.XOOPS_URL.'/userinfo.php?uid='.$ret['uid'].'">'.$user->getVar('uname').'</a>');
 		} else {
 			$ele['uid'] = new XoopsFormLabel('', _MI_TWEETBOMB_ANONYMOUS);
+		}
+		if ($ret['replies']>0) {
+			$ele['replies'] = new XoopsFormLabel('', $ret['replies']);
+		} else {
+			$ele['replies'] = new XoopsFormLabel('', '');
+		}
+		if ($ret['replied']>0) {
+			$ele['replied'] = new XoopsFormLabel('', date(_DATESTRING, $ret['replied']));
+		} else {
+			$ele['replied'] = new XoopsFormLabel('', '');
 		}
 		if ($ret['created']>0) {
 			$ele['created'] = new XoopsFormLabel('', date(_DATESTRING, $ret['created']));
@@ -82,7 +93,7 @@ class TwitterbombReplies extends XoopsObject
 			case 'mixed':
 			case 'recent':
 			case 'poopular':
-				$func = ucfirst($this->getVar('type')).ucfirst($this->getVar('language')).'RepliesPreHook';
+				$func = ucfirst($this->getVar('type')).'RepliesPreHook';
 				break;
 			default:
 				return $this;
@@ -103,7 +114,7 @@ class TwitterbombReplies extends XoopsObject
 			case 'mixed':
 			case 'recent':
 			case 'poopular':
-				$func = ucfirst($this->getVar('type')).ucfirst($this->getVar('language')).'RepliesPostHook';
+				$func = ucfirst($this->getVar('type')).'RepliesPostHook';
 				break;
 			default:
 				return $rid;
@@ -124,7 +135,7 @@ class TwitterbombReplies extends XoopsObject
 			case 'mixed':
 			case 'recent':
 			case 'poopular':
-				$func = ucfirst($this->getVar('type')).ucfirst($this->getVar('language')).'RepliesGetHook';
+				$func = ucfirst($this->getVar('type')).'RepliesGetHook';
 				break;
 			default:
 				return $this;
@@ -137,6 +148,22 @@ class TwitterbombReplies extends XoopsObject
 		return $this;	
 	}
 	
+	function getTweet() {
+		switch($this->getVar('type')) {
+			case 'reply':
+				return $this->getVar('reply');
+				break;
+			case 'bomb':
+				$base_matrix_handler=&xoops_getmodulehandler('base_matrix', 'twitterbomb');
+				$campaign_handler=&xoops_getmodulehandler('campaign', 'twitterbomb');
+				$campaign = $campaign_handler->get($this->getVar('rcid'));
+				if (is_object($campaign)) {
+					return $base_matrix_handler->getSentence($campaign->getVar('cid'), $campaign->getVar('catid'));
+				}
+				break;
+		}
+		return false;
+	}
 }
 
 

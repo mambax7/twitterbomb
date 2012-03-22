@@ -162,6 +162,34 @@ class TwitterbombOauth extends XoopsObject
 			return false;	
 	}
 
+	function sendReply($tweet, $url, $in_reply_to_status_id = 0, $for_tweet=false) {
+		if (!is_a($this->_connection, 'TwitterOAuth'))
+			@$this->getConnection($for_tweet);
+			
+		$url = $this->shortenURL($url);
+
+		if (is_a($this->_connection, 'TwitterOAuth')&&$this->getVar('remaining_hits')>0) {
+			$tweet = twitterbomb_object2array($this->_connection->post('statuses/update', 	array(	'status'=>substr($tweet,0, (!empty($url)?126:140)).' '.$url,
+																									'wrap_links' => 'true', 'in_reply_to_status_id' => $in_reply_to_status_id 
+					 )));
+			
+			if (isset($tweet['error'])&&!empty($tweet['error']))
+				return false;
+				
+			switch ($this->_connection->http_code) {
+		  		case 200:
+		    		$this->increaseTweets(1);
+		    		$this->increaseCall(1);
+		  			return $tweet['id_str']; 
+		    		break;
+		  		default:
+		    		return false;
+		    		break;
+			}
+		} else 
+			return false;	
+	}
+	
 	function sendRetweet($id, $for_tweet=false) {
 		if (!is_a($this->_connection, 'TwitterOAuth'))
 			@$this->getConnection($for_tweet);

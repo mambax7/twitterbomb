@@ -333,6 +333,21 @@ $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = 5;
 
 $i++;
+$modversion['config'][$i]['name'] = 'replies_items';
+$modversion['config'][$i]['title'] = "_MI_TWEETBOMB_REPLIES_ITEMS";
+$modversion['config'][$i]['description'] = "_MI_TWEETBOMB_REPLIES_ITEMS_DESC";
+$modversion['config'][$i]['formtype'] = 'text';
+$modversion['config'][$i]['valuetype'] = 'int';
+$modversion['config'][$i]['default'] = 5;
+
+$i++;
+$modversion['config'][$i]['name'] = 'mentions_items';
+$modversion['config'][$i]['title'] = "_MI_TWEETBOMB_MENTIONS_ITEMS";
+$modversion['config'][$i]['description'] = "_MI_TWEETBOMB_MENTIONS_ITEMS_DESC";
+$modversion['config'][$i]['formtype'] = 'text';
+$modversion['config'][$i]['valuetype'] = 'int';
+$modversion['config'][$i]['default'] = 5;
+$i++;
 $modversion['config'][$i]['name'] = 'anonymous';
 $modversion['config'][$i]['title'] = "_MI_TWEETBOMB_ANONYMOUS";
 $modversion['config'][$i]['description'] = "_MI_TWEETBOMB_ANONYMOUS_DESC";
@@ -666,6 +681,25 @@ $i++;
 $modversion['config'][$i]['name'] = 'cron_retweet';
 $modversion['config'][$i]['title'] = '_MI_TWEETBOMB_CRON_RETWEET';
 $modversion['config'][$i]['description'] = '_MI_TWEETBOMB_CRON_RETWEET';
+$modversion['config'][$i]['formtype'] = 'yesno';
+$modversion['config'][$i]['valuetype'] = 'int';
+$modversion['config'][$i]['default'] = true;
+$modversion['config'][$i]['options'] = 	array();
+
+$i++;
+$modversion['config'][$i]['name'] = 'cron_reply';
+$modversion['config'][$i]['title'] = '_MI_TWEETBOMB_CRON_REPLIES';
+$modversion['config'][$i]['description'] = '_MI_TWEETBOMB_CRON_REPLIES';
+$modversion['config'][$i]['formtype'] = 'yesno';
+$modversion['config'][$i]['valuetype'] = 'int';
+$modversion['config'][$i]['default'] = true;
+$modversion['config'][$i]['options'] = 	array();
+
+
+$i++;
+$modversion['config'][$i]['name'] = 'cron_mention';
+$modversion['config'][$i]['title'] = '_MI_TWEETBOMB_CRON_MENTIONS';
+$modversion['config'][$i]['description'] = '_MI_TWEETBOMB_CRON_MENTIONS';
 $modversion['config'][$i]['formtype'] = 'yesno';
 $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = true;

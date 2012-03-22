@@ -465,5 +465,15 @@
 	define('_MI_TWEETBOMB_CAMPAIGN_TITLE_REPLY', 'Reply');
 	define('_MI_TWEETBOMB_CAMPAIGN_TITLE_MENTIONS', 'Mentions');
 	define('_MI_TWEETBOMB_REPLY_BOMB', 'Reply Bombing: %s Campaign');
+
+	//Preferences
+	define('_MI_TWEETBOMB_CRON_REPLIES', 'Run generate replies script on cronjob?');
+	define('_MI_TWEETBOMB_CRON_REPLIES_DESC', 'Whether you want replies to be cronned.');
+	define('_MI_TWEETBOMB_CRON_MENTIONS', 'Run generate mentions script on cronjob?');
+	define('_MI_TWEETBOMB_CRON_MENTIONS_DESC', 'Whether you want mentions to be cronned.');
+	define('_MI_TWEETBOMB_REPLIES_ITEMS', 'Replies - RSS Items');
+	define('_MI_TWEETBOMB_REPLIES_ITEMS_DESC', 'Number of items to return on RSS Feeds of a reply campaign.');
+	define('_MI_TWEETBOMB_MENTIONS_ITEMS', 'Mentions - RSS Items');
+	define('_MI_TWEETBOMB_MENTIONS_ITEMS_DESC', 'Number of items to return on RSS Feeds of a mention campaign.');
 	
 ?>

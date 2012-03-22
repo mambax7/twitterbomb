@@ -288,54 +288,54 @@
 	define('_AM_TWEETBOMB_TH_MEASUREMENT', 'Measurement');
 	define('_AM_TWEETBOMB_TH_LANGUAGE', 'Language');
 	define('_AM_TWEETBOMB_TH_SEARCHED', 'Last Searched');
-	define('_AM_TWEETBOMB_TH_RETWEETS', 'Retweets');
-	define('_AM_TWEETBOMB_TH_RETWEETED', 'Last Retweeted');
+	define('_AM_TWEETBOMB_TH_MENTIONSS', 'Retweets');
+	define('_AM_TWEETBOMB_TH_MENTIONSED', 'Last Retweeted');
 
 	//Forms Definitions
-	define('_AM_TWEETBOMB_FORM_ISNEW_RETWEET', 'New Search and Tweet');
-	define('_AM_TWEETBOMB_FORM_EDIT_RETWEET', 'Edit Search and Tweet');
-	define('_AM_TWEETBOMB_FORM_RID_RETWEET', 'Retweet ID');
-	define('_AM_TWEETBOMB_FORM_DESC_RID_RETWEET', ''); 
-	define('_AM_TWEETBOMB_FORM_SEARCH_RETWEET', 'Search For');
-	define('_AM_TWEETBOMB_FORM_DESC_SEARCH_RETWEET', 'One Item Only');
-	define('_AM_TWEETBOMB_FORM_SKIP_RETWEET', 'Exceptions');
-	define('_AM_TWEETBOMB_FORM_DESC_SKIP_RETWEET', 'IF tweet contains any of these do not retweet (Seperate with a pipe "|")');
-	define('_AM_TWEETBOMB_FORM_GEOCODE_RETWEET', 'Enable Geocoding Search');
-	define('_AM_TWEETBOMB_FORM_DESC_GEOCODE_RETWEET', 'Uses, Longitude, Latitude, Radius from point and measurement');
-	define('_AM_TWEETBOMB_FORM_LONGITUDE_RETWEET', 'Longitude');
-	define('_AM_TWEETBOMB_FORM_DESC_LONGITUDE_RETWEET', '');
-	define('_AM_TWEETBOMB_FORM_LATITUDE_RETWEET', 'Latitude');
-	define('_AM_TWEETBOMB_FORM_DESC_LATITUDE_RETWEET', '');
-	define('_AM_TWEETBOMB_FORM_RADIUS_RETWEET', 'Radius from point to search?');
-	define('_AM_TWEETBOMB_FORM_DESC_RADIUS_RETWEET', '');
-	define('_AM_TWEETBOMB_FORM_MEASUREMENT_RETWEET', 'Measurement of Radius');
-	define('_AM_TWEETBOMB_FORM_DESC_MEASUREMENT_RETWEET', '');
-	define('_AM_TWEETBOMB_FORM_LANGUAGE_RETWEET', 'Language to search in');
-	define('_AM_TWEETBOMB_FORM_DESC_LANGUAGE_RETWEET', '');
-	define('_AM_TWEETBOMB_FORM_TYPE_RETWEET', 'Type of search');
-	define('_AM_TWEETBOMB_FORM_DESC_TYPE_RETWEET', '');
-	define('_AM_TWEETBOMB_FORM_CREATED_RETWEET', 'Created');
-	define('_AM_TWEETBOMB_FORM_ACTIONED_RETWEET', 'Actioned');
-	define('_AM_TWEETBOMB_FORM_UPDATED_RETWEET', 'Updated');
-	define('_AM_TWEETBOMB_FORM_SEARCHED_RETWEET', 'Last Searched');
-	define('_AM_TWEETBOMB_FORM_RETWEETED_RETWEET', 'Last Retweeted');
-	define('_AM_TWEETBOMB_FORM_RETWEETS_RETWEET', 'Retweets');
-	define('_AM_TWEETBOMB_FORM_UID_RETWEET', 'User');
+	define('_AM_TWEETBOMB_FORM_ISNEW_MENTIONS', 'New Search and Tweet');
+	define('_AM_TWEETBOMB_FORM_EDIT_MENTIONS', 'Edit Search and Tweet');
+	define('_AM_TWEETBOMB_FORM_RID_MENTIONS', 'Retweet ID');
+	define('_AM_TWEETBOMB_FORM_DESC_RID_MENTIONS', ''); 
+	define('_AM_TWEETBOMB_FORM_SEARCH_MENTIONS', 'Search For');
+	define('_AM_TWEETBOMB_FORM_DESC_SEARCH_MENTIONS', 'One Item Only');
+	define('_AM_TWEETBOMB_FORM_SKIP_MENTIONS', 'Exceptions');
+	define('_AM_TWEETBOMB_FORM_DESC_SKIP_MENTIONS', 'IF tweet contains any of these do not retweet (Seperate with a pipe "|")');
+	define('_AM_TWEETBOMB_FORM_GEOCODE_MENTIONS', 'Enable Geocoding Search');
+	define('_AM_TWEETBOMB_FORM_DESC_GEOCODE_MENTIONS', 'Uses, Longitude, Latitude, Radius from point and measurement');
+	define('_AM_TWEETBOMB_FORM_LONGITUDE_MENTIONS', 'Longitude');
+	define('_AM_TWEETBOMB_FORM_DESC_LONGITUDE_MENTIONS', '');
+	define('_AM_TWEETBOMB_FORM_LATITUDE_MENTIONS', 'Latitude');
+	define('_AM_TWEETBOMB_FORM_DESC_LATITUDE_MENTIONS', '');
+	define('_AM_TWEETBOMB_FORM_RADIUS_MENTIONS', 'Radius from point to search?');
+	define('_AM_TWEETBOMB_FORM_DESC_RADIUS_MENTIONS', '');
+	define('_AM_TWEETBOMB_FORM_MEASUREMENT_MENTIONS', 'Measurement of Radius');
+	define('_AM_TWEETBOMB_FORM_DESC_MEASUREMENT_MENTIONS', '');
+	define('_AM_TWEETBOMB_FORM_LANGUAGE_MENTIONS', 'Language to search in');
+	define('_AM_TWEETBOMB_FORM_DESC_LANGUAGE_MENTIONS', '');
+	define('_AM_TWEETBOMB_FORM_TYPE_MENTIONS', 'Type of search');
+	define('_AM_TWEETBOMB_FORM_DESC_TYPE_MENTIONS', '');
+	define('_AM_TWEETBOMB_FORM_CREATED_MENTIONS', 'Created');
+	define('_AM_TWEETBOMB_FORM_ACTIONED_MENTIONS', 'Actioned');
+	define('_AM_TWEETBOMB_FORM_UPDATED_MENTIONS', 'Updated');
+	define('_AM_TWEETBOMB_FORM_SEARCHED_MENTIONS', 'Last Searched');
+	define('_AM_TWEETBOMB_FORM_MENTIONSED_MENTIONS', 'Last Retweeted');
+	define('_AM_TWEETBOMB_FORM_MENTIONSS_MENTIONS', 'Retweets');
+	define('_AM_TWEETBOMB_FORM_UID_MENTIONS', 'User');
 	define('_AM_TWEETBOMB_FORM_RIDS_CAMPAIGN', 'Retweet Searches to use');
 	define('_AM_TWEETBOMB_FORM_DESC_RIDS_CAMPAIGN', 'You need to have defined some <a href="index.php?op=retweet&fct=list">Search and Retweets</a> for this option which only applies to retweet campaigns.');
 	
 	//Template text
-	define('_AM_TWEETBOMB_RETWEET_H1', 'Search and Tweet');
-	define('_AM_TWEETBOMB_RETWEET_P', 'This is your entered search terms and exceptions to search for and retweet from twitter!');
-	define('_AM_TWEETBOMB_NEW_RETWEET_H1', 'New Search and Tweets');
-	define('_AM_TWEETBOMB_NEW_RETWEET_P', 'This is where you enter a search and tweet for the cron.');
+	define('_AM_TWEETBOMB_MENTIONS_H1', 'Search and Tweet');
+	define('_AM_TWEETBOMB_MENTIONS_P', 'This is your entered search terms and exceptions to search for and retweet from twitter!');
+	define('_AM_TWEETBOMB_NEW_MENTIONS_H1', 'New Search and Tweets');
+	define('_AM_TWEETBOMB_NEW_MENTIONS_P', 'This is where you enter a search and tweet for the cron.');
 
 	// Messages
-	define('_AM_MSG_RETWEET_FAILEDTOSAVE', 'Search and retweet Failed to Save!');
-	define('_AM_MSG_RETWEET_SAVEDOKEY', 'Search and retweet Saved Okey!');
-	define('_AM_MSG_RETWEET_FAILEDTODELETE', 'Search and retweet Failed to Delete.');
-	define('_AM_MSG_RETWEET_DELETED', 'Search and retweet Deleted');
-	define('_AM_MSG_RETWEET_DELETE', 'Do you wish to delete the search and retweet of "%s"?');	
+	define('_AM_MSG_MENTIONS_FAILEDTOSAVE', 'Search and retweet Failed to Save!');
+	define('_AM_MSG_MENTIONS_SAVEDOKEY', 'Search and retweet Saved Okey!');
+	define('_AM_MSG_MENTIONS_FAILEDTODELETE', 'Search and retweet Failed to Delete.');
+	define('_AM_MSG_MENTIONS_DELETED', 'Search and retweet Deleted');
+	define('_AM_MSG_MENTIONS_DELETE', 'Do you wish to delete the search and retweet of "%s"?');	
 	
 	
 	// Version 1.25
@@ -343,26 +343,26 @@
 	define('_AM_TWEETBOMB_ADMIN_COUNTS', 'Twitter Bomb Statistics');
 	define('_AM_TWEETBOMB_ADMIN_THEREARE_CAMPAIGNSBOMB', 'Bombing Campaigns: %s');
 	define('_AM_TWEETBOMB_ADMIN_THEREARE_CAMPAIGNSSCHEDULER', 'Scheduler Campaigns: %s');
-	define('_AM_TWEETBOMB_ADMIN_THEREARE_CAMPAIGNSRETWEET', 'Search & Retweeting Campaigns: %s');
+	define('_AM_TWEETBOMB_ADMIN_THEREARE_CAMPAIGNSMENTIONS', 'Search & Retweeting Campaigns: %s');
 	define('_AM_TWEETBOMB_ADMIN_THEREARE_CAMPAIGNSACTIVE', 'Active Campaigns: %s');
 	define('_AM_TWEETBOMB_ADMIN_THEREARE_CAMPAIGNSINACTIVE', 'Inactive Campaigns: %s');
 	define('_AM_TWEETBOMB_ADMIN_THEREARE_CATEGORIES', 'Number of Categories: %s');
 	define('_AM_TWEETBOMB_ADMIN_THEREARE_KEYWORDS', 'Total Keywords/Phrases: %s');
 	define('_AM_TWEETBOMB_ADMIN_THEREARE_URLS', 'Source URLs: %s');
-	define('_AM_TWEETBOMB_ADMIN_THEREARE_RETWEETS', 'Retweet Terms & Exceptions: %s');
+	define('_AM_TWEETBOMB_ADMIN_THEREARE_MENTIONSS', 'Retweet Terms & Exceptions: %s');
 	define('_AM_TWEETBOMB_ADMIN_THEREARE_SCHEDULERTOTAL', 'Scheduled Tweets total of: %s');
 	define('_AM_TWEETBOMB_ADMIN_THEREARE_SCHEDULERWAITING', 'Scheduled Tweets waiting: %s');
 	define('_AM_TWEETBOMB_ADMIN_THEREARE_SCHEDULERTWEETED', 'Sceduled Tweets Tweeted: %s');
 	define('_AM_TWEETBOMB_ADMIN_THEREARE_LOGTOTAL', 'Log Lines Total: %s');
 	define('_AM_TWEETBOMB_ADMIN_THEREARE_LOGBOMB', 'Bombing Log Lines: %s');
 	define('_AM_TWEETBOMB_ADMIN_THEREARE_LOGSCHEDULER', 'Scheduler Log Lines: %s');
-	define('_AM_TWEETBOMB_ADMIN_THEREARE_LOGRETWEET', 'Search & Retweet Log Lines: %s');
+	define('_AM_TWEETBOMB_ADMIN_THEREARE_LOGMENTIONS', 'Search & Retweet Log Lines: %s');
 	define('_AM_TWEETBOMB_ADMIN_THEREARE_LOGLASTBOMB', 'Last time in log Bombing Happened: %s');
 	define('_AM_TWEETBOMB_ADMIN_THEREARE_LOGFIRSTBOMB', 'First time in log Bombing Happened: %s');
 	define('_AM_TWEETBOMB_ADMIN_THEREARE_LOGLASTSCHEDULE', 'Last time in log Scheduler Happened: %s');
 	define('_AM_TWEETBOMB_ADMIN_THEREARE_LOGFIRSTSCHEDULE', 'First time in log Scheduler Happened: %s');
-	define('_AM_TWEETBOMB_ADMIN_THEREARE_LOGLASTRETWEET', 'Last time in log Retweet Happened: %s');
-	define('_AM_TWEETBOMB_ADMIN_THEREARE_LOGFIRSTRETWEET', 'First time in log Retweet Happened: %s');
+	define('_AM_TWEETBOMB_ADMIN_THEREARE_LOGLASTMENTIONS', 'Last time in log Retweet Happened: %s');
+	define('_AM_TWEETBOMB_ADMIN_THEREARE_LOGFIRSTMENTIONS', 'First time in log Retweet Happened: %s');
 	
 	// About
 	define('_AM_TWITTERBOMB_ABOUT_MAKEDONATE', 'Make a donation to chronolabs co-op');
@@ -437,6 +437,20 @@
 	define('_AM_TWEETBOMB_FORM_DESC_USER_MENTIONS', 'Must include @ or # at the front!');
 	define('_AM_TWEETBOMB_FORM_KEYWORDS_MENTIONS', 'Keywords must have');
 	define('_AM_TWEETBOMB_FORM_DESC_KEYWORDS_MENTIONS', '"-keyword" will exclude and "keyword" will be inclusive and select.');
+	define('_AM_TWEETBOMB_FORM_GEOCODE_MENTIONS', 'Enable Geocoding Search');
+	define('_AM_TWEETBOMB_FORM_DESC_GEOCODE_MENTIONS', 'Uses, Longitude, Latitude, Radius from point and measurement');
+	define('_AM_TWEETBOMB_FORM_LONGITUDE_MENTIONS', 'Longitude');
+	define('_AM_TWEETBOMB_FORM_DESC_LONGITUDE_MENTIONS', '');
+	define('_AM_TWEETBOMB_FORM_LATITUDE_MENTIONS', 'Latitude');
+	define('_AM_TWEETBOMB_FORM_DESC_LATITUDE_MENTIONS', '');
+	define('_AM_TWEETBOMB_FORM_RADIUS_MENTIONS', 'Radius from point to search?');
+	define('_AM_TWEETBOMB_FORM_DESC_RADIUS_MENTIONS', '');
+	define('_AM_TWEETBOMB_FORM_MEASUREMENT_MENTIONS', 'Measurement of Radius');
+	define('_AM_TWEETBOMB_FORM_DESC_MEASUREMENT_MENTIONS', '');
+	define('_AM_TWEETBOMB_FORM_LANGUAGE_MENTIONS', 'Language to search in');
+	define('_AM_TWEETBOMB_FORM_DESC_LANGUAGE_MENTIONS', '');
+	define('_AM_TWEETBOMB_FORM_TYPE_MENTIONS', 'Type of search');
+	define('_AM_TWEETBOMB_FORM_DESC_TYPE_MENTIONS', '');
 	define('_AM_TWEETBOMB_FORM_RPIDS_MENTIONS', 'Replies to Use');
 	define('_AM_TWEETBOMB_FORM_DESC_RPIDS_MENTIONS', '');
 	define('_AM_TWEETBOMB_FORM_UID_MENTIONS', 'Owner');

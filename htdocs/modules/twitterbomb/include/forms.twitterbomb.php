@@ -168,7 +168,7 @@
 		$ele['op'] = new XoopsFormHidden('op', 'replies');
 		$ele['fct'] = new XoopsFormHidden('fct', 'save');
 		$ele['id'] = new XoopsFormHidden('id', $id);
-		$ele['cid'] = new TwitterBombFormSelectCampaigns(_AM_TWEETBOMB_FORM_CID_REPLIES, $id.'[cid]', $object->getVar('cid'), 1, false, false, 'reply');
+		$ele['cid'] = new TwitterBombFormSelectCampaigns(_AM_TWEETBOMB_FORM_CID_REPLIES, $id.'[cid]', $object->getVar('cid'), 1, false, true, 'reply');
 		$ele['cid']->setDescription(_AM_TWEETBOMB_FORM_DESC_CID_REPLIES);
 		$ele['catid'] = new TwitterBombFormSelectCategories(_AM_TWEETBOMB_FORM_CATID_REPLIES, $id.'[catid]', $object->getVar('catid'));
 		$ele['catid']->setDescription(_AM_TWEETBOMB_FORM_DESC_CATID_REPLIES);
@@ -180,7 +180,7 @@
 		$ele['keywords']->setDescription(_AM_TWEETBOMB_FORM_DESC_KEYWORDS_REPLIES);
 		$ele['urlid'] = new TwitterBombFormSelectUrls(_AM_TWEETBOMB_FORM_URLS_REPLIES, $id.'[urlid]', $object->getVar('urlid'));
 		$ele['urlid']->setDescription(_AM_TWEETBOMB_FORM_DESC_URLS_REPLIES);
-		$ele['rcid'] = new TwitterBombFormSelectCampaigns(_AM_TWEETBOMB_FORM_RCID_REPLIES, $id.'[rcid]', $object->getVar('rcid'), 1, false, 'bomb');
+		$ele['rcid'] = new TwitterBombFormSelectCampaigns(_AM_TWEETBOMB_FORM_RCID_REPLIES, $id.'[rcid]', $object->getVar('rcid'), 1, false, true, 'bomb');
 		$ele['rcid']->setDescription(_AM_TWEETBOMB_FORM_DESC_RCID_REPLIES);
 						
 		if ($object->getVar('uid')>0) {
@@ -234,7 +234,7 @@
 		$ele['op'] = new XoopsFormHidden('op', 'mentions');
 		$ele['fct'] = new XoopsFormHidden('fct', 'save');
 		$ele['id'] = new XoopsFormHidden('id', $id);
-		$ele['cid'] = new TwitterBombFormSelectCampaigns(_AM_TWEETBOMB_FORM_CID_MENTIONS, $id.'[cid]', $object->getVar('cid'), 1, false, false, 'mentions');
+		$ele['cid'] = new TwitterBombFormSelectCampaigns(_AM_TWEETBOMB_FORM_CID_MENTIONS, $id.'[cid]', $object->getVar('cid'), 1, false, true, 'mentions');
 		$ele['cid']->setDescription(_AM_TWEETBOMB_FORM_DESC_CID_MENTIONS);
 		$ele['catid'] = new TwitterBombFormSelectCategories(_AM_TWEETBOMB_FORM_CATID_MENTIONS, $id.'[catid]', $object->getVar('catid'));
 		$ele['catid']->setDescription(_AM_TWEETBOMB_FORM_DESC_CATID_MENTIONS);
@@ -244,6 +244,20 @@
 		$ele['keywords']->setDescription(_AM_TWEETBOMB_FORM_DESC_KEYWORDS_MENTIONS);
 		$ele['rpids'] = new TwitterbombFormCheckBoxReplies(_AM_TWEETBOMB_FORM_RPIDS_MENTIONS, $id.'[rpids]', $object->getVar('rpids'), '<br/>');
 		$ele['rpids']->setDescription(_AM_TWEETBOMB_FORM_DESC_RPIDS_MENTIONS);
+		$ele['geocode'] = new XoopsFormRadioYN(_AM_TWEETBOMB_FORM_GEOCODE_MENTIONS, $id.'[geocode]', $object->getVar('geocode'));
+		$ele['geocode']->setDescription(_AM_TWEETBOMB_FORM_DESC_GEOCODE_MENTIONS);
+		$ele['longitude'] = new XoopsFormText(_AM_TWEETBOMB_FORM_LONGITUDE_MENTIONS, $id.'[longitude]', 10,24, $object->getVar('longitude'));
+		$ele['longitude']->setDescription(_AM_TWEETBOMB_FORM_DESC_LONGITUDE_MENTIONS);
+		$ele['latitude'] = new XoopsFormText(_AM_TWEETBOMB_FORM_LATITUDE_MENTIONS, $id.'[latitude]', 10,24, $object->getVar('latitude'));
+		$ele['latitude']->setDescription(_AM_TWEETBOMB_FORM_DESC_LATITUDE_MENTIONS);
+		$ele['radius'] = new XoopsFormText(_AM_TWEETBOMB_FORM_RADIUS_MENTIONS, $id.'[radius]', 8,24, $object->getVar('radius'));
+		$ele['radius']->setDescription(_AM_TWEETBOMB_FORM_DESC_RADIUS_MENTIONS);
+		$ele['measurement'] = new TwitterbombFormSelectMeasurement(_AM_TWEETBOMB_FORM_MEASUREMENT_MENTIONS, $id.'[measurement]', $object->getVar('measurement'));
+		$ele['measurement']->setDescription(_AM_TWEETBOMB_FORM_DESC_MEASUREMENT_MENTIONS);
+		$ele['language'] = new TwitterbombFormSelectLanguage(_AM_TWEETBOMB_FORM_LANGUAGE_MENTIONS, $id.'[language]', $object->getVar('language'));
+		$ele['language']->setDescription(_AM_TWEETBOMB_FORM_DESC_LANGUAGE_MENTIONS);
+		$ele['type'] = new TwitterbombFormSelectRetweetType(_AM_TWEETBOMB_FORM_TYPE_MENTIONS, $id.'[type]', $object->getVar('type'));
+		$ele['type']->setDescription(_AM_TWEETBOMB_FORM_DESC_TYPE_MENTIONS);
 				
 		if ($object->getVar('uid')>0) {
 			$member_handler=xoops_gethandler('member');

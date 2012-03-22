@@ -19,7 +19,14 @@ class TwitterbombMentions extends XoopsObject
         $this->initVar('catid', XOBJ_DTYPE_INT, null, false);
 		$this->initVar('user', XOBJ_DTYPE_TXTBOX, '@', true, 64);
 		$this->initVar('rpids', XOBJ_DTYPE_ARRAY(), array(), false);
-		$this->initVar('keywords', XOBJ_DTYPE_TXTBOX, null, true, 500);    
+		$this->initVar('keywords', XOBJ_DTYPE_TXTBOX, null, true, 500);
+		$this->initVar('geocode', XOBJ_DTYPE_INT, null, false);
+        $this->initVar('longitude', XOBJ_DTYPE_DECIMAL, null, false);
+        $this->initVar('latitude', XOBJ_DTYPE_DECIMAL, null, false);
+        $this->initVar('radius', XOBJ_DTYPE_INT, 2, false);
+		$this->initVar('measurement', XOBJ_DTYPE_ENUM, 'km', false, false, false, array('mi','km'));
+		$this->initVar('language', XOBJ_DTYPE_ENUM, 'en', false, false, false, array('aa','ab','af','am','ar','as','ay','az','ba','be','bg','bh','bi','bn','bo','br','ca','co','cs','cy','da','de','dz','el','en','eo','es','et','eu','fa','fi','fj','fo','fr','fy','ga','gd','gl','gn','gu','ha','he','hi','hr','hu','hy','ia','id','ie','ik','is','it','iu','ja','jw','ka','kk','kl','km','kn','ko','ks','ku','ky','la','ln','lo','lt','lv','mg','mi','mk','ml','mn','mo','mr','ms','mt','my','na','ne','nl','no','oc','om','or','pa','pl','ps','pt','qu','rm','rn','ro','ru','rw','sa','sd','sg','sh','si','sk','sl','sm','sn','so','sq','sr','ss','st','su','sv','sw','ta','te','tg','th','ti','tk','tl','tn','to','tr','ts','tt','tw','ug','uk','ur','uz','vi','vo','wo','xh','yi','yo','za','zh','zu'));
+        $this->initVar('type', XOBJ_DTYPE_ENUM, 'mixed', false, false, false, array('mixed','recent','popular'));
 		$this->initVar('uid', XOBJ_DTYPE_INT, null, false);
 		$this->initVar('mentions', XOBJ_DTYPE_INT, null, false);
 		$this->initVar('created', XOBJ_DTYPE_INT, null, false);
@@ -35,17 +42,34 @@ class TwitterbombMentions extends XoopsObject
 		$ret = parent::toArray();
 		$ele = array();
 		$ele['id'] = new XoopsFormHidden('id['.$ret['mid'].']', $this->getVar('mid'));
-		$ele['cid'] = new TwitterBombFormSelectCampaigns('', $ret['mid'].'[cid]', $this->getVar('cid'), 1, false, 'mentions');
+		$ele['cid'] = new TwitterBombFormSelectCampaigns('', $ret['mid'].'[cid]', $this->getVar('cid'), 1, false, true, 'mentions');
 		$ele['catid'] = new TwitterBombFormSelectCategories('', $ret['mid'].'[catid]', $this->getVar('catid'));
 		$ele['rpids'] = new TwitterBombFormCheckboxReplies('', $ret['mid'].'[rpids]', $this->getVar('rpids'), '<br/>');
 		$ele['user'] = new XoopsFormText('', $ret['mid'].'[user]', 26,64, $this->getVar('user'));
 		$ele['keywords'] = new XoopsFormTextArea('', $ret['mid'].'[keywords]', 26, 4, $this->getVar('keywords'));
+		$ele['geocode'] = new XoopsFormRadioYN('', $ret['rid'].'[geocode]', $this->getVar('geocode'));
+		$ele['longitude'] = new XoopsFormText('', $ret['rid'].'[longitude]', 10,24, $this->getVar('longitude'));
+		$ele['latitude'] = new XoopsFormText('', $ret['rid'].'[latitude]', 10,24, $this->getVar('latitude'));
+		$ele['radius'] = new XoopsFormText('', $ret['rid'].'[radius]', 8,24, $this->getVar('radius'));
+		$ele['measurement'] = new TwitterbombFormSelectMeasurement('', $ret['rid'].'[measurement]', $this->getVar('measurement'));
+		$ele['language'] = new TwitterbombFormSelectLanguage('', $ret['rid'].'[language]', $this->getVar('language'));
+		
 		if ($ret['uid']>0) {
 			$member_handler=xoops_gethandler('member');
 			$user = $member_handler->getUser($ret['uid']);
 			$ele['uid'] = new XoopsFormLabel('', '<a href="'.XOOPS_URL.'/userinfo.php?uid='.$ret['uid'].'">'.$user->getVar('uname').'</a>');
 		} else {
 			$ele['uid'] = new XoopsFormLabel('', _MI_TWEETBOMB_ANONYMOUS);
+		}
+		if ($ret['mentions']>0) {
+			$ele['mentions'] = new XoopsFormLabel('', $ret['mentions']);
+		} else {
+			$ele['mentions'] = new XoopsFormLabel('', '');
+		}
+		if ($ret['mentioned']>0) {
+			$ele['mentioned'] = new XoopsFormLabel('', date(_DATESTRING, $ret['mentioned']));
+		} else {
+			$ele['mentioned'] = new XoopsFormLabel('', '');
 		}
 		if ($ret['created']>0) {
 			$ele['created'] = new XoopsFormLabel('', date(_DATESTRING, $ret['created']));
@@ -81,9 +105,18 @@ class TwitterbombMentions extends XoopsObject
 */
 class TwitterbombMentionsHandler extends XoopsPersistableObjectHandler
 {
+	
+	var $_mod = NULL;
+	var $_modConfig = array();
+	
     function __construct(&$db) 
     {
         parent::__construct($db, "twitterbomb_mentions", 'TwitterbombMentions', "mid", "user");
+
+        $module_handler = xoops_gethandler('module');
+		$config_handler = xoops_gethandler('config');
+		$this->_mod = $module_handler->getByDirname('twitterbomb');
+		$this->_modConfig = $config_handler->getConfigList($this->_mod->getVar('mid'));
     }
 	
     function insert($obj, $force=true) {
@@ -179,6 +212,43 @@ class TwitterbombMentionsHandler extends XoopsPersistableObjectHandler
     		return '&nbsp;';
     }
     
+ 	function doSearchForReply($cid, $catid, $mids) {
+    	if (is_array($rids)) {
+    		$criteria = new CriteriaCompo(new Criteria('mid', '('.implode(',', $mids).')', 'IN'));
+    	} else {
+    		$criteria = new CriteriaCompo(new Criteria('mid', $mids));
+    	}
+    	$criteria->setSort('RAND()');
+    	$criteria->setOrder('ASC');
+    	
+    	$log_handler = xoops_getmodulehandler('log', 'twitterbomb');
+    	$ret = array();
+    	$terms = $this->getObjects($criteria, true);
+    	foreach($terms as $mid => $mention) {
+    		// Get Since ID
+    		$criteria_log = new CriteriaCompo(new Criteria('mid', $mid));
+    		$criteria_log->add(new Criteria('cid', $cid));
+    		$criteria_log->add(new Criteria('catid', $catid));
+    		$criteria_log->setSort('`date`');
+    		$criteria_log->setOrder('DESC');
+    		$criteria_log->setStart(0);
+    		$criteria_log->setLimit(1);
+    		$logs = $log_handler->getObjects($criteria_log, false);
+    		if (is_object($logs[0]))
+    			$since_id = $logs[0]->getVar('id');
+    		else 
+    			$since_id = '';
+
+    		// Do Search
+    		$ret[$mid] = twitterbomb_searchtwitter($this->_modConfig['gather_on_search'], $mention->getVar('user'), explode(' ',trim($mention->getVar('keywords'))), ($mention->getVar('geocode')==true?$mention->getVar('longitude').','.$mention->getVar('latitude').','.$mention->getVar('radius').$mention->getVar('measurement'):''), $mention->getVar('language'), 1, $mention->getVar('type'), ($this->_modConfig['gather_on_search']<100?$this->_modConfig['gather_on_search']:'100'), 'true', '', $since_id);
+
+    		// Set Search Timer
+    		$mention->setVar('searched', time());
+    		$this->insert($mention, true);
+    	}
+   	
+    	return count($ret)>0?$ret:false;
+    }
     
 }
 ?>

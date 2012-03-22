@@ -18,7 +18,7 @@ function xoops_module_update_twitterbomb(&$module) {
 	
 	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_scheduler')."` ADD COLUMN `pregmatch_replace` VARCHAR(500) DEFAULT NULL";
 	
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')."` ADD COLUMN `type` ENUM('bomb','secheduler','reply','mentions') DEFAULT 'bomb'";
+	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')."` ADD COLUMN `type` ENUM('bomb','secheduler','reply','mention') DEFAULT 'bomb'";
 	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')."` ADD COLUMN `source_nick` VARCHAR(64) DEFAULT NULL";
 	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')."` ADD COLUMN `tweeted` INT(13) UNSIGNED DEFAULT '0'";
 	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')."` ADD COLUMN `id` VARCHAR(128) DEFAULT NULL";
@@ -40,7 +40,7 @@ function xoops_module_update_twitterbomb(&$module) {
 	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_log')."` ADD COLUMN `hits` INT(13) UNSIGNED DEFAULT '0'";
 	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_log')."` ADD COLUMN `rank` INT(13) UNSIGNED DEFAULT '0'";
 	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_log')."` ADD COLUMN `active` INT(13) UNSIGNED DEFAULT '0'";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_log')."` CHANGE COLUMN `provider` `provider` ENUM('bomb', 'scheduler', 'retweet', 'reply', 'mentions') DEFAULT 'bomb'";
+	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_log')."` CHANGE COLUMN `provider` `provider` ENUM('bomb', 'scheduler', 'retweet', 'reply', 'mention') DEFAULT 'bomb'";
 	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_log')."` ADD COLUMN `rid` INT(13) UNSIGNED DEFAULT '0'";
 	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_log')."` ADD COLUMN `about_id` INT(13) UNSIGNED DEFAULT '0'";
 	
@@ -274,6 +274,13 @@ $sql[] = "CREATE TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_scheduler')."
   `catid` INT(13) UNSIGNED DEFAULT '0',
   `user` VARCHAR(64) DEFAULT NULL,
   `keywords` VARCHAR(500) DEFAULT NULL,
+  `geocode` tinyint(1) unsigned default '0',
+  `longitude` decimal(10,6) default '0.000000',
+  `latitude` decimal(10,6) default '0.000000',
+  `radius` int(13) unsigned default '0',
+  `measurement` enum('mi','km') default 'km',
+  `language` enum('aa','ab','af','am','ar','AS','ay','az','ba','be','bg','bh','bi','bn','bo','br','ca','co','cs','cy','da','de','dz','el','en','eo','es','et','eu','fa','fi','fj','fo','fr','fy','ga','gd','gl','gn','gu','ha','he','hi','hr','hu','hy','ia','id','ie','ik','IS','it','iu','ja','jw','ka','kk','kl','km','kn','ko','ks','ku','ky','la','LN','lo','lt','lv','mg','mi','mk','ml','mn','mo','mr','ms','mt','my','na','ne','nl','NO','oc','om','OR','pa','pl','ps','pt','qu','rm','rn','ro','ru','rw','sa','sd','sg','sh','si','sk','sl','sm','sn','so','sq','sr','ss','st','su','sv','sw','ta','te','tg','th','ti','tk','tl','tn','TO','tr','ts','tt','tw','ug','uk','ur','uz','vi','vo','wo','xh','yi','yo','za','zh','zu') default 'en',
+  `type` enum('mixed','recent','popular') default 'mixed',
   `rpids` VARCHAR(750) DEFAULT NULL,  
   `uid` INT(13) UNSIGNED DEFAULT '0',
   `mentions` INT(13) UNSIGNED DEFAULT '0',

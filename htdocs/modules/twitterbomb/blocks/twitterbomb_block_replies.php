@@ -29,7 +29,7 @@ function b_twitterbomb_block_replies_show( $options )
 	
 	if ($campaign->getVar('timed')!=0) {
 		if ($campaign->getVar('start')<time()&&$campaign->getVar('end')>time()) {
-			if (!$block['tweets'] = XoopsCache::read('tweetbomb_replies_'.$cacheid)) {
+			if (!$block['tweets'] = XoopsCache::read('tweetbomb_reply_'.$cacheid)) {
 				$log_handler =& xoops_getmodulehandler('log', 'twitterbomb');
 				$criteria = new CriteriaCompo(new Criteria('cid', $cid));
 				$criteria->setSort('`date`');
@@ -54,7 +54,7 @@ function b_twitterbomb_block_replies_show( $options )
 			$block['tweets'][0]['description'] = sprintf(_BL_TWEETBOMB_RSS_TIMED_DESCRIPTION, date('Y-m-d', $campaign->getVar('start')), date('Y-m-d', $campaign->getVar('end')));		
 		}
 	} else {
-		if (!$block['tweets']  = XoopsCache::read('tweetbomb_replies_'.$cacheid)) {
+		if (!$block['tweets']  = XoopsCache::read('tweetbomb_reply_'.$cacheid)) {
 			$log_handler =& xoops_getmodulehandler('log', 'twitterbomb');
 			$criteria = new CriteriaCompo(new Criteria('cid', $cid));
 			$criteria->setSort('`date`');
