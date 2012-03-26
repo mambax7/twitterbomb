@@ -31,8 +31,8 @@
 // ------------------------------------------------------------------------- //
 
 $modversion['name'] = _MI_TWEETBOMB_NAME;
-$modversion['version'] = 1.27;
-$modversion['releasedate'] = "Tuesday, January 10, 2012";
+$modversion['version'] = 1.29;
+$modversion['releasedate'] = "Monday, March 26, 2012";
 $modversion['description'] = _MI_TWEETBOMB_DESCRIPTION;
 $modversion['author'] = "Wishcraft";
 $modversion['credits'] = "Simon Roberts (simon@chronolabs.coop)";
@@ -49,9 +49,9 @@ $modversion['dirmoduleadmin'] = 'Frameworks/moduleclasses';
 $modversion['icons16'] = 'Frameworks/moduleclasses/icons/16';
 $modversion['icons32'] = 'Frameworks/moduleclasses/icons/32';
 
-$modversion['release_info'] = "Stable 2012/01/10";
+$modversion['release_info'] = "Stable 2012/03/26";
 $modversion['release_file'] = XOOPS_URL."/modules/twitterbomb/docs/changelog.txt";
-$modversion['release_date'] = "2012/01/10";
+$modversion['release_date'] = "2012/03/26";
 
 $modversion['author_realname'] = "Simon Antony Roberts";
 $modversion['author_website_url'] = "http://www.chronolabs.org.au";
@@ -260,19 +260,23 @@ $modversion['templates'][29]['description'] = 'Main Control Panel Twitter Bomb R
 
 // Menu
 $i = 0;
-if ($GLOBALS['xoopsModuleConfig']['anonymous']==true&&!is_object($GLOBALS['xoopsUser'])) {
-	$i++;
-	$modversion['sub'][$i]['name'] = _MI_TWEETBOMBS_MENU_USERNAME;
-	$modversion['sub'][$i]['url'] = "index.php?op=usernames&fct=new";
-} elseif (is_object($GLOBALS['xoopsUser'])) {
-	$i++;
-	$modversion['sub'][$i]['name'] = _MI_TWEETBOMBS_MENU_USERNAME;
-	$modversion['sub'][$i]['url'] = "index.php?op=usernames&fct=new";
+if (isset($GLOBALS['xoopsModuleConfig']['anonymous'])) {
+	if ($GLOBALS['xoopsModuleConfig']['anonymous']==true&&!is_object($GLOBALS['xoopsUser'])) {
+		$i++;
+		$modversion['sub'][$i]['name'] = _MI_TWEETBOMBS_MENU_USERNAME;
+		$modversion['sub'][$i]['url'] = "index.php?op=usernames&fct=new";
+	} elseif (is_object($GLOBALS['xoopsUser'])) {
+		$i++;
+		$modversion['sub'][$i]['name'] = _MI_TWEETBOMBS_MENU_USERNAME;
+		$modversion['sub'][$i]['url'] = "index.php?op=usernames&fct=new";
+	}
 }
-if (!empty($GLOBALS['xoopsModuleConfig']['consumer_key'])&&!empty($GLOBALS['xoopsModuleConfig']['consumer_secret'])) {
-	$i++;
-	$modversion['sub'][$i]['name'] = _MI_TWEETBOMBS_MENU_AUTHORISE;
-	$modversion['sub'][$i]['url'] = "redirect.php";
+if (isset($GLOBALS['xoopsModuleConfig']['consumer_key'])&&isset($GLOBALS['xoopsModuleConfig']['consumer_secret'])) {
+	if (!empty($GLOBALS['xoopsModuleConfig']['consumer_key'])&&!empty($GLOBALS['xoopsModuleConfig']['consumer_secret'])) {
+		$i++;
+		$modversion['sub'][$i]['name'] = _MI_TWEETBOMBS_MENU_AUTHORISE;
+		$modversion['sub'][$i]['url'] = "redirect.php";
+	}
 }
 
 $i = 0;
@@ -347,6 +351,7 @@ $modversion['config'][$i]['description'] = "_MI_TWEETBOMB_MENTIONS_ITEMS_DESC";
 $modversion['config'][$i]['formtype'] = 'text';
 $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = 5;
+
 $i++;
 $modversion['config'][$i]['name'] = 'anonymous';
 $modversion['config'][$i]['title'] = "_MI_TWEETBOMB_ANONYMOUS";

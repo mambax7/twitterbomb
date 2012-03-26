@@ -515,7 +515,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 							$loopsb++;
 						}
 						break;						
-					case "mentions":
+					case "mention":
 						$items=0;
 						$loop=0;
 						$item=0;

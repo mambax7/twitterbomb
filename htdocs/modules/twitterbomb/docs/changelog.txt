@@ -1,4 +1,33 @@
 ========================================
+ 2012/03/24 2:00:00 Version 1.29 STABLE
+========================================
+ - Changed /sql/mysql.php - prefix of indicies fixed [mamba] (Wishcraft)
+ - Changed /xoops_version.php - Anonymous Variable Checked to Exist [mamba] (Wishcraft)
+ 
+========================================
+ 2012/03/24 2:00:00 Version 1.28 BETA
+========================================
+ - Changed /admin/index.php - Mentions and Replies added to Admin  (Wishcraft)
+ - Changed /include/forms.twitterbomb.php - Function tweetbomb_replies_get_form() Added  (Wishcraft)
+ - Changed /include/forms.twitterbomb.php - Function tweetbomb_mentions_get_form() Added  (Wishcraft)
+ - Changed /include/forms.twitterbomb.php - Other Minor Form Changes Made Added  (Wishcraft)
+ - Changed /include/upgrade.php - changes for Replies & Mentions & BigInt instead of varchar ID Storage Added (Wishcraft)
+ - Changed /include/formselectmode.php - changes for Replies & Mentions Added (Wishcraft)
+ - Changed /include/formselecttype.php - changes for Replies & Mentions Added (Wishcraft)
+ - Changed /include/formselecttype.php - changes for Replies & Mentions Added (Wishcraft)
+ - Changed /cron/tweet.php - Mention & Replies Routines Added (Wishcraft)
+ - Changed /class/oauth.php - Function oauth::sendReply() Added (Wishcraft)
+ - Changed /class/campaigns.php - changes for Replies & Mentions Added (Wishcraft)
+ - Changed /class/log.php - changes for Replies & Mentions Added (Wishcraft)
+ - Changed /sql/mysql.php - changes for Replies & Mentions Added (Wishcraft)
+ - Changed /language/english/admin.php - changes for Replies & Mentions Added (Wishcraft)
+ - Changed /language/english/modinfo.php - changes for Replies & Mentions Added (Wishcraft)
+ - Added /class/mentions.php - Class Wrapper for Mentions Added (Wishcraft)
+ - Added /class/replies.php - Class Wrapper for Replies Added (Wishcraft)
+ - Added /include/formcheckboxmentions.php - Check Box for Mentions Added (Wishcraft)
+ - Added /include/formcheckboxreplies.php - Check Box for Replies Added (Wishcraft)
+
+========================================
  2012/01/09 14:00:00 Version 1.26 STABLE
 ========================================
  - Changed /admin/index.php - Fixed WSOD on Dashboard with $log[0]-getVar to ->getVar  (Wishcraft)

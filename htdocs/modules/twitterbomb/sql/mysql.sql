@@ -78,8 +78,8 @@ CREATE TABLE `twitterbomb_log` (
   `id` bigint(42) default NULL,
   `about_id` int(13) unsigned default '0',
   PRIMARY KEY  (`lid`),
-  KEY `COMMON` (`provider`,`alias`,`tweet`(15),`url`(15),`date`,`cid`,`catid`,`hits`,`rank`,`active`,`tags`(25),`id`(15),`rid`,`about_id`),
-  KEY `COMMON_INDEX` (`lid`,`provider`,`uid`,`sid`,`oid`,`tid`,`cid`,`catid`,`hits`,`rank`,`active`,`id`(15),`rid`)
+  KEY `COMMON` (`provider`,`alias`,`tweet`(15),`url`(15),`date`,`cid`,`catid`,`hits`,`rank`,`active`,`tags`(25),`id`,`rid`,`about_id`),
+  KEY `COMMON_INDEX` (`lid`,`provider`,`uid`,`sid`,`oid`,`tid`,`cid`,`catid`,`hits`,`rank`,`active`,`id`,`rid`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `twitterbomb_urls` (
@@ -116,7 +116,7 @@ CREATE TABLE `twitterbomb_usernames` (
   `tweeted` INT(13) UNSIGNED DEFAULT '0',
   `source_nick` VARCHAR(64) DEFAULT NULL,
   PRIMARY KEY  (`tid`),
-  KEY `COMMON` (`cid`,`oid`,`catid`,`screen_name`(15),`id`(12),`name`(25),`uid`,`indexed`,`followed`)
+  KEY `COMMON` (`cid`,`oid`,`catid`,`screen_name`(15),`id`,`name`(25),`uid`,`indexed`,`followed`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `twitterbomb_category` (
@@ -146,7 +146,6 @@ CREATE TABLE `twitterbomb_campaign` (
   `updated` int(13) unsigned default '0',
   `active` int(13) unsigned default '0',
   `type` enum('bomb','scheduler','retweet','reply','mention') default 'bomb',
-  `cron` int(13) unsigned default '0',
   `rids` varchar(750) default '',
   `rpids` varchar(750) default '',
   `mids` varchar(750) default '',
@@ -193,8 +192,8 @@ CREATE TABLE `twitterbomb_following` (
   `updated` int(13) unsigned default '0',
   `actioned` int(13) unsigned default '0',
   PRIMARY KEY  (`fid`),
-  KEY `COMMON` (`id`(25),`flid`(25),`followed`),
-  KEY `SECONDARY` (`id`(12),`flid`(12),`followed`,`created`)
+  KEY `COMMON` (`id`,`flid`,`followed`),
+  KEY `SECONDARY` (`id`,`flid`,`followed`,`created`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `twitterbomb_retweet` (
