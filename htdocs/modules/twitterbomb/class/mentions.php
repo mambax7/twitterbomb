@@ -18,7 +18,7 @@ class TwitterbombMentions extends XoopsObject
         $this->initVar('cid', XOBJ_DTYPE_INT, null, false);
         $this->initVar('catid', XOBJ_DTYPE_INT, null, false);
 		$this->initVar('user', XOBJ_DTYPE_TXTBOX, '@', true, 64);
-		$this->initVar('rpids', XOBJ_DTYPE_ARRAY(), array(), false);
+		$this->initVar('rpids', XOBJ_DTYPE_ARRAY, array(), false);
 		$this->initVar('keywords', XOBJ_DTYPE_TXTBOX, null, true, 500);
 		$this->initVar('geocode', XOBJ_DTYPE_INT, null, false);
         $this->initVar('longitude', XOBJ_DTYPE_DECIMAL, null, false);

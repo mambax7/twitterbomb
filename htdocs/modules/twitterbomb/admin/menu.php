@@ -59,4 +59,12 @@ $adminmenu[11]['title'] = _MI_TWEETBOMB_TITLE_ADMENU11;
 $adminmenu[11]['icon'] = _MI_TWEETBOMB_ICON_ADMENU11;
 $adminmenu[11]['image'] = _MI_TWEETBOMB_ICON_ADMENU11;
 $adminmenu[11]['link'] = _MI_TWEETBOMB_LINK_ADMENU11;
+$adminmenu[12]['title'] = _MI_TWEETBOMB_TITLE_ADMENU12;
+$adminmenu[12]['icon'] = _MI_TWEETBOMB_ICON_ADMENU12;
+$adminmenu[12]['image'] = _MI_TWEETBOMB_ICON_ADMENU12;
+$adminmenu[12]['link'] = _MI_TWEETBOMB_LINK_ADMENU12;
+$adminmenu[13]['title'] = _MI_TWEETBOMB_TITLE_ADMENU13;
+$adminmenu[13]['icon'] = _MI_TWEETBOMB_ICON_ADMENU13;
+$adminmenu[13]['image'] = _MI_TWEETBOMB_ICON_ADMENU13;
+$adminmenu[13]['link'] = _MI_TWEETBOMB_LINK_ADMENU13;
 ?>

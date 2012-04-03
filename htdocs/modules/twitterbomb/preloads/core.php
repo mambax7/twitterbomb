@@ -11,14 +11,14 @@ class TwitterbombCorePreload extends XoopsPreloadItem
     
 	function eventCoreFooterEnd($args)
     {
-    	include('../post.common.end.php');
-    	include('../post.footer.end.php');
+    	include(dirname(dirname(__FILE__)).'/post.common.end.php');
+    	include(dirname(dirname(__FILE__)).'/post.footer.end.php');
     }
 
     function eventCoreHeaderCacheEnd($args)
     {
-    	include('../post.common.end.php');
-    	include('../post.cache.end.php');
+    	include(dirname(dirname(__FILE__)).'/post.common.end.php');
+    	include(dirname(dirname(__FILE__)).'/post.cache.end.php');
     }
     
 }

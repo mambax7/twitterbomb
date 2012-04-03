@@ -1,5 +1,18 @@
 ========================================
- 2012/03/24 2:00:00 Version 1.29 STABLE
+ 2012/04/03 20:08:00 Version 1.30 STABLE
+========================================
+ - Changed /language/english/modinfo.php - Admin Menus changed (Wishcraft)
+ - Changed /language/english/admin.php - Missing Langauge Constants Added and Duplicates Removed (Wishcraft)
+ - Changed /admin/menu.php - Missing menus added (Wishcraft)
+ - Changed /admin/index.php - Missing variable added to mention 'uid' header titles (Wishcraft)
+ - Changed /include/function.php - Warning & Notices, handler object name (mention), header filter for RCID addressed (Wishcraft)
+ - Changed /include/upgrade.php - Missing Field Variables Addressed (Wishcraft)
+ - Changed /cron/tweet.php - Minor fixes, error message on missing root oauth  (Wishcraft)
+ - Changed /cron/gather.php - Minor fixes, error message on missing root oauth  (Wishcraft)
+ - Changed /cron/follow.php - Minor fixes, error message on missing root oauth (Wishcraft)
+
+========================================
+ 2012/03/24 2:00:00 Version 1.29 BETA2
 ========================================
  - Changed /sql/mysql.php - prefix of indicies fixed [mamba] (Wishcraft)
  - Changed /xoops_version.php - Anonymous Variable Checked to Exist [mamba] (Wishcraft)

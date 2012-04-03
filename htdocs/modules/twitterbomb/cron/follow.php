@@ -1,7 +1,7 @@
 <?php
 
 include_once('../../../mainfile.php');
-
+$GLOBALS['xoopsLogger']->activated = false;
 if (!defined('NLB')) {
 	if (!isset($_SERVER['HTTP_HOST']))
 		define('NLB', "\n");
@@ -35,7 +35,11 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_follow']) {
 	$oauth_handler=&xoops_getmodulehandler('oauth', 'twitterbomb');
 	
 	$oauth = $oauth_handler->getRootOauth(true);
-	
+	if (!is_object($oauth)) {
+		xoops_error('Critical Error: No OAuth Root Object');
+		echo 'Follower Cron Ended: '.date('Y-m-d D H:i:s', time()).NLB;
+		return false;
+	}
 	$GLOBALS['execution_time'] = $GLOBALS['execution_time'] + 120;
 	set_time_limit($GLOBALS['execution_time']);
 	

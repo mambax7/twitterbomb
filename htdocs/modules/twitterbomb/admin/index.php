@@ -79,35 +79,37 @@
 		    $criteria->setOrder('DESC');
 		    $criteria->setLimit(1);
 		    $logs = $log_handler->getObjects($criteria, false);
-		    if (is_object($logs[0])) {
-		    	$indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_LOGLASTSCHEDULE."</label>", date(_DATESTRING, $logs[0]->getVar('date')), 'Green');
-			    $criteria = new CriteriaCompo(new Criteria('`provider`', 'scheduler', '='));
-			    $criteria->setSort('`date`');
-			    $criteria->setOrder('ASC');
-			    $criteria->setLimit(1);
-			    $logs = $log_handler->getObjects($criteria, false);
+		    if (isset($logs[0]))
 			    if (is_object($logs[0])) {
-			    	$indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_LOGFIRSTSCHEDULE."</label>", date(_DATESTRING, $logs[0]->getVar('date')), 'Green');
+			    	$indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_LOGLASTSCHEDULE."</label>", date(_DATESTRING, $logs[0]->getVar('date')), 'Green');
+				    $criteria = new CriteriaCompo(new Criteria('`provider`', 'scheduler', '='));
+				    $criteria->setSort('`date`');
+				    $criteria->setOrder('ASC');
+				    $criteria->setLimit(1);
+				    $logs = $log_handler->getObjects($criteria, false);
+				    if (is_object($logs[0])) {
+				    	$indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_LOGFIRSTSCHEDULE."</label>", date(_DATESTRING, $logs[0]->getVar('date')), 'Green');
+				    }
 			    }
-		    }
 
 		    $criteria = new CriteriaCompo(new Criteria('`provider`', 'retweet', '='));
 		    $criteria->setSort('`date`');
 		    $criteria->setOrder('DESC');
 		    $criteria->setLimit(1);
 		    $logs = $log_handler->getObjects($criteria, false);
-		    if (is_object($logs[0])) {
-		    	$indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_LOGLASTRETWEET."</label>", date(_DATESTRING, $logs[0]->getVar('date')), 'Green');
-			    $criteria = new CriteriaCompo(new Criteria('`provider`', 'retweet', '='));
-			    $criteria->setSort('`date`');
-			    $criteria->setOrder('ASC');
-			    $criteria->setLimit(1);
-			    $logs = $log_handler->getObjects($criteria, false);
+		    if (isset($logs[0]))
 			    if (is_object($logs[0])) {
-			    	$indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_LOGFIRSTRETWEET."</label>", date(_DATESTRING, $logs[0]->getVar('date')), 'Green');
+			    	$indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_LOGLASTRETWEET."</label>", date(_DATESTRING, $logs[0]->getVar('date')), 'Green');
+				    $criteria = new CriteriaCompo(new Criteria('`provider`', 'retweet', '='));
+				    $criteria->setSort('`date`');
+				    $criteria->setOrder('ASC');
+				    $criteria->setLimit(1);
+				    $logs = $log_handler->getObjects($criteria, false);
+				    if (is_object($logs[0])) {
+				    	$indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_LOGFIRSTRETWEET."</label>", date(_DATESTRING, $logs[0]->getVar('date')), 'Green');
+				    }
 			    }
-		    }
-		    
+			    
 		    echo $indexAdmin->renderIndex();	
 			
 			break;	
@@ -1219,7 +1221,7 @@
 					$pagenav = new XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
 					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 			
-					foreach (array(	'cid','catid','mid','user','keywords','mentions','created','updated','mentioned','mentions') as $id => $key) {
+					foreach (array(	'cid','catid','mid','user','keywords','mentions','created','updated','mentioned','mentions','uid') as $id => $key) {
 						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?($order=='DESC'?'ASC':'DESC'):$order).'&op='.$op.'&filter='.$filter.'">'.(defined('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key)))?constant('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))):'_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))).'</a>');
 						$GLOBALS['xoopsTpl']->assign('filter_'.strtolower(str_replace('-','_',$key)).'_th', $mentions_handler->getFilterForm($filter, $key, $sort, $op, $fct));
 					}

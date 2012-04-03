@@ -62,7 +62,7 @@ class TwitterBombLog extends XoopsObject
     		if (is_object($category))
     			$ret['catid_text'] = $category->getVar('name');
     	}
-    	if ($this->_modConfig['tags']) {
+    	if ($GLOBALS['twitterbombModuleConfig']['tags']) {
 	    	include_once XOOPS_ROOT_PATH."/modules/tag/include/tagbar.php";
 			$ret['tagbar'] = tagBar($this->getVar('lid'), $this->getVar('catid'));
     	}

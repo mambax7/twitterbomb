@@ -31,8 +31,8 @@
 // ------------------------------------------------------------------------- //
 
 $modversion['name'] = _MI_TWEETBOMB_NAME;
-$modversion['version'] = 1.29;
-$modversion['releasedate'] = "Monday, March 26, 2012";
+$modversion['version'] = 1.30;
+$modversion['releasedate'] = "Tuesday, April 03, 2012";
 $modversion['description'] = _MI_TWEETBOMB_DESCRIPTION;
 $modversion['author'] = "Wishcraft";
 $modversion['credits'] = "Simon Roberts (simon@chronolabs.coop)";
@@ -49,9 +49,9 @@ $modversion['dirmoduleadmin'] = 'Frameworks/moduleclasses';
 $modversion['icons16'] = 'Frameworks/moduleclasses/icons/16';
 $modversion['icons32'] = 'Frameworks/moduleclasses/icons/32';
 
-$modversion['release_info'] = "Stable 2012/03/26";
+$modversion['release_info'] = "Stable 2012/04/03";
 $modversion['release_file'] = XOOPS_URL."/modules/twitterbomb/docs/changelog.txt";
-$modversion['release_date'] = "2012/03/26";
+$modversion['release_date'] = "2012/04/03";
 
 $modversion['author_realname'] = "Simon Antony Roberts";
 $modversion['author_website_url'] = "http://www.chronolabs.org.au";

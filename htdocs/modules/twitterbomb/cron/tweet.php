@@ -14,7 +14,7 @@ if (!defined('NLB')) {
 ini_set('memory_limit', '256M');
 include_once('../../../mainfile.php');
 include_once(XOOPS_ROOT_PATH.'/modules/twitterbomb/include/functions.php');
-
+$GLOBALS['xoopsLogger']->activated = false;
 error_reporting(E_ALL);
 ini_set("log_errors" , "1");
 ini_set("error_log" , XOOPS_ROOT_PATH."/uploads/cron.errors.log.".md5(XOOPS_ROOT_PATH).".txt");
@@ -47,10 +47,16 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 	$campaign_handler = xoops_getmodulehandler('campaign', 'twitterbomb');
 	$retweet_handler=&xoops_getmodulehandler('retweet', 'twitterbomb');
 	$replies_handler=&xoops_getmodulehandler('replies', 'twitterbomb');
-	$mentions_handler=&xoops_getmodulehandler('mentions', 'twitterbomb');
+	$mention_handler=&xoops_getmodulehandler('mentions', 'twitterbomb');
 	
 	$oauth_handler = xoops_getmodulehandler('oauth', 'twitterbomb');
 	@$oauth = $oauth_handler->getRootOauth(true);
+	if (!is_object($oauth)) {
+		xoops_error('Critical Error: No OAuth Root Object');
+		echo 'Tweeter Cron Ended: '.date('Y-m-d D H:i:s', time()).NLB;
+		return false;
+	}
+	
 	if (!$cids = XoopsCache::read('twitterbomb_cids_cron')) {
 		$criteria_a = new CriteriaCompo(new Criteria('timed', '0'));
 		$criteria_b = new CriteriaCompo(new Criteria('timed', '1'));
@@ -74,7 +80,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 		$types[] = 'reply';
 	}
 	if ($GLOBALS['twitterbombModuleConfig']['cron_mention']) {
-		$types[] = 'mentions';
+		$types[] = 'mention';
 	}
 	if ($GLOBALS['twitterbombModuleConfig']['cron_retweet']) {
 		$types[] = 'retweet';
@@ -83,7 +89,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 		$types[] = 'scheduler';
 		$types[] = 'bomber';
 	}	
-	$criteria->add(new Criteria('`type`', '("'.implode('","',$types)).'")', 'IN');
+	$criteria->add(new Criteria('`type`', '("'.implode('","',$types).'")', 'IN'));
 	$criteria->add(new Criteria('`cron`', true), 'AND');
 	$criteria->setOrder('DESC');
 	$criteria->setSort('RAND()');
@@ -532,10 +538,10 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 								}
 								$GLOBALS['execution_time'] = $GLOBALS['execution_time'] + 30;
 								set_time_limit($GLOBALS['execution_time']);
-								$search = $mentions_handler->doSearchForReply($cid, $catid, $campaign->getVar('mids'));
+								$search = $mention_handler->doSearchForReply($cid, $catid, $campaign->getVar('mids'));
 								if (is_array($search)) {
 									foreach ($search as $mid => $results) {
-										$mention = $mentions_handler->get($mid);
+										$mention = $mention_handler->get($mid);
 										if (microtime(true)-$GLOBALS['cron_start']>$GLOBALS['cron_run_for']*(($GLOBALS['twitterbombModuleConfig']['cron_tweet']?1:0)+($GLOBALS['twitterbombModuleConfig']['cron_retweet']?1:0))) {
 											return endtweeter($cids);
 										}
@@ -571,9 +577,9 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 															$log->setVar('tags', twitterbomb_ExtractTags($replytweet));
 															$log = $log_handler->get($lid = $log_handler->insert($log, true));
 															if ($replied = $oauth->sendReply($replytweet, twitterbomb_shortenurl($link), $id)) {
-																$mention->setVar('mentions', $mention->getVar('mentions')+1);
+																$mention->setVar('mention', $mention->getVar('mention')+1);
 																$mention->setVar('mentioned', time());
-																$mentions_handler->insert($mention);
+																$mention_handler->insert($mention);
 																echo 'Reply Sent: '.$replied['id_str'].' - '.$replytweet.NLB;
 																if ($GLOBALS['twitterbombModuleConfig']['tags']) {
 																	$tag_handler = xoops_getmodulehandler('tag', 'tag');
@@ -623,9 +629,9 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 								}
 								$loop++;
 							}
-							if (count($ret)>$GLOBALS['twitterbombModuleConfig']['mentions_items']) {
+							if (count($ret)>$GLOBALS['twitterbombModuleConfig']['mention_items']) {
 								foreach($ret as $key => $value) {
-									if (count($ret)>$GLOBALS['twitterbombModuleConfig']['mentions_items'])
+									if (count($ret)>$GLOBALS['twitterbombModuleConfig']['mention_items'])
 										unset($ret[$key]);
 								}
 							}
@@ -663,7 +669,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 				$types[] = 'reply';
 			}
 			if ($GLOBALS['twitterbombModuleConfig']['cron_mention']) {
-				$types[] = 'mentions';
+				$types[] = 'mention';
 			}
 			if ($GLOBALS['twitterbombModuleConfig']['cron_retweet']) {
 				$types[] = 'retweet';
@@ -691,7 +697,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 					$types[] = 'reply';
 				}
 				if ($GLOBALS['twitterbombModuleConfig']['cron_mention']) {
-					$types[] = 'mentions';
+					$types[] = 'mention';
 				}
 				if ($GLOBALS['twitterbombModuleConfig']['cron_retweet']) {
 					$types[] = 'retweet';
@@ -700,7 +706,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 					$types[] = 'scheduler';
 					$types[] = 'bomber';
 				}	
-				$criteria->add(new Criteria('`type`', '("'.implode('","',$types)).'")', 'IN');
+				$criteria->add(new Criteria('`type`', '("'.implode('","',$types).'")', 'IN'));
 				$criteria->setOrder('DESC');
 				$criteria->setSort('RAND()');
 				$campaigns = $campaign_handler->getObjects($criteria, true);

@@ -258,9 +258,9 @@ if (!function_exists('twitterbomb_get_rss')) {
     		$c++;
 			$looped++;
 		}
-		if ($count($ret)>$GLOBALS['twitterbombModuleConfig']['items']) {
+		if (count($ret)>$GLOBALS['twitterbombModuleConfig']['items']) {
 			foreach($ret as $key => $value) {
-				if ($count($ret)>$GLOBALS['twitterbombModuleConfig']['items'])
+				if (count($ret)>$GLOBALS['twitterbombModuleConfig']['items'])
 					unset($ret[$key]);
 			}
 		}			
@@ -312,13 +312,14 @@ if (!function_exists('twitterbomb_get_scheduler_rss')) {
 			}
 			$looped++;
 		}
-		if ($count($ret)>$GLOBALS['twitterbombModuleConfig']['scheduler_items']) {
-			foreach($ret as $key => $value) {
-				if ($count($ret)>$GLOBALS['twitterbombModuleConfig']['scheduler_items'])
-					unset($ret[$key]);
-			}
-		}	
-		return $ret;
+		if (is_array($ret))
+			if (count($ret)>$GLOBALS['twitterbombModuleConfig']['scheduler_items']) {
+				foreach($ret as $key => $value) {
+					if (count($ret)>$GLOBALS['twitterbombModuleConfig']['scheduler_items'])
+						unset($ret[$key]);
+				}
+			}	
+		return is_array($ret)?$ret:array();
 	}
 }
 
@@ -340,7 +341,7 @@ if (!function_exists('twitterbomb_get_retweet_rss')) {
 			}
 		}
 		
-		$oauth = $oauth_handle->getRootOauth(true);
+		$oauth = $oauth_handler->getRootOauth(true);
 		if (!is_object($oauth))
 			return array();
 		
@@ -412,13 +413,14 @@ if (!function_exists('twitterbomb_get_retweet_rss')) {
 			}
 			$looped++;
 		}
-		if ($count($ret)>$GLOBALS['twitterbombModuleConfig']['retweet_items']) {
-			foreach($ret as $key => $value) {
-				if ($count($ret)>$GLOBALS['twitterbombModuleConfig']['retweet_items'])
-					unset($ret[$key]);
-			}
-		}	
-		return $ret;
+		if (is_array($ret))
+			if (count($ret)>$GLOBALS['twitterbombModuleConfig']['retweet_items']) {
+				foreach($ret as $key => $value) {
+					if (count($ret)>$GLOBALS['twitterbombModuleConfig']['retweet_items'])
+						unset($ret[$key]);
+				}
+			}	
+		return is_array($ret)?$ret:array();
 	}
 }
 
@@ -478,7 +480,7 @@ if (!function_exists('tweetbomb_getFilterElement')) {
 		    	$ele->setExtra('onchange="window.open(\''.$_SERVER['PHP_SELF'].'?'.$components['extra'].'&filter='.$components['filter'].(!empty($components['filter'])?'|':'').$field.',\'+this.options[this.selectedIndex].value'.(!empty($components['operator'])?'+\','.$components['operator'].'\'':'').',\'_self\')"');
 		    	break;
 			case 'rcid':
-				$ele = new TwitterBombFormSelectCampaigns('', 'filter_'.$field.'', $components['value'], 1, false, 'bomb');
+				$ele = new TwitterBombFormSelectCampaigns('', 'filter_'.$field.'', $components['value'], 1, false, true, 'bomb');
 		    	$ele->setExtra('onchange="window.open(\''.$_SERVER['PHP_SELF'].'?'.$components['extra'].'&filter='.$components['filter'].(!empty($components['filter'])?'|':'').$field.',\'+this.options[this.selectedIndex].value'.(!empty($components['operator'])?'+\','.$components['operator'].'\'':'').',\'_self\')"');
 		    	break;
 			case 'cid':
@@ -558,7 +560,7 @@ if (!function_exists('tweetbomb_getFilterElement')) {
 		    	$button->setExtra('onclick="window.open(\''.$_SERVER['PHP_SELF'].'?'.$measurement['extra'].'&filter='.$measurement['filter'].(!empty($measurement['filter'])?'|':'').'radius'.',\'+$(\'#filter_radius\').val()'.(!empty($components['operator'])?'+\','.$components['operator'].'\'':'').'+\'|'.'measurement'.',\'+$(\'#filter_measurement'.'\').val()'.(!empty($measurement['operator'])?'+\','.$measurement['operator'].'\'':'').',\'_self\')"');
 		    	$ele->addElement($button);		    	
 		}
-		return $ele;
+		return isset($ele)?$ele:false;
 	}
 }
 
@@ -590,7 +592,7 @@ if (!function_exists('tweetbomb_getFilterURLComponents')) {
 		foreach($pagenav as $key=>$value) {
 			$retb[] = "$key=$value";
 		}
-		return array('value'=>$ele_value, 'field'=>$field, 'operator'=>$operator, 'filter'=>implode('|', $ret), 'extra'=>implode('&', $retb));
+		return array('value'=>(isset($ele_value)?$ele_value:''), 'field'=>(isset($field)?$field:''), 'operator'=>(isset($operator)?$operator:''), 'filter'=>implode('|', (isset($ret)&&is_array($ret)?$ret:array())), 'extra'=>implode('&', (isset($retb)&&is_array($retb)?$retb:array())));
 	}
 }
 ?>

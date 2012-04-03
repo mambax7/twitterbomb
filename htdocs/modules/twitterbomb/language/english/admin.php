@@ -292,52 +292,19 @@
 	define('_AM_TWEETBOMB_TH_MENTIONSED', 'Last Retweeted');
 
 	//Forms Definitions
-	define('_AM_TWEETBOMB_FORM_ISNEW_MENTIONS', 'New Search and Tweet');
-	define('_AM_TWEETBOMB_FORM_EDIT_MENTIONS', 'Edit Search and Tweet');
 	define('_AM_TWEETBOMB_FORM_RID_MENTIONS', 'Retweet ID');
 	define('_AM_TWEETBOMB_FORM_DESC_RID_MENTIONS', ''); 
 	define('_AM_TWEETBOMB_FORM_SEARCH_MENTIONS', 'Search For');
 	define('_AM_TWEETBOMB_FORM_DESC_SEARCH_MENTIONS', 'One Item Only');
 	define('_AM_TWEETBOMB_FORM_SKIP_MENTIONS', 'Exceptions');
 	define('_AM_TWEETBOMB_FORM_DESC_SKIP_MENTIONS', 'IF tweet contains any of these do not retweet (Seperate with a pipe "|")');
-	define('_AM_TWEETBOMB_FORM_GEOCODE_MENTIONS', 'Enable Geocoding Search');
-	define('_AM_TWEETBOMB_FORM_DESC_GEOCODE_MENTIONS', 'Uses, Longitude, Latitude, Radius from point and measurement');
-	define('_AM_TWEETBOMB_FORM_LONGITUDE_MENTIONS', 'Longitude');
-	define('_AM_TWEETBOMB_FORM_DESC_LONGITUDE_MENTIONS', '');
-	define('_AM_TWEETBOMB_FORM_LATITUDE_MENTIONS', 'Latitude');
-	define('_AM_TWEETBOMB_FORM_DESC_LATITUDE_MENTIONS', '');
-	define('_AM_TWEETBOMB_FORM_RADIUS_MENTIONS', 'Radius from point to search?');
-	define('_AM_TWEETBOMB_FORM_DESC_RADIUS_MENTIONS', '');
-	define('_AM_TWEETBOMB_FORM_MEASUREMENT_MENTIONS', 'Measurement of Radius');
-	define('_AM_TWEETBOMB_FORM_DESC_MEASUREMENT_MENTIONS', '');
-	define('_AM_TWEETBOMB_FORM_LANGUAGE_MENTIONS', 'Language to search in');
-	define('_AM_TWEETBOMB_FORM_DESC_LANGUAGE_MENTIONS', '');
-	define('_AM_TWEETBOMB_FORM_TYPE_MENTIONS', 'Type of search');
-	define('_AM_TWEETBOMB_FORM_DESC_TYPE_MENTIONS', '');
-	define('_AM_TWEETBOMB_FORM_CREATED_MENTIONS', 'Created');
-	define('_AM_TWEETBOMB_FORM_ACTIONED_MENTIONS', 'Actioned');
-	define('_AM_TWEETBOMB_FORM_UPDATED_MENTIONS', 'Updated');
 	define('_AM_TWEETBOMB_FORM_SEARCHED_MENTIONS', 'Last Searched');
 	define('_AM_TWEETBOMB_FORM_MENTIONSED_MENTIONS', 'Last Retweeted');
 	define('_AM_TWEETBOMB_FORM_MENTIONSS_MENTIONS', 'Retweets');
-	define('_AM_TWEETBOMB_FORM_UID_MENTIONS', 'User');
 	define('_AM_TWEETBOMB_FORM_RIDS_CAMPAIGN', 'Retweet Searches to use');
 	define('_AM_TWEETBOMB_FORM_DESC_RIDS_CAMPAIGN', 'You need to have defined some <a href="index.php?op=retweet&fct=list">Search and Retweets</a> for this option which only applies to retweet campaigns.');
 	
-	//Template text
-	define('_AM_TWEETBOMB_MENTIONS_H1', 'Search and Tweet');
-	define('_AM_TWEETBOMB_MENTIONS_P', 'This is your entered search terms and exceptions to search for and retweet from twitter!');
-	define('_AM_TWEETBOMB_NEW_MENTIONS_H1', 'New Search and Tweets');
-	define('_AM_TWEETBOMB_NEW_MENTIONS_P', 'This is where you enter a search and tweet for the cron.');
 
-	// Messages
-	define('_AM_MSG_MENTIONS_FAILEDTOSAVE', 'Search and retweet Failed to Save!');
-	define('_AM_MSG_MENTIONS_SAVEDOKEY', 'Search and retweet Saved Okey!');
-	define('_AM_MSG_MENTIONS_FAILEDTODELETE', 'Search and retweet Failed to Delete.');
-	define('_AM_MSG_MENTIONS_DELETED', 'Search and retweet Deleted');
-	define('_AM_MSG_MENTIONS_DELETE', 'Do you wish to delete the search and retweet of "%s"?');	
-	
-	
 	// Version 1.25
 	// Dashboard 
 	define('_AM_TWEETBOMB_ADMIN_COUNTS', 'Twitter Bomb Statistics');
@@ -371,7 +338,6 @@
 	// Table headers
 	define('_AM_TWEETBOMB_TH_MID', 'Mention ID');
 	define('_AM_TWEETBOMB_TH_RPID', 'Reply ID');
-	define('_AM_TWEETBOMB_TH_URLID', 'URL');
 	define('_AM_TWEETBOMB_TH_REPLY', 'Reply');
 	define('_AM_TWEETBOMB_TH_KEYWORDS', 'Keywords');
 	define('_AM_TWEETBOMB_TH_USER', 'User/Hashtag');
@@ -460,6 +426,61 @@
 	define('_AM_TWEETBOMB_FORM_MENTIONED_MENTIONS', 'Last Mentioned');
 	define('_AM_TWEETBOMB_FORM_MENTIONS_MENTIONS', 'Number of Mentions');
 	
+	
+	// Version 1.30
+	// Dashboard
+	define('_AM_TWEETBOMB_ADMIN_THEREARE_REPLIESSBOMB', 'There are Bombed Replies: %s');
+	define('_AM_TWEETBOMB_ADMIN_THEREARE_REPLIESSSCHEDULER', 'There are Scheduled Replies: %s');
+	define('_AM_TWEETBOMB_ADMIN_THEREARE_REPLIESSRETWEET', 'There are Retweeted Replies: %s');
+	define('_AM_TWEETBOMB_ADMIN_THEREARE_REPLIESSACTIVE', 'There are Active Replies: %s');
+	define('_AM_TWEETBOMB_ADMIN_THEREARE_REPLIESSINACTIVE', 'There are Inactive Replies: %s');
+	define('_AM_TWEETBOMB_ADMIN_THEREARE_RETWEETS', 'There are Retweets: %s');
+	define('_AM_TWEETBOMB_ADMIN_THEREARE_LOGRETWEET', 'Retweet log lines are: %s');
+	
+	//Campaigns
+	define('_AM_TWEETBOMB_FORM_MIDS_CAMPAIGN', 'Reply Keywording and Correlation');
+	define('_AM_TWEETBOMB_FORM_DESC_MIDS_CAMPAIGN', 'Must have selected retweet keywords which tweets are cross compaired to this on reply on tweet campaign that mention correspondence.');
+	define('_AM_TWEETBOMB_FORM_RPIDS_CAMPAIGN', 'Replies and Mention Keywords');
+	define('_AM_TWEETBOMB_FORM_DESC_RPIDS_CAMPAIGN', 'For mention campaigns use this feature alone for keywords on mention and reply.');
+	define('_AM_TWEETBOMB_FORM_CRON_CAMPAIGN', 'Cron this Item?');
+	define('_AM_TWEETBOMB_FORM_DESC_CRON_CAMPAIGN', 'Turns on and off campaign on the cron!');
+	
+	// Retweet
+	// Smarty Constants
+	define('_AM_TWEETBOMB_RETWEET_H1', 'Search Tweet Functions');
+	define('_AM_TWEETBOMB_RETWEET_P', 'This is the area by geocode, language and item being searched for retweeting or replying to depending on campaign.');
+	define('_AM_TWEETBOMB_NEW_RETWEET_H1', 'New Search Tweet Function');
+	define('_AM_TWEETBOMB_NEW_RETWEET_P', 'Here you can specify a new tweet function area by geocode, language and item being searched for retweeting or replying to depending on campaign.');
+
+	// Table headers
+	define('_AM_TWEETBOMB_TH_RETWEETS', 'Retweet');
+	define('_AM_TWEETBOMB_TH_RETWEETED', 'Searched last');
+	
+	//Form
+	define('_AM_TWEETBOMB_FORM_SEARCH_RETWEET', 'Search For');
+	define('_AM_TWEETBOMB_FORM_DESC_SEARCH_RETWEET', 'This is the item being searched for');
+	define('_AM_TWEETBOMB_FORM_SKIP_RETWEET', 'Skip');
+	define('_AM_TWEETBOMB_FORM_DESC_SKIP_RETWEET', 'This is the keyword it contains or with a - infront of the word must not contain to be valid!');
+	define('_AM_TWEETBOMB_FORM_GEOCODE_RETWEET', 'GeoCode Based?');
+	define('_AM_TWEETBOMB_FORM_DESC_GEOCODE_RETWEET', 'Whether the tweet has to be within a geocode.');
+	define('_AM_TWEETBOMB_FORM_LONGITUDE_RETWEET', 'Longitude of Tweet');
+	define('_AM_TWEETBOMB_FORM_DESC_LONGITUDE_RETWEET', 'Only valid if geocode is turned on');
+	define('_AM_TWEETBOMB_FORM_LATITUDE_RETWEET', 'Latitude of Tweet');
+	define('_AM_TWEETBOMB_FORM_DESC_LATITUDE_RETWEET', 'Only valid if geocode is turned on');
+	define('_AM_TWEETBOMB_FORM_RADIUS_RETWEET', 'Radius from Map points tweet occured');
+	define('_AM_TWEETBOMB_FORM_DESC_RADIUS_RETWEET', 'Only valid if geocode is turned on');
+	define('_AM_TWEETBOMB_FORM_MEASUREMENT_RETWEET', 'Measurement Radius is in');
+	define('_AM_TWEETBOMB_FORM_DESC_MEASUREMENT_RETWEET', 'Only valid if geocode is turned on');
+	define('_AM_TWEETBOMB_FORM_LANGUAGE_RETWEET', 'Language Tweet must be');
+	define('_AM_TWEETBOMB_FORM_DESC_LANGUAGE_RETWEET', '');
+	define('_AM_TWEETBOMB_FORM_TYPE_RETWEET', 'Type of Tweet');
+	define('_AM_TWEETBOMB_FORM_DESC_TYPE_RETWEET', '');
+	define('_AM_TWEETBOMB_FORM_UID_RETWEET', 'User of Search Function');
+	
+	// Search & Reply
+	// Table header
+	define('_AM_TWEETBOMB_TH_REPLIED', 'Replied');
+	define('_AM_TWEETBOMB_TH_RCID', 'Bomb Campaign');
 ?>
 	
 	

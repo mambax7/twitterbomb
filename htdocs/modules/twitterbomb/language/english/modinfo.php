@@ -428,24 +428,25 @@
 		define('_MI_TWEETBOMB_TITLE_ADMENU7', 'Tweet Scheduler');
 		define('_MI_TWEETBOMB_ICON_ADMENU7', '../../'.$GLOBALS['twitterbombModule']->getInfo('icons32').'/twitterbomb.scheduler.png');
 		define('_MI_TWEETBOMB_LINK_ADMENU7', 'admin/index.php?op=scheduler&fct=list');
-		define('_MI_TWEETBOMB_TITLE_ADMENU8', 'Tweet Log');
-		define('_MI_TWEETBOMB_ICON_ADMENU8', '../../'.$GLOBALS['twitterbombModule']->getInfo('icons32').'/twitterbomb.logs.png');
-		define('_MI_TWEETBOMB_LINK_ADMENU8', 'admin/index.php?op=log');	
-		define('_MI_TWEETBOMB_TITLE_ADMENU9', 'Search & Retweet');
-		define('_MI_TWEETBOMB_ICON_ADMENU9', '../../'.$GLOBALS['twitterbombModule']->getInfo('icons32').'/twitterbomb.retweet.png');
-		define('_MI_TWEETBOMB_LINK_ADMENU9', 'admin/index.php?op=retweet&fct=list');
-		define('_MI_TWEETBOMB_TITLE_ADMENU10', 'Search & Reply');
-		define('_MI_TWEETBOMB_ICON_ADMENU10', '../../'.$GLOBALS['twitterbombModule']->getInfo('icons32').'/twitterbomb.reply.png');
-		define('_MI_TWEETBOMB_LINK_ADMENU10', 'admin/index.php?op=replies&fct=list');
-		define('_MI_TWEETBOMB_TITLE_ADMENU11', 'Mention & Reply');
-		define('_MI_TWEETBOMB_ICON_ADMENU11', '../../'.$GLOBALS['twitterbombModule']->getInfo('icons32').'/twitterbomb.mentions.png');
-		define('_MI_TWEETBOMB_LINK_ADMENU11', 'admin/index.php?op=mentions&fct=list');				
-		define('_MI_TWEETBOMB_TITLE_ADMENU12', 'Preferences');
-		define('_MI_TWEETBOMB_ICON_ADMENU12', '../../'.$GLOBALS['twitterbombModule']->getInfo('icons32').'/twitterbomb.preferences.png');
-		define('_MI_TWEETBOMB_LINK_ADMENU12', '../system/admin.php?fct=preferences&op=showmod&mod='.$GLOBALS['twitterbombModule']->getVar('mid'));
-		define('_MI_TWEETBOMB_TITLE_ADMENU13', 'About');
-		define('_MI_TWEETBOMB_ICON_ADMENU13', '../../'.$GLOBALS['twitterbombModule']->getInfo('icons32').'/about.png');
-		define('_MI_TWEETBOMB_LINK_ADMENU13', 'admin/index.php?op=about');
+		define('_MI_TWEETBOMB_TITLE_ADMENU8', 'Search & Retweet');
+		define('_MI_TWEETBOMB_ICON_ADMENU8', '../../'.$GLOBALS['twitterbombModule']->getInfo('icons32').'/twitterbomb.retweet.png');
+		define('_MI_TWEETBOMB_LINK_ADMENU8', 'admin/index.php?op=retweet&fct=list');
+		define('_MI_TWEETBOMB_TITLE_ADMENU9', 'Search & Reply');
+		define('_MI_TWEETBOMB_ICON_ADMENU9', '../../'.$GLOBALS['twitterbombModule']->getInfo('icons32').'/twitterbomb.reply.png');
+		define('_MI_TWEETBOMB_LINK_ADMENU9', 'admin/index.php?op=replies&fct=list');
+		define('_MI_TWEETBOMB_TITLE_ADMENU10', 'Mention & Reply');
+		define('_MI_TWEETBOMB_ICON_ADMENU10', '../../'.$GLOBALS['twitterbombModule']->getInfo('icons32').'/twitterbomb.mentions.png');
+		define('_MI_TWEETBOMB_LINK_ADMENU10', 'admin/index.php?op=mentions&fct=list');				
+		define('_MI_TWEETBOMB_TITLE_ADMENU11', 'About');
+		define('_MI_TWEETBOMB_ICON_ADMENU11', '../../'.$GLOBALS['twitterbombModule']->getInfo('icons32').'/about.png');
+		define('_MI_TWEETBOMB_LINK_ADMENU11', 'admin/index.php?op=about');
+		define('_MI_TWEETBOMB_TITLE_ADMENU12', 'Tweet Log');
+		define('_MI_TWEETBOMB_ICON_ADMENU12', '../../'.$GLOBALS['twitterbombModule']->getInfo('icons32').'/twitterbomb.logs.png');
+		define('_MI_TWEETBOMB_LINK_ADMENU12', 'admin/index.php?op=log');	
+		define('_MI_TWEETBOMB_TITLE_ADMENU13', 'Preferences');
+		define('_MI_TWEETBOMB_ICON_ADMENU13', '../../'.$GLOBALS['twitterbombModule']->getInfo('icons32').'/twitterbomb.preferences.png');
+		define('_MI_TWEETBOMB_LINK_ADMENU13', '../system/admin.php?fct=preferences&op=showmod&mod='.$GLOBALS['twitterbombModule']->getVar('mid'));
+		
 	}
 	
 	// version 1.27

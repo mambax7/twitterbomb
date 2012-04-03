@@ -1,7 +1,7 @@
 <?php
 
 include_once('../../../mainfile.php');
-
+$GLOBALS['xoopsLogger']->activated = false;
 if (!defined('NLB')) {
 	if (!isset($_SERVER['HTTP_HOST']))
 		define('NLB', "\n");
@@ -14,7 +14,10 @@ $config_handler = xoops_gethandler('config');
 $GLOBALS['twitterbombModule'] = $module_handler->getByDirname('twitterbomb');
 $GLOBALS['twitterbombModuleConfig'] = $config_handler->getConfigList($GLOBALS['twitterbombModule']->getVar('mid'));
 
-$GLOBALS['execution_time'] = $GLOBALS['execution_time'] + 30;
+if (isset($GLOBALS['execution_time']))
+	$GLOBALS['execution_time'] = $GLOBALS['execution_time'] + 30;
+else 
+	$GLOBALS['execution_time'] = 30;
 
 if (!isset($GLOBALS['cron_run_for']))
 	$GLOBALS['cron_run_for'] = ceil($GLOBALS['twitterbombModuleConfig']['interval_of_cron'] / (($GLOBALS['twitterbombModuleConfig']['cron_follow']?1:0)+($GLOBALS['twitterbombModuleConfig']['cron_gather']?1:0)+($GLOBALS['twitterbombModuleConfig']['cron_tweet']?1:0)+($GLOBALS['twitterbombModuleConfig']['cron_retweet']?1:0)));
@@ -36,7 +39,11 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_gather']) {
 	$usernames_handler=&xoops_getmodulehandler('usernames', 'twitterbomb');
 	
 	$oauth_handler = xoops_getmodulehandler('oauth', 'twitterbomb');
-	
+	if (!is_object($oauth)) {
+		xoops_error('Critical Error: No OAuth Root Object');
+		echo 'Gather Cron Ended: '.date('Y-m-d D H:i:s', time()).NLB;
+		return false;
+	}
 	if (!$oids = XoopsCache::read('twitterbomb_oids_cron')) {
 		$criteria = new CriteriaCompo(new Criteria('1', '1'));
 	} else {

@@ -11,14 +11,14 @@ function xoops_module_update_twitterbomb(&$module) {
 	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_campaign')."` ADD COLUMN `type` ENUM('bomb','scheduler', 'retweet') DEFAULT 'bomb'";
 	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_campaign')."` ADD COLUMN `cron` INT(13) UNSIGNED DEFAULT '0'";
 	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_campaign')."` ADD COLUMN `rids` VARCHAR(1000) DEFAULT ''";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_campaign')."` CHANGE COLUMN `type` `type` ENUM('bomb','scheduler', 'retweet') DEFAULT 'bomb'";
+	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_campaign')."` CHANGE COLUMN `type` `type` ENUM('bomb','scheduler','retweet','reply','mention') DEFAULT 'bomb'";
 	
 	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_category')."` ADD COLUMN `hits` INT(13) UNSIGNED DEFAULT '0'";
 	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_category')."` ADD COLUMN `active` INT(13) UNSIGNED DEFAULT '0'";
 	
 	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_scheduler')."` ADD COLUMN `pregmatch_replace` VARCHAR(500) DEFAULT NULL";
 	
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')."` ADD COLUMN `type` ENUM('bomb','secheduler','reply','mention') DEFAULT 'bomb'";
+	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')."` ADD COLUMN `type` ENUM('bomb','secheduler','retweet','reply','mention') DEFAULT 'bomb'";
 	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')."` ADD COLUMN `source_nick` VARCHAR(64) DEFAULT NULL";
 	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')."` ADD COLUMN `tweeted` INT(13) UNSIGNED DEFAULT '0'";
 	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')."` ADD COLUMN `id` VARCHAR(128) DEFAULT NULL";
@@ -82,7 +82,7 @@ $sql[] = "CREATE TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_scheduler')."
 	
 	$sql[] = "CREATE TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_log')."` (	
   `lid` int(13) unsigned NOT NULL auto_increment,
-  `provider` enum('bomb','scheduler','retweet') default 'bomb',
+  `provider` enum('bomb','scheduler','retweet','reply','mention') default 'bomb',
   `uid` int(13) unsigned default '0',
   `sid` int(13) unsigned default '0',
   `oid` int(13) unsigned default '0',
@@ -308,7 +308,7 @@ $sql[] = "CREATE TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_scheduler')."
 		else {
 			switch ($GLOBALS['xoopsDB']->errno()) {
 				default:
-					xoops_error($question, 'Error Number: '.$GLOBALS['xoopsDB']->errno().' - SQL Did Not Executed! ('.$GLOBALS['xoopsDB']->error().'!!!)');
+					//xoops_error($question, 'Error Number: '.$GLOBALS['xoopsDB']->errno().' - SQL Did Not Executed! ('.$GLOBALS['xoopsDB']->error().'!!!)');
 					break;
 				case 2006:
 				case 1317:

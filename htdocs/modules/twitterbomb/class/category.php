@@ -42,26 +42,30 @@ class TwitterbombCategory extends XoopsObject
 		} else {
 			$ele['uid'] = new XoopsFormLabel('', _MI_TWEETBOMB_ANONYMOUS);
 		}
-		if ($ret['created']>0) {
-			$ele['created'] = new XoopsFormLabel('', date(_DATESTRING, $ret['created']));
-		} else {
-			$ele['created'] = new XoopsFormLabel('', '');
-		}
-		if ($ret['actioned']>0) {
-			$ele['actioned'] = new XoopsFormLabel('', date(_DATESTRING, $ret['actioned']));
-		} else {
-			$ele['actioned'] = new XoopsFormLabel('', '');
-		}
-		if ($ret['updated']>0) {
-			$ele['updated'] = new XoopsFormLabel('', date(_DATESTRING, $ret['updated']));
-		} else {
-			$ele['updated'] = new XoopsFormLabel('', '');
-		}
-		if ($ret['active']>0) {
-			$ele['active'] = new XoopsFormLabel('', date(_DATESTRING, $ret['active']));
-		} else {
-			$ele['active'] = new XoopsFormLabel('', '');
-		}		
+		if (isset($ret['created']))
+			if ($ret['created']>0) {
+				$ele['created'] = new XoopsFormLabel('', date(_DATESTRING, $ret['created']));
+			} else {
+				$ele['created'] = new XoopsFormLabel('', '');
+			}
+		if (isset($ret['actioned']))
+			if ($ret['actioned']>0) {
+				$ele['actioned'] = new XoopsFormLabel('', date(_DATESTRING, $ret['actioned']));
+			} else {
+				$ele['actioned'] = new XoopsFormLabel('', '');
+			}
+		if (isset($ret['updated']))
+			if ($ret['updated']>0) {
+				$ele['updated'] = new XoopsFormLabel('', date(_DATESTRING, $ret['updated']));
+			} else {
+				$ele['updated'] = new XoopsFormLabel('', '');
+			}
+		if (isset($ret['active']))
+			if ($ret['active']>0) {
+				$ele['active'] = new XoopsFormLabel('', date(_DATESTRING, $ret['active']));
+			} else {
+				$ele['active'] = new XoopsFormLabel('', '');
+			}		
 		foreach($ele as $key => $obj) {
 			$ret['form'][$key] = $ele[$key]->render(); 
 		}

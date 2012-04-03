@@ -172,7 +172,7 @@
 		$ele['cid']->setDescription(_AM_TWEETBOMB_FORM_DESC_CID_REPLIES);
 		$ele['catid'] = new TwitterBombFormSelectCategories(_AM_TWEETBOMB_FORM_CATID_REPLIES, $id.'[catid]', $object->getVar('catid'));
 		$ele['catid']->setDescription(_AM_TWEETBOMB_FORM_DESC_CATID_REPLIES);
-		$ele['type'] = new TwitterBombFormSelectType(_AM_TWEETBOMB_FORM_TYPE_REPLIES, $id.'[type]', $object->getVar('type'), 1, false, 'bomb,reply');
+		$ele['type'] = new TwitterBombFormSelectType(_AM_TWEETBOMB_FORM_TYPE_REPLIES, $id.'[type]', $object->getVar('type'), 1, false, false, 'bomb,reply');
 		$ele['type']->setDescription(_AM_TWEETBOMB_FORM_DESC_TYPE_REPLIES);
 		$ele['reply'] = new XoopsFormText(_AM_TWEETBOMB_FORM_REPLY_REPLIES, $id.'[reply]', 35,140, $object->getVar('reply'));
 		$ele['reply']->setDescription(_AM_TWEETBOMB_FORM_DESC_REPLY_REPLIES);
