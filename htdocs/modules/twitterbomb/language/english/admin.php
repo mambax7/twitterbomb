@@ -481,6 +481,7 @@
 	// Table header
 	define('_AM_TWEETBOMB_TH_REPLIED', 'Replied');
 	define('_AM_TWEETBOMB_TH_RCID', 'Bomb Campaign');
+	define('_AM_TWEETBOMB_TH_RPIDS', 'Replies');
 ?>
 	
 	

@@ -19,7 +19,7 @@ class TwitterbombMentions extends XoopsObject
         $this->initVar('catid', XOBJ_DTYPE_INT, null, false);
 		$this->initVar('user', XOBJ_DTYPE_TXTBOX, '@', true, 64);
 		$this->initVar('rpids', XOBJ_DTYPE_ARRAY, array(), false);
-		$this->initVar('keywords', XOBJ_DTYPE_TXTBOX, null, true, 500);
+		$this->initVar('keywords', XOBJ_DTYPE_TXTBOX, null, false, 500);
 		$this->initVar('geocode', XOBJ_DTYPE_INT, null, false);
         $this->initVar('longitude', XOBJ_DTYPE_DECIMAL, null, false);
         $this->initVar('latitude', XOBJ_DTYPE_DECIMAL, null, false);
@@ -44,9 +44,9 @@ class TwitterbombMentions extends XoopsObject
 		$ele['id'] = new XoopsFormHidden('id['.$ret['mid'].']', $this->getVar('mid'));
 		$ele['cid'] = new TwitterBombFormSelectCampaigns('', $ret['mid'].'[cid]', $this->getVar('cid'), 1, false, true, 'mentions');
 		$ele['catid'] = new TwitterBombFormSelectCategories('', $ret['mid'].'[catid]', $this->getVar('catid'));
-		$ele['rpids'] = new TwitterBombFormCheckboxReplies('', $ret['mid'].'[rpids]', $this->getVar('rpids'), '<br/>');
+		$ele['rpids'] = new TwitterBombFormCheckboxReplies('', $ret['mid'].'[rpids]', $this->getVar('rpids'), '&nbsp;');
 		$ele['user'] = new XoopsFormText('', $ret['mid'].'[user]', 26,64, $this->getVar('user'));
-		$ele['keywords'] = new XoopsFormTextArea('', $ret['mid'].'[keywords]', 26, 4, $this->getVar('keywords'));
+		$ele['keywords'] = new XoopsFormTextArea('', $ret['mid'].'[keywords]', $this->getVar('keywords'), 4, 26);
 		$ele['geocode'] = new XoopsFormRadioYN('', $ret['rid'].'[geocode]', $this->getVar('geocode'));
 		$ele['longitude'] = new XoopsFormText('', $ret['rid'].'[longitude]', 10,24, $this->getVar('longitude'));
 		$ele['latitude'] = new XoopsFormText('', $ret['rid'].'[latitude]', 10,24, $this->getVar('latitude'));

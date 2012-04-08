@@ -17,10 +17,10 @@ class TwitterbombReplies extends XoopsObject
         $this->initVar('rpid', XOBJ_DTYPE_INT, null, false);
         $this->initVar('cid', XOBJ_DTYPE_INT, null, false);
         $this->initVar('catid', XOBJ_DTYPE_INT, null, false);
-		$this->initVar('urlid', XOBJ_DTYPE_INT, null, true, 255);
+		$this->initVar('urlid', XOBJ_DTYPE_INT, null, false);
 		$this->initVar('rcid', XOBJ_DTYPE_INT, null, false);    
-		$this->initVar('reply', XOBJ_DTYPE_TXTBOX, null, true, 140);
-		$this->initVar('keywords', XOBJ_DTYPE_TXTBOX, null, true, 500);    
+		$this->initVar('reply', XOBJ_DTYPE_TXTBOX, null, false, 140);
+		$this->initVar('keywords', XOBJ_DTYPE_TXTBOX, null, false, 500);    
 		$this->initVar('uid', XOBJ_DTYPE_INT, null, false);
 		$this->initVar('type', XOBJ_DTYPE_ENUM, 'reply', false, false, false, array('bomb','reply'));
 		$this->initVar('replies', XOBJ_DTYPE_INT, null, false);
@@ -45,7 +45,7 @@ class TwitterbombReplies extends XoopsObject
 		$ele['rcid'] = new TwitterBombFormSelectCampaigns('', $ret['rpid'].'[rcid]', $this->getVar('rcid'), 1, false, true, 'bomb');
 		$ele['type'] = new TwitterBombFormSelectType('', $ret['rpid'].'[type]', $this->getVar('type'), 1, false, false, 'bomb,reply');
 		$ele['reply'] = new XoopsFormText('', $ret['rpid'].'[reply]', 26,140, $this->getVar('reply'));
-		$ele['keywords'] = new XoopsFormTextArea('', $ret['rpid'].'[keywords]', 26, 4, $this->getVar('keywords'));
+		$ele['keywords'] = new XoopsFormTextArea('', $ret['rpid'].'[keywords]', $this->getVar('keywords'), 4, 26);
 		
 		if ($ret['uid']>0) {
 			$member_handler=xoops_gethandler('member');
