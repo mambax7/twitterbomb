@@ -1,5 +1,16 @@
 ========================================
- 2012/04/03 20:08:00 Version 1.30 STABLE
+ 2012/04/25 17:23:00 Version 1.31 STABLE
+========================================
+ - Changed /admin/index.php - $_REQUEST['id'] imported as $id for subroutine (Wishcraft)
+ - Changed /class/base_matrix.php - Required fields Marked for Database insertion (Wishcraft)
+ - Changed /class/keywords.php - Required fields Marked for Database insertion (Wishcraft)
+ - Changed /class/mentions.php - Required fields Marked for Database insertion (Wishcraft)
+ - Changed /class/replies.php - Required fields Marked for Database insertion (Wishcraft)
+ - Changed /class/retweet.php - Required fields Marked for Database insertion (Wishcraft)
+ - Changed /class/scheduler.php - Required fields Marked for Database insertion (Wishcraft)
+ 
+========================================
+ 2012/04/03 20:08:00 Version 1.30 RC
 ========================================
  - Changed /language/english/modinfo.php - Admin Menus changed (Wishcraft)
  - Changed /language/english/admin.php - Missing Langauge Constants Added and Duplicates Removed (Wishcraft)

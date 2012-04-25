@@ -22,7 +22,7 @@ class TwitterbombReplies extends XoopsObject
 		$this->initVar('reply', XOBJ_DTYPE_TXTBOX, null, false, 140);
 		$this->initVar('keywords', XOBJ_DTYPE_TXTBOX, null, false, 500);    
 		$this->initVar('uid', XOBJ_DTYPE_INT, null, false);
-		$this->initVar('type', XOBJ_DTYPE_ENUM, 'reply', false, false, false, array('bomb','reply'));
+		$this->initVar('type', XOBJ_DTYPE_ENUM, 'reply', true, false, false, array('bomb','reply'));
 		$this->initVar('replies', XOBJ_DTYPE_INT, null, false);
 		$this->initVar('created', XOBJ_DTYPE_INT, null, false);
 		$this->initVar('updated', XOBJ_DTYPE_INT, null, false);
@@ -143,7 +143,8 @@ class TwitterbombReplies extends XoopsObject
 		}
 		
 		if (function_exists($func))  {
-			return @$func($this);
+			$object = @$func($this);
+			return is_object($object)?$object:$this;
 		}
 		return $this;	
 	}
@@ -303,6 +304,12 @@ function insert($object, $force = true) {
     		return '&nbsp;';
     }
     
+	function delete($id_or_object, $force = true) {
+    	if (is_numeric($id_or_object))
+    		return parent::deleteAll(new Criteria('`'.$this->keyName.'`', $id_or_object), $force);
+    	elseif (is_object($id_or_object))
+    		return parent::delete($id_or_object, $force);
+    }
     
 }
 ?>

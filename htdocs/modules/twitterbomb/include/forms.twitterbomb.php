@@ -606,14 +606,14 @@
 	function tweetbomb_scheduler_get_form($object) {
 		
 		if (!is_object($object)) {
-			$handler = xoops_getmodulehandler('campaign', 'twitterbomb');
+			$handler = xoops_getmodulehandler('scheduler', 'twitterbomb');
 			$object = $handler->create(); 
 		}
 
 		if ($object->isNew())
-			$sform = new XoopsThemeForm(_AM_TWEETBOMB_FORM_ISNEW_SCHEDULER, 'campaign', 'index.php', 'post');
+			$sform = new XoopsThemeForm(_AM_TWEETBOMB_FORM_ISNEW_SCHEDULER, 'scheduler', 'index.php', 'post');
 		else
-			$sform = new XoopsThemeForm(_AM_TWEETBOMB_FORM_EDIT_SCHEDULER, 'campaign', 'index.php', 'post');
+			$sform = new XoopsThemeForm(_AM_TWEETBOMB_FORM_EDIT_SCHEDULER, 'scheduler', 'index.php', 'post');
 
 		$id = $object->getVar('cid');
 		if (empty($id)) $id = '0';

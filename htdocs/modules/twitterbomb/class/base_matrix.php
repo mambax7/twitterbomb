@@ -17,8 +17,8 @@ class TwitterbombBase_matrix extends XoopsObject
         $this->initVar('baseid', XOBJ_DTYPE_INT, null, false);
         $this->initVar('cid', XOBJ_DTYPE_INT, null, false);
         $this->initVar('catid', XOBJ_DTYPE_INT, null, false);         
-		$this->initVar('base1', XOBJ_DTYPE_ENUM, null, false, false, false, array('for','when','clause','then','over','under','their','there','trend',''));    
-		$this->initVar('base2', XOBJ_DTYPE_ENUM, null, false, false, false, array('for','when','clause','then','over','under','their','there','trend',''));
+		$this->initVar('base1', XOBJ_DTYPE_ENUM, 'for', true, false, false, array('for','when','clause','then','over','under','their','there','trend',''));    
+		$this->initVar('base2', XOBJ_DTYPE_ENUM, 'when', true, false, false, array('for','when','clause','then','over','under','their','there','trend',''));
 		$this->initVar('base3', XOBJ_DTYPE_ENUM, null, false, false, false, array('for','when','clause','then','over','under','their','there','trend',''));
 		$this->initVar('base4', XOBJ_DTYPE_ENUM, null, false, false, false, array('for','when','clause','then','over','under','their','there','trend',''));
 		$this->initVar('base5', XOBJ_DTYPE_ENUM, null, false, false, false, array('for','when','clause','then','over','under','their','there','trend',''));
@@ -150,7 +150,8 @@ class TwitterbombBase_matrix extends XoopsObject
 		}
 		
 		if (function_exists($func))  {
-			return @$func($this);
+			$object = @$func($this);
+			return is_object($object)?$object:$this;
 		}
 		return $this;
 	}
@@ -320,6 +321,11 @@ class TwitterbombBase_matrixHandler extends XoopsPersistableObjectHandler
     		return '&nbsp;';
     }
     
-    
+    function delete($id_or_object, $force = true) {
+    	if (is_numeric($id_or_object))
+    		return parent::deleteAll(new Criteria('`'.$this->keyName.'`', $id_or_object), $force);
+    	elseif (is_object($id_or_object))
+    		return parent::delete($id_or_object, $force);
+    }
 }
 ?>

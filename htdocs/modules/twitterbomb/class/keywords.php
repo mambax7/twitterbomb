@@ -17,7 +17,7 @@ class TwitterbombKeywords extends XoopsObject
         $this->initVar('kid', XOBJ_DTYPE_INT, null, false);
         $this->initVar('cid', XOBJ_DTYPE_INT, null, false);
         $this->initVar('catid', XOBJ_DTYPE_INT, null, false);         
-        $this->initVar('base', XOBJ_DTYPE_ENUM, null, false, false, false, array('for','when','clause','then','over','under','their','there'));
+        $this->initVar('base', XOBJ_DTYPE_ENUM, null, true, false, false, array('for','when','clause','then','over','under','their','there'));
 		$this->initVar('keyword', XOBJ_DTYPE_TXTBOX, null, true, 35);    
 		$this->initVar('uid', XOBJ_DTYPE_INT, null, false);
 		$this->initVar('created', XOBJ_DTYPE_INT, null, false);
@@ -112,7 +112,8 @@ class TwitterbombKeywords extends XoopsObject
 		}
 		
 		if (function_exists($func))  {
-			return @$func($this);
+			$object = @$func($this);
+			return is_object($object)?$object:$this;
 		}
 		return $this;
 	}
@@ -295,6 +296,12 @@ class TwitterbombKeywordsHandler extends XoopsPersistableObjectHandler
     		return '&nbsp;';
     }
     
+	function delete($id_or_object, $force = true) {
+    	if (is_numeric($id_or_object))
+    		return parent::deleteAll(new Criteria('`'.$this->keyName.'`', $id_or_object), $force);
+    	elseif (is_object($id_or_object))
+    		return parent::delete($id_or_object, $force);
+    }
     
 }
 ?>

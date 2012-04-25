@@ -11,6 +11,7 @@
 	$order = !empty($_REQUEST['order'])?$_REQUEST['order']:'DESC';
 	$sort = !empty($_REQUEST['sort'])?''.$_REQUEST['sort'].'':'created';
 	$filter = !empty($_REQUEST['filter'])?''.$_REQUEST['filter'].'':'1,1';
+	$id = !empty($_REQUEST['id'])?(is_array($_REQUEST['id'])?array_unique($_REQUEST['id']):intval($_REQUEST['id'])):0;
 	
 	switch($op) {
 		default:
@@ -187,7 +188,10 @@
 						
 					$campaigns = $campaign_handler->getObjects($criteria, true);
 					foreach($campaigns as $cid => $campaign) {
-						$GLOBALS['xoopsTpl']->append('campaign', $campaign->toArray());
+						if (!is_object($campaign))
+							$campaign_handler->delete($cid);
+						else
+							$GLOBALS['xoopsTpl']->append('campaign', $campaign->toArray());
 					}
 					$GLOBALS['xoopsTpl']->assign('form', tweetbomb_campaign_get_form(false));
 					$GLOBALS['xoopsTpl']->assign('php_self', $_SERVER['PHP_SELF']);
@@ -202,8 +206,8 @@
 					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
 					
 					$campaign_handler =& xoops_getmodulehandler('campaign', 'twitterbomb');
-					if (isset($_REQUEST['id'])) {
-						$campaign = $campaign_handler->get(intval($_REQUEST['id']));
+					if ($id!=0) {
+						$campaign = $campaign_handler->get($id);
 					} else {
 						$campaign = $campaign_handler->create();
 					}
@@ -215,8 +219,8 @@
 				case "save":
 					
 					$campaign_handler =& xoops_getmodulehandler('campaign', 'twitterbomb');
-					$id=0;
-					if ($id=intval($_REQUEST['id'])) {
+					
+					if ($id!=0) {
 						$campaign = $campaign_handler->get($id);
 					} else {
 						$campaign = $campaign_handler->create();
@@ -227,6 +231,9 @@
 					
 					if (empty($_POST[$id]['timed']))
 						$campaign->setVar('timed', FALSE);
+
+					if (empty($_POST[$id]['cron']))
+						$campaign->setVar('cron', FALSE);
 						
 					if (!$id=$campaign_handler->insert($campaign)) {
 						redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_REPLIES_FAILEDTOSAVE);
@@ -239,12 +246,12 @@
 				case "savelist":
 					
 					$campaign_handler =& xoops_getmodulehandler('campaign', 'twitterbomb');
-					foreach($_REQUEST['id'] as $id) {
-						$campaign = $campaign_handler->get($id);
-						$campaign->setVars($_POST[$id]);
-						$campaign->setVar('start', strtotime($_POST[$id]['start']));
-						$campaign->setVar('end', strtotime($_POST[$id]['end']));
-						if (empty($_POST[$id]['timed']))
+					foreach($id as $ids) {
+						$campaign = $campaign_handler->get($ids);
+						$campaign->setVars($_POST[$ids]);
+						$campaign->setVar('start', strtotime($_POST[$ids]['start']));
+						$campaign->setVar('end', strtotime($_POST[$ids]['end']));
+						if (empty($_POST[$ids]['timed']))
 							$campaign->setVar('timed', FALSE);
 						if (!$campaign_handler->insert($campaign)) {
 							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_REPLIES_FAILEDTOSAVE);
@@ -257,8 +264,8 @@
 				case "delete":	
 								
 					$campaign_handler =& xoops_getmodulehandler('campaign', 'twitterbomb');
-					$id=0;
-					if (isset($_POST['id'])&&$id=intval($_POST['id'])) {
+					
+					if (isset($_POST['id'])&&$id!=0) {
 						$campaign = $campaign_handler->get($id);
 						if (!$campaign_handler->delete($campaign)) {
 							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_REPLIES_FAILEDTODELETE);
@@ -268,8 +275,8 @@
 							exit(0);
 						}
 					} else {
-						$campaign = $campaign_handler->get(intval($_REQUEST['id']));
-						xoops_confirm(array('id'=>$_REQUEST['id'], 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_REPLIES_DELETE, $campaign->getVar('name')));
+						$campaign = $campaign_handler->get($id);
+						xoops_confirm(array('id'=>$id, 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_REPLIES_DELETE, $campaign->getVar('name')));
 					}
 					break;
 			}
@@ -311,7 +318,9 @@
 						
 					$categorys = $category_handler->getObjects($criteria, true);
 					foreach($categorys as $cid => $category) {
-						if (is_object($category))					
+						if (!is_object($category))
+							$category_handler->delete($cid);
+						else
 							$GLOBALS['xoopsTpl']->append('category', $category->toArray());
 					}
 					$GLOBALS['xoopsTpl']->assign('form', tweetbomb_category_get_form(false));
@@ -327,8 +336,8 @@
 					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
 					
 					$category_handler =& xoops_getmodulehandler('category', 'twitterbomb');
-					if (isset($_REQUEST['id'])) {
-						$category = $category_handler->get(intval($_REQUEST['id']));
+					if ($id!=0) {
+						$category = $category_handler->get($id);
 					} else {
 						$category = $category_handler->create();
 					}
@@ -340,8 +349,8 @@
 				case "save":
 					
 					$category_handler =& xoops_getmodulehandler('category', 'twitterbomb');
-					$id=0;
-					if ($id=intval($_REQUEST['id'])) {
+					
+					if ($id!=0) {
 						$category = $category_handler->get($id);
 					} else {
 						$category = $category_handler->create();
@@ -358,9 +367,9 @@
 				case "savelist":
 					
 					$category_handler =& xoops_getmodulehandler('category', 'twitterbomb');
-					foreach($_REQUEST['id'] as $id) {
-						$category = $category_handler->get($id);
-						$category->setVars($_POST[$id]);
+					foreach($id as $ids) {
+						$category = $category_handler->get($ids);
+						$category->setVars($_POST[$ids]);
 						if (!$category_handler->insert($category)) {
 							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_CATEGORY_FAILEDTOSAVE);
 							exit(0);
@@ -372,8 +381,8 @@
 				case "delete":	
 								
 					$category_handler =& xoops_getmodulehandler('category', 'twitterbomb');
-					$id=0;
-					if (isset($_POST['id'])&&$id=intval($_POST['id'])) {
+					
+					if (isset($_POST['id'])&&$id!=0) {
 						$category = $category_handler->get($id);
 						if (!$category_handler->delete($category)) {
 							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_CATEGORY_FAILEDTODELETE);
@@ -383,8 +392,8 @@
 							exit(0);
 						}
 					} else {
-						$category = $category_handler->get(intval($_REQUEST['id']));
-						xoops_confirm(array('id'=>$_REQUEST['id'], 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_CATEGORY_DELETE, $category->getVar('name')));
+						$category = $category_handler->get($id);
+						xoops_confirm(array('id'=>$id, 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_CATEGORY_DELETE, $category->getVar('name')));
 					}
 					break;
 			}
@@ -425,7 +434,9 @@
 					
 					$keywordss = $keywords_handler->getObjects($criteria, true);
 					foreach($keywordss as $cid => $keywords) {
-						if (is_object($keywords))
+						if (!is_object($keywords))
+							$keywords_handler->delete($cid);
+						else
 							$GLOBALS['xoopsTpl']->append('keywords', $keywords->toArray());
 					}
 					
@@ -442,8 +453,8 @@
 					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
 					
 					$keywords_handler =& xoops_getmodulehandler('keywords', 'twitterbomb');
-					if (isset($_REQUEST['id'])) {
-						$keywords = $keywords_handler->get(intval($_REQUEST['id']));
+					if ($id!=0) {
+						$keywords = $keywords_handler->get($id);
 					} else {
 						$keywords = $keywords_handler->create();
 					}
@@ -455,8 +466,8 @@
 				case "save":
 					
 					$keywords_handler =& xoops_getmodulehandler('keywords', 'twitterbomb');
-					$id=0;
-					if ($id=intval($_REQUEST['id'])) {
+					
+					if ($id!=0) {
 						$keywords = $keywords_handler->get($id);
 					} else {
 						$keywords = $keywords_handler->create();
@@ -473,9 +484,9 @@
 				case "savelist":
 					
 					$keywords_handler =& xoops_getmodulehandler('keywords', 'twitterbomb');
-					foreach($_REQUEST['id'] as $id) {
-						$keywords = $keywords_handler->get($id);
-						$keywords->setVars($_POST[$id]);
+					foreach($id as $ids) {
+						$keywords = $keywords_handler->get($ids);
+						$keywords->setVars($_POST[$ids]);
 						if (!$keywords_handler->insert($keywords)) {
 							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_KEYWORDS_FAILEDTOSAVE);
 							exit(0);
@@ -487,8 +498,8 @@
 				case "delete":	
 								
 					$keywords_handler =& xoops_getmodulehandler('keywords', 'twitterbomb');
-					$id=0;
-					if (isset($_POST['id'])&&$id=intval($_POST['id'])) {
+					
+					if (isset($_POST['id'])&&$id!=0) {
 						$keywords = $keywords_handler->get($id);
 						if (!$keywords_handler->delete($keywords)) {
 							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_KEYWORDS_FAILEDTODELETE);
@@ -498,8 +509,8 @@
 							exit(0);
 						}
 					} else {
-						$keywords = $keywords_handler->get(intval($_REQUEST['id']));
-						xoops_confirm(array('id'=>$_REQUEST['id'], 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_KEYWORDS_DELETE, $keywords->getVar('name')));
+						$keywords = $keywords_handler->get($id);
+						xoops_confirm(array('id'=>$id, 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_KEYWORDS_DELETE, $keywords->getVar('name')));
 					}
 					break;
 			}
@@ -541,7 +552,9 @@
 						
 					$base_matrixs = $base_matrix_handler->getObjects($criteria, true);
 					foreach($base_matrixs as $cid => $base_matrix) {
-						if (is_object($base_matrix))
+						if (!is_object($base_matrix))
+							$base_matrix_handler->delete($cid);
+						else
 							$GLOBALS['xoopsTpl']->append('base_matrix', $base_matrix->toArray());
 					}
 					$GLOBALS['xoopsTpl']->assign('form', tweetbomb_base_matrix_get_form(false));
@@ -557,8 +570,8 @@
 					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
 					
 					$base_matrix_handler =& xoops_getmodulehandler('base_matrix', 'twitterbomb');
-					if (isset($_REQUEST['id'])) {
-						$base_matrix = $base_matrix_handler->get(intval($_REQUEST['id']));
+					if ($id!=0) {
+						$base_matrix = $base_matrix_handler->get($id);
 					} else {
 						$base_matrix = $base_matrix_handler->create();
 					}
@@ -570,8 +583,8 @@
 				case "save":
 					
 					$base_matrix_handler =& xoops_getmodulehandler('base_matrix', 'twitterbomb');
-					$id=0;
-					if ($id=intval($_REQUEST['id'])) {
+					
+					if ($id!=0) {
 						$base_matrix = $base_matrix_handler->get($id);
 					} else {
 						$base_matrix = $base_matrix_handler->create();
@@ -588,9 +601,9 @@
 				case "savelist":
 					
 					$base_matrix_handler =& xoops_getmodulehandler('base_matrix', 'twitterbomb');
-					foreach($_REQUEST['id'] as $id) {
-						$base_matrix = $base_matrix_handler->get($id);
-						$base_matrix->setVars($_POST[$id]);
+					foreach($id as $ids) {
+						$base_matrix = $base_matrix_handler->get($ids);
+						$base_matrix->setVars($_POST[$ids]);
 						if (!$base_matrix_handler->insert($base_matrix)) {
 							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_BASEMATRIX_FAILEDTOSAVE);
 							exit(0);
@@ -602,8 +615,8 @@
 				case "delete":	
 								
 					$base_matrix_handler =& xoops_getmodulehandler('base_matrix', 'twitterbomb');
-					$id=0;
-					if (isset($_POST['id'])&&$id=intval($_POST['id'])) {
+					
+					if (isset($_POST['id'])&&$id!=0) {
 						$base_matrix = $base_matrix_handler->get($id);
 						if (!$base_matrix_handler->delete($base_matrix)) {
 							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_BASEMATRIX_FAILEDTODELETE);
@@ -613,8 +626,8 @@
 							exit(0);
 						}
 					} else {
-						$base_matrix = $base_matrix_handler->get(intval($_REQUEST['id']));
-						xoops_confirm(array('id'=>$_REQUEST['id'], 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_BASEMATRIX_DELETE, $base_matrix->getVar('name')));
+						$base_matrix = $base_matrix_handler->get($id);
+						xoops_confirm(array('id'=>$id, 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_BASEMATRIX_DELETE, $base_matrix->getVar('name')));
 					}
 					break;
 			}
@@ -656,7 +669,9 @@
 
 					$usernamess = $usernames_handler->getObjects($criteria, true);
 					foreach($usernamess as $cid => $usernames) {
-						if (is_object($usernames))
+						if (!is_object($usernames))
+							$usernames_handler->delete($cid);
+						else
 							$GLOBALS['xoopsTpl']->append('usernames', $usernames->toArray());
 					}
 					$GLOBALS['xoopsTpl']->assign('form', tweetbomb_usernames_get_form(false));
@@ -672,8 +687,8 @@
 					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
 					
 					$usernames_handler =& xoops_getmodulehandler('usernames', 'twitterbomb');
-					if (isset($_REQUEST['id'])) {
-						$usernames = $usernames_handler->get(intval($_REQUEST['id']));
+					if ($id!=0) {
+						$usernames = $usernames_handler->get($id);
 					} else {
 						$usernames = $usernames_handler->create();
 					}
@@ -685,8 +700,8 @@
 				case "save":
 					
 					$usernames_handler =& xoops_getmodulehandler('usernames', 'twitterbomb');
-					$id=0;
-					if ($id=intval($_REQUEST['id'])) {
+					
+					if ($id!=0) {
 						$usernames = $usernames_handler->get($id);
 					} else {
 						$usernames = $usernames_handler->create();
@@ -703,9 +718,9 @@
 				case "savelist":
 					
 					$usernames_handler =& xoops_getmodulehandler('usernames', 'twitterbomb');
-					foreach($_REQUEST['id'] as $id) {
-						$usernames = $usernames_handler->get($id);
-						$usernames->setVars($_POST[$id]);
+					foreach($id as $ids) {
+						$usernames = $usernames_handler->get($ids);
+						$usernames->setVars($_POST[$ids]);
 						if (!$usernames_handler->insert($usernames)) {
 							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_USERNAMES_FAILEDTOSAVE);
 							exit(0);
@@ -717,8 +732,8 @@
 				case "delete":	
 								
 					$usernames_handler =& xoops_getmodulehandler('usernames', 'twitterbomb');
-					$id=0;
-					if (isset($_POST['id'])&&$id=intval($_POST['id'])) {
+					
+					if (isset($_POST['id'])&&$id!=0) {
 						$usernames = $usernames_handler->get($id);
 						if (!$usernames_handler->delete($usernames)) {
 							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_USERNAMES_FAILEDTODELETE);
@@ -728,8 +743,8 @@
 							exit(0);
 						}
 					} else {
-						$usernames = $usernames_handler->get(intval($_REQUEST['id']));
-						xoops_confirm(array('id'=>$_REQUEST['id'], 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_USERNAMES_DELETE, $usernames->getVar('screen_name')));
+						$usernames = $usernames_handler->get($id);
+						xoops_confirm(array('id'=>$id, 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_USERNAMES_DELETE, $usernames->getVar('screen_name')));
 					}
 					break;
 			}
@@ -771,7 +786,9 @@
 						
 					$urlss = $urls_handler->getObjects($criteria, true);
 					foreach($urlss as $cid => $urls) {
-						if (is_object($urls))
+						if (!is_object($urls))
+							$urls_handler->delete($cid);
+						else
 							$GLOBALS['xoopsTpl']->append('urls', $urls->toArray());
 					}
 					$GLOBALS['xoopsTpl']->assign('form', tweetbomb_urls_get_form(false));
@@ -787,8 +804,8 @@
 					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
 					
 					$urls_handler =& xoops_getmodulehandler('urls', 'twitterbomb');
-					if (isset($_REQUEST['id'])) {
-						$urls = $urls_handler->get(intval($_REQUEST['id']));
+					if ($id!=0) {
+						$urls = $urls_handler->get($id);
 					} else {
 						$urls = $urls_handler->create();
 					}
@@ -800,8 +817,8 @@
 				case "save":
 					
 					$urls_handler =& xoops_getmodulehandler('urls', 'twitterbomb');
-					$id=0;
-					if ($id=intval($_REQUEST['id'])) {
+					
+					if ($id!=0) {
 						$urls = $urls_handler->get($id);
 					} else {
 						$urls = $urls_handler->create();
@@ -818,9 +835,9 @@
 				case "savelist":
 					
 					$urls_handler =& xoops_getmodulehandler('urls', 'twitterbomb');
-					foreach($_REQUEST['id'] as $id) {
-						$urls = $urls_handler->get($id);
-						$urls->setVars($_POST[$id]);
+					foreach($id as $ids) {
+						$urls = $urls_handler->get($ids);
+						$urls->setVars($_POST[$ids]);
 						if (!$urls_handler->insert($urls)) {
 							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_URLS_FAILEDTOSAVE);
 							exit(0);
@@ -832,8 +849,8 @@
 				case "delete":	
 								
 					$urls_handler =& xoops_getmodulehandler('urls', 'twitterbomb');
-					$id=0;
-					if (isset($_POST['id'])&&$id=intval($_POST['id'])) {
+					
+					if (isset($_POST['id'])&&$id!=0) {
 						$urls = $urls_handler->get($id);
 						if (!$urls_handler->delete($urls)) {
 							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_URLS_FAILEDTODELETE);
@@ -843,8 +860,8 @@
 							exit(0);
 						}
 					} else {
-						$urls = $urls_handler->get(intval($_REQUEST['id']));
-						xoops_confirm(array('id'=>$_REQUEST['id'], 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_URLS_DELETE, $urls->getVar('name')));
+						$urls = $urls_handler->get($id);
+						xoops_confirm(array('id'=>$id, 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_URLS_DELETE, $urls->getVar('name')));
 					}
 					break;
 			}
@@ -887,7 +904,10 @@
 					
 					$schedulers = $scheduler_handler->getObjects($criteria, true);
 					foreach($schedulers as $cid => $scheduler) {
-						$GLOBALS['xoopsTpl']->append('scheduler', $scheduler->toArray());
+						if (!is_object($scheduler))
+							$scheduler_handler->delete($cid);
+						else
+							$GLOBALS['xoopsTpl']->append('scheduler', $scheduler->toArray());
 					}
 					$GLOBALS['xoopsTpl']->assign('form', tweetbomb_scheduler_get_form(false));
 					$GLOBALS['xoopsTpl']->assign('upload_form', tweetbomb_scheduler_get_upload_form($scheduler_handler));
@@ -897,20 +917,19 @@
 					
 				case "new":
 				case "edit":
-					
+
 					twitterbomb_adminMenu(7);
 					
 					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
 					include_once $GLOBALS['xoops']->path( "/class/template.php" );
-					$GLOBALS['xoopsTpl'] = new XoopsTpl();
 					
 					$scheduler_handler =& xoops_getmodulehandler('scheduler', 'twitterbomb');
-					if (isset($_REQUEST['id'])) {
-						$scheduler = $scheduler_handler->get(intval($_REQUEST['id']));
+					if ($id!=0) {
+						$scheduler = $scheduler_handler->get($id);
 					} else {
 						$scheduler = $scheduler_handler->create();
 					}
-					
+
 					$GLOBALS['xoopsTpl']->assign('form', $scheduler->getForm());
 					$GLOBALS['xoopsTpl']->assign('upload_form', $scheduler_handler->getUploadForm());
 					$GLOBALS['xoopsTpl']->assign('php_self', $_SERVER['PHP_SELF']);
@@ -919,16 +938,16 @@
 				case "save":
 					
 					$scheduler_handler =& xoops_getmodulehandler('scheduler', 'twitterbomb');
-					$id=0;
-					if ($id=intval($_REQUEST['id'])) {
+					
+					if ($id!=0) {
 						$scheduler = $scheduler_handler->get($id);
 					} else {
 						$scheduler = $scheduler_handler->create();
 					}
-					$scheduler->setVars($_POST[$id]);
-					$scheduler->setVar('search', explode('|', $_POST[$id]['search']));
-					$scheduler->setVar('replace', explode('|', $_POST[$id]['replace']));
-					$scheduler->setVar('strip', explode('|', $_POST[$id]['strip']));
+					$scheduler->setVars($_POST[$ids]);
+					$scheduler->setVar('search', explode('|', $_POST[$ids]['search']));
+					$scheduler->setVar('replace', explode('|', $_POST[$ids]['replace']));
+					$scheduler->setVar('strip', explode('|', $_POST[$ids]['strip']));
 											
 					if (!$id=$scheduler_handler->insert($scheduler)) {
 						redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_SCHEDULER_FAILEDTOSAVE);
@@ -941,12 +960,12 @@
 				case "savelist":
 					
 					$scheduler_handler =& xoops_getmodulehandler('scheduler', 'twitterbomb');
-					foreach($_REQUEST['id'] as $id) {
-						$scheduler = $scheduler_handler->get($id);
-						$scheduler->setVars($_POST[$id]);
-						$scheduler->setVar('start', strtotime($_POST[$id]['start']));
-						$scheduler->setVar('end', strtotime($_POST[$id]['end']));
-						if (empty($_POST[$id]['timed']))
+					foreach($id as $ids) {
+						$scheduler = $scheduler_handler->get($ids);
+						$scheduler->setVars($_POST[$ids]);
+						$scheduler->setVar('start', strtotime($_POST[$ids]['start']));
+						$scheduler->setVar('end', strtotime($_POST[$ids]['end']));
+						if (empty($_POST[$ids]['timed']))
 							$scheduler->setVar('timed', FALSE);
 						if (!$scheduler_handler->insert($scheduler)) {
 							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_SCHEDULER_FAILEDTOSAVE);
@@ -959,8 +978,8 @@
 				case "delete":	
 								
 					$scheduler_handler =& xoops_getmodulehandler('scheduler', 'twitterbomb');
-					$id=0;
-					if (isset($_POST['id'])&&$id=intval($_POST['id'])) {
+					
+					if (isset($_POST['id'])&&$id!=0) {
 						$scheduler = $scheduler_handler->get($id);
 						if (!$scheduler_handler->delete($scheduler)) {
 							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_SCHEDULER_FAILEDTODELETE);
@@ -970,8 +989,8 @@
 							exit(0);
 						}
 					} else {
-						$scheduler = $scheduler_handler->get(intval($_REQUEST['id']));
-						xoops_confirm(array('id'=>$_REQUEST['id'], 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_SCHEDULER_DELETE, $scheduler->getVar('text')));
+						$scheduler = $scheduler_handler->get($id);
+						xoops_confirm(array('id'=>$id, 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_SCHEDULER_DELETE, $scheduler->getVar('text')));
 					}
 					break;
 				case "importfile":
@@ -1005,13 +1024,13 @@
 					      			$line = twitterbomb_checkmirc_log_line($line);
 					      			
 					      		if (!empty($line)) {
-									$id=0;
+									
 									$scheduler = $scheduler_handler->create();
 									
-									$scheduler->setVars($_POST[$id]);
-									$scheduler->setVar('search', explode('|', $_POST[$id]['search']));
-									$scheduler->setVar('replace', explode('|', $_POST[$id]['replace']));
-									$scheduler->setVar('strip', explode('|', $_POST[$id]['strip']));
+									$scheduler->setVars($_POST[$ids]);
+									$scheduler->setVar('search', explode('|', $_POST[$ids]['search']));
+									$scheduler->setVar('replace', explode('|', $_POST[$ids]['replace']));
+									$scheduler->setVar('strip', explode('|', $_POST[$ids]['strip']));
 									$scheduler->setVar('text', $line);
 									if (!$id=$scheduler_handler->insert($scheduler)) {
 										unlink(XOOPS_UPLOAD_PATH.'/'.$uploader->getSavedFileName());
@@ -1069,7 +1088,10 @@
 				
 			$logs = $log_handler->getObjects($criteria, true);
 			foreach($logs as $id => $log) {
-				$GLOBALS['xoopsTpl']->append('log', $log->toArray());
+				if (!is_object($log))
+					$log_handler->delete($id);
+				else
+					$GLOBALS['xoopsTpl']->append('log', $log->toArray());
 			}
 					
 			$GLOBALS['xoopsTpl']->display('db:twitterbomb_cpanel_log.html');
@@ -1112,7 +1134,9 @@
 					
 					$retweets = $retweet_handler->getObjects($criteria, true);
 					foreach($retweets as $rid => $retweet) {
-						if (is_object($retweet))					
+						if (!is_object($retweet))
+							$retweet_handler->delete($rid);
+						else
 							$GLOBALS['xoopsTpl']->append('retweet', $retweet->toArray());
 					}
 					
@@ -1129,11 +1153,11 @@
 					
 					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
 					include_once $GLOBALS['xoops']->path( "/class/template.php" );
-					$GLOBALS['xoopsTpl'] = new XoopsTpl();
+					
 					
 					$retweet_handler =& xoops_getmodulehandler('retweet', 'twitterbomb');
-					if (isset($_REQUEST['id'])) {
-						$retweet = $retweet_handler->get(intval($_REQUEST['id']));
+					if ($id!=0) {
+						$retweet = $retweet_handler->get($id);
 					} else {
 						$retweet = $retweet_handler->create();
 					}
@@ -1145,8 +1169,8 @@
 				case "save":
 					
 					$retweet_handler =& xoops_getmodulehandler('retweet', 'twitterbomb');
-					$id=0;
-					if ($id=intval($_REQUEST['id'])) {
+					
+					if ($id!=0) {
 						$retweet = $retweet_handler->get($id);
 					} else {
 						$retweet = $retweet_handler->create();
@@ -1167,10 +1191,10 @@
 				case "savelist":
 					
 					$retweet_handler =& xoops_getmodulehandler('retweet', 'twitterbomb');
-					foreach($_REQUEST['id'] as $id) {
+					foreach($id as $ids) {
 						$retweet = $retweet_handler->get($id);
-						$retweet->setVars($_POST[$id]);
-						if (!isset($_POST[$id]['geocode'])||empty($_POST[$id]['geocode'])||$_POST[$id]['geocode']!=1)
+						$retweet->setVars($_POST[$ids]);
+						if (!isset($_POST[$ids]['geocode'])||empty($_POST[$ids]['geocode'])||$_POST[$ids]['geocode']!=1)
 							$retweet->setVar('geocode', false);
 						else 
 							$retweet->setVar('geocode', true);
@@ -1186,8 +1210,8 @@
 				case "delete":	
 								
 					$retweet_handler =& xoops_getmodulehandler('retweet', 'twitterbomb');
-					$id=0;
-					if (isset($_POST['id'])&&$id=intval($_POST['id'])) {
+					
+					if (isset($_POST['id'])&&$id!=0) {
 						$retweet = $retweet_handler->get($id);
 						if (!$retweet_handler->delete($retweet)) {
 							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_RETWEET_FAILEDTODELETE);
@@ -1197,8 +1221,8 @@
 							exit(0);
 						}
 					} else {
-						$retweet = $retweet_handler->get(intval($_REQUEST['id']));
-						xoops_confirm(array('id'=>$_REQUEST['id'], 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_RETWEET_DELETE, $retweet->getVar('search')));
+						$retweet = $retweet_handler->get($id);
+						xoops_confirm(array('id'=>$id, 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_RETWEET_DELETE, $retweet->getVar('search')));
 					}
 					break;
 			}
@@ -1240,7 +1264,10 @@
 						
 					$mentionss = $mentions_handler->getObjects($criteria, true);
 					foreach($mentionss as $cid => $mentions) {
-						$GLOBALS['xoopsTpl']->append('mentions', $mentions->toArray());
+						if (!is_object($mentions))
+							$mentions_handler->delete($cid);
+						else
+							$GLOBALS['xoopsTpl']->append('mentions', $mentions->toArray());
 					}
 					$GLOBALS['xoopsTpl']->assign('form', tweetbomb_mentions_get_form(false));
 					$GLOBALS['xoopsTpl']->assign('php_self', $_SERVER['PHP_SELF']);
@@ -1255,8 +1282,8 @@
 					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
 					
 					$mentions_handler =& xoops_getmodulehandler('mentions', 'twitterbomb');
-					if (isset($_REQUEST['id'])) {
-						$mentions = $mentions_handler->get(intval($_REQUEST['id']));
+					if ($id!=0) {
+						$mentions = $mentions_handler->get($id);
 					} else {
 						$mentions = $mentions_handler->create();
 					}
@@ -1268,8 +1295,8 @@
 				case "save":
 					
 					$mentions_handler =& xoops_getmodulehandler('mentions', 'twitterbomb');
-					$id=0;
-					if ($id=intval($_REQUEST['id'])) {
+					
+					if ($id!=0) {
 						$mentions = $mentions_handler->get($id);
 					} else {
 						$mentions = $mentions_handler->create();
@@ -1279,6 +1306,9 @@
 					$mentions->setVar('end', strtotime($_POST[$id]['end']));
 					
 					if (empty($_POST[$id]['timed']))
+						$mentions->setVar('timed', FALSE);
+
+					if (empty($_POST[$id]['cron']))
 						$mentions->setVar('timed', FALSE);
 						
 					if (!$id=$mentions_handler->insert($mentions)) {
@@ -1292,12 +1322,12 @@
 				case "savelist":
 					
 					$mentions_handler =& xoops_getmodulehandler('mentions', 'twitterbomb');
-					foreach($_REQUEST['id'] as $id) {
-						$mentions = $mentions_handler->get($id);
-						$mentions->setVars($_POST[$id]);
-						$mentions->setVar('start', strtotime($_POST[$id]['start']));
-						$mentions->setVar('end', strtotime($_POST[$id]['end']));
-						if (empty($_POST[$id]['timed']))
+					foreach($id as $ids) {
+						$mentions = $mentions_handler->get($ids);
+						$mentions->setVars($_POST[$ids]);
+						$mentions->setVar('start', strtotime($_POST[$ids]['start']));
+						$mentions->setVar('end', strtotime($_POST[$ids]['end']));
+						if (empty($_POST[$ids]['timed']))
 							$mentions->setVar('timed', FALSE);
 						if (!$mentions_handler->insert($mentions)) {
 							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_REPLIES_FAILEDTOSAVE);
@@ -1310,8 +1340,8 @@
 				case "delete":	
 								
 					$mentions_handler =& xoops_getmodulehandler('mentions', 'twitterbomb');
-					$id=0;
-					if (isset($_POST['id'])&&$id=intval($_POST['id'])) {
+					
+					if (isset($_POST['id'])&&$id!=0) {
 						$mentions = $mentions_handler->get($id);
 						if (!$mentions_handler->delete($mentions)) {
 							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_REPLIES_FAILEDTODELETE);
@@ -1321,8 +1351,8 @@
 							exit(0);
 						}
 					} else {
-						$mentions = $mentions_handler->get(intval($_REQUEST['id']));
-						xoops_confirm(array('id'=>$_REQUEST['id'], 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_REPLIES_DELETE, $mentions->getVar('user')));
+						$mentions = $mentions_handler->get($id);
+						xoops_confirm(array('id'=>$id, 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_REPLIES_DELETE, $mentions->getVar('user')));
 					}
 					break;
 			}
@@ -1364,7 +1394,10 @@
 						
 					$repliess = $replies_handler->getObjects($criteria, true);
 					foreach($repliess as $cid => $replies) {
-						$GLOBALS['xoopsTpl']->append('replies', $replies->toArray());
+						if (!is_object($replies))
+							$replies_handler->delete($cid);
+						else
+							$GLOBALS['xoopsTpl']->append('replies', $replies->toArray());
 					}
 					$GLOBALS['xoopsTpl']->assign('form', tweetbomb_replies_get_form(false));
 					$GLOBALS['xoopsTpl']->assign('php_self', $_SERVER['PHP_SELF']);
@@ -1379,8 +1412,8 @@
 					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
 					
 					$replies_handler =& xoops_getmodulehandler('replies', 'twitterbomb');
-					if (isset($_REQUEST['id'])) {
-						$replies = $replies_handler->get(intval($_REQUEST['id']));
+					if ($id!=0) {
+						$replies = $replies_handler->get($id);
 					} else {
 						$replies = $replies_handler->create();
 					}
@@ -1392,8 +1425,8 @@
 				case "save":
 					
 					$replies_handler =& xoops_getmodulehandler('replies', 'twitterbomb');
-					$id=0;
-					if ($id=intval($_REQUEST['id'])) {
+					
+					if ($id!=0) {
 						$replies = $replies_handler->get($id);
 					} else {
 						$replies = $replies_handler->create();
@@ -1415,12 +1448,12 @@
 				case "savelist":
 					
 					$replies_handler =& xoops_getmodulehandler('replies', 'twitterbomb');
-					foreach($_REQUEST['id'] as $id) {
-						$replies = $replies_handler->get($id);
-						$replies->setVars($_POST[$id]);
-						$replies->setVar('start', strtotime($_POST[$id]['start']));
-						$replies->setVar('end', strtotime($_POST[$id]['end']));
-						if (empty($_POST[$id]['timed']))
+					foreach($id as $ids) {
+						$replies = $replies_handler->get($ids);
+						$replies->setVars($_POST[$ids]);
+						$replies->setVar('start', strtotime($_POST[$ids]['start']));
+						$replies->setVar('end', strtotime($_POST[$ids]['end']));
+						if (empty($_POST[$ids]['timed']))
 							$replies->setVar('timed', FALSE);
 						if (!$replies_handler->insert($replies)) {
 							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_REPLIES_FAILEDTOSAVE);
@@ -1433,8 +1466,8 @@
 				case "delete":	
 								
 					$replies_handler =& xoops_getmodulehandler('replies', 'twitterbomb');
-					$id=0;
-					if (isset($_POST['id'])&&$id=intval($_POST['id'])) {
+					
+					if (isset($_POST['id'])&&$id!=0) {
 						$replies = $replies_handler->get($id);
 						if (!$replies_handler->delete($replies)) {
 							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_REPLIES_FAILEDTODELETE);
@@ -1444,8 +1477,8 @@
 							exit(0);
 						}
 					} else {
-						$replies = $replies_handler->get(intval($_REQUEST['id']));
-						xoops_confirm(array('id'=>$_REQUEST['id'], 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_REPLIES_DELETE, $replies->getVar('reply')));
+						$replies = $replies_handler->get($id);
+						xoops_confirm(array('id'=>$id, 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_REPLIES_DELETE, $replies->getVar('reply')));
 					}
 					break;
 			}

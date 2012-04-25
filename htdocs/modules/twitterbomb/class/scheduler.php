@@ -187,7 +187,8 @@ class TwitterbombScheduler extends XoopsObject
 		}
 		
 		if (function_exists($func))  {
-			return @$func($this, $for_tweet);
+			$object = @$func($this);
+			return is_object($object)?$object:$this;
 		}
 		return $this;
 	}
@@ -374,5 +375,13 @@ class TwitterbombSchedulerHandler extends XoopsPersistableObjectHandler
     	else 
     		return '&nbsp;';
     }
+    
+    function delete($id_or_object, $force = true) {
+    	if (is_numeric($id_or_object))
+    		return parent::deleteAll(new Criteria('`'.$this->keyName.'`', $id_or_object), $force);
+    	elseif (is_object($id_or_object))
+    		return parent::delete($id_or_object, $force);
+    }
+    
 }
 ?>

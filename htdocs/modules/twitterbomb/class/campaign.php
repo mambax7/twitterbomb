@@ -27,7 +27,7 @@ class TwitterbombCampaign extends XoopsObject
 		$this->initVar('updated', XOBJ_DTYPE_INT, null, false);
 		$this->initVar('active', XOBJ_DTYPE_INT, null, false);
 		$this->initVar('cron', XOBJ_DTYPE_INT, null, false);
-		$this->initVar('type', XOBJ_DTYPE_ENUM, 'bomb', false, false, false, array('bomb','scheduler','retweet','reply','mention'));
+		$this->initVar('type', XOBJ_DTYPE_ENUM, 'bomb', true, false, false, array('bomb','scheduler','retweet','reply','mention'));
 		$this->initVar('rids', XOBJ_DTYPE_ARRAY, null, false);
 		$this->initVar('mids', XOBJ_DTYPE_ARRAY, null, false);
 		$this->initVar('rpids', XOBJ_DTYPE_ARRAY, null, false);
@@ -160,6 +160,13 @@ class TwitterbombCampaignHandler extends XoopsPersistableObjectHandler
     		return $ele->render();
     	else 
     		return '&nbsp;';
+    }
+    
+	function delete($id_or_object, $force = true) {
+    	if (is_numeric($id_or_object))
+    		return parent::deleteAll(new Criteria('`'.$this->keyName.'`', $id_or_object), $force);
+    	elseif (is_object($id_or_object))
+    		return parent::delete($id_or_object, $force);
     }
 }
 
