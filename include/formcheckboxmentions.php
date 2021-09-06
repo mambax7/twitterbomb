@@ -70,8 +70,8 @@ class TwitterbombFormCheckBoxMentions extends XoopsFormElement
         $this->_delimeter = $delimeter;
         $this->setFormType('checkbox');
 
-        $campaign_handler =& xoops_getModuleHandler('campaign', 'twitterbomb');
-        $mentions_handler =& xoops_getModuleHandler('mentions', 'twitterbomb');
+        $campaign_handler = xoops_getModuleHandler('campaign', 'twitterbomb');
+        $mentions_handler = xoops_getModuleHandler('mentions', 'twitterbomb');
         $criteria         = new Criteria('1', '1');
         $criteria->setSort('`created`');
         $criteria->setOrder('ASC');

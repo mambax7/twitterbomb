@@ -34,9 +34,9 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_gather']) {
 		}
 	}
 	
-	$campaign_handler = xoops_getModuleHandler('campaign', 'twitterbomb');
-	$following_handler=&xoops_getModuleHandler('following', 'twitterbomb');
-	$usernames_handler=&xoops_getModuleHandler('usernames', 'twitterbomb');
+	$campaign_handler  = xoops_getModuleHandler('campaign', 'twitterbomb');
+	$following_handler = xoops_getModuleHandler('following', 'twitterbomb');
+	$usernames_handler = xoops_getModuleHandler('usernames', 'twitterbomb');
 	
 	$oauth_handler = xoops_getModuleHandler('oauth', 'twitterbomb');
 	if (!is_object($oauth)) {

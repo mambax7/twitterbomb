@@ -21,12 +21,12 @@
  
 defined('XOOPS_ROOT_PATH') or die('Restricted access');
 
-$xoopsPreload =& XoopsPreload::getInstance();
+$xoopsPreload = XoopsPreload::getInstance();
 $xoopsPreload->triggerEvent('core.header.start');
 
 include_once $GLOBALS['xoops']->path('class/xoopsblock.php');
 
-$xoopsLogger =& XoopsLogger::getInstance();
+$xoopsLogger = XoopsLogger::getInstance();
 $xoopsLogger->stopTime('Module init');
 $xoopsLogger->startTime('XOOPS output init');
 
@@ -56,7 +56,7 @@ if ('default' != $xoopsConfig['theme_set'] && file_exists(XOOPS_THEME_PATH . '/'
     /**
      * @var xos_opal_Theme
      */
-    $xoTheme  =& $xoopsThemeFactory->createInstance(['contentTemplate' => @$xoopsOption['template_main']]);
+    $xoTheme  = $xoopsThemeFactory->createInstance(['contentTemplate' => @$xoopsOption['template_main']]);
     $xoopsTpl =& $xoTheme->template;
 
     $xoopsPreload->triggerEvent('core.header.addmeta');

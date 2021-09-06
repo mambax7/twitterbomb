@@ -104,7 +104,7 @@ class TwitterBombFormSelectUrls extends XoopsFormElement
             $this->setValue($value);
         }
         $this->addOption(0, _MI_TWEETBOMB_NONE);
-        $urls_handler =& xoops_getModuleHandler('urls', 'twitterbomb');
+        $urls_handler = xoops_getModuleHandler('urls', 'twitterbomb');
         foreach ($urls_handler->getObjects(null, true) as $urlid => $obj) {
             $this->addOption($urlid, $obj->getVar('name'));
         }

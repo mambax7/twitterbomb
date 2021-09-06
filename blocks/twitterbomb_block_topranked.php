@@ -12,7 +12,7 @@ function b_twitterbomb_block_topranked_show( $options )
 		
 		$xoModuleConfig = $config_handler->getConfigList($xoModule->getVar('mid'));
 		
-		$scheduler_handler =& xoops_getModuleHandler('scheduler', 'twitterbomb');
+		$scheduler_handler = xoops_getModuleHandler('scheduler', 'twitterbomb');
 		$scheduler_handler->recalc();
 		
 		$criteria = new CriteriaCompo(new Criteria('`rank`', '0', '>'));

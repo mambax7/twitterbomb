@@ -156,8 +156,8 @@ class TwitterbombReplies extends XoopsObject
                 return $this->getVar('reply');
                 break;
             case 'bomb':
-                $base_matrix_handler =& xoops_getModuleHandler('base_matrix', 'twitterbomb');
-                $campaign_handler    =& xoops_getModuleHandler('campaign', 'twitterbomb');
+                $base_matrix_handler = xoops_getModuleHandler('base_matrix', 'twitterbomb');
+                $campaign_handler    = xoops_getModuleHandler('campaign', 'twitterbomb');
                 $campaign            = $campaign_handler->get($this->getVar('rcid'));
                 if (is_object($campaign)) {
                     return $base_matrix_handler->getSentence($campaign->getVar('cid'), $campaign->getVar('catid'));

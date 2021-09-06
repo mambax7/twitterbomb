@@ -40,14 +40,14 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 		}
 	}
 	
-	$scheduler_handler=&xoops_getModuleHandler('scheduler', 'twitterbomb');
-	$base_matrix_handler=&xoops_getModuleHandler('base_matrix', 'twitterbomb');
-	$usernames_handler=&xoops_getModuleHandler('usernames', 'twitterbomb');
-	$urls_handler=&xoops_getModuleHandler('urls', 'twitterbomb');
-	$campaign_handler = xoops_getModuleHandler('campaign', 'twitterbomb');
-	$retweet_handler=&xoops_getModuleHandler('retweet', 'twitterbomb');
-	$replies_handler=&xoops_getModuleHandler('replies', 'twitterbomb');
-	$mention_handler=&xoops_getModuleHandler('mentions', 'twitterbomb');
+	$scheduler_handler   = xoops_getModuleHandler('scheduler', 'twitterbomb');
+	$base_matrix_handler = xoops_getModuleHandler('base_matrix', 'twitterbomb');
+	$usernames_handler   = xoops_getModuleHandler('usernames', 'twitterbomb');
+	$urls_handler        = xoops_getModuleHandler('urls', 'twitterbomb');
+	$campaign_handler    = xoops_getModuleHandler('campaign', 'twitterbomb');
+	$retweet_handler     = xoops_getModuleHandler('retweet', 'twitterbomb');
+	$replies_handler     = xoops_getModuleHandler('replies', 'twitterbomb');
+	$mention_handler     = xoops_getModuleHandler('mentions', 'twitterbomb');
 	
 	$oauth_handler = xoops_getModuleHandler('oauth', 'twitterbomb');
 	@$oauth = $oauth_handler->getRootOauth(true);

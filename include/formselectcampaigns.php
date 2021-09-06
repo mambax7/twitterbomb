@@ -109,7 +109,7 @@ class TwitterBombFormSelectCampaigns extends XoopsFormElement
 
     public function GetCampaign($ownid, $type)
     {
-        $campaign_handler =& xoops_getModuleHandler('campaign', 'twitterbomb');
+        $campaign_handler = xoops_getModuleHandler('campaign', 'twitterbomb');
         $criteriaa        = new CriteriaCompo(new Criteria('timed', '0', '='), 'OR');
         $criteriab        = new CriteriaCompo(new Criteria('timed', '1', '='), 'AND');
         $criteriab->add(new Criteria('`start`', time(), '<'));

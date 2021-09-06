@@ -164,7 +164,7 @@
 					
 					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
-					$campaign_handler =& xoops_getModuleHandler('campaign', 'twitterbomb');
+					$campaign_handler = xoops_getModuleHandler('campaign', 'twitterbomb');
 
 					$criteria = $campaign_handler->getFilterCriteria($filter);
 					$ttl = $campaign_handler->getCount($criteria);
@@ -209,7 +209,7 @@
 					
 					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
-					$campaign_handler =& xoops_getModuleHandler('campaign', 'twitterbomb');
+					$campaign_handler = xoops_getModuleHandler('campaign', 'twitterbomb');
 					if (0 != $id) {
 						$campaign = $campaign_handler->get($id);
 					} else {
@@ -222,7 +222,7 @@
 					break;
 				case 'save':
 					
-					$campaign_handler =& xoops_getModuleHandler('campaign', 'twitterbomb');
+					$campaign_handler = xoops_getModuleHandler('campaign', 'twitterbomb');
 					
 					if (0 != $id) {
 						$campaign = $campaign_handler->get($id);
@@ -249,7 +249,7 @@
 					break;
 				case 'savelist':
 					
-					$campaign_handler =& xoops_getModuleHandler('campaign', 'twitterbomb');
+					$campaign_handler = xoops_getModuleHandler('campaign', 'twitterbomb');
 					foreach($id as $ids) {
 						$campaign = $campaign_handler->get($ids);
 						$campaign->setVars($_POST[$ids]);
@@ -267,7 +267,7 @@
 					break;				
 				case 'delete':
 								
-					$campaign_handler =& xoops_getModuleHandler('campaign', 'twitterbomb');
+					$campaign_handler = xoops_getModuleHandler('campaign', 'twitterbomb');
 					
 					if (isset($_POST['id']) && 0 != $id) {
 						$campaign = $campaign_handler->get($id);
@@ -294,7 +294,7 @@
 					
 					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
-					$category_handler =& xoops_getModuleHandler('category', 'twitterbomb');
+					$category_handler = xoops_getModuleHandler('category', 'twitterbomb');
 						
 					$criteria = $category_handler->getFilterCriteria($filter);
 					$ttl = $category_handler->getCount($criteria);
@@ -339,7 +339,7 @@
 					
 					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
-					$category_handler =& xoops_getModuleHandler('category', 'twitterbomb');
+					$category_handler = xoops_getModuleHandler('category', 'twitterbomb');
 					if (0 != $id) {
 						$category = $category_handler->get($id);
 					} else {
@@ -352,7 +352,7 @@
 					break;
 				case 'save':
 					
-					$category_handler =& xoops_getModuleHandler('category', 'twitterbomb');
+					$category_handler = xoops_getModuleHandler('category', 'twitterbomb');
 					
 					if (0 != $id) {
 						$category = $category_handler->get($id);
@@ -370,7 +370,7 @@
 					break;
 				case 'savelist':
 					
-					$category_handler =& xoops_getModuleHandler('category', 'twitterbomb');
+					$category_handler = xoops_getModuleHandler('category', 'twitterbomb');
 					foreach($id as $ids) {
 						$category = $category_handler->get($ids);
 						$category->setVars($_POST[$ids]);
@@ -384,7 +384,7 @@
 					break;				
 				case 'delete':
 								
-					$category_handler =& xoops_getModuleHandler('category', 'twitterbomb');
+					$category_handler = xoops_getModuleHandler('category', 'twitterbomb');
 					
 					if (isset($_POST['id']) && 0 != $id) {
 						$category = $category_handler->get($id);
@@ -411,8 +411,8 @@
 
 					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
-					$keywords_handler =& xoops_getModuleHandler('keywords', 'twitterbomb');
-					$criteria = $keywords_handler->getFilterCriteria($filter);
+					$keywords_handler = xoops_getModuleHandler('keywords', 'twitterbomb');
+					$criteria         = $keywords_handler->getFilterCriteria($filter);
 					$ttl = $keywords_handler->getCount($criteria);
 					$sort = !empty($_REQUEST['sort'])?''.$_REQUEST['sort'].'':'created';
 					
@@ -456,7 +456,7 @@
 					
 					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
-					$keywords_handler =& xoops_getModuleHandler('keywords', 'twitterbomb');
+					$keywords_handler = xoops_getModuleHandler('keywords', 'twitterbomb');
 					if (0 != $id) {
 						$keywords = $keywords_handler->get($id);
 					} else {
@@ -469,7 +469,7 @@
 					break;
 				case 'save':
 					
-					$keywords_handler =& xoops_getModuleHandler('keywords', 'twitterbomb');
+					$keywords_handler = xoops_getModuleHandler('keywords', 'twitterbomb');
 					
 					if (0 != $id) {
 						$keywords = $keywords_handler->get($id);
@@ -487,7 +487,7 @@
 					break;
 				case 'savelist':
 					
-					$keywords_handler =& xoops_getModuleHandler('keywords', 'twitterbomb');
+					$keywords_handler = xoops_getModuleHandler('keywords', 'twitterbomb');
 					foreach($id as $ids) {
 						$keywords = $keywords_handler->get($ids);
 						$keywords->setVars($_POST[$ids]);
@@ -501,7 +501,7 @@
 					break;				
 				case 'delete':
 								
-					$keywords_handler =& xoops_getModuleHandler('keywords', 'twitterbomb');
+					$keywords_handler = xoops_getModuleHandler('keywords', 'twitterbomb');
 					
 					if (isset($_POST['id']) && 0 != $id) {
 						$keywords = $keywords_handler->get($id);
@@ -528,7 +528,7 @@
 					
 					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
-					$base_matrix_handler =& xoops_getModuleHandler('base_matrix', 'twitterbomb');
+					$base_matrix_handler = xoops_getModuleHandler('base_matrix', 'twitterbomb');
 						
 					$criteria = $base_matrix_handler->getFilterCriteria($filter);
 					$ttl = $base_matrix_handler->getCount($criteria);
@@ -573,7 +573,7 @@
 					
 					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
-					$base_matrix_handler =& xoops_getModuleHandler('base_matrix', 'twitterbomb');
+					$base_matrix_handler = xoops_getModuleHandler('base_matrix', 'twitterbomb');
 					if (0 != $id) {
 						$base_matrix = $base_matrix_handler->get($id);
 					} else {
@@ -586,7 +586,7 @@
 					break;
 				case 'save':
 					
-					$base_matrix_handler =& xoops_getModuleHandler('base_matrix', 'twitterbomb');
+					$base_matrix_handler = xoops_getModuleHandler('base_matrix', 'twitterbomb');
 					
 					if (0 != $id) {
 						$base_matrix = $base_matrix_handler->get($id);
@@ -604,7 +604,7 @@
 					break;
 				case 'savelist':
 					
-					$base_matrix_handler =& xoops_getModuleHandler('base_matrix', 'twitterbomb');
+					$base_matrix_handler = xoops_getModuleHandler('base_matrix', 'twitterbomb');
 					foreach($id as $ids) {
 						$base_matrix = $base_matrix_handler->get($ids);
 						$base_matrix->setVars($_POST[$ids]);
@@ -618,7 +618,7 @@
 					break;				
 				case 'delete':
 								
-					$base_matrix_handler =& xoops_getModuleHandler('base_matrix', 'twitterbomb');
+					$base_matrix_handler = xoops_getModuleHandler('base_matrix', 'twitterbomb');
 					
 					if (isset($_POST['id']) && 0 != $id) {
 						$base_matrix = $base_matrix_handler->get($id);
@@ -645,7 +645,7 @@
 					
 					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
-					$usernames_handler =& xoops_getModuleHandler('usernames', 'twitterbomb');
+					$usernames_handler = xoops_getModuleHandler('usernames', 'twitterbomb');
 						
 					$criteria = $usernames_handler->getFilterCriteria($filter);
 					$ttl = $usernames_handler->getCount($criteria);
@@ -690,7 +690,7 @@
 					
 					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
-					$usernames_handler =& xoops_getModuleHandler('usernames', 'twitterbomb');
+					$usernames_handler = xoops_getModuleHandler('usernames', 'twitterbomb');
 					if (0 != $id) {
 						$usernames = $usernames_handler->get($id);
 					} else {
@@ -703,7 +703,7 @@
 					break;
 				case 'save':
 					
-					$usernames_handler =& xoops_getModuleHandler('usernames', 'twitterbomb');
+					$usernames_handler = xoops_getModuleHandler('usernames', 'twitterbomb');
 					
 					if (0 != $id) {
 						$usernames = $usernames_handler->get($id);
@@ -721,7 +721,7 @@
 					break;
 				case 'savelist':
 					
-					$usernames_handler =& xoops_getModuleHandler('usernames', 'twitterbomb');
+					$usernames_handler = xoops_getModuleHandler('usernames', 'twitterbomb');
 					foreach($id as $ids) {
 						$usernames = $usernames_handler->get($ids);
 						$usernames->setVars($_POST[$ids]);
@@ -735,7 +735,7 @@
 					break;				
 				case 'delete':
 								
-					$usernames_handler =& xoops_getModuleHandler('usernames', 'twitterbomb');
+					$usernames_handler = xoops_getModuleHandler('usernames', 'twitterbomb');
 					
 					if (isset($_POST['id']) && 0 != $id) {
 						$usernames = $usernames_handler->get($id);
@@ -762,7 +762,7 @@
 					
 					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
-					$urls_handler =& xoops_getModuleHandler('urls', 'twitterbomb');
+					$urls_handler = xoops_getModuleHandler('urls', 'twitterbomb');
 						
 					$criteria = $urls_handler->getFilterCriteria($filter);
 					$ttl = $urls_handler->getCount($criteria);
@@ -807,7 +807,7 @@
 					
 					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
-					$urls_handler =& xoops_getModuleHandler('urls', 'twitterbomb');
+					$urls_handler = xoops_getModuleHandler('urls', 'twitterbomb');
 					if (0 != $id) {
 						$urls = $urls_handler->get($id);
 					} else {
@@ -820,7 +820,7 @@
 					break;
 				case 'save':
 					
-					$urls_handler =& xoops_getModuleHandler('urls', 'twitterbomb');
+					$urls_handler = xoops_getModuleHandler('urls', 'twitterbomb');
 					
 					if (0 != $id) {
 						$urls = $urls_handler->get($id);
@@ -838,7 +838,7 @@
 					break;
 				case 'savelist':
 					
-					$urls_handler =& xoops_getModuleHandler('urls', 'twitterbomb');
+					$urls_handler = xoops_getModuleHandler('urls', 'twitterbomb');
 					foreach($id as $ids) {
 						$urls = $urls_handler->get($ids);
 						$urls->setVars($_POST[$ids]);
@@ -852,7 +852,7 @@
 					break;				
 				case 'delete':
 								
-					$urls_handler =& xoops_getModuleHandler('urls', 'twitterbomb');
+					$urls_handler = xoops_getModuleHandler('urls', 'twitterbomb');
 					
 					if (isset($_POST['id']) && 0 != $id) {
 						$urls = $urls_handler->get($id);
@@ -880,7 +880,7 @@
 					
 					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
-					$scheduler_handler =& xoops_getModuleHandler('scheduler', 'twitterbomb');
+					$scheduler_handler = xoops_getModuleHandler('scheduler', 'twitterbomb');
 						
 					$criteria = $scheduler_handler->getFilterCriteria($filter);
 					$ttl = $scheduler_handler->getCount($criteria);
@@ -927,7 +927,7 @@
 					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					include_once $GLOBALS['xoops']->path('/class/template.php');
 					
-					$scheduler_handler =& xoops_getModuleHandler('scheduler', 'twitterbomb');
+					$scheduler_handler = xoops_getModuleHandler('scheduler', 'twitterbomb');
 					if (0 != $id) {
 						$scheduler = $scheduler_handler->get($id);
 					} else {
@@ -941,7 +941,7 @@
 					break;
 				case 'save':
 					
-					$scheduler_handler =& xoops_getModuleHandler('scheduler', 'twitterbomb');
+					$scheduler_handler = xoops_getModuleHandler('scheduler', 'twitterbomb');
 					
 					if (0 != $id) {
 						$scheduler = $scheduler_handler->get($id);
@@ -963,7 +963,7 @@
 					break;
 				case 'savelist':
 					
-					$scheduler_handler =& xoops_getModuleHandler('scheduler', 'twitterbomb');
+					$scheduler_handler = xoops_getModuleHandler('scheduler', 'twitterbomb');
 					foreach($id as $ids) {
 						$scheduler = $scheduler_handler->get($ids);
 						$scheduler->setVars($_POST[$ids]);
@@ -981,7 +981,7 @@
 					break;				
 				case 'delete':
 								
-					$scheduler_handler =& xoops_getModuleHandler('scheduler', 'twitterbomb');
+					$scheduler_handler = xoops_getModuleHandler('scheduler', 'twitterbomb');
 					
 					if (isset($_POST['id']) && 0 != $id) {
 						$scheduler = $scheduler_handler->get($id);
@@ -999,7 +999,7 @@
 					break;
 				case 'importfile':
 					
-					$scheduler_handler =& xoops_getModuleHandler('scheduler', 'twitterbomb');
+					$scheduler_handler = xoops_getModuleHandler('scheduler', 'twitterbomb');
 					
 			  		include_once $GLOBALS['xoops']->path('/modules/twitterbomb/class/myuploader.php');
 			  		
@@ -1064,7 +1064,7 @@
 			
 			include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 
-			$log_handler =& xoops_getModuleHandler('log', 'twitterbomb');
+			$log_handler = xoops_getModuleHandler('log', 'twitterbomb');
 				
 			$criteria = $log_handler->getFilterCriteria($filter);
 			$ttl = $log_handler->getCount($criteria);
@@ -1109,7 +1109,7 @@
 					
 					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
-					$retweet_handler =& xoops_getModuleHandler('retweet', 'twitterbomb');
+					$retweet_handler = xoops_getModuleHandler('retweet', 'twitterbomb');
 					
 					$criteria = $retweet_handler->getFilterCriteria($filter);
 					$ttl = $retweet_handler->getCount($criteria);
@@ -1162,7 +1162,7 @@
 					include_once $GLOBALS['xoops']->path('/class/template.php');
 					
 					
-					$retweet_handler =& xoops_getModuleHandler('retweet', 'twitterbomb');
+					$retweet_handler = xoops_getModuleHandler('retweet', 'twitterbomb');
 					if (0 != $id) {
 						$retweet = $retweet_handler->get($id);
 					} else {
@@ -1175,7 +1175,7 @@
 					break;
 				case 'save':
 					
-					$retweet_handler =& xoops_getModuleHandler('retweet', 'twitterbomb');
+					$retweet_handler = xoops_getModuleHandler('retweet', 'twitterbomb');
 					
 					if (0 != $id) {
 						$retweet = $retweet_handler->get($id);
@@ -1197,7 +1197,7 @@
 					break;
 				case 'savelist':
 					
-					$retweet_handler =& xoops_getModuleHandler('retweet', 'twitterbomb');
+					$retweet_handler = xoops_getModuleHandler('retweet', 'twitterbomb');
 					foreach($id as $ids) {
 						$retweet = $retweet_handler->get($id);
 						$retweet->setVars($_POST[$ids]);
@@ -1216,7 +1216,7 @@
 					break;				
 				case 'delete':
 								
-					$retweet_handler =& xoops_getModuleHandler('retweet', 'twitterbomb');
+					$retweet_handler = xoops_getModuleHandler('retweet', 'twitterbomb');
 					
 					if (isset($_POST['id']) && 0 != $id) {
 						$retweet = $retweet_handler->get($id);
@@ -1243,7 +1243,7 @@
 					
 					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
-					$mentions_handler =& xoops_getModuleHandler('mentions', 'twitterbomb');
+					$mentions_handler = xoops_getModuleHandler('mentions', 'twitterbomb');
 
 					$criteria = $mentions_handler->getFilterCriteria($filter);
 					$ttl = $mentions_handler->getCount($criteria);
@@ -1288,7 +1288,7 @@
 					
 					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
-					$mentions_handler =& xoops_getModuleHandler('mentions', 'twitterbomb');
+					$mentions_handler = xoops_getModuleHandler('mentions', 'twitterbomb');
 					if (0 != $id) {
 						$mentions = $mentions_handler->get($id);
 					} else {
@@ -1301,7 +1301,7 @@
 					break;
 				case 'save':
 					
-					$mentions_handler =& xoops_getModuleHandler('mentions', 'twitterbomb');
+					$mentions_handler = xoops_getModuleHandler('mentions', 'twitterbomb');
 					
 					if (0 != $id) {
 						$mentions = $mentions_handler->get($id);
@@ -1328,7 +1328,7 @@
 					break;
 				case 'savelist':
 					
-					$mentions_handler =& xoops_getModuleHandler('mentions', 'twitterbomb');
+					$mentions_handler = xoops_getModuleHandler('mentions', 'twitterbomb');
 					foreach($id as $ids) {
 						$mentions = $mentions_handler->get($ids);
 						$mentions->setVars($_POST[$ids]);
@@ -1346,7 +1346,7 @@
 					break;				
 				case 'delete':
 								
-					$mentions_handler =& xoops_getModuleHandler('mentions', 'twitterbomb');
+					$mentions_handler = xoops_getModuleHandler('mentions', 'twitterbomb');
 					
 					if (isset($_POST['id']) && 0 != $id) {
 						$mentions = $mentions_handler->get($id);
@@ -1373,7 +1373,7 @@
 					
 					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
-					$replies_handler =& xoops_getModuleHandler('replies', 'twitterbomb');
+					$replies_handler = xoops_getModuleHandler('replies', 'twitterbomb');
 
 					$criteria = $replies_handler->getFilterCriteria($filter);
 					$ttl = $replies_handler->getCount($criteria);
@@ -1418,7 +1418,7 @@
 					
 					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
-					$replies_handler =& xoops_getModuleHandler('replies', 'twitterbomb');
+					$replies_handler = xoops_getModuleHandler('replies', 'twitterbomb');
 					if (0 != $id) {
 						$replies = $replies_handler->get($id);
 					} else {
@@ -1431,7 +1431,7 @@
 					break;
 				case 'save':
 					
-					$replies_handler =& xoops_getModuleHandler('replies', 'twitterbomb');
+					$replies_handler = xoops_getModuleHandler('replies', 'twitterbomb');
 					
 					if (0 != $id) {
 						$replies = $replies_handler->get($id);
@@ -1454,7 +1454,7 @@
 					break;
 				case 'savelist':
 					
-					$replies_handler =& xoops_getModuleHandler('replies', 'twitterbomb');
+					$replies_handler = xoops_getModuleHandler('replies', 'twitterbomb');
 					foreach($id as $ids) {
 						$replies = $replies_handler->get($ids);
 						$replies->setVars($_POST[$ids]);
@@ -1472,7 +1472,7 @@
 					break;				
 				case 'delete':
 								
-					$replies_handler =& xoops_getModuleHandler('replies', 'twitterbomb');
+					$replies_handler = xoops_getModuleHandler('replies', 'twitterbomb');
 					
 					if (isset($_POST['id']) && 0 != $id) {
 						$replies = $replies_handler->get($id);

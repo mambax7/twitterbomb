@@ -74,8 +74,8 @@ $tpl = new XoopsTpl();
 			include_once XOOPS_ROOT_PATH.'/class/cache/xoopscache.php';
 		}
 	}
-	$campaign_handler = &xoops_getModuleHandler('campaign','twitterbomb');
-	$campaign = $campaign_handler->get($cid);
+	$campaign_handler = xoops_getModuleHandler('campaign', 'twitterbomb');
+	$campaign         = $campaign_handler->get($cid);
 	
 	if (0 != $campaign->getVar('timed')) {
 		if ($campaign->getVar('start')<time()&&$campaign->getVar('end')>time()) {
@@ -138,8 +138,8 @@ $tpl = new XoopsTpl();
             ]);
 
             if (0 != $story['sid']){
-            	$scheduler_handler = &xoops_getModuleHandler('scheduler','twitterbomb');
-				$scheduler = $scheduler_handler->get($story['sid']);
+            	$scheduler_handler = xoops_getModuleHandler('scheduler', 'twitterbomb');
+				$scheduler         = $scheduler_handler->get($story['sid']);
 				if (0 == $scheduler->getVar('when'))
 					$scheduler->setVar('when', time());
 				$scheduler->setVar('tweeted', time());

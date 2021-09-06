@@ -25,8 +25,8 @@
 			default:
 			case 'list':
 		
-				$campaign_handler =& xoops_getModuleHandler('campaign', 'twitterbomb');
-				$category_handler =& xoops_getModuleHandler('category', 'twitterbomb');
+				$campaign_handler = xoops_getModuleHandler('campaign', 'twitterbomb');
+				$category_handler = xoops_getModuleHandler('category', 'twitterbomb');
 		
 				if ($catid>0)
 					$criteriaa = new CriteriaCompo(new Criteria('catid', '('.implode(',',twitterbomb_getSubCategoriesIn($catid)).')', 'IN'), 'AND');
@@ -82,8 +82,8 @@
 				exit(0);
 				break;
 			case 'save':
-				$usernames_handler =& xoops_getModuleHandler('usernames', 'twitterbomb');
-				$usernames = $usernames_handler->create();
+				$usernames_handler = xoops_getModuleHandler('usernames', 'twitterbomb');
+				$usernames         = $usernames_handler->create();
 				$usernames->setVars($_POST['0']);
 				if (!isset($_POST['0']['type'])||empty($_POST['0']['type']))
 					$usernames->setVar('type', 'bomb');

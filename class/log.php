@@ -53,14 +53,14 @@ class TwitterBombLog extends XoopsObject
             $ret['active_datetime'] = date(_DATESTRING, $this->getVar('active'));
         }
         $ret['provider']  = ucfirst($this->getVar('provider'));
-        $campaign_handler =& xoops_getModuleHandler('campaign', 'twitterbomb');
+        $campaign_handler = xoops_getModuleHandler('campaign', 'twitterbomb');
         if (0 <> $this->getVar('cid')) {
             $campaign = $campaign_handler->get($this->getVar('cid'));
             if (is_object($campaign)) {
                 $ret['cid_text'] = $campaign->getVar('name');
             }
         }
-        $category_handler =& xoops_getModuleHandler('category', 'twitterbomb');
+        $category_handler = xoops_getModuleHandler('category', 'twitterbomb');
         if (0 <> $this->getVar('catid')) {
             $category = $category_handler->get($this->getVar('cid'));
             if (is_object($category)) {

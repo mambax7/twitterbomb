@@ -28,7 +28,7 @@ include('header.php');
 
 xoops_loadLanguage('search');
 
-$config_handler =& xoops_getHandler('config');
+$config_handler    = xoops_getHandler('config');
 $xoopsConfigSearch = $config_handler->getConfigsByCat(XOOPS_CONF_SEARCH);
 
 if (1 != $xoopsConfigSearch['enable_search']) {
@@ -89,8 +89,8 @@ if ('results' == $action) {
     }
 }
 
-$groups = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-$gperm_handler =& xoops_getHandler('groupperm');
+$groups            = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
+$gperm_handler     = xoops_getHandler('groupperm');
 $available_modules = $gperm_handler->getItemIds('module_read', $groups);
 if ('search' == $action) {
     include $GLOBALS['xoops']->path('header.php');
@@ -103,7 +103,7 @@ if ('OR' != $andor && 'exact' != $andor && 'AND' != $andor) {
     $andor = 'AND';
 }
 
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 if ('showallbyuser' != $action) {
     if ('exact' != $andor) {
         $ignored_queries = []; // holds kewords that are shorter than allowed minmum length
@@ -131,8 +131,8 @@ if ('showallbyuser' != $action) {
 }
 switch ($action) {
     case 'results':
-        $module_handler =& xoops_getHandler('module');
-        $criteria = new CriteriaCompo(new Criteria('hassearch', 1));
+        $module_handler = xoops_getHandler('module');
+        $criteria       = new CriteriaCompo(new Criteria('hassearch', 1));
         $criteria->add(new Criteria('isactive', 1));
         $criteria->add(new Criteria('mid', '(' . implode(',', $available_modules) . ')', 'IN'));
         $modules = $module_handler->getObjects($criteria, true);
@@ -209,13 +209,13 @@ switch ($action) {
     case 'showall':
     case 'showallbyuser':
         include $GLOBALS['xoops']->path('header.php');
-        $module_handler =& xoops_getHandler('module');
-        $module =& $module_handler->get($mid);
-        $results = $module->search($queries, $andor, 20, $start, $uid);
+        $module_handler = xoops_getHandler('module');
+        $module         = $module_handler->get($mid);
+        $results        = $module->search($queries, $andor, 20, $start, $uid);
         $count = count($results);
         if (is_array($results) && $count > 0) {
-            $next_results =& $module->search($queries, $andor, 1, $start + 20, $uid);
-            $next_count = count($next_results);
+            $next_results = $module->search($queries, $andor, 1, $start + 20, $uid);
+            $next_count   = count($next_results);
             $has_next = false;
             if (is_array($next_results) && 1 == $next_count) {
                 $has_next = true;

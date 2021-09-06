@@ -5,9 +5,9 @@ function b_twitterbomb_block_retweet_show( $options )
 	if (empty($options[0]))
 		return false;
 				
-	$block['tweets']= [];
-	$campaign_handler =& xoops_getModuleHandler('campaign', 'twitterbomb');
-	$campaign = $campaign_handler->get($options[0]);
+	$block['tweets']  = [];
+	$campaign_handler = xoops_getModuleHandler('campaign', 'twitterbomb');
+	$campaign         = $campaign_handler->get($options[0]);
 	if (!is_object($campaign)) {
 		$block['tweets'][0]['title'] = sprintf(_BL_TWEETBOMB_NO_CAMPAIGN, date('Y-m-d H:i:s', time()));
 		$block['tweets'][0]['link'] = XOOPS_URL;
@@ -30,8 +30,8 @@ function b_twitterbomb_block_retweet_show( $options )
 	if (0 != $campaign->getVar('timed')) {
 		if ($campaign->getVar('start')<time()&&$campaign->getVar('end')>time()) {
 			if (!$block['tweets'] = XoopsCache::read('tweetbomb_retweet_'.$cacheid)) {
-				$log_handler =& xoops_getModuleHandler('log', 'twitterbomb');
-				$criteria = new CriteriaCompo(new Criteria('cid', $cid));
+				$log_handler = xoops_getModuleHandler('log', 'twitterbomb');
+				$criteria    = new CriteriaCompo(new Criteria('cid', $cid));
 				$criteria->setSort('`date`');
 				$criteria->setOrder('DESC');
 				$criteria->setLimit($options[1]);
@@ -55,8 +55,8 @@ function b_twitterbomb_block_retweet_show( $options )
 		}
 	} else {
 		if (!$block['tweets']  = XoopsCache::read('tweetbomb_retweet_'.$cacheid)) {
-			$log_handler =& xoops_getModuleHandler('log', 'twitterbomb');
-			$criteria = new CriteriaCompo(new Criteria('cid', $cid));
+			$log_handler = xoops_getModuleHandler('log', 'twitterbomb');
+			$criteria    = new CriteriaCompo(new Criteria('cid', $cid));
 			$criteria->setSort('`date`');
 			$criteria->setOrder('DESC');
 			$criteria->setLimit($options[1]);

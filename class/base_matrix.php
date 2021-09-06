@@ -230,7 +230,7 @@ class TwitterbombBase_matrixHandler extends XoopsPersistableObjectHandler
 
     public function getSentence($cid, $catid)
     {
-        $keywords_handler =& xoops_getModuleHandler('keywords', 'twitterbomb');
+        $keywords_handler = xoops_getModuleHandler('keywords', 'twitterbomb');
 
         $criteriaa = new CriteriaCompo(new Criteria('cid', 0), 'OR');
         $criteriaa->add(new Criteria('catid', 0), 'OR');

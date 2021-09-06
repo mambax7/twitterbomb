@@ -31,7 +31,7 @@
 	$GLOBALS['twitterbombImageAdmin'] = XOOPS_URL .'/'. $GLOBALS['twitterbombModule']->getInfo('icons32');
 	
 	if ($GLOBALS['xoopsUser']) {
-	    $moduleperm_handler =& xoops_getHandler('groupperm');
+	    $moduleperm_handler = xoops_getHandler('groupperm');
 	    if (!$moduleperm_handler->checkRight('module_admin', $GLOBALS['twitterbombModule']->getVar( 'mid' ), $GLOBALS['xoopsUser']->getGroups())) {
 	        redirect_header(XOOPS_URL, 1, _NOPERM);
 	        exit();
