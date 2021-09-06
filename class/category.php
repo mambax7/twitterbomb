@@ -85,7 +85,7 @@ class TwitterbombCategory extends XoopsObject
 */
 class TwitterbombCategoryHandler extends XoopsPersistableObjectHandler
 {
-    function __construct(&$db) 
+    function __construct($db)
     {
         parent::__construct($db, "twitterbomb_category", 'TwitterbombCategory', "catid", "name");
     }

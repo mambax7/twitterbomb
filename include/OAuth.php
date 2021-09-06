@@ -558,7 +558,7 @@ class OAuthServer {
   /**
    * version 1
    */
-  private function get_version(&$request) {
+  private function get_version($request) {
     $version = $request->get_parameter("oauth_version");
     if (!$version) {
       // Service Providers MUST assume the protocol version to be 1.0 if this parameter is not present. 
@@ -574,7 +574,7 @@ class OAuthServer {
   /**
    * figure out the signature with some defaults
    */
-  private function get_signature_method(&$request) {
+  private function get_signature_method($request) {
     $signature_method =
         @$request->get_parameter("oauth_signature_method");
 
@@ -594,7 +594,7 @@ class OAuthServer {
   /**
    * try to find the consumer for the provided request's consumer key
    */
-  private function get_consumer(&$request) {
+  private function get_consumer($request) {
     $consumer_key = @$request->get_parameter("oauth_consumer_key");
     if (!$consumer_key) {
       throw new OAuthException(_ERR_TWEETBOMB_OAUTH_INVALID_CONSUMER_KEY);
@@ -611,7 +611,7 @@ class OAuthServer {
   /**
    * try to find the token for the provided request's token key
    */
-  private function get_token(&$request, $consumer, $token_type="access") {
+  private function get_token($request, $consumer, $token_type="access") {
     $token_field = @$request->get_parameter('oauth_token');
     $token = $this->data_store->lookup_token(
       $consumer, $token_type, $token_field

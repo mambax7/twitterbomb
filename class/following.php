@@ -64,7 +64,7 @@ class TwitterbombFollowing extends XoopsObject
 */
 class TwitterbombFollowingHandler extends XoopsPersistableObjectHandler
 {
-    function __construct(&$db) 
+    function __construct($db)
     {
         parent::__construct($db, "twitterbomb_following", 'TwitterbombFollowing', "fid", "flid");
     }

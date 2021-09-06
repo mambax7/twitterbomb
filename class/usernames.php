@@ -133,7 +133,7 @@ class TwitterbombUsernames extends XoopsObject
 */
 class TwitterbombUsernamesHandler extends XoopsPersistableObjectHandler
 {
-    function __construct(&$db) 
+    function __construct($db)
     {
         parent::__construct($db, "twitterbomb_usernames", 'TwitterbombUsernames', "tid", "screen_name");
     }

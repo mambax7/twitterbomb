@@ -99,7 +99,7 @@ class TwitterbombCampaign extends XoopsObject
 */
 class TwitterbombCampaignHandler extends XoopsPersistableObjectHandler
 {
-    function __construct(&$db) 
+    function __construct($db)
     {
         parent::__construct($db, "twitterbomb_campaign", 'TwitterbombCampaign', "cid", "name");
     }

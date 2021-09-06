@@ -89,7 +89,7 @@ class TwitterbombUrls extends XoopsObject
 */
 class TwitterbombUrlsHandler extends XoopsPersistableObjectHandler
 {
-    function __construct(&$db) 
+    function __construct($db)
     {
         parent::__construct($db, "twitterbomb_urls", 'TwitterbombUrls', "urlid", "surl");
     }

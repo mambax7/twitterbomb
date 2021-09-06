@@ -172,7 +172,7 @@ class TwitterBombRetweetHandler extends XoopsPersistableObjectHandler
 	var $_mod = NULL;
 	var $_modConfig = array();
 	
-    function __construct(&$db) 
+    function __construct($db)
     {
 		$this->db = $db;
         parent::__construct($db, 'twitterbomb_retweet', 'TwitterBombRetweet', "rid", "search");

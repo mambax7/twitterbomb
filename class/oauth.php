@@ -507,7 +507,7 @@ class TwitterbombOauthHandler extends XoopsPersistableObjectHandler
 	var $_modConfig = array();
 	var $_mod = NULL;
 	
-    function __construct(&$db) 
+    function __construct($db)
     {
         parent::__construct($db, "twitterbomb_oauth", 'TwitterbombOauth', "oid", "username");
 
