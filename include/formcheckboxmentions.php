@@ -104,7 +104,7 @@ class TwitterbombFormCheckBoxMentions extends XoopsFormElement
     /**
      * Set the "value"
      *
-     * @param array $
+     * @param $value
      */
     public function setValue($value)
     {

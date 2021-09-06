@@ -80,11 +80,10 @@ class MyXoopsMediaUploader
      * @param string $uploadDir
      * @param array  $allowedMimeTypes
      * @param int    $maxFileSize
-     * @param int    $maxWidth
-     * @param int    $maxHeight
-     * @param int    $cmodvalue
-     * @param array  $allowedExtensions
-     **/
+     * @param null   $maxWidth
+     * @param null   $maxHeight
+     * @param null   $allowedExtensions
+     */
     public function __construct($uploadDir, $allowedMimeTypes, $maxFileSize, $maxWidth = null, $maxHeight = null, $allowedExtensions = null)
     {
         if (is_array($allowedMimeTypes)) {
@@ -106,10 +105,11 @@ class MyXoopsMediaUploader
     /**
      * Fetch the uploaded file
      *
-     * @param string $media_name Name of the file field
-     * @param int    $index      Index of the file (if more than one uploaded under that name)
+     * @param      $index_name
+     * @param      $media_define
+     * @param null $index Index of the file (if more than one uploaded under that name)
      * @return  bool
-     **/
+     */
     public function fetchMedia($index_name, $media_define, $index = null)
     {
         if (!isset($_FILES[$index_name])) {

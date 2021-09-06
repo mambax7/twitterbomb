@@ -203,7 +203,7 @@ class TwitterOAuth
     /**
      * Make an HTTP request
      *
-     * @return API results
+     * @return bool|string results
      */
     public function http($url, $method, $postfields = null)
     {
