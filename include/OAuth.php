@@ -120,7 +120,7 @@ class OAuthSignatureMethod_HMAC_SHA1 extends OAuthSignatureMethod
 
         $key_parts = [
             $consumer->secret,
-            ($token) ? $token->secret : '',
+            $token->secret ?? '',
         ];
 
         $key_parts = OAuthUtil::urlencode_rfc3986($key_parts);
@@ -152,7 +152,7 @@ class OAuthSignatureMethod_PLAINTEXT extends OAuthSignatureMethod {
   public function build_signature($request, $consumer, $token) {
     $key_parts = [
       $consumer->secret,
-      ($token) ? $token->secret : ''
+      $token->secret ?? ''
     ];
 
     $key_parts = OAuthUtil::urlencode_rfc3986($key_parts);
