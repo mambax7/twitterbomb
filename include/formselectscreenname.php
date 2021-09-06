@@ -164,7 +164,7 @@ class TwitterBombFormSelectScreenname extends XoopsFormElement
     /**
      * Set pre-selected values
      *
-     * @param  $value mixed
+     * @param mixed $value
      */
     public function setValue($value)
     {
