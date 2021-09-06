@@ -234,7 +234,7 @@ if (!function_exists('twitterbomb_get_rss')) {
 			$username = $usernames_handler->getUser($cid, $catid);
 			$sourceuser = $usernames_handler->getSourceUser($cid, $catid, $sentence);
 			$url = $urls_handler->getUrl($cid, $catid);
-			$c = sizeof($ret)+1;
+			$c = count($ret) + 1;
 			$mtr=mt_rand($GLOBALS['twitterbombModuleConfig']['odds_lower'],$GLOBALS['twitterbombModuleConfig']['odds_higher']);
 			$ret[$c]['title'] = (is_object($sourceuser)?'@'.$sourceuser->getVar('screen_name').' ':'').(strlen($username)>0&&($mtr<=$GLOBALS['twitterbombModuleConfig']['odds_minimum']||$mtr>=$GLOBALS['twitterbombModuleConfig']['odds_maximum'])?'@'.$username.' ':'').str_replace('#@', '@', str_replace('#(', '(#', str_replace('##', '#', twitterbomb_TweetString(htmlspecialchars_decode($sentence), $GLOBALS['twitterbombModuleConfig']['aggregate'], $GLOBALS['twitterbombModuleConfig']['wordlength']))));	  
 			$ret[$c]['link'] = XOOPS_URL.'/modules/twitterbomb/go.php?cid='.$cid.'&catid='.$catid.'&uri='.urlencode( sprintf($url, urlencode(str_replace(['#', '@'], '', $sentence))));
@@ -398,11 +398,11 @@ if (!function_exists('twitterbomb_get_retweet_rss')) {
 				    			$log->setVar('tid', $tid);
 				    			$log_handler->insert($log, true);
 
-					   	   		$ret[]['title'] = $retweet['text'];	  
-								$ret[sizeof($ret)]['link'] = $link;
-								$ret[sizeof($ret)]['description'] = htmlspecialchars_decode($retweet['text']);
-								$ret[sizeof($ret)]['lid'] = $lid;
-								$ret[sizeof($ret)]['rid'] = $rid;
+					   	   		$ret[]['title']                  = $retweet['text'];
+                                $ret[count($ret)]['link']        = $link;
+                                $ret[count($ret)]['description'] = htmlspecialchars_decode($retweet['text']);
+                                $ret[count($ret)]['lid']         = $lid;
+                                $ret[count($ret)]['rid']         = $rid;
 								$item++;
 					   		} else {
 					   			@$log_handler->delete($log, true);
@@ -460,7 +460,7 @@ if (!function_exists('twitterbomb_TweetString')) {
 if (!function_exists('twitterbomb_checkmirc_log_line')) {
 	function twitterbomb_checkmirc_log_line($line) {
 		$parts = explode(' ', $line);
-		if ($parts[0]==$parts[sizeof($parts)]) {
+		if ($parts[0]== $parts[count($parts)]) {
 			return null;
 		}
 		if ('Session' == $parts[0]) {

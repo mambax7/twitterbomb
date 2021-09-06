@@ -34,7 +34,7 @@
 		$common = explode(' ', strtolower($GLOBALS['xoopsModuleConfig']['scheduler_usernames']));
 		$usernames_handler = xoops_getModuleHandler('usernames', 'twitterbomb');
 		
-		if (count($common)==count($parts)&&sizeof($common)==sizeof($parts)) {
+		if (count($common)==count($parts) && count($common) == count($parts)) {
 			
 			$pass = true;
 			foreach($common as $key=> $value) {

@@ -188,10 +188,10 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 									   		}
 									   		$log->setVar('id', $id);
 									   		$lid = $log_handler->insert($log, true);
-									   		$ret[]['title'] = $tweet;	  
-											$ret[sizeof($ret)-1]['link'] = $link;
-											$ret[sizeof($ret)-1]['description'] = (strlen($username)>0&&($mtr<=$GLOBALS['twitterbombModuleConfig']['odds_minimum']||$mtr>=$GLOBALS['twitterbombModuleConfig']['odds_maximum'])?'@'.$username.' ':'').htmlspecialchars_decode($sentence);
-											$ret[sizeof($ret)-1]['lid'] = $lid;
+									   		$ret[]['title'] = $tweet;
+                                            $ret[count($ret) - 1]['link'] = $link;
+                                            $ret[count($ret) - 1]['description'] = (strlen($username) > 0 && ($mtr <= $GLOBALS['twitterbombModuleConfig']['odds_minimum'] || $mtr >= $GLOBALS['twitterbombModuleConfig']['odds_maximum'])? '@' . $username . ' ':'') . htmlspecialchars_decode($sentence);
+                                            $ret[count($ret) - 1]['lid'] = $lid;
 											$item++;
 								   		} else {
 								   			echo 'Tweet Failed: '.$tweet.' - '.$link.NLB;
@@ -262,11 +262,11 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 								    			}
 								    			$log->setVar('id', $id);
 									   			$lid = $log_handler->insert($log, true);
-									   	   		$ret[]['title'] = $tweet;	  
-												$ret[sizeof($ret)-1]['link'] = $link;
-												$ret[sizeof($ret)-1]['description'] = htmlspecialchars_decode($sentence['tweet']);
-												$ret[sizeof($ret)-1]['lid'] = $lid;
-												$ret[sizeof($ret)-1]['sid'] = $sentence['sid'];
+									   	   		$ret[]['title'] = $tweet;
+                                                $ret[count($ret) - 1]['link'] = $link;
+                                                $ret[count($ret) - 1]['description'] = htmlspecialchars_decode($sentence['tweet']);
+                                                $ret[count($ret) - 1]['lid'] = $lid;
+                                                $ret[count($ret) - 1]['sid'] = $sentence['sid'];
 												$item++;
 									   		} else {
 									   			echo 'Tweet Failed: '.$tweet.' - '.$link.NLB;
@@ -366,11 +366,11 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 															$log->setVar('url', $link);
 															$log->setVar('tid', $tid);
 															$log_handler->insert($log, true);
-															$ret[]['title'] = $retweet['text'];	  
-															$ret[sizeof($ret)-1]['link'] = $link;
-															$ret[sizeof($ret)-1]['description'] = htmlspecialchars_decode($retweet['text']);
-															$ret[sizeof($ret)-1]['lid'] = $lid;
-															$ret[sizeof($ret)-1]['rid'] = $rid;
+															$ret[]['title']                      = $retweet['text'];
+                                                            $ret[count($ret) - 1]['link']        = $link;
+                                                            $ret[count($ret) - 1]['description'] = htmlspecialchars_decode($retweet['text']);
+                                                            $ret[count($ret) - 1]['lid']         = $lid;
+                                                            $ret[count($ret) - 1]['rid']         = $rid;
 															$item++;
 															$c++;
 															$items++;
@@ -483,11 +483,11 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 																$log->setVar('url', $link);
 																$log->setVar('tid', $tid);
 																$log_handler->insert($log, true);
-																$ret[]['title'] = $replytweet;	  
-																$ret[sizeof($ret)-1]['link'] = $link;
-																$ret[sizeof($ret)-1]['description'] = htmlspecialchars_decode($replytweet);
-																$ret[sizeof($ret)-1]['lid'] = $lid;
-																$ret[sizeof($ret)-1]['rid'] = $rid;
+																$ret[]['title']                      = $replytweet;
+                                                                $ret[count($ret) - 1]['link']        = $link;
+                                                                $ret[count($ret) - 1]['description'] = htmlspecialchars_decode($replytweet);
+                                                                $ret[count($ret) - 1]['lid']         = $lid;
+                                                                $ret[count($ret) - 1]['rid']         = $rid;
 																$item++;
 																$c++;
 																$items++;
@@ -602,11 +602,11 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 																$log->setVar('url', $link);
 																$log->setVar('tid', $tid);
 																$log_handler->insert($log, true);
-																$ret[]['title'] = $replytweet;	  
-																$ret[sizeof($ret)-1]['link'] = $link;
-																$ret[sizeof($ret)-1]['description'] = htmlspecialchars_decode($replytweet);
-																$ret[sizeof($ret)-1]['lid'] = $lid;
-																$ret[sizeof($ret)-1]['rid'] = $rid;
+																$ret[]['title']                      = $replytweet;
+                                                                $ret[count($ret) - 1]['link']        = $link;
+                                                                $ret[count($ret) - 1]['description'] = htmlspecialchars_decode($replytweet);
+                                                                $ret[count($ret) - 1]['lid']         = $lid;
+                                                                $ret[count($ret) - 1]['rid']         = $rid;
 																$item++;
 																$c++;
 																$items++;

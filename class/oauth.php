@@ -343,7 +343,7 @@ class TwitterbombOauth extends XoopsObject
             $c = 1;
             foreach ($mixed as $key => $value) {
                 $i++;
-                $ret[$c] .= $value . (sizeof($mixed) != $key || $i < 100 ? ',' : '');
+                $ret[$c] .= $value . (count($mixed) != $key || $i < 100 ? ',' : '');
                 if (100 == $i) {
                     $i = 0;
                     $c++;
@@ -354,7 +354,7 @@ class TwitterbombOauth extends XoopsObject
             $mixed = explode(',', $mixed);
             foreach ($mixed as $key => $value) {
                 $i++;
-                $ret[$c] .= $value . (sizeof($mixed) != $key || $i < 100 ? ',' : '');
+                $ret[$c] .= $value . (count($mixed) != $key || $i < 100 ? ',' : '');
                 if (100 == $i) {
                     $i = 0;
                     $c++;

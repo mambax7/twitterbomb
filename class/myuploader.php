@@ -245,7 +245,7 @@ class MyXoopsMediaUploader
             $this->setErrors('Failed opening directory: ' . $this->uploadDir);
             return false;
         }
-        if (!is_writeable($this->uploadDir)) {
+        if (!is_writable($this->uploadDir)) {
             $this->setErrors('Failed opening directory with write permission: ' . $this->uploadDir);
             return false;
         }
