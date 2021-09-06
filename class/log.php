@@ -38,7 +38,7 @@ class TwitterBombLog extends XoopsObject
 
     public function getTotalHitsOnAlias()
     {
-        $sql = "SELECT SUM(`hits`) as `hits` FROM `" . $GLOBALS['xoopsDB']->prefix('twitterbomb_log') . '` WHERE `alias` = "' . $this->getVar('alias') . '" AND  `provider` = "' . $this->getVar('provider') . '"';
+        $sql = 'SELECT SUM(`hits`) as `hits` FROM `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_log') . '` WHERE `alias` = "' . $this->getVar('alias') . '" AND  `provider` = "' . $this->getVar('provider') . '"';
         [$hits] = $GLOBALS['xoopsDB']->fetchRow($GLOBALS['xoopsDB']->queryF($sql));
         return $hits;
     }
@@ -68,7 +68,7 @@ class TwitterBombLog extends XoopsObject
             }
         }
         if ($GLOBALS['twitterbombModuleConfig']['tags']) {
-            include_once XOOPS_ROOT_PATH . "/modules/tag/include/tagbar.php";
+            include_once XOOPS_ROOT_PATH . '/modules/tag/include/tagbar.php';
             $ret['tagbar'] = tagBar($this->getVar('lid'), $this->getVar('catid'));
         }
         foreach ($ret as $key => $value) {
@@ -136,7 +136,7 @@ class TwitterBombLogHandler extends XoopsPersistableObjectHandler
     public function __construct($db)
     {
         $this->db = $db;
-        parent::__construct($db, 'twitterbomb_log', 'TwitterBombLog', "lid", "tweet");
+        parent::__construct($db, 'twitterbomb_log', 'TwitterBombLog', 'lid', 'tweet');
 
         $module_handler   = xoops_getHandler('module');
         $config_handler   = xoops_getHandler('config');
@@ -156,7 +156,7 @@ class TwitterBombLogHandler extends XoopsPersistableObjectHandler
 
     public function plusHit($lid)
     {
-        $sql = "UPDATE " . $GLOBALS['xoopsDB']->prefix('twitterbomb_log') . ' SET `hits` = `hits` + 1, `active` = "' . time() . '" WHERE `lid` = ' . $lid;
+        $sql = 'UPDATE ' . $GLOBALS['xoopsDB']->prefix('twitterbomb_log') . ' SET `hits` = `hits` + 1, `active` = "' . time() . '" WHERE `lid` = ' . $lid;
         $GLOBALS['xoopsDB']->queryF($sql);
         return $this->recalc();
     }
@@ -166,7 +166,7 @@ class TwitterBombLogHandler extends XoopsPersistableObjectHandler
         // Recalculating Ranking Tweets
         if ($this->_modConfig['number_to_rank'] != 0) {
             // Reset Rank
-            $sql = "UPDATE " . $GLOBALS['xoopsDB']->prefix('twitterbomb_log') . ' SET `rank` = 0 WHERE `rank` <> 0';
+            $sql = 'UPDATE ' . $GLOBALS['xoopsDB']->prefix('twitterbomb_log') . ' SET `rank` = 0 WHERE `rank` <> 0';
             @$GLOBALS['xoopsDB']->queryF($sql);
             //Recalculate rank
             $criteria = new CriteriaCompo(new Criteria('`hits`', 0, '>'));

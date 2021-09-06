@@ -89,7 +89,7 @@ class TwitterbombCategoryHandler extends XoopsPersistableObjectHandler
 {
     public function __construct($db)
     {
-        parent::__construct($db, "twitterbomb_category", 'TwitterbombCategory', "catid", "name");
+        parent::__construct($db, 'twitterbomb_category', 'TwitterbombCategory', 'catid', 'name');
     }
 
     public function insert($obj, $force = true)
@@ -143,7 +143,7 @@ class TwitterbombCategoryHandler extends XoopsPersistableObjectHandler
         if ($catid == 0) {
             return false;
         }
-        $sql = "UPDATE " . $GLOBALS['xoopsDB']->prefix('twitterbomb_category') . " SET 	`hits` = `hits` + 1, `active` = '" . time() . "' WHERE `catid` = '" . $catid . "'";
+        $sql = 'UPDATE ' . $GLOBALS['xoopsDB']->prefix('twitterbomb_category') . " SET 	`hits` = `hits` + 1, `active` = '" . time() . "' WHERE `catid` = '" . $catid . "'";
         if ($GLOBALS['xoopsDB']->queryF($sql)) {
             return true;
         } else {

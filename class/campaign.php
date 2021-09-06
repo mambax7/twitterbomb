@@ -84,7 +84,7 @@ class TwitterbombCampaign extends XoopsObject
 
     public function setCron()
     {
-        $sql = "UPDATE " . $GLOBALS['xoopsDB']->prefix('twitterbomb_campaign') . ' SET `cron` = "' . time() . '" WHERE `cid` = ' . $this->getVar('cid');
+        $sql = 'UPDATE ' . $GLOBALS['xoopsDB']->prefix('twitterbomb_campaign') . ' SET `cron` = "' . time() . '" WHERE `cid` = ' . $this->getVar('cid');
         $GLOBALS['xoopsDB']->queryF($sql);
         $this->vars['cron']['value'] = time();
     }
@@ -102,7 +102,7 @@ class TwitterbombCampaignHandler extends XoopsPersistableObjectHandler
 {
     public function __construct($db)
     {
-        parent::__construct($db, "twitterbomb_campaign", 'TwitterbombCampaign', "cid", "name");
+        parent::__construct($db, 'twitterbomb_campaign', 'TwitterbombCampaign', 'cid', 'name');
     }
 
     public function insert($obj, $force = true)
@@ -124,7 +124,7 @@ class TwitterbombCampaignHandler extends XoopsPersistableObjectHandler
         if ($cid == 0) {
             return false;
         }
-        $sql = "UPDATE " . $GLOBALS['xoopsDB']->prefix('twitterbomb_campaign') . " SET 	`hits` = `hits` + 1, `active` = '" . time() . "' WHERE `cid` = '" . $cid . "'";
+        $sql = 'UPDATE ' . $GLOBALS['xoopsDB']->prefix('twitterbomb_campaign') . " SET 	`hits` = `hits` + 1, `active` = '" . time() . "' WHERE `cid` = '" . $cid . "'";
         if ($GLOBALS['xoopsDB']->queryF($sql)) {
             return true;
         } else {

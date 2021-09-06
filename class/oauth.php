@@ -47,7 +47,7 @@ class TwitterbombOauth extends XoopsObject
 
     private function reset()
     {
-        $sql = "UPDATE " . $GLOBALS['xoopsDB']->prefix('twitterbomb_oauth') . ' SET `calls` = 0, `reset` = "' . time() . '", `updated` = "' . time() . '" WHERE `oid` = ' . $this->getVar('oid');
+        $sql = 'UPDATE ' . $GLOBALS['xoopsDB']->prefix('twitterbomb_oauth') . ' SET `calls` = 0, `reset` = "' . time() . '", `updated` = "' . time() . '" WHERE `oid` = ' . $this->getVar('oid');
         $GLOBALS['xoopsDB']->queryF($sql);
         $this->vars['calls']['value'] = 0;
         $this->vars['reset']['value'] = time();
@@ -55,7 +55,7 @@ class TwitterbombOauth extends XoopsObject
 
     private function setLimits($limits)
     {
-        $sql = "UPDATE "
+        $sql = 'UPDATE '
                . $GLOBALS['xoopsDB']->prefix('twitterbomb_oauth')
                . ' SET `remaining_hits` = "'
                . $limits['remaining_hits']
@@ -75,7 +75,7 @@ class TwitterbombOauth extends XoopsObject
 
     private function increaseCall($amount = 1)
     {
-        $sql = "UPDATE " . $GLOBALS['xoopsDB']->prefix('twitterbomb_oauth') . ' SET `calls` = `calls` + ' . $amount . ', `updated` = "' . time() . '" WHERE `oid` = ' . $this->getVar('oid');
+        $sql = 'UPDATE ' . $GLOBALS['xoopsDB']->prefix('twitterbomb_oauth') . ' SET `calls` = `calls` + ' . $amount . ', `updated` = "' . time() . '" WHERE `oid` = ' . $this->getVar('oid');
         $GLOBALS['xoopsDB']->queryF($sql);
         $this->vars['calls']['value'] = $this->vars['calls']['value'] + $amount;
         $this->getRateLimits(false);
@@ -83,7 +83,7 @@ class TwitterbombOauth extends XoopsObject
 
     private function increaseTweets($amount = 1)
     {
-        $sql = "UPDATE " . $GLOBALS['xoopsDB']->prefix('twitterbomb_oauth') . ' SET `tweets` = `tweets` + ' . $amount . ', `tweeted` = "' . time() . '", `updated` = "' . time() . '" WHERE `oid` = ' . $this->getVar('oid');
+        $sql = 'UPDATE ' . $GLOBALS['xoopsDB']->prefix('twitterbomb_oauth') . ' SET `tweets` = `tweets` + ' . $amount . ', `tweeted` = "' . time() . '", `updated` = "' . time() . '" WHERE `oid` = ' . $this->getVar('oid');
         $GLOBALS['xoopsDB']->queryF($sql);
         $this->vars['tweets']['value']  = $this->vars['tweets']['value'] + $amount;
         $this->vars['tweeted']['value'] = time();
@@ -91,7 +91,7 @@ class TwitterbombOauth extends XoopsObject
 
     private function validate($user)
     {
-        $sql = "UPDATE " . $GLOBALS['xoopsDB']->prefix('twitterbomb_oauth') . ' SET `mode` = "valid", `username` = "' . $user['screen_name'] . '", `id` = "' . $user['id'] . '", `updated` = "' . time() . '" WHERE `oid` = ' . $this->getVar('oid');
+        $sql = 'UPDATE ' . $GLOBALS['xoopsDB']->prefix('twitterbomb_oauth') . ' SET `mode` = "valid", `username` = "' . $user['screen_name'] . '", `id` = "' . $user['id'] . '", `updated` = "' . time() . '" WHERE `oid` = ' . $this->getVar('oid');
         $GLOBALS['xoopsDB']->queryF($sql);
         $this->vars['mode']['value']     = 'valid';
         $this->vars['username']['value'] = $user['screen_name'];
@@ -100,14 +100,14 @@ class TwitterbombOauth extends XoopsObject
 
     public function setFriendsTimer()
     {
-        $sql = "UPDATE " . $GLOBALS['xoopsDB']->prefix('twitterbomb_oauth') . ' SET `friends` = "' . time() + $this->_modConfig['look_for_friends'] . '", `updated` = "' . time() . '" WHERE `oid` = ' . $this->getVar('oid');
+        $sql = 'UPDATE ' . $GLOBALS['xoopsDB']->prefix('twitterbomb_oauth') . ' SET `friends` = "' . time() + $this->_modConfig['look_for_friends'] . '", `updated` = "' . time() . '" WHERE `oid` = ' . $this->getVar('oid');
         $GLOBALS['xoopsDB']->queryF($sql);
         $this->vars['friends']['value'] = time() + $this->_modConfig['look_for_friends'];
     }
 
     public function setMentionsTimer()
     {
-        $sql = "UPDATE " . $GLOBALS['xoopsDB']->prefix('twitterbomb_oauth') . ' SET `mentions` = "' . time() + $this->_modConfig['look_for_mention'] . '", `updated` = "' . time() . '" WHERE `oid` = ' . $this->getVar('oid');
+        $sql = 'UPDATE ' . $GLOBALS['xoopsDB']->prefix('twitterbomb_oauth') . ' SET `mentions` = "' . time() + $this->_modConfig['look_for_mention'] . '", `updated` = "' . time() . '" WHERE `oid` = ' . $this->getVar('oid');
         $GLOBALS['xoopsDB']->queryF($sql);
         $this->vars['mentions']['value'] = time() + $this->_modConfig['look_for_mention'];
     }
@@ -571,7 +571,7 @@ class TwitterbombOauthHandler extends XoopsPersistableObjectHandler
 
     public function __construct($db)
     {
-        parent::__construct($db, "twitterbomb_oauth", 'TwitterbombOauth', "oid", "username");
+        parent::__construct($db, 'twitterbomb_oauth', 'TwitterbombOauth', 'oid', 'username');
 
         xoops_load('xoopscache');
         if (!class_exists('XoopsCache')) {

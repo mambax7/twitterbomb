@@ -79,7 +79,7 @@ class TwitterbombScheduler extends XoopsObject
             if ($log_handler->getCount(new Criteria('sid', $this->getVar('sid'))) > 0) {
                 $logs = $log_handler->getObjects(new Criteria('sid', $this->getVar('sid')), false);
                 if (is_object($logs[0])) {
-                    include_once XOOPS_ROOT_PATH . "/modules/tag/include/tagbar.php";
+                    include_once XOOPS_ROOT_PATH . '/modules/tag/include/tagbar.php';
                     $ret['tagbar'] = tagBar($logs[0]->getVar('lid'), $logs[0]->getVar('catid'));
                 }
             }
@@ -228,7 +228,7 @@ class TwitterbombSchedulerHandler extends XoopsPersistableObjectHandler
 
     public function __construct($db)
     {
-        parent::__construct($db, "twitterbomb_scheduler", 'TwitterbombScheduler', "sid", "text");
+        parent::__construct($db, 'twitterbomb_scheduler', 'TwitterbombScheduler', 'sid', 'text');
 
         $module_handler   = xoops_getHandler('module');
         $config_handler   = xoops_getHandler('config');
@@ -332,7 +332,7 @@ class TwitterbombSchedulerHandler extends XoopsPersistableObjectHandler
 
     public function plusHit($sid)
     {
-        $sql = "UPDATE " . $GLOBALS['xoopsDB']->prefix('twitterbomb_scheduler') . ' SET `hits` = `hits` + 1 WHERE `sid` = ' . $sid;
+        $sql = 'UPDATE ' . $GLOBALS['xoopsDB']->prefix('twitterbomb_scheduler') . ' SET `hits` = `hits` + 1 WHERE `sid` = ' . $sid;
         $GLOBALS['xoopsDB']->queryF($sql);
         return $this->recalc();
     }
@@ -342,7 +342,7 @@ class TwitterbombSchedulerHandler extends XoopsPersistableObjectHandler
         // Recalculating Ranking Tweets
         if ($this->_modConfig['number_to_rank'] != 0) {
             // Reset Rank
-            $sql = "UPDATE " . $GLOBALS['xoopsDB']->prefix('twitterbomb_scheduler') . ' SET `rank` = 0 WHERE `rank` <> 0';
+            $sql = 'UPDATE ' . $GLOBALS['xoopsDB']->prefix('twitterbomb_scheduler') . ' SET `rank` = 0 WHERE `rank` <> 0';
             @$GLOBALS['xoopsDB']->queryF($sql);
             //Recalculate rank
             $criteria = new CriteriaCompo(new Criteria('`hits`', 0, '>'));

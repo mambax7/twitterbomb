@@ -94,7 +94,7 @@ class TwitterbombUrlsHandler extends XoopsPersistableObjectHandler
 {
     public function __construct($db)
     {
-        parent::__construct($db, "twitterbomb_urls", 'TwitterbombUrls', "urlid", "surl");
+        parent::__construct($db, 'twitterbomb_urls', 'TwitterbombUrls', 'urlid', 'surl');
     }
 
     public function insert($obj, $force = true)

@@ -3,9 +3,9 @@
 	require_once (dirname(__FILE__, 4) . '/include/cp_header.php');
 	
 	if (!defined('_CHARSET'))
-		define("_CHARSET","UTF-8");
+		define('_CHARSET', 'UTF-8');
 	if (!defined('_CHARSET_ISO'))
-		define("_CHARSET_ISO","ISO-8859-1");
+		define('_CHARSET_ISO', 'ISO-8859-1');
 		
 	$GLOBALS['myts'] = MyTextSanitizer::getInstance();
 	
@@ -37,12 +37,12 @@
 	        exit();
 	    }
 	} else {
-	    redirect_header(XOOPS_URL . "/user.php", 1, _NOPERM);
+	    redirect_header(XOOPS_URL . '/user.php', 1, _NOPERM);
 	    exit();
 	}
 	
 	if (!isset($GLOBALS['xoopsTpl']) || !is_object($GLOBALS['xoopsTpl'])) {
-		include_once(XOOPS_ROOT_PATH."/class/template.php");
+		include_once(XOOPS_ROOT_PATH . '/class/template.php');
 		$GLOBALS['xoopsTpl'] = new XoopsTpl();
 	}
 	

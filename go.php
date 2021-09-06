@@ -8,7 +8,7 @@
 	$uri = $_REQUEST['uri'] ?? '';
 	
 	if ($cid==0||$url=''||$catid==0) {
-		header( "HTTP/1.1 301 Moved Permanently" ); 
+		header('HTTP/1.1 301 Moved Permanently');
 		header('Location: '.XOOPS_URL);
 		exit(0);
 	}
@@ -29,7 +29,7 @@
 		$category_handler =& xoops_getModuleHandler('category', 'twitterbomb');
 		$category_handler->plusHit($catid);
 	}	
-	header( "HTTP/1.1 301 Moved Permanently" ); 
+	header('HTTP/1.1 301 Moved Permanently');
 	header('Location: '.$uri);
 
 ?>

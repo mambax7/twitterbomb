@@ -284,7 +284,7 @@ class MyXoopsMediaUploader
     public function _copyFile($chmod)
     {
         $matched = [];
-        if (!preg_match("/\.([a-zA-Z0-9]+)$/", $this->mediaName, $matched)) {
+        if (!preg_match('/\.([a-zA-Z0-9]+)$/', $this->mediaName, $matched)) {
             return false;
         }
         if (isset($this->targetFileName)) {

@@ -12,7 +12,7 @@
 	if ($GLOBALS['twitterbombModuleConfig']['htaccess']&&empty($_POST)) {
 		$url = XOOPS_URL.'/'.$GLOBALS['twitterbombModuleConfig']['baseurl'].'/'.$op.','.$fct.','.$start.','.$limit.','.$cid.','.$catid.$GLOBALS['twitterbombModuleConfig']['endofurl'];
 		if (strpos($url, $_SERVER['REQUEST_URI'])==0) {
-			header( "HTTP/1.1 301 Moved Permanently" ); 
+			header('HTTP/1.1 301 Moved Permanently');
 			header('Location: '.$url);
 			exit(0);
 		}
@@ -20,7 +20,7 @@
 	
 	switch($op) {
 	default:
-	case "campaigns":
+	case 'campaigns':
 		switch($fct) {
 			default:
 			case 'list':
@@ -70,7 +70,7 @@
 		}
 		break;
 		
-	case "usernames":
+	case 'usernames':
 		switch($fct) {
 			default:
 			case 'new':

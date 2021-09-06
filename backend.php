@@ -27,7 +27,7 @@ if ($cacheid != md5($cid.$catid))
 if ($GLOBALS['twitterbombModuleConfig']['htaccess']) {
 	$url = XOOPS_URL.'/'.$GLOBALS['twitterbombModuleConfig']['baseurl'].'/rss,'.$cid.','.$catid.','.$cacheid.$GLOBALS['twitterbombModuleConfig']['endofurl_rss'];
 	if (strpos($url, $_SERVER['REQUEST_URI'])==0) {
-		header( "HTTP/1.1 301 Moved Permanently" ); 
+		header('HTTP/1.1 301 Moved Permanently');
 		header('Location: '.$url);
 		exit(0);
 	}

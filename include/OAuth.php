@@ -53,7 +53,7 @@ class OAuthToken
      */
     public function to_string()
     {
-        return "oauth_token=" . OAuthUtil::urlencode_rfc3986($this->key) . "&oauth_token_secret=" . OAuthUtil::urlencode_rfc3986($this->secret);
+        return 'oauth_token=' . OAuthUtil::urlencode_rfc3986($this->key) . '&oauth_token_secret=' . OAuthUtil::urlencode_rfc3986($this->secret);
     }
 
     public function __toString()
@@ -110,7 +110,7 @@ class OAuthSignatureMethod_HMAC_SHA1 extends OAuthSignatureMethod
 {
     public function get_name()
     {
-        return "HMAC-SHA1";
+        return 'HMAC-SHA1';
     }
 
     public function build_signature($request, $consumer, $token)
@@ -120,7 +120,7 @@ class OAuthSignatureMethod_HMAC_SHA1 extends OAuthSignatureMethod
 
         $key_parts = [
             $consumer->secret,
-            ($token) ? $token->secret : "",
+            ($token) ? $token->secret : '',
         ];
 
         $key_parts = OAuthUtil::urlencode_rfc3986($key_parts);
@@ -137,7 +137,7 @@ class OAuthSignatureMethod_HMAC_SHA1 extends OAuthSignatureMethod
  */
 class OAuthSignatureMethod_PLAINTEXT extends OAuthSignatureMethod {
   public function get_name() {
-    return "PLAINTEXT";
+    return 'PLAINTEXT';
   }
 
   /**
@@ -152,7 +152,7 @@ class OAuthSignatureMethod_PLAINTEXT extends OAuthSignatureMethod {
   public function build_signature($request, $consumer, $token) {
     $key_parts = [
       $consumer->secret,
-      ($token) ? $token->secret : ""
+      ($token) ? $token->secret : ''
     ];
 
     $key_parts = OAuthUtil::urlencode_rfc3986($key_parts);
@@ -173,7 +173,7 @@ class OAuthSignatureMethod_PLAINTEXT extends OAuthSignatureMethod {
  */
 abstract class OAuthSignatureMethod_RSA_SHA1 extends OAuthSignatureMethod {
   public function get_name() {
-    return "RSA-SHA1";
+    return 'RSA-SHA1';
   }
 
   // Up to the SP to implement this lookup of keys. Possible ideas are:
@@ -255,7 +255,7 @@ class OAuthRequest
      */
     public static function from_request($http_method = null, $http_url = null, $parameters = null)
     {
-        $scheme = (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != "on") ? 'http' : 'https';
+        $scheme = (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != 'on') ? 'http' : 'https';
         @$http_url or $http_url = $scheme . '://' . $_SERVER['HTTP_HOST'] . ':' . $_SERVER['SERVER_PORT'] . $_SERVER['REQUEST_URI'];
         @$http_method or $http_method = $_SERVER['REQUEST_METHOD'];
 
@@ -272,10 +272,10 @@ class OAuthRequest
 
             // It's a POST request of the proper content-type, so parse POST
             // parameters and add those overriding any duplicates from GET
-            if ($http_method == "POST"
+            if ($http_method == 'POST'
                 && @strstr(
-                    $request_headers["Content-Type"],
-                    "application/x-www-form-urlencoded"
+                    $request_headers['Content-Type'],
+                    'application/x-www-form-urlencoded'
                 )) {
                 $post_data  = OAuthUtil::parse_parameters(
                     file_get_contents(self::$POST_INPUT)
@@ -285,7 +285,7 @@ class OAuthRequest
 
             // We have a Authorization-header with OAuth data. Parse the header
             // and add those overriding any duplicates from GET or POST
-            if (@substr($request_headers['Authorization'], 0, 6) == "OAuth ") {
+            if (@substr($request_headers['Authorization'], 0, 6) == 'OAuth ') {
                 $header_parameters = OAuthUtil::split_header(
                     $request_headers['Authorization']
                 );
@@ -303,10 +303,10 @@ class OAuthRequest
     {
         @$parameters or $parameters = [];
         $defaults = [
-            "oauth_version"      => OAuthRequest::$version,
-            "oauth_nonce"        => OAuthRequest::generate_nonce(),
-            "oauth_timestamp"    => OAuthRequest::generate_timestamp(),
-            "oauth_consumer_key" => $consumer->key,
+            'oauth_version'      => OAuthRequest::$version,
+            'oauth_nonce'        => OAuthRequest::generate_nonce(),
+            'oauth_timestamp'    => OAuthRequest::generate_timestamp(),
+            'oauth_consumer_key' => $consumer->key,
         ];
         if ($token) {
             $defaults['oauth_token'] = $token->key;
@@ -452,7 +452,7 @@ class OAuthRequest
 
         $total = [];
         foreach ($this->parameters as $k => $v) {
-            if (substr($k, 0, 5) != "oauth") {
+            if (substr($k, 0, 5) != 'oauth') {
                 continue;
             }
             if (is_array($v)) {
@@ -473,12 +473,12 @@ class OAuthRequest
     public function sign_request($signature_method, $consumer, $token)
     {
         $this->set_parameter(
-            "oauth_signature_method",
+            'oauth_signature_method',
             $signature_method->get_name(),
             false
         );
         $signature = $this->build_signature($signature_method, $consumer, $token);
-        $this->set_parameter("oauth_signature", $signature, false);
+        $this->set_parameter('oauth_signature', $signature, false);
     }
 
     public function build_signature($signature_method, $consumer, $token)
@@ -559,7 +559,7 @@ class OAuthServer
         $consumer = $this->get_consumer($request);
 
         // requires authorized request token
-        $token = $this->get_token($request, $consumer, "request");
+        $token = $this->get_token($request, $consumer, 'request');
 
         $this->check_signature($request, $consumer, $token);
 
@@ -577,7 +577,7 @@ class OAuthServer
     {
         $this->get_version($request);
         $consumer = $this->get_consumer($request);
-        $token    = $this->get_token($request, $consumer, "access");
+        $token    = $this->get_token($request, $consumer, 'access');
         $this->check_signature($request, $consumer, $token);
         return [$consumer, $token];
     }
@@ -589,7 +589,7 @@ class OAuthServer
      */
     private function get_version($request)
     {
-        $version = $request->get_parameter("oauth_version");
+        $version = $request->get_parameter('oauth_version');
         if (!$version) {
             // Service Providers MUST assume the protocol version to be 1.0 if this parameter is not present.
             // Chapter 7.0 ("Accessing Protected Ressources")
@@ -606,7 +606,7 @@ class OAuthServer
      */
     private function get_signature_method($request)
     {
-        $signature_method = @$request->get_parameter("oauth_signature_method");
+        $signature_method = @$request->get_parameter('oauth_signature_method');
 
         if (!$signature_method) {
             // According to chapter 7 ("Accessing Protected Ressources") the signature-method
@@ -618,7 +618,7 @@ class OAuthServer
             $signature_method,
             array_keys($this->signature_methods)
         )) {
-            throw new OAuthException(sprintf(_ERR_TWEETBOMB_OAUTH_NOSIGNATURE_NOSUPPORT, $signature_method, implode(", ", array_keys($this->signature_methods))));
+            throw new OAuthException(sprintf(_ERR_TWEETBOMB_OAUTH_NOSIGNATURE_NOSUPPORT, $signature_method, implode(', ', array_keys($this->signature_methods))));
         }
         return $this->signature_methods[$signature_method];
     }
@@ -628,7 +628,7 @@ class OAuthServer
      */
     private function get_consumer($request)
     {
-        $consumer_key = @$request->get_parameter("oauth_consumer_key");
+        $consumer_key = @$request->get_parameter('oauth_consumer_key');
         if (!$consumer_key) {
             throw new OAuthException(_ERR_TWEETBOMB_OAUTH_INVALID_CONSUMER_KEY);
         }
@@ -644,7 +644,7 @@ class OAuthServer
     /**
      * try to find the token for the provided request's token key
      */
-    private function get_token($request, $consumer, $token_type = "access")
+    private function get_token($request, $consumer, $token_type = 'access')
     {
         $token_field = @$request->get_parameter('oauth_token');
         $token       = $this->data_store->lookup_token(
@@ -822,9 +822,9 @@ class OAuthUtil {
       $out = [];
       foreach( $headers AS $key => $value ) {
         $key = str_replace(
-            " ",
-            "-",
-            ucwords(strtolower(str_replace("-", " ", $key)))
+            ' ',
+            '-',
+            ucwords(strtolower(str_replace('-', ' ', $key)))
           );
         $out[$key] = $value;
       }
@@ -838,14 +838,14 @@ class OAuthUtil {
         $out['Content-Type'] = $_ENV['CONTENT_TYPE'];
 
       foreach ($_SERVER as $key => $value) {
-        if (substr($key, 0, 5) == "HTTP_") {
+        if (substr($key, 0, 5) == 'HTTP_') {
           // this is chaos, basically it is just there to capitalize the first
           // letter of every word that is not an initial HTTP and strip HTTP
           // code from przemek
           $key = str_replace(
-            " ",
-            "-",
-            ucwords(strtolower(str_replace("_", " ", substr($key, 5))))
+              ' ',
+              '-',
+              ucwords(strtolower(str_replace('_', ' ', substr($key, 5))))
           );
           $out[$key] = $value;
         }

@@ -174,7 +174,7 @@ class TwitterBombRetweet extends XoopsObject
 
     public function plusRetweets()
     {
-        $sql = "UPDATE " . $GLOBALS['xoopsDB']->prefix('twitterbomb_retweet') . ' SET `retweets` = `retweets` + 1, `retweeted` = "' . time() . '" WHERE `rid` = ' . $this->getVar('rid');
+        $sql = 'UPDATE ' . $GLOBALS['xoopsDB']->prefix('twitterbomb_retweet') . ' SET `retweets` = `retweets` + 1, `retweeted` = "' . time() . '" WHERE `rid` = ' . $this->getVar('rid');
         $GLOBALS['xoopsDB']->queryF($sql);
         $this->var['retweets']['value']  = $this->var['retweets']['value'] + 1;
         $this->var['retweeted']['value'] = time();
@@ -321,7 +321,7 @@ class TwitterBombRetweetHandler extends XoopsPersistableObjectHandler
     public function __construct($db)
     {
         $this->db = $db;
-        parent::__construct($db, 'twitterbomb_retweet', 'TwitterBombRetweet', "rid", "search");
+        parent::__construct($db, 'twitterbomb_retweet', 'TwitterBombRetweet', 'rid', 'search');
 
         $module_handler   = xoops_getHandler('module');
         $config_handler   = xoops_getHandler('config');

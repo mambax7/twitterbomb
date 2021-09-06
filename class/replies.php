@@ -180,7 +180,7 @@ class TwitterbombRepliesHandler extends XoopsPersistableObjectHandler
 {
     public function __construct($db)
     {
-        parent::__construct($db, "twitterbomb_replies", 'TwitterbombReplies', "rpid", "phrase");
+        parent::__construct($db, 'twitterbomb_replies', 'TwitterbombReplies', 'rpid', 'phrase');
     }
 
     public function insert($object, $force = true)

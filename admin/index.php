@@ -4,8 +4,8 @@
 	
 	xoops_cp_header();
 	
-	$op = $_REQUEST['op'] ?? "dashboard";
-	$fct = $_REQUEST['fct'] ?? "list";
+	$op = $_REQUEST['op'] ?? 'dashboard';
+	$fct = $_REQUEST['fct'] ?? 'list';
 	$limit = !empty($_REQUEST['limit'])?intval($_REQUEST['limit']):30;
 	$start = !empty($_REQUEST['start'])?intval($_REQUEST['start']):0;
 	$order = !empty($_REQUEST['order'])?$_REQUEST['order']:'DESC';
@@ -17,7 +17,7 @@
 		default:
 			$_GET['op'] = 'dashboard';
 			
-		case "dashboard":
+		case 'dashboard':
 					
 			echo twitterbomb_adminMenu(0);
 			
@@ -33,9 +33,9 @@
 
 		 	$indexAdmin = new ModuleAdmin();	
 		    $indexAdmin->addInfoBox(_AM_TWEETBOMB_ADMIN_COUNTS);
-		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_REPLIESSBOMB."</label>", $campaign_handler->getCount(new Criteria('`type`', 'bomb', '=')), 'Green');
-		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_REPLIESSSCHEDULER."</label>", $campaign_handler->getCount(new Criteria('`type`', 'scheduler', '=')), 'Green');
-		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_REPLIESSRETWEET."</label>", $campaign_handler->getCount(new Criteria('`type`', 'retweet', '=')), 'Green');
+		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_REPLIESSBOMB . '</label>', $campaign_handler->getCount(new Criteria('`type`', 'bomb', '=')), 'Green');
+		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_REPLIESSSCHEDULER . '</label>', $campaign_handler->getCount(new Criteria('`type`', 'scheduler', '=')), 'Green');
+		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_REPLIESSRETWEET . '</label>', $campaign_handler->getCount(new Criteria('`type`', 'retweet', '=')), 'Green');
 
 		    $criteria_a = new CriteriaCompo(new Criteria('timed', '0'));
 			$criteria_b = new CriteriaCompo(new Criteria('timed', '1'));
@@ -44,19 +44,19 @@
 			$criteria = new CriteriaCompo($criteria_a);
 			$criteria->add($criteria_b, 'OR');
 
-		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_REPLIESSACTIVE."</label>", $campaign_handler->getCount($criteria), 'Orange');
-		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_REPLIESSINACTIVE."</label>", ($campaign_handler->getCount(NULL)-$campaign_handler->getCount($criteria)), 'Orange');
-		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_CATEGORIES."</label>", $category_handler->getCount(NULL), 'Green');
-		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_KEYWORDS."</label>", $keywords_handler->getCount(NULL), 'Green');
-			$indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_URLS."</label>", $urls_handler->getCount(NULL), 'Green');
-		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_RETWEETS."</label>", $retweet_handler->getCount(NULL), 'Green');
-		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_SCHEDULERTOTAL."</label>", $scheduler_handler->getCount(NULL), 'Green');
-		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_SCHEDULERWAITING."</label>", $scheduler_handler->getCount(new Criteria('`tweeted`', '0', '=')), 'Green');
-		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_SCHEDULERTWEETED."</label>", $scheduler_handler->getCount(new Criteria('`tweeted`', '0', '!=')), 'Green');
-			$indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_LOGTOTAL."</label>", $log_handler->getCount(NULL), 'Orange');
-		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_LOGBOMB."</label>", $log_handler->getCount(new Criteria('`provider`', 'bomb', '=')), 'Orange');
-		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_LOGSCHEDULER."</label>", $log_handler->getCount(new Criteria('`provider`', 'scheduler', '=')), 'Orange');
-		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_LOGRETWEET."</label>", $log_handler->getCount(new Criteria('`provider`', 'retweet', '=')), 'Orange');
+		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_REPLIESSACTIVE . '</label>', $campaign_handler->getCount($criteria), 'Orange');
+		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_REPLIESSINACTIVE . '</label>', ($campaign_handler->getCount(NULL) - $campaign_handler->getCount($criteria)), 'Orange');
+		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_CATEGORIES . '</label>', $category_handler->getCount(NULL), 'Green');
+		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_KEYWORDS . '</label>', $keywords_handler->getCount(NULL), 'Green');
+			$indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_URLS . '</label>', $urls_handler->getCount(NULL), 'Green');
+		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_RETWEETS . '</label>', $retweet_handler->getCount(NULL), 'Green');
+		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_SCHEDULERTOTAL . '</label>', $scheduler_handler->getCount(NULL), 'Green');
+		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_SCHEDULERWAITING . '</label>', $scheduler_handler->getCount(new Criteria('`tweeted`', '0', '=')), 'Green');
+		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_SCHEDULERTWEETED . '</label>', $scheduler_handler->getCount(new Criteria('`tweeted`', '0', '!=')), 'Green');
+			$indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_LOGTOTAL . '</label>', $log_handler->getCount(NULL), 'Orange');
+		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_LOGBOMB . '</label>', $log_handler->getCount(new Criteria('`provider`', 'bomb', '=')), 'Orange');
+		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_LOGSCHEDULER . '</label>', $log_handler->getCount(new Criteria('`provider`', 'scheduler', '=')), 'Orange');
+		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_LOGRETWEET . '</label>', $log_handler->getCount(new Criteria('`provider`', 'retweet', '=')), 'Orange');
 
 		    $criteria = new CriteriaCompo(new Criteria('`provider`', 'bomb', '='));
 		    $criteria->setSort('`date`');
@@ -64,14 +64,14 @@
 		    $criteria->setLimit(1);
 		    $logs = $log_handler->getObjects($criteria, false);
 		    if (is_object($logs[0])) {
-		    	$indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_LOGLASTBOMB."</label>", date(_DATESTRING, $logs[0]->getVar('date')), 'Green');
+		    	$indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_LOGLASTBOMB . '</label>', date(_DATESTRING, $logs[0]->getVar('date')), 'Green');
 			    $criteria = new CriteriaCompo(new Criteria('`provider`', 'bomb', '='));
 			    $criteria->setSort('`date`');
 			    $criteria->setOrder('ASC');
 			    $criteria->setLimit(1);
 			    $logs = $log_handler->getObjects($criteria, false);
 			    if (is_object($logs[0])) {
-			    	$indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_LOGFIRSTBOMB."</label>", date(_DATESTRING, $logs[0]->getVar('date')), 'Green');
+			    	$indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_LOGFIRSTBOMB . '</label>', date(_DATESTRING, $logs[0]->getVar('date')), 'Green');
 			    }
 		    }
 			    		
@@ -82,14 +82,14 @@
 		    $logs = $log_handler->getObjects($criteria, false);
 		    if (isset($logs[0]))
 			    if (is_object($logs[0])) {
-			    	$indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_LOGLASTSCHEDULE."</label>", date(_DATESTRING, $logs[0]->getVar('date')), 'Green');
+			    	$indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_LOGLASTSCHEDULE . '</label>', date(_DATESTRING, $logs[0]->getVar('date')), 'Green');
 				    $criteria = new CriteriaCompo(new Criteria('`provider`', 'scheduler', '='));
 				    $criteria->setSort('`date`');
 				    $criteria->setOrder('ASC');
 				    $criteria->setLimit(1);
 				    $logs = $log_handler->getObjects($criteria, false);
 				    if (is_object($logs[0])) {
-				    	$indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_LOGFIRSTSCHEDULE."</label>", date(_DATESTRING, $logs[0]->getVar('date')), 'Green');
+				    	$indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_LOGFIRSTSCHEDULE . '</label>', date(_DATESTRING, $logs[0]->getVar('date')), 'Green');
 				    }
 			    }
 
@@ -100,21 +100,21 @@
 		    $logs = $log_handler->getObjects($criteria, false);
 		    if (isset($logs[0]))
 			    if (is_object($logs[0])) {
-			    	$indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_LOGLASTRETWEET."</label>", date(_DATESTRING, $logs[0]->getVar('date')), 'Green');
+			    	$indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_LOGLASTRETWEET . '</label>', date(_DATESTRING, $logs[0]->getVar('date')), 'Green');
 				    $criteria = new CriteriaCompo(new Criteria('`provider`', 'retweet', '='));
 				    $criteria->setSort('`date`');
 				    $criteria->setOrder('ASC');
 				    $criteria->setLimit(1);
 				    $logs = $log_handler->getObjects($criteria, false);
 				    if (is_object($logs[0])) {
-				    	$indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, "<label>"._AM_TWEETBOMB_ADMIN_THEREARE_LOGFIRSTRETWEET."</label>", date(_DATESTRING, $logs[0]->getVar('date')), 'Green');
+				    	$indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_LOGFIRSTRETWEET . '</label>', date(_DATESTRING, $logs[0]->getVar('date')), 'Green');
 				    }
 			    }
 			    
 		    echo $indexAdmin->renderIndex();	
 			
 			break;	
-		case "about":
+		case 'about':
 			echo twitterbomb_adminMenu(11);
 			$paypalitemno='TWITTERBOMB125';
 			$aboutAdmin = new ModuleAdmin();
@@ -155,14 +155,14 @@
 			echo implode("\n", $donationform);
 			echo (substr($about, $iend+1, strlen($about)-$iend-1));
 			break;
-		case "campaign":	
+		case 'campaign':
 			switch ($fct)
 			{
 				default:
-				case "list":				
+				case 'list':
 					twitterbomb_adminMenu(1);
 					
-					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
+					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
 					$campaign_handler =& xoops_getModuleHandler('campaign', 'twitterbomb');
 
@@ -202,12 +202,12 @@
 					$GLOBALS['xoopsTpl']->display('db:twitterbomb_cpanel_campaign_list.html');
 					break;		
 					
-				case "new":
-				case "edit":
+				case 'new':
+				case 'edit':
 					
 					twitterbomb_adminMenu(1);
 					
-					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
+					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
 					$campaign_handler =& xoops_getModuleHandler('campaign', 'twitterbomb');
 					if ($id!=0) {
@@ -220,7 +220,7 @@
 					$GLOBALS['xoopsTpl']->assign('php_self', $_SERVER['PHP_SELF']);
 					$GLOBALS['xoopsTpl']->display('db:twitterbomb_cpanel_campaign_edit.html');
 					break;
-				case "save":
+				case 'save':
 					
 					$campaign_handler =& xoops_getModuleHandler('campaign', 'twitterbomb');
 					
@@ -247,7 +247,7 @@
 						exit(0);
 					}
 					break;
-				case "savelist":
+				case 'savelist':
 					
 					$campaign_handler =& xoops_getModuleHandler('campaign', 'twitterbomb');
 					foreach($id as $ids) {
@@ -265,7 +265,7 @@
 					redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_REPLIES_SAVEDOKEY);
 					exit(0);
 					break;				
-				case "delete":	
+				case 'delete':
 								
 					$campaign_handler =& xoops_getModuleHandler('campaign', 'twitterbomb');
 					
@@ -285,14 +285,14 @@
 					break;
 			}
 			break;
-		case "category":	
+		case 'category':
 			switch ($fct)
 			{
 				default:
-				case "list":				
+				case 'list':
 					twitterbomb_adminMenu(2);
 					
-					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
+					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
 					$category_handler =& xoops_getModuleHandler('category', 'twitterbomb');
 						
@@ -332,12 +332,12 @@
 					$GLOBALS['xoopsTpl']->display('db:twitterbomb_cpanel_category_list.html');
 					break;		
 					
-				case "new":
-				case "edit":
+				case 'new':
+				case 'edit':
 					
 					twitterbomb_adminMenu(2);
 					
-					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
+					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
 					$category_handler =& xoops_getModuleHandler('category', 'twitterbomb');
 					if ($id!=0) {
@@ -350,7 +350,7 @@
 					$GLOBALS['xoopsTpl']->assign('php_self', $_SERVER['PHP_SELF']);
 					$GLOBALS['xoopsTpl']->display('db:twitterbomb_cpanel_category_edit.html');
 					break;
-				case "save":
+				case 'save':
 					
 					$category_handler =& xoops_getModuleHandler('category', 'twitterbomb');
 					
@@ -368,7 +368,7 @@
 						exit(0);
 					}
 					break;
-				case "savelist":
+				case 'savelist':
 					
 					$category_handler =& xoops_getModuleHandler('category', 'twitterbomb');
 					foreach($id as $ids) {
@@ -382,7 +382,7 @@
 					redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_CATEGORY_SAVEDOKEY);
 					exit(0);
 					break;				
-				case "delete":	
+				case 'delete':
 								
 					$category_handler =& xoops_getModuleHandler('category', 'twitterbomb');
 					
@@ -402,14 +402,14 @@
 					break;
 			}
 			break;
-		case "keywords":	
+		case 'keywords':
 			switch ($fct)
 			{
 				default:
-				case "list":				
+				case 'list':
 					twitterbomb_adminMenu(3);
 
-					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
+					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
 					$keywords_handler =& xoops_getModuleHandler('keywords', 'twitterbomb');
 					$criteria = $keywords_handler->getFilterCriteria($filter);
@@ -449,12 +449,12 @@
 					$GLOBALS['xoopsTpl']->display('db:twitterbomb_cpanel_keywords_list.html');
 					break;		
 					
-				case "new":
-				case "edit":
+				case 'new':
+				case 'edit':
 					
 					twitterbomb_adminMenu(3);
 					
-					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
+					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
 					$keywords_handler =& xoops_getModuleHandler('keywords', 'twitterbomb');
 					if ($id!=0) {
@@ -467,7 +467,7 @@
 					$GLOBALS['xoopsTpl']->assign('php_self', $_SERVER['PHP_SELF']);
 					$GLOBALS['xoopsTpl']->display('db:twitterbomb_cpanel_keywords_edit.html');
 					break;
-				case "save":
+				case 'save':
 					
 					$keywords_handler =& xoops_getModuleHandler('keywords', 'twitterbomb');
 					
@@ -485,7 +485,7 @@
 						exit(0);
 					}
 					break;
-				case "savelist":
+				case 'savelist':
 					
 					$keywords_handler =& xoops_getModuleHandler('keywords', 'twitterbomb');
 					foreach($id as $ids) {
@@ -499,7 +499,7 @@
 					redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_KEYWORDS_SAVEDOKEY);
 					exit(0);
 					break;				
-				case "delete":	
+				case 'delete':
 								
 					$keywords_handler =& xoops_getModuleHandler('keywords', 'twitterbomb');
 					
@@ -519,14 +519,14 @@
 					break;
 			}
 			break;
-		case "base_matrix":	
+		case 'base_matrix':
 			switch ($fct)
 			{
 				default:
-				case "list":				
+				case 'list':
 					twitterbomb_adminMenu(4);
 					
-					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
+					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
 					$base_matrix_handler =& xoops_getModuleHandler('base_matrix', 'twitterbomb');
 						
@@ -566,12 +566,12 @@
 					$GLOBALS['xoopsTpl']->display('db:twitterbomb_cpanel_base_matrix_list.html');
 					break;		
 					
-				case "new":
-				case "edit":
+				case 'new':
+				case 'edit':
 					
 					twitterbomb_adminMenu(4);
 					
-					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
+					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
 					$base_matrix_handler =& xoops_getModuleHandler('base_matrix', 'twitterbomb');
 					if ($id!=0) {
@@ -584,7 +584,7 @@
 					$GLOBALS['xoopsTpl']->assign('php_self', $_SERVER['PHP_SELF']);
 					$GLOBALS['xoopsTpl']->display('db:twitterbomb_cpanel_base_matrix_edit.html');
 					break;
-				case "save":
+				case 'save':
 					
 					$base_matrix_handler =& xoops_getModuleHandler('base_matrix', 'twitterbomb');
 					
@@ -602,7 +602,7 @@
 						exit(0);
 					}
 					break;
-				case "savelist":
+				case 'savelist':
 					
 					$base_matrix_handler =& xoops_getModuleHandler('base_matrix', 'twitterbomb');
 					foreach($id as $ids) {
@@ -616,7 +616,7 @@
 					redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_BASEMATRIX_SAVEDOKEY);
 					exit(0);
 					break;				
-				case "delete":	
+				case 'delete':
 								
 					$base_matrix_handler =& xoops_getModuleHandler('base_matrix', 'twitterbomb');
 					
@@ -636,14 +636,14 @@
 					break;
 			}
 			break;
-		case "usernames":	
+		case 'usernames':
 			switch ($fct)
 			{
 				default:
-				case "list":				
+				case 'list':
 					twitterbomb_adminMenu(5);
 					
-					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
+					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
 					$usernames_handler =& xoops_getModuleHandler('usernames', 'twitterbomb');
 						
@@ -683,12 +683,12 @@
 					$GLOBALS['xoopsTpl']->display('db:twitterbomb_cpanel_usernames_list.html');
 					break;		
 					
-				case "new":
-				case "edit":
+				case 'new':
+				case 'edit':
 					
 					twitterbomb_adminMenu(5);
 					
-					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
+					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
 					$usernames_handler =& xoops_getModuleHandler('usernames', 'twitterbomb');
 					if ($id!=0) {
@@ -701,7 +701,7 @@
 					$GLOBALS['xoopsTpl']->assign('php_self', $_SERVER['PHP_SELF']);
 					$GLOBALS['xoopsTpl']->display('db:twitterbomb_cpanel_usernames_edit.html');
 					break;
-				case "save":
+				case 'save':
 					
 					$usernames_handler =& xoops_getModuleHandler('usernames', 'twitterbomb');
 					
@@ -719,7 +719,7 @@
 						exit(0);
 					}
 					break;
-				case "savelist":
+				case 'savelist':
 					
 					$usernames_handler =& xoops_getModuleHandler('usernames', 'twitterbomb');
 					foreach($id as $ids) {
@@ -733,7 +733,7 @@
 					redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_USERNAMES_SAVEDOKEY);
 					exit(0);
 					break;				
-				case "delete":	
+				case 'delete':
 								
 					$usernames_handler =& xoops_getModuleHandler('usernames', 'twitterbomb');
 					
@@ -753,14 +753,14 @@
 					break;
 			}
 			break;
-		case "urls":	
+		case 'urls':
 			switch ($fct)
 			{
 				default:
-				case "list":				
+				case 'list':
 					twitterbomb_adminMenu(6);
 					
-					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
+					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
 					$urls_handler =& xoops_getModuleHandler('urls', 'twitterbomb');
 						
@@ -800,12 +800,12 @@
 					$GLOBALS['xoopsTpl']->display('db:twitterbomb_cpanel_urls_list.html');
 					break;		
 					
-				case "new":
-				case "edit":
+				case 'new':
+				case 'edit':
 					
 					twitterbomb_adminMenu(6);
 					
-					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
+					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
 					$urls_handler =& xoops_getModuleHandler('urls', 'twitterbomb');
 					if ($id!=0) {
@@ -818,7 +818,7 @@
 					$GLOBALS['xoopsTpl']->assign('php_self', $_SERVER['PHP_SELF']);
 					$GLOBALS['xoopsTpl']->display('db:twitterbomb_cpanel_urls_edit.html');
 					break;
-				case "save":
+				case 'save':
 					
 					$urls_handler =& xoops_getModuleHandler('urls', 'twitterbomb');
 					
@@ -836,7 +836,7 @@
 						exit(0);
 					}
 					break;
-				case "savelist":
+				case 'savelist':
 					
 					$urls_handler =& xoops_getModuleHandler('urls', 'twitterbomb');
 					foreach($id as $ids) {
@@ -850,7 +850,7 @@
 					redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_URLS_SAVEDOKEY);
 					exit(0);
 					break;				
-				case "delete":	
+				case 'delete':
 								
 					$urls_handler =& xoops_getModuleHandler('urls', 'twitterbomb');
 					
@@ -871,14 +871,14 @@
 			}
 			break;
 
-		case "scheduler":	
+		case 'scheduler':
 			switch ($fct)
 			{
 				default:
-				case "list":				
+				case 'list':
 					twitterbomb_adminMenu(7);
 					
-					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
+					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
 					$scheduler_handler =& xoops_getModuleHandler('scheduler', 'twitterbomb');
 						
@@ -919,13 +919,13 @@
 					$GLOBALS['xoopsTpl']->display('db:twitterbomb_cpanel_scheduler_list.html');
 					break;		
 					
-				case "new":
-				case "edit":
+				case 'new':
+				case 'edit':
 
 					twitterbomb_adminMenu(7);
 					
-					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
-					include_once $GLOBALS['xoops']->path( "/class/template.php" );
+					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
+					include_once $GLOBALS['xoops']->path('/class/template.php');
 					
 					$scheduler_handler =& xoops_getModuleHandler('scheduler', 'twitterbomb');
 					if ($id!=0) {
@@ -939,7 +939,7 @@
 					$GLOBALS['xoopsTpl']->assign('php_self', $_SERVER['PHP_SELF']);
 					$GLOBALS['xoopsTpl']->display('db:twitterbomb_cpanel_scheduler_edit.html');
 					break;
-				case "save":
+				case 'save':
 					
 					$scheduler_handler =& xoops_getModuleHandler('scheduler', 'twitterbomb');
 					
@@ -961,7 +961,7 @@
 						exit(0);
 					}
 					break;
-				case "savelist":
+				case 'savelist':
 					
 					$scheduler_handler =& xoops_getModuleHandler('scheduler', 'twitterbomb');
 					foreach($id as $ids) {
@@ -979,7 +979,7 @@
 					redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_SCHEDULER_SAVEDOKEY);
 					exit(0);
 					break;				
-				case "delete":	
+				case 'delete':
 								
 					$scheduler_handler =& xoops_getModuleHandler('scheduler', 'twitterbomb');
 					
@@ -997,7 +997,7 @@
 						xoops_confirm(['id' =>$id, 'op' => $_REQUEST['op'], 'fct' => $_REQUEST['fct'], 'limit' => $_REQUEST['limit'], 'start' => $_REQUEST['start'], 'order' => $_REQUEST['order'], 'sort' => $_REQUEST['sort'], 'filter' => $_REQUEST['filter']], 'index.php', sprintf(_AM_MSG_SCHEDULER_DELETE, $scheduler->getVar('text')));
 					}
 					break;
-				case "importfile":
+				case 'importfile':
 					
 					$scheduler_handler =& xoops_getModuleHandler('scheduler', 'twitterbomb');
 					
@@ -1057,12 +1057,12 @@
 					break;
 			}
 			break;
-		case "log":	
+		case 'log':
 			
 			xoops_loadLanguage('admin', 'twitterbomb');
 			twitterbomb_adminMenu(8);
 			
-			include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
+			include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 
 			$log_handler =& xoops_getModuleHandler('log', 'twitterbomb');
 				
@@ -1100,14 +1100,14 @@
 					
 			$GLOBALS['xoopsTpl']->display('db:twitterbomb_cpanel_log.html');
 			break;
-		case "retweet":	
+		case 'retweet':
 			switch ($fct)
 			{
 				default:
-				case "list":				
+				case 'list':
 					twitterbomb_adminMenu(9);
 					
-					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
+					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
 					$retweet_handler =& xoops_getModuleHandler('retweet', 'twitterbomb');
 					
@@ -1153,13 +1153,13 @@
 					
 					break;		
 					
-				case "new":
-				case "edit":
+				case 'new':
+				case 'edit':
 					
 					twitterbomb_adminMenu(9);
 					
-					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
-					include_once $GLOBALS['xoops']->path( "/class/template.php" );
+					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
+					include_once $GLOBALS['xoops']->path('/class/template.php');
 					
 					
 					$retweet_handler =& xoops_getModuleHandler('retweet', 'twitterbomb');
@@ -1173,7 +1173,7 @@
 					$GLOBALS['xoopsTpl']->assign('php_self', $_SERVER['PHP_SELF']);
 					$GLOBALS['xoopsTpl']->display('db:twitterbomb_cpanel_retweet_edit.html');
 					break;
-				case "save":
+				case 'save':
 					
 					$retweet_handler =& xoops_getModuleHandler('retweet', 'twitterbomb');
 					
@@ -1195,7 +1195,7 @@
 						exit(0);
 					}
 					break;
-				case "savelist":
+				case 'savelist':
 					
 					$retweet_handler =& xoops_getModuleHandler('retweet', 'twitterbomb');
 					foreach($id as $ids) {
@@ -1214,7 +1214,7 @@
 					redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_RETWEET_SAVEDOKEY);
 					exit(0);
 					break;				
-				case "delete":	
+				case 'delete':
 								
 					$retweet_handler =& xoops_getModuleHandler('retweet', 'twitterbomb');
 					
@@ -1234,14 +1234,14 @@
 					break;
 			}
 			break;
-		case "mentions":	
+		case 'mentions':
 			switch ($fct)
 			{
 				default:
-				case "list":				
+				case 'list':
 					twitterbomb_adminMenu(11);
 					
-					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
+					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
 					$mentions_handler =& xoops_getModuleHandler('mentions', 'twitterbomb');
 
@@ -1281,12 +1281,12 @@
 					$GLOBALS['xoopsTpl']->display('db:twitterbomb_cpanel_mentions_list.html');
 					break;		
 					
-				case "new":
-				case "edit":
+				case 'new':
+				case 'edit':
 					
 					twitterbomb_adminMenu(11);
 					
-					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
+					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
 					$mentions_handler =& xoops_getModuleHandler('mentions', 'twitterbomb');
 					if ($id!=0) {
@@ -1299,7 +1299,7 @@
 					$GLOBALS['xoopsTpl']->assign('php_self', $_SERVER['PHP_SELF']);
 					$GLOBALS['xoopsTpl']->display('db:twitterbomb_cpanel_mentions_edit.html');
 					break;
-				case "save":
+				case 'save':
 					
 					$mentions_handler =& xoops_getModuleHandler('mentions', 'twitterbomb');
 					
@@ -1326,7 +1326,7 @@
 						exit(0);
 					}
 					break;
-				case "savelist":
+				case 'savelist':
 					
 					$mentions_handler =& xoops_getModuleHandler('mentions', 'twitterbomb');
 					foreach($id as $ids) {
@@ -1344,7 +1344,7 @@
 					redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_REPLIES_SAVEDOKEY);
 					exit(0);
 					break;				
-				case "delete":	
+				case 'delete':
 								
 					$mentions_handler =& xoops_getModuleHandler('mentions', 'twitterbomb');
 					
@@ -1364,14 +1364,14 @@
 					break;
 			}
 			break;
-		case "replies":	
+		case 'replies':
 			switch ($fct)
 			{
 				default:
-				case "list":				
+				case 'list':
 					twitterbomb_adminMenu(12);
 					
-					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
+					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
 					$replies_handler =& xoops_getModuleHandler('replies', 'twitterbomb');
 
@@ -1411,12 +1411,12 @@
 					$GLOBALS['xoopsTpl']->display('db:twitterbomb_cpanel_replies_list.html');
 					break;		
 					
-				case "new":
-				case "edit":
+				case 'new':
+				case 'edit':
 					
 					twitterbomb_adminMenu(12);
 					
-					include_once $GLOBALS['xoops']->path( "/class/pagenav.php" );
+					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
 					$replies_handler =& xoops_getModuleHandler('replies', 'twitterbomb');
 					if ($id!=0) {
@@ -1429,7 +1429,7 @@
 					$GLOBALS['xoopsTpl']->assign('php_self', $_SERVER['PHP_SELF']);
 					$GLOBALS['xoopsTpl']->display('db:twitterbomb_cpanel_replies_edit.html');
 					break;
-				case "save":
+				case 'save':
 					
 					$replies_handler =& xoops_getModuleHandler('replies', 'twitterbomb');
 					
@@ -1452,7 +1452,7 @@
 						exit(0);
 					}
 					break;
-				case "savelist":
+				case 'savelist':
 					
 					$replies_handler =& xoops_getModuleHandler('replies', 'twitterbomb');
 					foreach($id as $ids) {
@@ -1470,7 +1470,7 @@
 					redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_REPLIES_SAVEDOKEY);
 					exit(0);
 					break;				
-				case "delete":	
+				case 'delete':
 								
 					$replies_handler =& xoops_getModuleHandler('replies', 'twitterbomb');
 					

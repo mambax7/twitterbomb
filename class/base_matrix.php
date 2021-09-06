@@ -171,7 +171,7 @@ class TwitterbombBase_matrixHandler extends XoopsPersistableObjectHandler
 {
     public function __construct($db)
     {
-        parent::__construct($db, "twitterbomb_base_matrix", 'TwitterbombBase_matrix', "baseid");
+        parent::__construct($db, 'twitterbomb_base_matrix', 'TwitterbombBase_matrix', 'baseid');
     }
 
     public function insert($obj, $force = true)

@@ -6,57 +6,57 @@ function xoops_module_update_twitterbomb(&$module) {
 	$recovery = [];
 	$sql = [];
 	
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_campaign')."` ADD COLUMN `hits` INT(13) UNSIGNED DEFAULT '0'";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_campaign')."` ADD COLUMN `active` INT(13) UNSIGNED DEFAULT '0'";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_campaign')."` ADD COLUMN `type` ENUM('bomb','scheduler', 'retweet') DEFAULT 'bomb'";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_campaign')."` ADD COLUMN `cron` INT(13) UNSIGNED DEFAULT '0'";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_campaign')."` ADD COLUMN `rids` VARCHAR(1000) DEFAULT ''";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_campaign')."` CHANGE COLUMN `type` `type` ENUM('bomb','scheduler','retweet','reply','mention') DEFAULT 'bomb'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_campaign') . "` ADD COLUMN `hits` INT(13) UNSIGNED DEFAULT '0'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_campaign') . "` ADD COLUMN `active` INT(13) UNSIGNED DEFAULT '0'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_campaign') . "` ADD COLUMN `type` ENUM('bomb','scheduler', 'retweet') DEFAULT 'bomb'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_campaign') . "` ADD COLUMN `cron` INT(13) UNSIGNED DEFAULT '0'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_campaign') . "` ADD COLUMN `rids` VARCHAR(1000) DEFAULT ''";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_campaign') . "` CHANGE COLUMN `type` `type` ENUM('bomb','scheduler','retweet','reply','mention') DEFAULT 'bomb'";
 	
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_category')."` ADD COLUMN `hits` INT(13) UNSIGNED DEFAULT '0'";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_category')."` ADD COLUMN `active` INT(13) UNSIGNED DEFAULT '0'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_category') . "` ADD COLUMN `hits` INT(13) UNSIGNED DEFAULT '0'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_category') . "` ADD COLUMN `active` INT(13) UNSIGNED DEFAULT '0'";
 	
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_scheduler')."` ADD COLUMN `pregmatch_replace` VARCHAR(500) DEFAULT NULL";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_scheduler') . '` ADD COLUMN `pregmatch_replace` VARCHAR(500) DEFAULT NULL';
 	
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')."` ADD COLUMN `type` ENUM('bomb','secheduler','retweet','reply','mention') DEFAULT 'bomb'";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')."` ADD COLUMN `source_nick` VARCHAR(64) DEFAULT NULL";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')."` ADD COLUMN `tweeted` INT(13) UNSIGNED DEFAULT '0'";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')."` ADD COLUMN `id` VARCHAR(128) DEFAULT NULL";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')."` ADD COLUMN `avarta` VARCHAR(255) DEFAULT NULL";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')."` ADD COLUMN `name` VARCHAR(128) DEFAULT NULL";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')."` ADD COLUMN `description` VARCHAR(255) DEFAULT NULL";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')."` ADD COLUMN `indexed` INT(13) UNSIGNED DEFAULT '0'";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')."` ADD COLUMN `followed` INT(13) UNSIGNED DEFAULT '0'";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')."` ADD COLUMN `actioned` INT(13) UNSIGNED DEFAULT '0'";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')."` ADD COLUMN `oid` INT(13) UNSIGNED DEFAULT '0'";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')."` CHANGE COLUMN `twitter_username` `screen_name` VARCHAR(64) DEFAULT NULL";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_usernames') . "` ADD COLUMN `type` ENUM('bomb','secheduler','retweet','reply','mention') DEFAULT 'bomb'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_usernames') . '` ADD COLUMN `source_nick` VARCHAR(64) DEFAULT NULL';
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_usernames') . "` ADD COLUMN `tweeted` INT(13) UNSIGNED DEFAULT '0'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_usernames') . '` ADD COLUMN `id` VARCHAR(128) DEFAULT NULL';
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_usernames') . '` ADD COLUMN `avarta` VARCHAR(255) DEFAULT NULL';
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_usernames') . '` ADD COLUMN `name` VARCHAR(128) DEFAULT NULL';
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_usernames') . '` ADD COLUMN `description` VARCHAR(255) DEFAULT NULL';
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_usernames') . "` ADD COLUMN `indexed` INT(13) UNSIGNED DEFAULT '0'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_usernames') . "` ADD COLUMN `followed` INT(13) UNSIGNED DEFAULT '0'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_usernames') . "` ADD COLUMN `actioned` INT(13) UNSIGNED DEFAULT '0'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_usernames') . "` ADD COLUMN `oid` INT(13) UNSIGNED DEFAULT '0'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_usernames') . '` CHANGE COLUMN `twitter_username` `screen_name` VARCHAR(64) DEFAULT NULL';
 	
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_log')."` ADD COLUMN `oid` INT(13) UNSIGNED DEFAULT '0'";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_log')."` ADD COLUMN `tid` INT(13) UNSIGNED DEFAULT '0'";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_log')."` ADD COLUMN `id` VARCHAR(128) DEFAULT NULL";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_log')."` ADD COLUMN `tags` VARCHAR(255) DEFAULT NULL";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_log')."` ADD COLUMN `cid` INT(13) UNSIGNED DEFAULT '0'";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_log')."` ADD COLUMN `catid` INT(13) UNSIGNED DEFAULT '0'";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_log')."` ADD COLUMN `hits` INT(13) UNSIGNED DEFAULT '0'";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_log')."` ADD COLUMN `rank` INT(13) UNSIGNED DEFAULT '0'";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_log')."` ADD COLUMN `active` INT(13) UNSIGNED DEFAULT '0'";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_log')."` CHANGE COLUMN `provider` `provider` ENUM('bomb', 'scheduler', 'retweet', 'reply', 'mention') DEFAULT 'bomb'";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_log')."` ADD COLUMN `rid` INT(13) UNSIGNED DEFAULT '0'";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_log')."` ADD COLUMN `about_id` INT(13) UNSIGNED DEFAULT '0'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_log') . "` ADD COLUMN `oid` INT(13) UNSIGNED DEFAULT '0'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_log') . "` ADD COLUMN `tid` INT(13) UNSIGNED DEFAULT '0'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_log') . '` ADD COLUMN `id` VARCHAR(128) DEFAULT NULL';
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_log') . '` ADD COLUMN `tags` VARCHAR(255) DEFAULT NULL';
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_log') . "` ADD COLUMN `cid` INT(13) UNSIGNED DEFAULT '0'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_log') . "` ADD COLUMN `catid` INT(13) UNSIGNED DEFAULT '0'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_log') . "` ADD COLUMN `hits` INT(13) UNSIGNED DEFAULT '0'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_log') . "` ADD COLUMN `rank` INT(13) UNSIGNED DEFAULT '0'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_log') . "` ADD COLUMN `active` INT(13) UNSIGNED DEFAULT '0'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_log') . "` CHANGE COLUMN `provider` `provider` ENUM('bomb', 'scheduler', 'retweet', 'reply', 'mention') DEFAULT 'bomb'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_log') . "` ADD COLUMN `rid` INT(13) UNSIGNED DEFAULT '0'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_log') . "` ADD COLUMN `about_id` INT(13) UNSIGNED DEFAULT '0'";
 	
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_base_matrix')."` CHANGE COLUMN `base1` `base1` ENUM('for','when','clause','then','over','under','their','there','trend','') DEFAULT ''";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_base_matrix')."` CHANGE COLUMN `base2` `base2` ENUM('for','when','clause','then','over','under','their','there','trend','') DEFAULT ''";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_base_matrix')."` CHANGE COLUMN `base3` `base3` ENUM('for','when','clause','then','over','under','their','there','trend','') DEFAULT ''";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_base_matrix')."` CHANGE COLUMN `base4` `base4` ENUM('for','when','clause','then','over','under','their','there','trend','') DEFAULT ''";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_base_matrix')."` CHANGE COLUMN `base5` `base5` ENUM('for','when','clause','then','over','under','their','there','trend','') DEFAULT ''";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_base_matrix')."` CHANGE COLUMN `base6` `base6` ENUM('for','when','clause','then','over','under','their','there','trend','') DEFAULT ''";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_base_matrix')."` CHANGE COLUMN `base7` `base7` ENUM('for','when','clause','then','over','under','their','there','trend','') DEFAULT ''";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_base_matrix') . "` CHANGE COLUMN `base1` `base1` ENUM('for','when','clause','then','over','under','their','there','trend','') DEFAULT ''";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_base_matrix') . "` CHANGE COLUMN `base2` `base2` ENUM('for','when','clause','then','over','under','their','there','trend','') DEFAULT ''";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_base_matrix') . "` CHANGE COLUMN `base3` `base3` ENUM('for','when','clause','then','over','under','their','there','trend','') DEFAULT ''";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_base_matrix') . "` CHANGE COLUMN `base4` `base4` ENUM('for','when','clause','then','over','under','their','there','trend','') DEFAULT ''";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_base_matrix') . "` CHANGE COLUMN `base5` `base5` ENUM('for','when','clause','then','over','under','their','there','trend','') DEFAULT ''";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_base_matrix') . "` CHANGE COLUMN `base6` `base6` ENUM('for','when','clause','then','over','under','their','there','trend','') DEFAULT ''";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_base_matrix') . "` CHANGE COLUMN `base7` `base7` ENUM('for','when','clause','then','over','under','their','there','trend','') DEFAULT ''";
 	
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_oauth')."` ADD COLUMN `id` VARCHAR(255) DEFAULT '0'";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_oauth')."` ADD COLUMN `friends` INT(13) UNSIGNED DEFAULT '0'";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_oauth')."` ADD COLUMN `mentions` INT(13) UNSIGNED DEFAULT '0'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_oauth') . "` ADD COLUMN `id` VARCHAR(255) DEFAULT '0'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_oauth') . "` ADD COLUMN `friends` INT(13) UNSIGNED DEFAULT '0'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_oauth') . "` ADD COLUMN `mentions` INT(13) UNSIGNED DEFAULT '0'";
 	
-$sql[] = "CREATE TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_scheduler')."` (
+$sql[] = 'CREATE TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_scheduler') . "` (
   `sid` INT(13) UNSIGNED NOT NULL AUTO_INCREMENT,
   `cid` INT(13) UNSIGNED DEFAULT '0',
   `catid` INT(13) UNSIGNED DEFAULT '0',
@@ -80,7 +80,7 @@ $sql[] = "CREATE TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_scheduler')."
   KEY `COMMON` (`cid`,`catid`,`mode`,`pre`(15),`text`(15),`search`(15),`replace`(15),`strip`(15),`pregmatch`(15),`pregmatch_replace`(15),`uid`,`hits`,`rank`,`when`,`tweeted`,`created`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8";
 	
-	$sql[] = "CREATE TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_log')."` (	
+	$sql[] = 'CREATE TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_log') . "` (	
   `lid` int(13) unsigned NOT NULL auto_increment,
   `provider` enum('bomb','scheduler','retweet','reply','mention') default 'bomb',
   `uid` int(13) unsigned default '0',
@@ -105,7 +105,7 @@ $sql[] = "CREATE TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_scheduler')."
   KEY `COMMON_INDEX` (`lid`,`provider`,`uid`,`sid`,`oid`,`tid`,`cid`,`catid`,`hits`,`rank`,`active`,`id`(15),`rid`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8";
 
-	$sql[] = "CREATE TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_oauth')."` (
+	$sql[] = 'CREATE TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_oauth') . "` (
   `oid` INT(13) UNSIGNED NOT NULL AUTO_INCREMENT,
   `cids` VARCHAR(1000) DEFAULT NULL,
   `catids` VARCHAR(1000) DEFAULT NULL,
@@ -135,7 +135,7 @@ $sql[] = "CREATE TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_scheduler')."
 ) ENGINE=INNODB DEFAULT CHARSET=utf8";
 	
 	
-	$sql[] = "CREATE TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_following')."` (
+	$sql[] = 'CREATE TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_following') . "` (
   `fid` int(20) unsigned NOT NULL auto_increment,
   `id` varchar(128) default NULL,
   `flid` varchar(128) default NULL,
@@ -148,7 +148,7 @@ $sql[] = "CREATE TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_scheduler')."
   KEY `SECONDARY` (`id`(12),`flid`(12),`followed`,`created`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8";
 
-	$sql[] = "CREATE TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_retweet')."` (
+	$sql[] = 'CREATE TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_retweet') . "` (
   `rid` int(20) unsigned NOT NULL auto_increment,
   `search` varchar(128) default NULL,
   `skip` varchar(128) default 'RT',
@@ -170,19 +170,20 @@ $sql[] = "CREATE TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_scheduler')."
   KEY `COMMON` (`search`(15),`skip`(15),`geocode`,`longitude`,`latitude`,`radius`,`measurement`,`language`,`type`,`uid`,`retweets`,`searched`,`created`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8";
 	
-	$sql['onfail_truncate_A_1'] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_retweet')."` ADD KEY `COMMON` (`search`(15),`skip`(15),`geocode`,`longitude`,`latitude`,`radius`,`measurement`,`language`,`type`,`uid`,`retweets`,`searched`,`created`)";
-	$sql['onfail_truncate_A_2'] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_following')."` ADD KEY `COMMON` (`id`(25),`flid`(25),`followed`)";
-	$sql['onfail_truncate_A_3'] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_following')."` ADD KEY `SECONDARY` (`id`(12),`flid`(12),`followed`,`created`)";
-	$sql['onfail_truncate_A_4'] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_oauth')."` ADD KEY `COMMON` (`cids`(25),`catids`(25),`mode`,`consumer_key`(15),`consumer_secret`(15),`oauth_token`(15),`oauth_token_secret`(15),`username`(15),`id`(15),`ip`(15),`netbios`(15),`uid`,`created`)";
-	$sql['onfail_truncate_A_5'] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_campaign')."` ADD KEY `COMMON` (`catid`,`name`(15),`start`,`end`,`timed`,`hits`,`uid`,`created`)";
-	$sql['onfail_truncate_A_6'] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_category')."` ADD KEY `COMMON` (`pcatdid`,`name`(15),`hits`,`uid`,`created`,`updated`,`active`)";
-	$sql['onfail_truncate_A_7'] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')."` ADD KEY `COMMON` (`cid`,`oid`,`catid`,`screen_name`(15),`id`(12),`name`(25),`uid`,`indexed`,`followed`)";
-	$sql['onfail_truncate_A_8'] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_urls')."` ADD KEY `COMMON` (`cid`,`catid`,`surl`(25),`name`(25),`uid`,`created`)";
-	$sql['onfail_truncate_A_9'] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_log')."` ADD KEY `COMMON` (`provider`,`alias`,`tweet`(15),`url`(15),`date`,`cid`,`catid`,`hits`,`rank`,`active`,`tags`(25),`id`(15),`rid`,`about_id`)";
-	$sql['onfail_truncate_A_10'] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_log')."` ADD KEY `COMMON_INDEX` (`lid`,`provider`,`uid`,`sid`,`oid`,`tid`,`cid`,`catid`,`hits`,`rank`,`active`,`id`(15),`rid`)";
-	$sql['onfail_truncate_A_11'] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_scheduler')."` ADD KEY `COMMON` (`cid`,`catid`,`mode`,`pre`(15),`text`(15),`search`(15),`replace`(15),`strip`(15),`pregmatch`(15),`pregmatch_replace`(15),`uid`,`hits`,`rank`,`when`,`tweeted`,`created`)";
-	$sql['onfail_truncate_A_12'] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_keywords')."` ADD KEY `COMMON` (`cid`,`catid`,`base`,`keyword`(15),`uid`,`created`)";
-	$sql['onfail_truncate_A_13'] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_base_matrix')."` ADD KEY `COMMON` (`cid`,`catid`,`base1`,`base2`,`base3`,`base4`,`base5`,`base6`,`base7`,`uid`,`created`)";
+	$sql['onfail_truncate_A_1'] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_retweet') . '` ADD KEY `COMMON` (`search`(15),`skip`(15),`geocode`,`longitude`,`latitude`,`radius`,`measurement`,`language`,`type`,`uid`,`retweets`,`searched`,`created`)';
+	$sql['onfail_truncate_A_2'] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_following') . '` ADD KEY `COMMON` (`id`(25),`flid`(25),`followed`)';
+	$sql['onfail_truncate_A_3'] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_following') . '` ADD KEY `SECONDARY` (`id`(12),`flid`(12),`followed`,`created`)';
+	$sql['onfail_truncate_A_4'] = 'ALTER TABLE `'
+                                  . $GLOBALS['xoopsDB']->prefix('twitterbomb_oauth') . '` ADD KEY `COMMON` (`cids`(25),`catids`(25),`mode`,`consumer_key`(15),`consumer_secret`(15),`oauth_token`(15),`oauth_token_secret`(15),`username`(15),`id`(15),`ip`(15),`netbios`(15),`uid`,`created`)';
+	$sql['onfail_truncate_A_5'] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_campaign') . '` ADD KEY `COMMON` (`catid`,`name`(15),`start`,`end`,`timed`,`hits`,`uid`,`created`)';
+	$sql['onfail_truncate_A_6'] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_category') . '` ADD KEY `COMMON` (`pcatdid`,`name`(15),`hits`,`uid`,`created`,`updated`,`active`)';
+	$sql['onfail_truncate_A_7'] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_usernames') . '` ADD KEY `COMMON` (`cid`,`oid`,`catid`,`screen_name`(15),`id`(12),`name`(25),`uid`,`indexed`,`followed`)';
+	$sql['onfail_truncate_A_8'] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_urls') . '` ADD KEY `COMMON` (`cid`,`catid`,`surl`(25),`name`(25),`uid`,`created`)';
+	$sql['onfail_truncate_A_9'] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_log') . '` ADD KEY `COMMON` (`provider`,`alias`,`tweet`(15),`url`(15),`date`,`cid`,`catid`,`hits`,`rank`,`active`,`tags`(25),`id`(15),`rid`,`about_id`)';
+	$sql['onfail_truncate_A_10'] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_log') . '` ADD KEY `COMMON_INDEX` (`lid`,`provider`,`uid`,`sid`,`oid`,`tid`,`cid`,`catid`,`hits`,`rank`,`active`,`id`(15),`rid`)';
+	$sql['onfail_truncate_A_11'] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_scheduler') . '` ADD KEY `COMMON` (`cid`,`catid`,`mode`,`pre`(15),`text`(15),`search`(15),`replace`(15),`strip`(15),`pregmatch`(15),`pregmatch_replace`(15),`uid`,`hits`,`rank`,`when`,`tweeted`,`created`)';
+	$sql['onfail_truncate_A_12'] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_keywords') . '` ADD KEY `COMMON` (`cid`,`catid`,`base`,`keyword`(15),`uid`,`created`)';
+	$sql['onfail_truncate_A_13'] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_base_matrix') . '` ADD KEY `COMMON` (`cid`,`catid`,`base1`,`base2`,`base3`,`base4`,`base5`,`base6`,`base7`,`uid`,`created`)';
 	
 	$recovery['onfail']['truncate']['A']['1']['A'] = 'SELECT * FROM '.$GLOBALS['xoopsDB']->prefix('twitterbomb_retweet').'';
 	$recovery['onfail']['truncate']['A']['2']['A'] = 'SELECT * FROM '.$GLOBALS['xoopsDB']->prefix('twitterbomb_following').'';
@@ -240,16 +241,16 @@ $sql[] = "CREATE TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_scheduler')."
 	$recovery['onfail']['truncate']['A']['12']['D'] = 'INSERT INTO '.$GLOBALS['xoopsDB']->prefix('twitterbomb_keywords').' (%s) VALUES (%s)';
 	$recovery['onfail']['truncate']['A']['13']['D'] = 'INSERT INTO '.$GLOBALS['xoopsDB']->prefix('twitterbomb_base_matrix').' (%s) VALUES (%s)';
 	
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_log')."` CHANGE COLUMN `id` `id` bigint(42) default '0'";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')."` CHANGE COLUMN `id` `id` bigint(42) default '0'";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_campaign')."` CHANGE COLUMN `rids` `rids` varchar(750) default ''";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_campaign')."` ADD COLUMN `rpids` varchar(750) default ''";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_campaign')."` ADD COLUMN `mids` varchar(750) default ''";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_campaign')."` ADD COLUMN `cron` tinyint(4) unsigned default '1'";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_following')."` CHANGE COLUMN `id` `id` bigint(42) default '0'";
-	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_following')."` CHANGE COLUMN `flid` `flid` bigint(42) default '0'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_log') . "` CHANGE COLUMN `id` `id` bigint(42) default '0'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_usernames') . "` CHANGE COLUMN `id` `id` bigint(42) default '0'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_campaign') . "` CHANGE COLUMN `rids` `rids` varchar(750) default ''";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_campaign') . "` ADD COLUMN `rpids` varchar(750) default ''";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_campaign') . "` ADD COLUMN `mids` varchar(750) default ''";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_campaign') . "` ADD COLUMN `cron` tinyint(4) unsigned default '1'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_following') . "` CHANGE COLUMN `id` `id` bigint(42) default '0'";
+	$sql[] = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_following') . "` CHANGE COLUMN `flid` `flid` bigint(42) default '0'";
 	
-	$sql[] = "CREATE TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_replies')."` (
+	$sql[] = 'CREATE TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_replies') . "` (
   `rpid` INT(13) UNSIGNED NOT NULL AUTO_INCREMENT,
   `cid` INT(13) UNSIGNED DEFAULT '0',
   `catid` INT(13) UNSIGNED DEFAULT '0',
@@ -268,7 +269,7 @@ $sql[] = "CREATE TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_scheduler')."
   KEY `COMMON` (`cid`,`catid`,`keywords`(45),`type`,`uid`,`created`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8";
 
-	$sql[] = "CREATE TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_mentions')."` (
+	$sql[] = 'CREATE TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_mentions') . "` (
   `mid` INT(13) UNSIGNED NOT NULL AUTO_INCREMENT,
   `cid` INT(13) UNSIGNED DEFAULT '0',
   `catid` INT(13) UNSIGNED DEFAULT '0',
@@ -340,8 +341,8 @@ $sql[] = "CREATE TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_scheduler')."
 											$values = '';
 											foreach($row as $field => $value) {
 												$k++;
-												$fields .= "`".$field."`".(count($row)<$k?", ":'');
-												$values .= $GLOBALS['xoopsDB']->quote($value).(count($row)<$k?", ":'');
+												$fields .= '`' . $field . '`' . (count($row) < $k? ', ' :'');
+												$values .= $GLOBALS['xoopsDB']->quote($value).(count($row)<$k? ', ' :'');
 											}
 											$result = $GLOBALS['xoopsDB']->queryF(sprintf($recoveryquestion, $fields, $values));			
 										}

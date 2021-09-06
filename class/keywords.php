@@ -135,7 +135,7 @@ class TwitterbombKeywordsHandler extends XoopsPersistableObjectHandler
 
     public function __construct($db)
     {
-        parent::__construct($db, "twitterbomb_keywords", 'TwitterbombKeywords', "kid", "keyword");
+        parent::__construct($db, 'twitterbomb_keywords', 'TwitterbombKeywords', 'kid', 'keyword');
 
         xoops_load('xoopscache');
         if (!class_exists('XoopsCache')) {

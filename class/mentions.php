@@ -249,7 +249,7 @@ class TwitterbombMentionsHandler extends XoopsPersistableObjectHandler
 
     public function __construct($db)
     {
-        parent::__construct($db, "twitterbomb_mentions", 'TwitterbombMentions', "mid", "user");
+        parent::__construct($db, 'twitterbomb_mentions', 'TwitterbombMentions', 'mid', 'user');
 
         $module_handler   = xoops_getHandler('module');
         $config_handler   = xoops_getHandler('config');

@@ -6,7 +6,7 @@ if (!defined('NLB')) {
 	if (!isset($_SERVER['HTTP_HOST']))
 		define('NLB', "\n");
 	else 
-		define('NLB', "<br/>");
+		define('NLB', '<br/>');
 }
 
 $module_handler = xoops_getHandler('module');

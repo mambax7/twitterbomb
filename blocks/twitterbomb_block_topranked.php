@@ -41,7 +41,7 @@ function b_twitterbomb_block_topranked_edit( $options )
 	include_once($GLOBALS['xoops']->path('/modules/twitterbomb/include/formobjects.twitterbomb.php'));
 	
 	$number = new XoopsFormText('', 'options[]', 10, 15, $options[0]);
-	$form = ""._BL_TWITTERBOMB_NUMBER."&nbsp;".$number->render().'<br/>';
+	$form = '' . _BL_TWITTERBOMB_NUMBER . '&nbsp;' . $number->render() . '<br/>';
 	
 	return $form ;
 }

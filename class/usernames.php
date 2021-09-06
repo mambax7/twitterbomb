@@ -135,7 +135,7 @@ class TwitterbombUsernamesHandler extends XoopsPersistableObjectHandler
 {
     public function __construct($db)
     {
-        parent::__construct($db, "twitterbomb_usernames", 'TwitterbombUsernames', "tid", "screen_name");
+        parent::__construct($db, 'twitterbomb_usernames', 'TwitterbombUsernames', 'tid', 'screen_name');
     }
 
     public function insert($obj, $force = true)
@@ -211,7 +211,7 @@ class TwitterbombUsernamesHandler extends XoopsPersistableObjectHandler
     {
         if ($limit > 0) {
             if (empty($type)) {
-                $sql = "SELECT * FROM "
+                $sql = 'SELECT * FROM '
                        . $GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')
                        . ' WHERE ((`cid`=0 OR `catid`=0) OR (`cid`='
                        . $cid
@@ -228,7 +228,7 @@ class TwitterbombUsernamesHandler extends XoopsPersistableObjectHandler
                        . ','
                        . $limit;
             } else {
-                $sql = "SELECT * FROM "
+                $sql = 'SELECT * FROM '
                        . $GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')
                        . ' WHERE ((`cid`=0 OR `catid`=0) OR (`cid`='
                        . $cid
@@ -249,7 +249,7 @@ class TwitterbombUsernamesHandler extends XoopsPersistableObjectHandler
             }
         } else {
             if (empty($type)) {
-                $sql = "SELECT * FROM "
+                $sql = 'SELECT * FROM '
                        . $GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')
                        . ' WHERE ((`cid`=0 OR `catid`=0) OR (`cid`='
                        . $cid
@@ -263,7 +263,7 @@ class TwitterbombUsernamesHandler extends XoopsPersistableObjectHandler
                        . $sentence
                        . '" LIKE concat("%", `source_nick`, "%") AND (`source_nick` <> "")) ORDER BY RAND() DESC';
             } else {
-                $sql = "SELECT * FROM "
+                $sql = 'SELECT * FROM '
                        . $GLOBALS['xoopsDB']->prefix('twitterbomb_usernames')
                        . ' WHERE ((`cid`=0 OR `catid`=0) OR (`cid`='
                        . $cid
@@ -322,7 +322,7 @@ class TwitterbombUsernamesHandler extends XoopsPersistableObjectHandler
                 $object = $this->create();
                 if ($object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_TXTBOX
                     || $object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_TXTAREA) {
-                    $criteria->add(new Criteria('`' . $var[0] . '`', "%" . $var[1] . "%", ($var[2] ?? 'LIKE')));
+                    $criteria->add(new Criteria('`' . $var[0] . '`', '%' . $var[1] . '%', ($var[2] ?? 'LIKE')));
                 } elseif ($object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_INT
                           || $object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_DECIMAL
                           || $object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_FLOAT) {
