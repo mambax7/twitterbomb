@@ -1,6 +1,6 @@
 <?php
 
-	require dirname(dirname(dirname(__FILE__))).'/mainfile.php';
+	require dirname(__FILE__, 3) . '/mainfile.php';
 	
 	if (!defined('_CHARSET'))
 		define("_CHARSET","UTF-8");

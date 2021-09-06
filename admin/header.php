@@ -1,6 +1,6 @@
 <?php
 
-	require_once (dirname(dirname(dirname(dirname(__FILE__)))).'/include/cp_header.php');
+	require_once (dirname(__FILE__, 4) . '/include/cp_header.php');
 	
 	if (!defined('_CHARSET'))
 		define("_CHARSET","UTF-8");
@@ -49,9 +49,9 @@
 	$GLOBALS['xoopsTpl']->assign('pathImageIcon', $GLOBALS['twitterbombImageIcon']);
 	$GLOBALS['xoopsTpl']->assign('pathImageAdmin', $GLOBALS['twitterbombImageAdmin']);
 
-	include(dirname(dirname(__FILE__)).'/include/functions.php');
-	include(dirname(dirname(__FILE__)).'/include/formobjects.twitterbomb.php');
-	include(dirname(dirname(__FILE__)).'/include/forms.twitterbomb.php');
+	include(dirname(__FILE__, 2) . '/include/functions.php');
+	include(dirname(__FILE__, 2) . '/include/formobjects.twitterbomb.php');
+	include(dirname(__FILE__, 2) . '/include/forms.twitterbomb.php');
 	
 	xoops_loadLanguage('admin', 'twitterbomb');
 	 
