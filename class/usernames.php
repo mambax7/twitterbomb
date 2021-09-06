@@ -76,7 +76,7 @@ class TwitterbombUsernames extends XoopsObject
             $ele['tweeted'] = new XoopsFormLabel('', '');
         }
         foreach ($ele as $key => $obj) {
-            $ret['form'][$key] = $ele[$key]->render();
+            $ret['form'][$key] = $obj->render();
         }
         return $ret;
     }

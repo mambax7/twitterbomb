@@ -225,7 +225,7 @@ class TwitterBombRetweet extends XoopsObject
         }
 
         foreach ($ele as $key => $obj) {
-            $ret['form'][$key] = $ele[$key]->render();
+            $ret['form'][$key] = $obj->render();
         }
 
         $ret['geocode']     = (true == $this->getVar('geocode') ? _YES : _NO);

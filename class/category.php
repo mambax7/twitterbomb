@@ -71,7 +71,7 @@ class TwitterbombCategory extends XoopsObject
             }
         }
         foreach ($ele as $key => $obj) {
-            $ret['form'][$key] = $ele[$key]->render();
+            $ret['form'][$key] = $obj->render();
         }
         return $ret;
     }

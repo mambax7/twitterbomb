@@ -80,7 +80,7 @@ class TwitterbombReplies extends XoopsObject
             $ele['updated'] = new XoopsFormLabel('', '');
         }
         foreach ($ele as $key => $obj) {
-            $ret['form'][$key] = $ele[$key]->render();
+            $ret['form'][$key] = $obj->render();
         }
         return $ret;
     }
