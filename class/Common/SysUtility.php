@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\xxxxx\Common;
+namespace XoopsModules\Twitterbomb\Common;
 
 /*
  Utility Class Definition
@@ -28,7 +28,7 @@ namespace XoopsModules\xxxxx\Common;
 
 use Xmf\Request;
 use XoopsFormEditor;
-use XoopsModules\xxxxx\{
+use XoopsModules\Twitterbomb\{
     Helper
 };
 
