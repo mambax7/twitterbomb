@@ -303,9 +303,9 @@ class OAuthRequest
     {
         @$parameters or $parameters = [];
         $defaults = [
-            'oauth_version'      => OAuthRequest::$version,
-            'oauth_nonce'        => OAuthRequest::generate_nonce(),
-            'oauth_timestamp'    => OAuthRequest::generate_timestamp(),
+            'oauth_version'      => self::$version,
+            'oauth_nonce'        => self::generate_nonce(),
+            'oauth_timestamp'    => self::generate_timestamp(),
             'oauth_consumer_key' => $consumer->key,
         ];
         if ($token) {
@@ -796,7 +796,7 @@ class OAuthUtil {
       $header_name = $matches[2][0];
       $header_content = (isset($matches[5])) ? $matches[5][0] : $matches[4][0];
       if (preg_match('/^oauth_/', $header_name) || !$only_allow_oauth_parameters) {
-        $params[$header_name] = OAuthUtil::urldecode_rfc3986($header_content);
+        $params[$header_name] = self::urldecode_rfc3986($header_content);
       }
       $offset = $match[1] + strlen($match[0]);
     }
@@ -865,8 +865,8 @@ class OAuthUtil {
     $parsed_parameters = [];
     foreach ($pairs as $pair) {
       $split = explode('=', $pair, 2);
-      $parameter = OAuthUtil::urldecode_rfc3986($split[0]);
-      $value = isset($split[1]) ? OAuthUtil::urldecode_rfc3986($split[1]) : '';
+      $parameter = self::urldecode_rfc3986($split[0]);
+      $value = isset($split[1]) ? self::urldecode_rfc3986($split[1]) : '';
 
       if (isset($parsed_parameters[$parameter])) {
         // We have already recieved parameter(s) with this name, so add to the list
@@ -890,8 +890,8 @@ class OAuthUtil {
     if (!$params) return '';
 
     // Urlencode both keys and values
-    $keys = OAuthUtil::urlencode_rfc3986(array_keys($params));
-    $values = OAuthUtil::urlencode_rfc3986(array_values($params));
+    $keys = self::urlencode_rfc3986(array_keys($params));
+    $values = self::urlencode_rfc3986(array_values($params));
     $params = array_combine($keys, $values);
 
     // Parameters are sorted by name, using lexicographical byte value ordering.
