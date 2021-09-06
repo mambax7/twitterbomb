@@ -127,7 +127,7 @@ class TwitterbombUrlsHandler extends XoopsPersistableObjectHandler
         $criteria->setSort('RAND()');
         $criteria->setLimit(1);
         $criteria->setStart(0);
-        $obj = parent::getObjects($criteria, false);
+        $obj = $this->getObjects($criteria, false);
         if (is_object($obj[0])) {
             return trim($obj[0]->getVar('surl'));
         }
@@ -173,7 +173,7 @@ class TwitterbombUrlsHandler extends XoopsPersistableObjectHandler
     public function delete($id_or_object, $force = true)
     {
         if (is_numeric($id_or_object)) {
-            return parent::deleteAll(new Criteria('`' . $this->keyName . '`', $id_or_object), $force);
+            return $this->deleteAll(new Criteria('`' . $this->keyName . '`', $id_or_object), $force);
         } elseif (is_object($id_or_object)) {
             return parent::delete($id_or_object, $force);
         }

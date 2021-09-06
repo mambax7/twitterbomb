@@ -175,7 +175,7 @@ class TwitterBombLogHandler extends XoopsPersistableObjectHandler
             $criteria->setStart(0);
             $criteria->setLimit($this->_modConfig['number_to_rank']);
             $rank = $this->_modConfig['number_to_rank'];
-            $objs = parent::getObjects($criteria, true);
+            $objs = $this->getObjects($criteria, true);
             foreach ($objs as $lid => $obj) {
                 $obj->setVar('rank', $rank);
                 parent::insert($obj, true);
@@ -188,7 +188,7 @@ class TwitterBombLogHandler extends XoopsPersistableObjectHandler
     public function insert($object, $force = true)
     {
         $criteria = new Criteria('`date`', time() - $this->_modConfig['logdrops'], '<=');
-        parent::deleteAll($criteria, $force);
+        $this->deleteAll($criteria, $force);
 
         if ($object->isNew()) {
             $object->setVar('date', time());
@@ -261,7 +261,7 @@ class TwitterBombLogHandler extends XoopsPersistableObjectHandler
     public function delete($id_or_object, $force = true)
     {
         if (is_numeric($id_or_object)) {
-            return parent::deleteAll(new Criteria('`' . $this->keyName . '`', $id_or_object), $force);
+            return $this->deleteAll(new Criteria('`' . $this->keyName . '`', $id_or_object), $force);
         } elseif (is_object($id_or_object)) {
             return parent::delete($id_or_object, $force);
         }

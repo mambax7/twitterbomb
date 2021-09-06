@@ -652,7 +652,7 @@ class TwitterbombOauthHandler extends XoopsPersistableObjectHandler
             $criteria->add(new Criteria('oauth_token', $this->_modConfig['access_token']));
             $criteria->add(new Criteria('oauth_token_secret', $this->_modConfig['access_token_secret']));
 
-            if (parent::getCount($criteria) > 0) {
+            if ($this->getCount($criteria) > 0) {
                 $oauths = parent::getObjects($criteria, false);
                 if (is_object($oauths[0])) {
                     //$oauths[0]->setHandler($this);
@@ -660,7 +660,7 @@ class TwitterbombOauthHandler extends XoopsPersistableObjectHandler
                 }
             }
 
-            $oauth = parent::create();
+            $oauth = $this->create();
             $oauth->setVar('uid', $this->_user['uid']);
             $oauth->setVar('ip', $this->_user['ip']);
             $oauth->setVar('netbios', $this->_user['netbios']);
@@ -772,7 +772,7 @@ class TwitterbombOauthHandler extends XoopsPersistableObjectHandler
 
             /* If HTTP response is 200 continue otherwise send to connect page to retry */
             if (200 == $this->_connection->http_code) {
-                $oauth = parent::create();
+                $oauth = $this->create();
                 $oauth->setVar('uid', $this->_user['uid']);
                 $oauth->setVar('ip', $this->_user['ip']);
                 $oauth->setVar('netbios', $this->_user['netbios']);

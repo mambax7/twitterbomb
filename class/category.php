@@ -113,7 +113,7 @@ class TwitterbombCategoryHandler extends XoopsPersistableObjectHandler
         } else {
             $criteria = new CriteriaCompo(new Criteria('pcatdid', '0'));
         }
-        $objs = parent::getObjects($criteria, true);
+        $objs = $this->getObjects($criteria, true);
         $ret  = [];
         $id   = [];
         foreach ($objs as $catid => $category) {
@@ -122,9 +122,9 @@ class TwitterbombCategoryHandler extends XoopsPersistableObjectHandler
                 $ret[$catid]['catid']    = $catid;
                 $ret[$catid]['name']     = $category->getVar('name');
                 $ret[$catid]['hits']     = $category->getVar('hits');
-                $ret[$catid]['subitems'] = parent::getCount(new Criteria('pcatdid', $catid));
+                $ret[$catid]['subitems'] = $this->getCount(new Criteria('pcatdid', $catid));
                 if ($ret[$catid]['subitems'] > 0) {
-                    foreach (parent::getObjects(new Criteria('pcatdid', $catid), true) as $scatid => $scategory) {
+                    foreach ($this->getObjects(new Criteria('pcatdid', $catid), true) as $scatid => $scategory) {
                         if (!in_array($scatid, $id)) {
                             $id[]                                           = $scatid;
                             $ret[$catid]['subcategories'][$scatid]['catid'] = $scatid;
@@ -191,7 +191,7 @@ class TwitterbombCategoryHandler extends XoopsPersistableObjectHandler
     public function delete($id_or_object, $force = true)
     {
         if (is_numeric($id_or_object)) {
-            return parent::deleteAll(new Criteria('`' . $this->keyName . '`', $id_or_object), $force);
+            return $this->deleteAll(new Criteria('`' . $this->keyName . '`', $id_or_object), $force);
         } elseif (is_object($id_or_object)) {
             return parent::delete($id_or_object, $force);
         }
