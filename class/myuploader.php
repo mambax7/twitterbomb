@@ -90,12 +90,12 @@ class MyXoopsMediaUploader
             $this->allowedMimeTypes =& $allowedMimeTypes;
         }
         $this->uploadDir   = $uploadDir;
-        $this->maxFileSize = intval($maxFileSize);
+        $this->maxFileSize = (int)$maxFileSize;
         if (isset($maxWidth)) {
-            $this->maxWidth = intval($maxWidth);
+            $this->maxWidth = (int)$maxWidth;
         }
         if (isset($maxHeight)) {
-            $this->maxHeight = intval($maxHeight);
+            $this->maxHeight = (int)$maxHeight;
         }
         if (isset($allowedExtensions) && is_array($allowedExtensions)) {
             $this->allowedExtensions =& $allowedExtensions;
@@ -116,7 +116,7 @@ class MyXoopsMediaUploader
             $this->setErrors('File not found');
             return false;
         } elseif (is_array($_FILES[$index_name][$media_name]['name']) && isset($index)) {
-            $index              = intval($index);
+            $index              = (int)$index;
             $this->mediaName    = $_FILES[$index_name][$media_name]['name'][$index];
             $this->mediaType    = $_FILES[$index_name][$media_name]['type'][$index];
             $this->mediaSize    = $_FILES[$index_name][$media_name]['size'][$index];
@@ -131,7 +131,7 @@ class MyXoopsMediaUploader
             $this->mediaError   = !empty($media_name['error'][$media_define]) ? $media_name['error'][$media_define] : 0;
         }
         $this->errors = [];
-        if (intval($this->mediaSize) < 0) {
+        if ((int)$this->mediaSize < 0) {
             $this->setErrors('Invalid File Size');
             return false;
         }
@@ -157,7 +157,7 @@ class MyXoopsMediaUploader
      **/
     public function setTargetFileName($value)
     {
-        $this->targetFileName = strval(trim($value));
+        $this->targetFileName = (string)trim($value);
     }
 
     /**
@@ -167,7 +167,7 @@ class MyXoopsMediaUploader
      **/
     public function setPrefix($value)
     {
-        $this->prefix = strval(trim($value));
+        $this->prefix = (string)trim($value);
     }
 
     /**

@@ -584,7 +584,7 @@ if (!function_exists('tweetbomb_getFilterURLComponents')) {
     	$pagenav = [];
     	$pagenav['op'] = $_REQUEST['op'] ?? 'campaign';
 		$pagenav['fct'] = $_REQUEST['fct'] ?? 'list';
-		$pagenav['limit'] = !empty($_REQUEST['limit'])?intval($_REQUEST['limit']):30;
+		$pagenav['limit'] = !empty($_REQUEST['limit'])? (int)$_REQUEST['limit'] :30;
 		$pagenav['start'] = 0;
 		$pagenav['order'] = !empty($_REQUEST['order'])?$_REQUEST['order']:'DESC';
 		$pagenav['sort'] = !empty($_REQUEST['sort'])?''.$_REQUEST['sort'].'':$sort;

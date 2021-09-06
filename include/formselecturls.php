@@ -99,7 +99,7 @@ class TwitterBombFormSelectUrls extends XoopsFormElement
         $this->setCaption($caption);
         $this->setName($name);
         $this->_multiple = $multiple;
-        $this->_size     = intval($size);
+        $this->_size     = (int)$size;
         if (isset($value)) {
             $this->setValue($value);
         }

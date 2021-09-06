@@ -6,12 +6,12 @@
 	
 	$op = $_REQUEST['op'] ?? 'dashboard';
 	$fct = $_REQUEST['fct'] ?? 'list';
-	$limit = !empty($_REQUEST['limit'])?intval($_REQUEST['limit']):30;
-	$start = !empty($_REQUEST['start'])?intval($_REQUEST['start']):0;
+	$limit = !empty($_REQUEST['limit'])? (int)$_REQUEST['limit'] :30;
+	$start = !empty($_REQUEST['start'])? (int)$_REQUEST['start'] :0;
 	$order = !empty($_REQUEST['order'])?$_REQUEST['order']:'DESC';
 	$sort = !empty($_REQUEST['sort'])?''.$_REQUEST['sort'].'':'created';
 	$filter = !empty($_REQUEST['filter'])?''.$_REQUEST['filter'].'':'1,1';
-	$id = !empty($_REQUEST['id'])?(is_array($_REQUEST['id'])?array_unique($_REQUEST['id']):intval($_REQUEST['id'])):0;
+	$id = !empty($_REQUEST['id'])?(is_array($_REQUEST['id'])?array_unique($_REQUEST['id']): (int)$_REQUEST['id']):0;
 	
 	switch($op) {
 		default:

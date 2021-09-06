@@ -1,10 +1,10 @@
 <?php
 	include('header.php');	
 	
-	$cid = isset($_REQUEST['cid'])?intval($_REQUEST['cid']):0;
-	$sid = isset($_REQUEST['sid'])?intval($_REQUEST['sid']):0;
-	$lid = isset($_REQUEST['lid'])?intval($_REQUEST['lid']):0;
-	$catid = isset($_REQUEST['catid'])?intval($_REQUEST['catid']):0;
+	$cid = isset($_REQUEST['cid'])? (int)$_REQUEST['cid'] :0;
+	$sid = isset($_REQUEST['sid'])? (int)$_REQUEST['sid'] :0;
+	$lid = isset($_REQUEST['lid'])? (int)$_REQUEST['lid'] :0;
+	$catid = isset($_REQUEST['catid'])? (int)$_REQUEST['catid'] :0;
 	$uri = $_REQUEST['uri'] ?? '';
 	
 	if (0 == $cid || $url= '' || 0 == $catid) {
