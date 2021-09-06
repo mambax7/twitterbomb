@@ -322,15 +322,15 @@ class TwitterbombUsernamesHandler extends XoopsPersistableObjectHandler
                 $object = $this->create();
                 if ($object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_TXTBOX
                     || $object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_TXTAREA) {
-                    $criteria->add(new Criteria('`' . $var[0] . '`', "%" . $var[1] . "%", (isset($var[2]) ? $var[2] : 'LIKE')));
+                    $criteria->add(new Criteria('`' . $var[0] . '`', "%" . $var[1] . "%", ($var[2] ?? 'LIKE')));
                 } elseif ($object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_INT
                           || $object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_DECIMAL
                           || $object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_FLOAT) {
-                    $criteria->add(new Criteria('`' . $var[0] . '`', $var[1], (isset($var[2]) ? $var[2] : '=')));
+                    $criteria->add(new Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
                 } elseif ($object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_ENUM) {
-                    $criteria->add(new Criteria('`' . $var[0] . '`', $var[1], (isset($var[2]) ? $var[2] : '=')));
+                    $criteria->add(new Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
                 } elseif ($object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_ARRAY) {
-                    $criteria->add(new Criteria('`' . $var[0] . '`', '%"' . $var[1] . '";%', (isset($var[2]) ? $var[2] : 'LIKE')));
+                    $criteria->add(new Criteria('`' . $var[0] . '`', '%"' . $var[1] . '";%', ($var[2] ?? 'LIKE')));
                 }
             } elseif (!empty($var[1]) && is_numeric($var[0])) {
                 $criteria->add(new Criteria("'" . $var[0] . "'", $var[1]));

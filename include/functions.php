@@ -560,7 +560,7 @@ if (!function_exists('tweetbomb_getFilterElement')) {
 		    	$button->setExtra('onclick="window.open(\''.$_SERVER['PHP_SELF'].'?'.$measurement['extra'].'&filter='.$measurement['filter'].(!empty($measurement['filter'])?'|':'').'radius'.',\'+$(\'#filter_radius\').val()'.(!empty($components['operator'])?'+\','.$components['operator'].'\'':'').'+\'|'.'measurement'.',\'+$(\'#filter_measurement'.'\').val()'.(!empty($measurement['operator'])?'+\','.$measurement['operator'].'\'':'').',\'_self\')"');
 		    	$ele->addElement($button);		    	
 		}
-		return isset($ele)?$ele:false;
+		return $ele ?? false;
 	}
 }
 
@@ -582,8 +582,8 @@ if (!function_exists('tweetbomb_getFilterURLComponents')) {
     		}
     	}
     	$pagenav = array();
-    	$pagenav['op'] = isset($_REQUEST['op'])?$_REQUEST['op']:"campaign";
-		$pagenav['fct'] = isset($_REQUEST['fct'])?$_REQUEST['fct']:"list";
+    	$pagenav['op'] = $_REQUEST['op'] ?? "campaign";
+		$pagenav['fct'] = $_REQUEST['fct'] ?? "list";
 		$pagenav['limit'] = !empty($_REQUEST['limit'])?intval($_REQUEST['limit']):30;
 		$pagenav['start'] = 0;
 		$pagenav['order'] = !empty($_REQUEST['order'])?$_REQUEST['order']:'DESC';
@@ -592,7 +592,7 @@ if (!function_exists('tweetbomb_getFilterURLComponents')) {
 		foreach($pagenav as $key=>$value) {
 			$retb[] = "$key=$value";
 		}
-		return array('value'=>(isset($ele_value)?$ele_value:''), 'field'=>(isset($field)?$field:''), 'operator'=>(isset($operator)?$operator:''), 'filter'=>implode('|', (isset($ret)&&is_array($ret)?$ret:array())), 'extra'=>implode('&', (isset($retb)&&is_array($retb)?$retb:array())));
+		return array('value' =>($ele_value ?? ''), 'field' =>($field ?? ''), 'operator' =>($operator ?? ''), 'filter' =>implode('|', (isset($ret) && is_array($ret)?$ret:array())), 'extra' =>implode('&', (isset($retb) && is_array($retb)?$retb:array())));
 	}
 }
 ?>

@@ -5,7 +5,7 @@
 	$sid = isset($_REQUEST['sid'])?intval($_REQUEST['sid']):0;
 	$lid = isset($_REQUEST['lid'])?intval($_REQUEST['lid']):0;
 	$catid = isset($_REQUEST['catid'])?intval($_REQUEST['catid']):0;
-	$uri = isset($_REQUEST['uri'])?$_REQUEST['uri']:'';
+	$uri = $_REQUEST['uri'] ?? '';
 	
 	if ($cid==0||$url=''||$catid==0) {
 		header( "HTTP/1.1 301 Moved Permanently" ); 

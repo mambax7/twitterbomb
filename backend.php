@@ -17,9 +17,9 @@
 //set_time_limit(180);
 include('header.php');
 
-$cid = isset($_REQUEST['cid'])?$_REQUEST['cid']:'0';
-$catid = isset($_REQUEST['catid'])?$_REQUEST['catid']:'0';
-$cacheid = isset($_REQUEST['cacheid'])?$_REQUEST['cacheid']:md5($cid.$catid);
+$cid = $_REQUEST['cid'] ?? '0';
+$catid = $_REQUEST['catid'] ?? '0';
+$cacheid = $_REQUEST['cacheid'] ?? md5($cid . $catid);
 
 if ($cacheid != md5($cid.$catid))
 	$cacheid = md5($cid.$catid);

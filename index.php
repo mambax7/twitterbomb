@@ -2,12 +2,12 @@
 
 	include('header.php');
 	
-	$op = isset($_REQUEST['op'])?$_REQUEST['op']:'campaigns';
-	$fct = isset($_REQUEST['fct'])?$_REQUEST['fct']:'list';
-	$limit = isset($_REQUEST['num'])?$_REQUEST['num']:10;	
-	$start = isset($_REQUEST['start'])?$_REQUEST['start']:0;	
-	$cid = isset($_REQUEST['cid'])?$_REQUEST['cid']:'0';
-	$catid = isset($_REQUEST['catid'])?$_REQUEST['catid']:'0';
+	$op = $_REQUEST['op'] ?? 'campaigns';
+	$fct = $_REQUEST['fct'] ?? 'list';
+	$limit = $_REQUEST['num'] ?? 10;
+	$start = $_REQUEST['start'] ?? 0;
+	$cid = $_REQUEST['cid'] ?? '0';
+	$catid = $_REQUEST['catid'] ?? '0';
 	
 	if ($GLOBALS['twitterbombModuleConfig']['htaccess']&&empty($_POST)) {
 		$url = XOOPS_URL.'/'.$GLOBALS['twitterbombModuleConfig']['baseurl'].'/'.$op.','.$fct.','.$start.','.$limit.','.$cid.','.$catid.$GLOBALS['twitterbombModuleConfig']['endofurl'];

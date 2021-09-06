@@ -4,8 +4,8 @@
 	
 	xoops_cp_header();
 	
-	$op = isset($_REQUEST['op'])?$_REQUEST['op']:"dashboard";
-	$fct = isset($_REQUEST['fct'])?$_REQUEST['fct']:"list";
+	$op = $_REQUEST['op'] ?? "dashboard";
+	$fct = $_REQUEST['fct'] ?? "list";
 	$limit = !empty($_REQUEST['limit'])?intval($_REQUEST['limit']):30;
 	$start = !empty($_REQUEST['start'])?intval($_REQUEST['start']):0;
 	$order = !empty($_REQUEST['order'])?$_REQUEST['order']:'DESC';
