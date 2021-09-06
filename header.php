@@ -14,8 +14,8 @@
 	$GLOBALS['twitterbombModule'] = $module_handler->getByDirname('twitterbomb');
 	$GLOBALS['twitterbombModuleConfig'] = $config_handler->getConfigList($GLOBALS['twitterbombModule']->getVar('mid')); 
 	
-	include(dirname(__FILE__).'/include/functions.php');	
-	include(dirname(__FILE__).'/include/formobjects.twitterbomb.php');
-	include(dirname(__FILE__).'/include/forms.twitterbomb.php');
+	include(__DIR__ . '/include/functions.php');
+	include(__DIR__ . '/include/formobjects.twitterbomb.php');
+	include(__DIR__ . '/include/forms.twitterbomb.php');
 	
 ?>
