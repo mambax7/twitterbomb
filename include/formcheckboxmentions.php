@@ -30,16 +30,14 @@ class TwitterbombFormCheckBoxMentions extends XoopsFormElement
      * @var array
      * @access private
      */
-    var $_options = array();
-
+    var $_options = [];
     /**
      * pre-selected values in array
      *
      * @var array
      * @access private
      */
-    var $_value = array();
-
+    var $_value = [];
     /**
      * HTML to seperate the elements
      *
@@ -47,7 +45,6 @@ class TwitterbombFormCheckBoxMentions extends XoopsFormElement
      * @access private
      */
     var $_delimeter;
-
     /**
      * Column number for rendering
      *
@@ -61,9 +58,9 @@ class TwitterbombFormCheckBoxMentions extends XoopsFormElement
      *
      * @param string $caption
      * @param string $name
-     * @param mixed $value Either one value as a string or an array of them.
+     * @param mixed  $value Either one value as a string or an array of them.
      */
-    function TwitterbombFormCheckBoxMentions($caption, $name, $value = null, $delimeter = '&nbsp;')
+    public function TwitterbombFormCheckBoxMentions($caption, $name, $value = null, $delimeter = '&nbsp;')
     {
         $this->setCaption($caption);
         $this->setName($name);
@@ -72,17 +69,17 @@ class TwitterbombFormCheckBoxMentions extends XoopsFormElement
         }
         $this->_delimeter = $delimeter;
         $this->setFormType('checkbox');
-        
+
         $campaign_handler =& xoops_getmodulehandler('campaign', 'twitterbomb');
         $mentions_handler =& xoops_getmodulehandler('mentions', 'twitterbomb');
-        $criteria = new Criteria('1','1');
+        $criteria         = new Criteria('1', '1');
         $criteria->setSort('`created`');
         $criteria->setOrder('ASC');
-        
-        $campaign = array();
-        
-        foreach($mentions_handler->getObjects($criteria, true) as $mid => $mentions) {
-        	$this->addOption($mid, $mentions->getVar('user'));
+
+        $campaign = [];
+
+        foreach ($mentions_handler->getObjects($criteria, true) as $mid => $mentions) {
+            $this->addOption($mid, $mentions->getVar('user'));
         }
     }
 
@@ -92,13 +89,13 @@ class TwitterbombFormCheckBoxMentions extends XoopsFormElement
      * @param bool $encode To sanitizer the text?
      * @return array
      */
-    function getValue($encode = false)
+    public function getValue($encode = false)
     {
-        if (! $encode) {
+        if (!$encode) {
             return $this->_value;
         }
-        $value = array();
-        foreach($this->_value as $val) {
+        $value = [];
+        foreach ($this->_value as $val) {
             $value[] = $val ? htmlspecialchars($val, ENT_QUOTES) : $val;
         }
         return $value;
@@ -109,11 +106,11 @@ class TwitterbombFormCheckBoxMentions extends XoopsFormElement
      *
      * @param array $
      */
-    function setValue($value)
+    public function setValue($value)
     {
-        $this->_value = array();
+        $this->_value = [];
         if (is_array($value)) {
-            foreach($value as $v) {
+            foreach ($value as $v) {
                 $this->_value[] = $v;
             }
         } else {
@@ -127,7 +124,7 @@ class TwitterbombFormCheckBoxMentions extends XoopsFormElement
      * @param string $value
      * @param string $name
      */
-    function addOption($value, $name = '')
+    public function addOption($value, $name = '')
     {
         if ($name != '') {
             $this->_options[$value] = $name;
@@ -141,10 +138,10 @@ class TwitterbombFormCheckBoxMentions extends XoopsFormElement
      *
      * @param array $options Associative array of value->name pairs
      */
-    function addOptionArray($options)
+    public function addOptionArray($options)
     {
         if (is_array($options)) {
-            foreach($options as $k => $v) {
+            foreach ($options as $k => $v) {
                 $this->addOption($k, $v);
             }
         }
@@ -156,13 +153,13 @@ class TwitterbombFormCheckBoxMentions extends XoopsFormElement
      * @param int $encode To sanitizer the text? potential values: 0 - skip; 1 - only for value; 2 - for both value and name
      * @return array Associative array of value->name pairs
      */
-    function getOptions($encode = false)
+    public function getOptions($encode = false)
     {
-        if (! $encode) {
+        if (!$encode) {
             return $this->_options;
         }
-        $value = array();
-        foreach($this->_options as $val => $name) {
+        $value = [];
+        foreach ($this->_options as $val => $name) {
             $value[$encode ? htmlspecialchars($val, ENT_QUOTES) : $val] = ($encode > 1) ? htmlspecialchars($name, ENT_QUOTES) : $name;
         }
         return $value;
@@ -174,7 +171,7 @@ class TwitterbombFormCheckBoxMentions extends XoopsFormElement
      * @param bool $encode To sanitizer the text?
      * @return string The delimiter
      */
-    function getDelimeter($encode = false)
+    public function getDelimeter($encode = false)
     {
         return $encode ? htmlspecialchars(str_replace('&nbsp;', ' ', $this->_delimeter)) : $this->_delimeter;
     }
@@ -184,29 +181,29 @@ class TwitterbombFormCheckBoxMentions extends XoopsFormElement
      *
      * @return string
      */
-    function render()
+    public function render()
     {
-        $ele_name = $this->getName();
-		$ele_title = $this->getTitle();
-        $ele_id = $ele_name;
-        $ele_value = $this->getValue();
-        $ele_options = $this->getOptions();
-        $ele_extra = $this->getExtra();
+        $ele_name      = $this->getName();
+        $ele_title     = $this->getTitle();
+        $ele_id        = $ele_name;
+        $ele_value     = $this->getValue();
+        $ele_options   = $this->getOptions();
+        $ele_extra     = $this->getExtra();
         $ele_delimeter = empty($this->columns) ? $this->getDelimeter() : '';
 
-        if (count($ele_options) > 1 && substr($ele_name, - 2, 2) != '[]') {
+        if (count($ele_options) > 1 && substr($ele_name, -2, 2) != '[]') {
             $ele_name = $ele_name . '[]';
             $this->setName($ele_name);
         }
         $ret = '';
-        if (! empty($this->columns)) {
+        if (!empty($this->columns)) {
             $ret .= '<table><tr>';
         }
-        $i = 0;
+        $i      = 0;
         $id_ele = 0;
-        foreach($ele_options as $value => $name) {
-            $id_ele ++;
-            if (! empty($this->columns)) {
+        foreach ($ele_options as $value => $name) {
+            $id_ele++;
+            if (!empty($this->columns)) {
                 if ($i % $this->columns == 0) {
                     $ret .= '<tr>';
                 }
@@ -217,15 +214,15 @@ class TwitterbombFormCheckBoxMentions extends XoopsFormElement
             if (count($ele_value) > 0 && in_array($value, $ele_value)) {
                 $ret .= ' checked="checked"';
             }
-            $ret .= $ele_extra . ' />'."<label name='xolb_{$ele_name}' for='{$ele_id}{$id_ele}'>" . $name . "</label>" . $ele_delimeter ;
-            if (! empty($this->columns)) {
+            $ret .= $ele_extra . ' />' . "<label name='xolb_{$ele_name}' for='{$ele_id}{$id_ele}'>" . $name . "</label>" . $ele_delimeter;
+            if (!empty($this->columns)) {
                 $ret .= '</td>';
-                if (++ $i % $this->columns == 0) {
+                if (++$i % $this->columns == 0) {
                     $ret .= '</tr>';
                 }
             }
         }
-        if (! empty($this->columns)) {
+        if (!empty($this->columns)) {
             if ($span = $i % $this->columns) {
                 $ret .= '<td colspan="' . ($this->columns - $span) . '"></td></tr>';
             }
@@ -239,18 +236,21 @@ class TwitterbombFormCheckBoxMentions extends XoopsFormElement
      *
      * @seealso TwitterbombForm::renderValidationJS
      */
-    function renderValidationJS()
+    public function renderValidationJS()
     {
         // render custom validation code if any
-        if (! empty($this->customValidationCode)) {
+        if (!empty($this->customValidationCode)) {
             return implode(NWLINE, $this->customValidationCode);
             // generate validation code if required
         } elseif ($this->isRequired()) {
-            $eltname = $this->getName();
+            $eltname    = $this->getName();
             $eltcaption = $this->getCaption();
-            $eltmsg = empty($eltcaption) ? sprintf(_FORM_ENTER, $eltname) : sprintf(_FORM_ENTER, $eltcaption);
-            $eltmsg = str_replace('"', '\"', stripslashes($eltmsg));
-            return NWLINE . "var hasChecked = false; var checkBox = myform.elements['{$eltname}'];" . "for ( var i = 0; i < checkBox.length; i++ ) { if (checkBox[i].checked == true) { hasChecked = true; break; } }" . "if (!hasChecked) { window.alert(\"{$eltmsg}\"); checkBox[0].focus(); return false; }";
+            $eltmsg     = empty($eltcaption) ? sprintf(_FORM_ENTER, $eltname) : sprintf(_FORM_ENTER, $eltcaption);
+            $eltmsg     = str_replace('"', '\"', stripslashes($eltmsg));
+            return NWLINE
+                   . "var hasChecked = false; var checkBox = myform.elements['{$eltname}'];"
+                   . "for ( var i = 0; i < checkBox.length; i++ ) { if (checkBox[i].checked == true) { hasChecked = true; break; } }"
+                   . "if (!hasChecked) { window.alert(\"{$eltmsg}\"); checkBox[0].focus(); return false; }";
         }
         return '';
     }

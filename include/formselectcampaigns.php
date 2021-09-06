@@ -60,8 +60,7 @@ class TwitterBombFormSelectCampaigns extends XoopsFormElement
      * @var array
      * @access private
      */
-    var $_options = array();
-
+    var $_options = [];
     /**
      * Allow multiple selections?
      *
@@ -69,7 +68,6 @@ class TwitterBombFormSelectCampaigns extends XoopsFormElement
      * @access private
      */
     var $_multiple = false;
-
     /**
      * Number of rows. "1" makes a dropdown list.
      *
@@ -77,64 +75,63 @@ class TwitterBombFormSelectCampaigns extends XoopsFormElement
      * @access private
      */
     var $_size;
-
     /**
      * Pre-selcted values
      *
      * @var array
      * @access private
      */
-    var $_value = array();
+    var $_value = [];
 
     /**
      * Constructor
      *
-     * @param string $caption Caption
-     * @param string $name "name" attribute
-     * @param mixed $value Pre-selected value (or array of them).
-     * @param int $size Number or rows. "1" makes a drop-down-list
-     * @param bool $multiple Allow multiple selections?
+     * @param string $caption  Caption
+     * @param string $name     "name" attribute
+     * @param mixed  $value    Pre-selected value (or array of them).
+     * @param int    $size     Number or rows. "1" makes a drop-down-list
+     * @param bool   $multiple Allow multiple selections?
      */
-    function TwitterBombFormSelectCampaigns($caption, $name, $value = null, $size = 1, $multiple = false, $ownid=0, $type = 'bomb,scheduler,retweet,reply,mentions')
+    public function TwitterBombFormSelectCampaigns($caption, $name, $value = null, $size = 1, $multiple = false, $ownid = 0, $type = 'bomb,scheduler,retweet,reply,mentions')
     {
-    	xoops_loadLanguage('modinfo', 'twitterbomb');
-    	
+        xoops_loadLanguage('modinfo', 'twitterbomb');
+
         $this->setCaption($caption);
         $this->setName($name);
         $this->_multiple = $multiple;
-        $this->_size = intval($size);
+        $this->_size     = intval($size);
         if (isset($value)) {
             $this->setValue($value);
         }
-		$this->addOption(0, _MI_TWEETBOMB_NONE);
-		@$this->GetCampaign($ownid, $type);
+        $this->addOption(0, _MI_TWEETBOMB_NONE);
+        @$this->GetCampaign($ownid, $type);
     }
 
-	function GetCampaign($ownid, $type){
-	
-		$campaign_handler =& xoops_getmodulehandler('campaign', 'twitterbomb');
-		$criteriaa = new CriteriaCompo(new Criteria('timed', '0', '='), 'OR');
-		$criteriab = new CriteriaCompo(new Criteria('timed', '1', '='), 'AND');
-		$criteriab->add(new Criteria('`start`', time(), '<'));
-		$criteriab->add(new Criteria('`end`', time(), '>'));
-		$crtieriac = new CriteriaCompo($criteriaa, 'OR');
-		$crtieriac->add($criteriab, 'OR');
-		$crtieria = new CriteriaCompo($criteriac, 'AND');
-		$crtieria->add(new Criteria('`type`', '("'.implode('","', explode(',', $type)).'")', 'IN'));
-		$campaigns = $campaign_handler->getObjects($crtieria, true);
-		foreach($campaigns as $cid => $campaign) {
-			if ($cid!=$ownid)
-				$this->addOption($cid, $campaign->getVar('name'));
-		}
+    public function GetCampaign($ownid, $type)
+    {
+        $campaign_handler =& xoops_getmodulehandler('campaign', 'twitterbomb');
+        $criteriaa        = new CriteriaCompo(new Criteria('timed', '0', '='), 'OR');
+        $criteriab        = new CriteriaCompo(new Criteria('timed', '1', '='), 'AND');
+        $criteriab->add(new Criteria('`start`', time(), '<'));
+        $criteriab->add(new Criteria('`end`', time(), '>'));
+        $crtieriac = new CriteriaCompo($criteriaa, 'OR');
+        $crtieriac->add($criteriab, 'OR');
+        $crtieria = new CriteriaCompo($criteriac, 'AND');
+        $crtieria->add(new Criteria('`type`', '("' . implode('","', explode(',', $type)) . '")', 'IN'));
+        $campaigns = $campaign_handler->getObjects($crtieria, true);
+        foreach ($campaigns as $cid => $campaign) {
+            if ($cid != $ownid) {
+                $this->addOption($cid, $campaign->getVar('name'));
+            }
+        }
+    }
 
-	}
-	
     /**
      * Are multiple selections allowed?
      *
      * @return bool
      */
-    function isMultiple()
+    public function isMultiple()
     {
         return $this->_multiple;
     }
@@ -144,7 +141,7 @@ class TwitterBombFormSelectCampaigns extends XoopsFormElement
      *
      * @return int
      */
-    function getSize()
+    public function getSize()
     {
         return $this->_size;
     }
@@ -155,13 +152,13 @@ class TwitterBombFormSelectCampaigns extends XoopsFormElement
      * @param bool $encode To sanitizer the text?
      * @return array
      */
-    function getValue($encode = false)
+    public function getValue($encode = false)
     {
-        if (! $encode) {
+        if (!$encode) {
             return $this->_value;
         }
-        $value = array();
-        foreach($this->_value as $val) {
+        $value = [];
+        foreach ($this->_value as $val) {
             $value[] = $val ? htmlspecialchars($val, ENT_QUOTES) : $val;
         }
         return $value;
@@ -172,10 +169,10 @@ class TwitterBombFormSelectCampaigns extends XoopsFormElement
      *
      * @param  $value mixed
      */
-    function setValue($value)
+    public function setValue($value)
     {
         if (is_array($value)) {
-            foreach($value as $v) {
+            foreach ($value as $v) {
                 $this->_value[] = $v;
             }
         } elseif (isset($value)) {
@@ -187,9 +184,9 @@ class TwitterBombFormSelectCampaigns extends XoopsFormElement
      * Add an option
      *
      * @param string $value "value" attribute
-     * @param string $name "name" attribute
+     * @param string $name  "name" attribute
      */
-    function addOption($value, $name = '')
+    public function addOption($value, $name = '')
     {
         if ($name != '') {
             $this->_options[$value] = $name;
@@ -203,10 +200,10 @@ class TwitterBombFormSelectCampaigns extends XoopsFormElement
      *
      * @param array $options Associative array of value->name pairs
      */
-    function addOptionArray($options)
+    public function addOptionArray($options)
     {
         if (is_array($options)) {
-            foreach($options as $k => $v) {
+            foreach ($options as $k => $v) {
                 $this->addOption($k, $v);
             }
         }
@@ -220,13 +217,13 @@ class TwitterBombFormSelectCampaigns extends XoopsFormElement
      * @param int $encode To sanitizer the text? potential values: 0 - skip; 1 - only for value; 2 - for both value and name
      * @return array Associative array of value->name pairs
      */
-    function getOptions($encode = false)
+    public function getOptions($encode = false)
     {
-        if (! $encode) {
+        if (!$encode) {
             return $this->_options;
         }
-        $value = array();
-        foreach($this->_options as $val => $name) {
+        $value = [];
+        foreach ($this->_options as $val => $name) {
             $value[$encode ? htmlspecialchars($val, ENT_QUOTES) : $val] = ($encode > 1) ? htmlspecialchars($name, ENT_QUOTES) : $name;
         }
         return $value;
@@ -237,24 +234,24 @@ class TwitterBombFormSelectCampaigns extends XoopsFormElement
      *
      * @return string HTML
      */
-    function render()
+    public function render()
     {
-        $ele_name = $this->getName();
-		$ele_title = $this->getTitle();
-        $ele_value = $this->getValue();
+        $ele_name    = $this->getName();
+        $ele_title   = $this->getTitle();
+        $ele_value   = $this->getValue();
         $ele_options = $this->getOptions();
-        $ret = '<select size="'.$this->getSize().'"'.$this->getExtra();
+        $ret         = '<select size="' . $this->getSize() . '"' . $this->getExtra();
         if ($this->isMultiple() != false) {
-            $ret .= ' name="'.$ele_name.'[]" id="'.$ele_name.'" title="'. $ele_title. '" multiple="multiple">' ;
+            $ret .= ' name="' . $ele_name . '[]" id="' . $ele_name . '" title="' . $ele_title . '" multiple="multiple">';
         } else {
-            $ret .= ' name="'.$ele_name.'" id="'.$ele_name.'" title="'. $ele_title. '">' ;
+            $ret .= ' name="' . $ele_name . '" id="' . $ele_name . '" title="' . $ele_title . '">';
         }
-        foreach($ele_options as $value => $name) {
-            $ret .= '<option value="'.htmlspecialchars($value, ENT_QUOTES).'"';
+        foreach ($ele_options as $value => $name) {
+            $ret .= '<option value="' . htmlspecialchars($value, ENT_QUOTES) . '"';
             if (count($ele_value) > 0 && in_array($value, $ele_value)) {
                 $ret .= ' selected="selected"';
             }
-            $ret .= '>'.$name.'</option>' ;
+            $ret .= '>' . $name . '</option>';
         }
         $ret .= '</select>';
         return $ret;
@@ -265,18 +262,20 @@ class TwitterBombFormSelectCampaigns extends XoopsFormElement
      *
      * @seealso XoopsForm::renderValidationJS
      */
-    function renderValidationJS()
+    public function renderValidationJS()
     {
         // render custom validation code if any
-        if (! empty($this->customValidationCode)) {
+        if (!empty($this->customValidationCode)) {
             return implode("\n", $this->customValidationCode);
             // generate validation code if required
         } elseif ($this->isRequired()) {
-            $eltname = $this->getName();
+            $eltname    = $this->getName();
             $eltcaption = $this->getCaption();
-            $eltmsg = empty($eltcaption) ? sprintf(_FORM_ENTER, $eltname) : sprintf(_FORM_ENTER, $eltcaption);
-            $eltmsg = str_replace('"', '\"', stripslashes($eltmsg));
-            return "\nvar hasSelected = false; var selectBox = myform.{$eltname};"."for (i = 0; i < selectBox.options.length; i++ ) { if (selectBox.options[i].selected == true) { hasSelected = true; break; } }"."if (!hasSelected) { window.alert(\"{$eltmsg}\"); selectBox.focus(); return false; }";
+            $eltmsg     = empty($eltcaption) ? sprintf(_FORM_ENTER, $eltname) : sprintf(_FORM_ENTER, $eltcaption);
+            $eltmsg     = str_replace('"', '\"', stripslashes($eltmsg));
+            return "\nvar hasSelected = false; var selectBox = myform.{$eltname};"
+                   . "for (i = 0; i < selectBox.options.length; i++ ) { if (selectBox.options[i].selected == true) { hasSelected = true; break; } }"
+                   . "if (!hasSelected) { window.alert(\"{$eltmsg}\"); selectBox.focus(); return false; }";
         }
         return '';
     }
