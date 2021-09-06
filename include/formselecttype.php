@@ -92,7 +92,7 @@ class TwitterBombFormSelectType extends XoopsFormElement
      * @param int    $size     Number or rows. "1" makes a drop-down-list
      * @param bool   $multiple Allow multiple selections?
      */
-    public function TwitterBombFormSelectType($caption, $name, $value = null, $size = 1, $multiple = false, $blank = true, $options = 'bomb,scheduler,retweet,reply,mentions')
+    public function __construct($caption, $name, $value = null, $size = 1, $multiple = false, $blank = true, $options = 'bomb,scheduler,retweet,reply,mentions')
     {
         xoops_loadLanguage('modinfo', 'twitterbomb');
 

@@ -11,7 +11,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
  */
 class TwitterbombScheduler extends XoopsObject
 {
-    public function TwitterbombScheduler($fid = null)
+    public function __construct($fid = null)
     {
         $this->initVar('sid', XOBJ_DTYPE_INT, 0, false);
         $this->initVar('cid', XOBJ_DTYPE_INT, 0, false);

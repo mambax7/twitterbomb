@@ -11,7 +11,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
  */
 class TwitterbombBase_matrix extends XoopsObject
 {
-    public function TwitterbombBase_matrix($fid = null)
+    public function __construct($fid = null)
     {
         $this->initVar('baseid', XOBJ_DTYPE_INT, null, false);
         $this->initVar('cid', XOBJ_DTYPE_INT, null, false);

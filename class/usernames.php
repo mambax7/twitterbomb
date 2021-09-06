@@ -11,7 +11,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
  */
 class TwitterbombUsernames extends XoopsObject
 {
-    public function TwitterbombUsernames($fid = null)
+    public function __construct($fid = null)
     {
         $this->initVar('tid', XOBJ_DTYPE_INT, null, false);
         $this->initVar('oid', XOBJ_DTYPE_INT, null, false);

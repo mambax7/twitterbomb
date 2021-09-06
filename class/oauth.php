@@ -13,7 +13,7 @@ class TwitterbombOauth extends XoopsObject
     public $_handler    = null;
     public $_modConfig  = [];
 
-    public function TwitterbombOauth($fid = null)
+    public function __construct($fid = null)
     {
         $this->initVar('oid', XOBJ_DTYPE_INT, null, false);
         $this->initVar('cids', XOBJ_DTYPE_ARRAY, [], false);

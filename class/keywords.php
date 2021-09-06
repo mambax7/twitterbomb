@@ -11,7 +11,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
  */
 class TwitterbombKeywords extends XoopsObject
 {
-    public function TwitterbombKeywords($fid = null)
+    public function __construct($fid = null)
     {
         $this->initVar('kid', XOBJ_DTYPE_INT, null, false);
         $this->initVar('cid', XOBJ_DTYPE_INT, null, false);

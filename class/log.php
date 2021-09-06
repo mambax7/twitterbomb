@@ -11,7 +11,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
  */
 class TwitterBombLog extends XoopsObject
 {
-    public function TwitterBombLog($id = null)
+    public function __construct($id = null)
     {
         $this->initVar('lid', XOBJ_DTYPE_INT, null, false);
         $this->initVar('provider', XOBJ_DTYPE_ENUM, 'bomb', false, false, false, ['bomb', 'scheduler', 'retweet', 'reply', 'mention']);

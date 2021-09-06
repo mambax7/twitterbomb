@@ -11,7 +11,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
  */
 class TwitterbombReplies extends XoopsObject
 {
-    public function TwitterbombReplies($fid = null)
+    public function __construct($fid = null)
     {
         $this->initVar('rpid', XOBJ_DTYPE_INT, null, false);
         $this->initVar('cid', XOBJ_DTYPE_INT, null, false);

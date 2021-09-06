@@ -85,7 +85,7 @@ class MyXoopsMediaUploader
      * @param int    $cmodvalue
      * @param array  $allowedExtensions
      **/
-    public function MyXoopsMediaUploader($uploadDir, $allowedMimeTypes, $maxFileSize, $maxWidth = null, $maxHeight = null, $allowedExtensions = null)
+    public function __construct($uploadDir, $allowedMimeTypes, $maxFileSize, $maxWidth = null, $maxHeight = null, $allowedExtensions = null)
     {
         if (is_array($allowedMimeTypes)) {
             $this->allowedMimeTypes =& $allowedMimeTypes;

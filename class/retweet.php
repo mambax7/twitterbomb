@@ -11,7 +11,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
  */
 class TwitterBombRetweet extends XoopsObject
 {
-    public function TwitterBombRetweet($id = null)
+    public function __construct($id = null)
     {
         $this->initVar('rid', XOBJ_DTYPE_INT, null, false);
         $this->initVar('search', XOBJ_DTYPE_TXTBOX, false, false, 128);
