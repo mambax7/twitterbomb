@@ -60,28 +60,28 @@ class TwitterBombFormSelectLanguage extends XoopsFormElement
      * @var array
      * @access private
      */
-    var $_options = [];
+    public $_options = [];
     /**
      * Allow multiple selections?
      *
      * @var bool
      * @access private
      */
-    var $_multiple = false;
+    public $_multiple = false;
     /**
      * Number of rows. "1" makes a dropdown list.
      *
      * @var int
      * @access private
      */
-    var $_size;
+    public $_size;
     /**
      * Pre-selcted values
      *
      * @var array
      * @access private
      */
-    var $_value = [];
+    public $_value = [];
 
     /**
      * Constructor

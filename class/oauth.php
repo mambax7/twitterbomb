@@ -9,9 +9,9 @@ require_once($GLOBALS['xoops']->path('/modules/twitterbomb/include/functions.php
 
 class TwitterbombOauth extends XoopsObject
 {
-    var $_connection = null;
-    var $_handler    = null;
-    var $_modConfig  = [];
+    public $_connection = null;
+    public $_handler    = null;
+    public $_modConfig  = [];
 
     public function TwitterbombOauth($fid = null)
     {
@@ -563,11 +563,11 @@ class TwitterbombOauth extends XoopsObject
 */
 class TwitterbombOauthHandler extends XoopsPersistableObjectHandler
 {
-    var $_connection = null;
-    var $_user       = [];
-    var $_root_oauth = null;
-    var $_modConfig  = [];
-    var $_mod        = null;
+    public $_connection = null;
+    public $_user       = [];
+    public $_root_oauth = null;
+    public $_modConfig  = [];
+    public $_mod        = null;
 
     public function __construct($db)
     {

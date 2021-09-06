@@ -57,22 +57,22 @@ Example
 
 class MyXoopsMediaUploader
 {
-    var $mediaName;
-    var $mediaType;
-    var $mediaSize;
-    var $mediaTmpName;
-    var $mediaError;
-    var $uploadDir         = '';
-    var $allowedMimeTypes  = [];
-    var $allowedExtensions = [];
-    var $maxFileSize       = 0;
-    var $maxWidth;
-    var $maxHeight;
-    var $targetFileName;
-    var $prefix;
-    var $errors            = [];
-    var $savedDestination;
-    var $savedFileName;
+    public $mediaName;
+    public $mediaType;
+    public $mediaSize;
+    public $mediaTmpName;
+    public $mediaError;
+    public $uploadDir         = '';
+    public $allowedMimeTypes  = [];
+    public $allowedExtensions = [];
+    public $maxFileSize       = 0;
+    public $maxWidth;
+    public $maxHeight;
+    public $targetFileName;
+    public $prefix;
+    public $errors            = [];
+    public $savedDestination;
+    public $savedFileName;
 
     /**
      * Constructor

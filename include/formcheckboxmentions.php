@@ -30,28 +30,28 @@ class TwitterbombFormCheckBoxMentions extends XoopsFormElement
      * @var array
      * @access private
      */
-    var $_options = [];
+    public $_options = [];
     /**
      * pre-selected values in array
      *
      * @var array
      * @access private
      */
-    var $_value = [];
+    public $_value = [];
     /**
      * HTML to seperate the elements
      *
      * @var string
      * @access private
      */
-    var $_delimeter;
+    public $_delimeter;
     /**
      * Column number for rendering
      *
      * @var int
      * @access public
      */
-    var $columns;
+    public $columns;
 
     /**
      * Constructor

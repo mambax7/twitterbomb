@@ -130,8 +130,8 @@ class TwitterbombKeywords extends XoopsObject
 */
 class TwitterbombKeywordsHandler extends XoopsPersistableObjectHandler
 {
-    var $_mod       = null;
-    var $_modConfig = [];
+    public $_mod       = null;
+    public $_modConfig = [];
 
     public function __construct($db)
     {
