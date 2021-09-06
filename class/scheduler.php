@@ -248,17 +248,17 @@ class TwitterbombSchedulerHandler extends XoopsPersistableObjectHandler
             $obj->setVar('updated', time());
         }
         $run_plugin = false;
-        if ($obj->vars['mode']['changed'] == true) {
+        if (true == $obj->vars['mode']['changed']) {
             $obj->setVar('actioned', time());
             $run_plugin = true;
         }
 
-        if ($run_plugin == true) {
+        if (true == $run_plugin) {
             $id  = parent::insert($obj, $force);
             $obj = parent::get($id);
             if (is_object($obj)) {
                 $ret = $obj->runInsertPlugin();
-                return ($ret != 0) ? $ret : $id;
+                return (0 != $ret) ? $ret : $id;
             } else {
                 return $id;
             }
@@ -289,7 +289,7 @@ class TwitterbombSchedulerHandler extends XoopsPersistableObjectHandler
         $obj = parent::getObjects($criteria, false);
 
         if (is_object($obj[0])) {
-            if ($obj[0]->getVar('when') == 0) {
+            if (0 == $obj[0]->getVar('when')) {
                 $obj[0]->setVar('when', time(), true);
                 @parent::insert($obj[0], true);
             }
@@ -313,7 +313,7 @@ class TwitterbombSchedulerHandler extends XoopsPersistableObjectHandler
 
     public function getObjects($criteria, $id_as_key = false, $as_object = true)
     {
-        if ($criteria->limit == 0) {
+        if (0 == $criteria->limit) {
             $criteria->setLimit($this->_modConfig['scheduler_items']);
         }
         $objs = parent::getObjects($criteria, $id_as_key, $as_object);
@@ -340,7 +340,7 @@ class TwitterbombSchedulerHandler extends XoopsPersistableObjectHandler
     public function recalc()
     {
         // Recalculating Ranking Tweets
-        if ($this->_modConfig['number_to_rank'] != 0) {
+        if (0 != $this->_modConfig['number_to_rank']) {
             // Reset Rank
             $sql = 'UPDATE ' . $GLOBALS['xoopsDB']->prefix('twitterbomb_scheduler') . ' SET `rank` = 0 WHERE `rank` <> 0';
             @$GLOBALS['xoopsDB']->queryF($sql);
@@ -360,7 +360,7 @@ class TwitterbombSchedulerHandler extends XoopsPersistableObjectHandler
         }
 
         // Kill Old Tweets
-        if ($this->_modConfig['kill_tweeted'] != 0) {
+        if (0 != $this->_modConfig['kill_tweeted']) {
             $criteria = new CriteriaCompo(new Criteria('tweeted', time() - $this->_modConfig['kill_tweeted'], '<'));
             $criteria->add(new Criteria('when', time() - $this->_modConfig['kill_tweeted'], '<'));
             $criteria->add(new Criteria('rank', 0, '='));
@@ -378,16 +378,16 @@ class TwitterbombSchedulerHandler extends XoopsPersistableObjectHandler
             $var = explode(',', $part);
             if (!empty($var[1]) && !is_numeric($var[0])) {
                 $object = $this->create();
-                if ($object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_TXTBOX
-                    || $object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_TXTAREA) {
+                if (XOBJ_DTYPE_TXTBOX == $object->vars[$var[0]]['data_type']
+                    || XOBJ_DTYPE_TXTAREA == $object->vars[$var[0]]['data_type']) {
                     $criteria->add(new Criteria('`' . $var[0] . '`', '%' . $var[1] . '%', ($var[2] ?? 'LIKE')));
-                } elseif ($object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_INT
-                          || $object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_DECIMAL
-                          || $object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_FLOAT) {
+                } elseif (XOBJ_DTYPE_INT == $object->vars[$var[0]]['data_type']
+                          || XOBJ_DTYPE_DECIMAL == $object->vars[$var[0]]['data_type']
+                          || XOBJ_DTYPE_FLOAT == $object->vars[$var[0]]['data_type']) {
                     $criteria->add(new Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
-                } elseif ($object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_ENUM) {
+                } elseif (XOBJ_DTYPE_ENUM == $object->vars[$var[0]]['data_type']) {
                     $criteria->add(new Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
-                } elseif ($object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_ARRAY) {
+                } elseif (XOBJ_DTYPE_ARRAY == $object->vars[$var[0]]['data_type']) {
                     $criteria->add(new Criteria('`' . $var[0] . '`', '%"' . $var[1] . '";%', ($var[2] ?? 'LIKE')));
                 }
             } elseif (!empty($var[1]) && is_numeric($var[0])) {

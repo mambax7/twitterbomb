@@ -28,7 +28,7 @@ function b_twitterbomb_block_scheduler_show( $options )
 	}
 	
 	$block['tweets']= [];
-	if ($campaign->getVar('timed')!=0) {
+	if (0 != $campaign->getVar('timed')) {
 		if ($campaign->getVar('start')<time()&&$campaign->getVar('end')>time()) {
 			if (!$block['tweets'] = XoopsCache::read('tweetbomb_scheduler_'.$cacheid)) {
 				$log_handler =& xoops_getModuleHandler('log', 'twitterbomb');

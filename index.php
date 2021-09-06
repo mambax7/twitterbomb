@@ -11,7 +11,7 @@
 	
 	if ($GLOBALS['twitterbombModuleConfig']['htaccess']&&empty($_POST)) {
 		$url = XOOPS_URL.'/'.$GLOBALS['twitterbombModuleConfig']['baseurl'].'/'.$op.','.$fct.','.$start.','.$limit.','.$cid.','.$catid.$GLOBALS['twitterbombModuleConfig']['endofurl'];
-		if (strpos($url, $_SERVER['REQUEST_URI'])==0) {
+		if (0 == strpos($url, $_SERVER['REQUEST_URI'])) {
 			header('HTTP/1.1 301 Moved Permanently');
 			header('Location: '.$url);
 			exit(0);

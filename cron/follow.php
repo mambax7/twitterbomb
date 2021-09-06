@@ -49,7 +49,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_follow']) {
 	foreach($usernames as $uid => $username) {
 		if (microtime(true)-$GLOBALS['cron_start']>$GLOBALS['cron_run_for'])
 			continue;
-		if ($username->getVar('id') == 0) {
+		if (0 == $username->getVar('id')) {
 			$user = $oauth->getUsers($username->getVar('screen_name'), 'screen_name');
 			$username->setVar('id', $user['id']);		
 			$username->setVar('avarta', $user['profile_image_url']);

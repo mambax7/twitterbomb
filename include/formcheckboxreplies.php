@@ -79,9 +79,9 @@ class TwitterbombFormCheckBoxReplies extends XoopsFormElement
         $campaign = [];
 
         foreach ($replies_handler->getObjects($criteria, true) as $rid => $replies) {
-            if ($replies->getVar('type') == 'reply') {
+            if ('reply' == $replies->getVar('type')) {
                 $this->addOption($rid, $replies->getVar('reply'));
-            } elseif ($replies->getVar('type') == 'bomb' && $replies->getVar('rcid') <> 0) {
+            } elseif ('bomb' == $replies->getVar('type') && 0 <> $replies->getVar('rcid')) {
                 if (!isset($campaign[$replies->getVar('rcid')])) {
                     $campaign[$replies->getVar('rcid')] = $campaign_handler->get($replies->getVar('rcid'));
                 }
@@ -133,7 +133,7 @@ class TwitterbombFormCheckBoxReplies extends XoopsFormElement
      */
     public function addOption($value, $name = '')
     {
-        if ($name != '') {
+        if ('' != $name) {
             $this->_options[$value] = $name;
         } else {
             $this->_options[$value] = $value;
@@ -198,7 +198,7 @@ class TwitterbombFormCheckBoxReplies extends XoopsFormElement
         $ele_extra     = $this->getExtra();
         $ele_delimeter = empty($this->columns) ? $this->getDelimeter() : '';
 
-        if (count($ele_options) > 1 && substr($ele_name, -2, 2) != '[]') {
+        if (count($ele_options) > 1 && '[]' != substr($ele_name, -2, 2)) {
             $ele_name = $ele_name . '[]';
             $this->setName($ele_name);
         }
@@ -211,7 +211,7 @@ class TwitterbombFormCheckBoxReplies extends XoopsFormElement
         foreach ($ele_options as $value => $name) {
             $id_ele++;
             if (!empty($this->columns)) {
-                if ($i % $this->columns == 0) {
+                if (0 == $i % $this->columns) {
                     $ret .= '<tr>';
                 }
                 $ret .= '<td>';
@@ -224,7 +224,7 @@ class TwitterbombFormCheckBoxReplies extends XoopsFormElement
             $ret .= $ele_extra . ' />' . "<label name='xolb_{$ele_name}' for='{$ele_id}{$id_ele}'>" . $name . '</label>' . $ele_delimeter;
             if (!empty($this->columns)) {
                 $ret .= '</td>';
-                if (++$i % $this->columns == 0) {
+                if (0 == ++$i % $this->columns) {
                     $ret .= '</tr>';
                 }
             }

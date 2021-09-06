@@ -185,41 +185,41 @@ class TwitterbombBase_matrixHandler extends XoopsPersistableObjectHandler
             $obj->setVar('updated', time());
         }
         $run_plugin = false;
-        if ($obj->vars['base1']['changed'] == true) {
+        if (true == $obj->vars['base1']['changed']) {
             $obj->setVar('actioned', time());
             $run_plugin = true;
         }
-        if ($obj->vars['base2']['changed'] == true) {
+        if (true == $obj->vars['base2']['changed']) {
             $obj->setVar('actioned', time());
             $run_plugin = true;
         }
-        if ($obj->vars['base3']['changed'] == true) {
+        if (true == $obj->vars['base3']['changed']) {
             $obj->setVar('actioned', time());
             $run_plugin = true;
         }
-        if ($obj->vars['base4']['changed'] == true) {
+        if (true == $obj->vars['base4']['changed']) {
             $obj->setVar('actioned', time());
             $run_plugin = true;
         }
-        if ($obj->vars['base5']['changed'] == true) {
+        if (true == $obj->vars['base5']['changed']) {
             $obj->setVar('actioned', time());
             $run_plugin = true;
         }
-        if ($obj->vars['base6']['changed'] == true) {
+        if (true == $obj->vars['base6']['changed']) {
             $obj->setVar('actioned', time());
             $run_plugin = true;
         }
-        if ($obj->vars['base7']['changed'] == true) {
+        if (true == $obj->vars['base7']['changed']) {
             $obj->setVar('actioned', time());
             $run_plugin = true;
         }
 
-        if ($run_plugin == true) {
+        if (true == $run_plugin) {
             $id  = parent::insert($obj, $force);
             $obj = parent::get($id);
             if (is_object($obj)) {
                 $ret = $obj->runInsertPlugin();
-                return ($ret != 0) ? $ret : $id;
+                return (0 != $ret) ? $ret : $id;
             } else {
                 return $id;
             }
@@ -297,16 +297,16 @@ class TwitterbombBase_matrixHandler extends XoopsPersistableObjectHandler
             $var = explode(',', $part);
             if (!empty($var[1]) && !is_numeric($var[0])) {
                 $object = $this->create();
-                if ($object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_TXTBOX
-                    || $object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_TXTAREA) {
+                if (XOBJ_DTYPE_TXTBOX == $object->vars[$var[0]]['data_type']
+                    || XOBJ_DTYPE_TXTAREA == $object->vars[$var[0]]['data_type']) {
                     $criteria->add(new Criteria('`' . $var[0] . '`', '%' . $var[1] . '%', ($var[2] ?? 'LIKE')));
-                } elseif ($object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_INT
-                          || $object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_DECIMAL
-                          || $object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_FLOAT) {
+                } elseif (XOBJ_DTYPE_INT == $object->vars[$var[0]]['data_type']
+                          || XOBJ_DTYPE_DECIMAL == $object->vars[$var[0]]['data_type']
+                          || XOBJ_DTYPE_FLOAT == $object->vars[$var[0]]['data_type']) {
                     $criteria->add(new Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
-                } elseif ($object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_ENUM) {
+                } elseif (XOBJ_DTYPE_ENUM == $object->vars[$var[0]]['data_type']) {
                     $criteria->add(new Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
-                } elseif ($object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_ARRAY) {
+                } elseif (XOBJ_DTYPE_ARRAY == $object->vars[$var[0]]['data_type']) {
                     $criteria->add(new Criteria('`' . $var[0] . '`', '%"' . $var[1] . '";%', ($var[2] ?? 'LIKE')));
                 }
             } elseif (!empty($var[1]) && is_numeric($var[0])) {

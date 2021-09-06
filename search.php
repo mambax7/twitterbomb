@@ -31,7 +31,7 @@ xoops_loadLanguage('search');
 $config_handler =& xoops_getHandler('config');
 $xoopsConfigSearch = $config_handler->getConfigsByCat(XOOPS_CONF_SEARCH);
 
-if ($xoopsConfigSearch['enable_search'] != 1) {
+if (1 != $xoopsConfigSearch['enable_search']) {
     header('Location: ' . XOOPS_URL . '/modules/twitterbomb/index.php');
     exit();
 }
@@ -72,17 +72,17 @@ if (!empty($_GET['start'])) {
 
 $queries = [];
 
-if ($action == 'results') {
-    if ($query == '') {
+if ('results' == $action) {
+    if ('' == $query) {
         redirect_header('search.php', 1, _SR_PLZENTER);
         exit();
     }
-} else if ($action == 'showall') {
-    if ($query == '' || empty($mid)) {
+} else if ('showall' == $action) {
+    if ('' == $query || empty($mid)) {
         redirect_header('search.php', 1, _SR_PLZENTER);
         exit();
     }
-} else if ($action == 'showallbyuser') {
+} else if ('showallbyuser' == $action) {
     if (empty($mid) || empty($uid)) {
         redirect_header('search.php', 1, _SR_PLZENTER);
         exit();
@@ -92,20 +92,20 @@ if ($action == 'results') {
 $groups = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
 $gperm_handler =& xoops_getHandler('groupperm');
 $available_modules = $gperm_handler->getItemIds('module_read', $groups);
-if ($action == 'search') {
+if ('search' == $action) {
     include $GLOBALS['xoops']->path('header.php');
     include $GLOBALS['xoops']->path('include/searchform.php');
     $search_form->display();
     include $GLOBALS['xoops']->path('footer.php');
     exit();
 }
-if ($andor != 'OR' && $andor != 'exact' && $andor != 'AND') {
+if ('OR' != $andor && 'exact' != $andor && 'AND' != $andor) {
     $andor = 'AND';
 }
 
 $myts =& MyTextSanitizer::getInstance();
-if ($action != 'showallbyuser') {
-    if ($andor != 'exact') {
+if ('showallbyuser' != $action) {
+    if ('exact' != $andor) {
         $ignored_queries = []; // holds kewords that are shorter than allowed minmum length
         $temp_queries = preg_split('/[\s,]+/', $query);
         foreach ($temp_queries as $q) {
@@ -116,7 +116,7 @@ if ($action != 'showallbyuser') {
                 $ignored_queries[] = $myts->addSlashes($q);
             }
         }
-        if (count($queries) == 0) {
+        if (0 == count($queries)) {
             redirect_header('search.php', 2, sprintf(_SR_KEYTOOSHORT, $xoopsConfigSearch['keyword_min']));
             exit();
         }
@@ -146,7 +146,7 @@ switch ($action) {
         $nomatch = true;
         echo '<h3>' . _SR_SEARCHRESULTS . "</h3>\n";
         echo _SR_KEYWORDS . ':';
-        if ($andor != 'exact') {
+        if ('exact' != $andor) {
             foreach ($queries as $q) {
                 echo ' <strong>' . htmlspecialchars(stripslashes($q)) . '</strong>';
             }
@@ -171,7 +171,7 @@ switch ($action) {
                     $nomatch = false;
                     echo '<h4>' . $module->getVar('name') . '</h4>';
                     for($i = 0; $i < $count; $i++) {
-                        if (isset($results[$i]['image']) && $results[$i]['image'] != '') {
+                        if (isset($results[$i]['image']) && '' != $results[$i]['image']) {
                             echo "<img src='modules/" . $module->getVar('dirname') . '/' . $results[$i]['image'] . "' alt='" . $module->getVar('name') . "' />&nbsp;";
                         } else {
                             echo "<img style='width:26px; height:26px;' src='images/icons/posticon2.gif' alt='" . $module->getVar('name') . "' />&nbsp;";
@@ -217,13 +217,13 @@ switch ($action) {
             $next_results =& $module->search($queries, $andor, 1, $start + 20, $uid);
             $next_count = count($next_results);
             $has_next = false;
-            if (is_array($next_results) && $next_count == 1) {
+            if (is_array($next_results) && 1 == $next_count) {
                 $has_next = true;
             }
             echo '<h4>' . _SR_SEARCHRESULTS . "</h4>\n";
-            if ($action == 'showall') {
+            if ('showall' == $action) {
                 echo _SR_KEYWORDS . ':';
-                if ($andor != 'exact') {
+                if ('exact' != $andor) {
                     foreach ($queries as $q) {
                         echo ' <strong>' . htmlspecialchars(stripslashes($q)) . '</strong>';
                     }
@@ -235,7 +235,7 @@ switch ($action) {
             printf(_SR_SHOWING, $start + 1, $start + $count);
             echo '<h5>' . $module->getVar('name') . '</h5>';
             for ($i = 0; $i < $count; $i ++) {
-                if (isset($results[$i]['image']) && $results[$i]['image'] != '') {
+                if (isset($results[$i]['image']) && '' != $results[$i]['image']) {
                     echo "<img src='modules/" . $module->getVar('dirname', 'n') . '/' . $results[$i]['image'] . "' alt='" . $module->getVar('name') . "' />&nbsp;";
                 } else {
                     echo "<img style='width:26px; height:26px;' src='images/icons/posticon2.gif' alt='" . $module->getVar('name') . "' />&nbsp;";
@@ -256,7 +256,7 @@ switch ($action) {
             echo '<table><tr>';
             $search_url = XOOPS_URL . '/search.php?query=' . urlencode(stripslashes(implode(' ', $queries)));
             $search_url .= "&mid={$mid}&action={$action}&andor={$andor}";
-            if ($action == 'showallbyuser') {
+            if ('showallbyuser' == $action) {
                 $search_url .= "&uid={$uid}";
             }
             if ($start > 0) {

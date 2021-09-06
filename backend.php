@@ -26,7 +26,7 @@ if ($cacheid != md5($cid.$catid))
 	
 if ($GLOBALS['twitterbombModuleConfig']['htaccess']) {
 	$url = XOOPS_URL.'/'.$GLOBALS['twitterbombModuleConfig']['baseurl'].'/rss,'.$cid.','.$catid.','.$cacheid.$GLOBALS['twitterbombModuleConfig']['endofurl_rss'];
-	if (strpos($url, $_SERVER['REQUEST_URI'])==0) {
+	if (0 == strpos($url, $_SERVER['REQUEST_URI'])) {
 		header('HTTP/1.1 301 Moved Permanently');
 		header('Location: '.$url);
 		exit(0);
@@ -77,7 +77,7 @@ $tpl = new XoopsTpl();
 	$campaign_handler = &xoops_getModuleHandler('campaign','twitterbomb');
 	$campaign = $campaign_handler->get($cid);
 	
-	if ($campaign->getVar('timed')!=0) {
+	if (0 != $campaign->getVar('timed')) {
 		if ($campaign->getVar('start')<time()&&$campaign->getVar('end')>time()) {
 			
 			if (!$sarray = XoopsCache::read('tweetbomb_'.$campaign->getVar('type').'_'.$cacheid)) {
@@ -137,10 +137,10 @@ $tpl = new XoopsTpl();
                 'description' => XoopsLocal::convert_encoding(htmlspecialchars($story['description'], ENT_QUOTES))
             ]);
 
-            if ($story['sid']!=0){
+            if (0 != $story['sid']){
             	$scheduler_handler = &xoops_getModuleHandler('scheduler','twitterbomb');
 				$scheduler = $scheduler_handler->get($story['sid']);
-				if ($scheduler->getVar('when')==0)
+				if (0 == $scheduler->getVar('when'))
 					$scheduler->setVar('when', time());
 				$scheduler->setVar('tweeted', time());
             	$scheduler_handler->insert($scheduler, true);

@@ -188,19 +188,19 @@ class TwitterBombRetweet extends XoopsObject
     public function toArray()
     {
         $ret = parent::toArray();
-        if ($this->getVar('searched') <> 0) {
+        if (0 <> $this->getVar('searched')) {
             $ret['searched_datetime'] = date(_DATESTRING, $this->getVar('searched'));
         }
-        if ($this->getVar('created') <> 0) {
+        if (0 <> $this->getVar('created')) {
             $ret['created_datetime'] = date(_DATESTRING, $this->getVar('created'));
         }
-        if ($this->getVar('updated') <> 0) {
+        if (0 <> $this->getVar('updated')) {
             $ret['updated_datetime'] = date(_DATESTRING, $this->getVar('updated'));
         }
-        if ($this->getVar('actioned') <> 0) {
+        if (0 <> $this->getVar('actioned')) {
             $ret['actioned_datetime'] = date(_DATESTRING, $this->getVar('actioned'));
         }
-        if ($this->getVar('retweeted') <> 0) {
+        if (0 <> $this->getVar('retweeted')) {
             $ret['retweeted_datetime'] = date(_DATESTRING, $this->getVar('retweeted'));
         }
 
@@ -228,7 +228,7 @@ class TwitterBombRetweet extends XoopsObject
             $ret['form'][$key] = $ele[$key]->render();
         }
 
-        $ret['geocode']     = ($this->getVar('geocode') == true ? _YES : _NO);
+        $ret['geocode']     = (true == $this->getVar('geocode') ? _YES : _NO);
         $ret['measurement'] = defined('_MI_TWEETBOMB_MEASUREMENT_' . strtoupper($this->getVar('measurement'))) ? constant('_MI_TWEETBOMB_MEASUREMENT_' . strtoupper($this->getVar('measurement'))) : $this->getVar('measurement');
         $ret['language']    = defined('_MI_TWEETBOMB_LANGUAGE_' . strtoupper($this->getVar('language'))) ? constant('_MI_TWEETBOMB_LANGUAGE_' . strtoupper($this->getVar('language'))) : $this->getVar('language');
         $ret['type']        = defined('_MI_TWEETBOMB_RETWEET_TYPE_' . strtoupper($this->getVar('type'))) ? constant('_MI_TWEETBOMB_RETWEET_TYPE_' . strtoupper($this->getVar('type'))) : $this->getVar('type');
@@ -337,13 +337,13 @@ class TwitterBombRetweetHandler extends XoopsPersistableObjectHandler
             $var = explode(',', $part);
             if (!empty($var[1]) && !is_numeric($var[0])) {
                 $object = $this->create();
-                if ($object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_TXTBOX || $object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_TXTAREA) {
+                if (XOBJ_DTYPE_TXTBOX == $object->vars[$var[0]]['data_type'] || XOBJ_DTYPE_TXTAREA == $object->vars[$var[0]]['data_type']) {
                     $criteria->add(new Criteria('`' . $var[0] . '`', '%' . $var[1] . '%', ($var[2] ?? 'LIKE')));
-                } elseif ($object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_INT || $object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_DECIMAL || $object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_FLOAT) {
+                } elseif (XOBJ_DTYPE_INT == $object->vars[$var[0]]['data_type'] || XOBJ_DTYPE_DECIMAL == $object->vars[$var[0]]['data_type'] || XOBJ_DTYPE_FLOAT == $object->vars[$var[0]]['data_type']) {
                     $criteria->add(new Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
-                } elseif ($object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_ENUM) {
+                } elseif (XOBJ_DTYPE_ENUM == $object->vars[$var[0]]['data_type']) {
                     $criteria->add(new Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
-                } elseif ($object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_ARRAY) {
+                } elseif (XOBJ_DTYPE_ARRAY == $object->vars[$var[0]]['data_type']) {
                     $criteria->add(new Criteria('`' . $var[0] . '`', '%"' . $var[1] . '";%', ($var[2] ?? 'LIKE')));
                 }
             } elseif (!empty($var[1]) && is_numeric($var[0])) {
@@ -397,7 +397,7 @@ class TwitterBombRetweetHandler extends XoopsPersistableObjectHandler
                 $this->_modConfig['gather_on_search'],
                 $retweet->getVar('search'),
                 explode(' ', trim($retweet->getVar('skip'))),
-                ($retweet->getVar('geocode') == true ? $retweet->getVar('longitude') . ',' . $retweet->getVar('latitude') . ',' . $retweet->getVar('radius') . $retweet->getVar('measurement') : ''),
+                (true == $retweet->getVar('geocode') ? $retweet->getVar('longitude') . ',' . $retweet->getVar('latitude') . ',' . $retweet->getVar('radius') . $retweet->getVar('measurement') : ''),
                 $retweet->getVar('language'),
                 1,
                 $retweet->getVar('type'),
@@ -435,7 +435,7 @@ class TwitterBombRetweetHandler extends XoopsPersistableObjectHandler
         }
 
         $run_plugin_action = false;
-        if ($object->vars['type']['changed'] == true || $object->vars['language']['changed'] == true) {
+        if (true == $object->vars['type']['changed'] || true == $object->vars['language']['changed']) {
             $run_plugin_action = true;
             $object->setVar('actioned', time());
         }

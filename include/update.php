@@ -315,7 +315,7 @@ $sql[] = 'CREATE TABLE `' . $GLOBALS['xoopsDB']->prefix('twitterbomb_scheduler')
 				case 1317:
 					set_time_limit($GLOBALS['seconds_executed']=$GLOBALS['seconds_executed']+60);
 					$setting = explode('_', $id);
-					if (count($setting)==4) {
+					if (4 == count($setting)) {
 						foreach($recovery[$setting[0]][$setting[1]][$setting[2]][$setting[3]] as $option => $recoveryquestion) {
 							if (strpos(' '.$recoveryquestion, 'SELECT * FROM')>0) {
 								$GLOBALS['xoopsDB']->close();	

@@ -123,7 +123,7 @@ class TwitterbombFormCheckBoxRetweet extends XoopsFormElement
      */
     public function addOption($value, $name = '')
     {
-        if ($name != '') {
+        if ('' != $name) {
             $this->_options[$value] = $name;
         } else {
             $this->_options[$value] = $value;
@@ -188,7 +188,7 @@ class TwitterbombFormCheckBoxRetweet extends XoopsFormElement
         $ele_extra     = $this->getExtra();
         $ele_delimeter = empty($this->columns) ? $this->getDelimeter() : '';
 
-        if (count($ele_options) > 1 && substr($ele_name, -2, 2) != '[]') {
+        if (count($ele_options) > 1 && '[]' != substr($ele_name, -2, 2)) {
             $ele_name = $ele_name . '[]';
             $this->setName($ele_name);
         }
@@ -201,7 +201,7 @@ class TwitterbombFormCheckBoxRetweet extends XoopsFormElement
         foreach ($ele_options as $value => $name) {
             $id_ele++;
             if (!empty($this->columns)) {
-                if ($i % $this->columns == 0) {
+                if (0 == $i % $this->columns) {
                     $ret .= '<tr>';
                 }
                 $ret .= '<td>';
@@ -214,7 +214,7 @@ class TwitterbombFormCheckBoxRetweet extends XoopsFormElement
             $ret .= $ele_extra . ' />' . "<label name='xolb_{$ele_name}' for='{$ele_id}{$id_ele}'>" . $name . '</label>' . $ele_delimeter;
             if (!empty($this->columns)) {
                 $ret .= '</td>';
-                if (++$i % $this->columns == 0) {
+                if (0 == ++$i % $this->columns) {
                     $ret .= '</tr>';
                 }
             }

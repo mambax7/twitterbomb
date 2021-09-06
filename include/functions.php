@@ -118,7 +118,7 @@ if (!function_exists('twitterbomb_searchtwitter')) {
 							$pass=true;
 							foreach($exceptions as $searchfor) {
 								if (!empty($searchfor)) {
-									if (substr($searchfor,0,1)=='-') {
+									if ('-' == substr($searchfor, 0, 1)) {
 										$numbernegative++;
 										if (!strpos(strtolower(' '.$result['text']), strtolower(substr($searchfor,1,strlen($searchfor)-1)))) {
 											$foundneg++;
@@ -135,21 +135,21 @@ if (!function_exists('twitterbomb_searchtwitter')) {
 								$pass=true;
 							elseif ($numbernegative>0&&$foundneg/$numbernegative*100>$GLOBALS['twitterbombModuleConfig']['negative_match_perc'])
 								$pass=true;
-							elseif ($numberpositive==0&&$foundpos==0)
+							elseif (0 == $numberpositive && 0 == $foundpos)
 								$pass=true;
-							elseif ($numbernegative==0&&$foundneg==0)
+							elseif (0 == $numbernegative && 0 == $foundneg)
 								$pass=true;
 							elseif ($numberpositive>0&&$foundpos>0)
 								$pass=true;
 							
 							if ($numbernegative>0&&$foundneg/$numbernegative*100<$GLOBALS['twitterbombModuleConfig']['negative_match_perc'])
 								$pass=false;
-							elseif ($foundpos==0&&$numberpositive>0)
+							elseif (0 == $foundpos && $numberpositive > 0)
 								$pass=false;
 						} else {
 							$pass=true;
 						}
-						if ($pass==true) {
+						if (true == $pass) {
 							$ret[$result['id_str']] = $result;
 							$gathered++;
 						} 
@@ -239,7 +239,7 @@ if (!function_exists('twitterbomb_get_rss')) {
 			$ret[$c]['title'] = (is_object($sourceuser)?'@'.$sourceuser->getVar('screen_name').' ':'').(strlen($username)>0&&($mtr<=$GLOBALS['twitterbombModuleConfig']['odds_minimum']||$mtr>=$GLOBALS['twitterbombModuleConfig']['odds_maximum'])?'@'.$username.' ':'').str_replace('#@', '@', str_replace('#(', '(#', str_replace('##', '#', twitterbomb_TweetString(htmlspecialchars_decode($sentence), $GLOBALS['twitterbombModuleConfig']['aggregate'], $GLOBALS['twitterbombModuleConfig']['wordlength']))));	  
 			$ret[$c]['link'] = XOOPS_URL.'/modules/twitterbomb/go.php?cid='.$cid.'&catid='.$catid.'&uri='.urlencode( sprintf($url, urlencode(str_replace(['#', '@'], '', $sentence))));
 			$ret[$c]['description'] = (is_object($sourceuser)?'@'.$sourceuser->getVar('screen_name').' ':'').(strlen($username)>0&&($mtr<=$GLOBALS['twitterbombModuleConfig']['odds_minimum']||$mtr>=$GLOBALS['twitterbombModuleConfig']['odds_maximum'])?'@'.$username.' ':'').htmlspecialchars_decode($sentence);
-			if (strlen($ret[$c]['title'])!=0) {
+			if (0 != strlen($ret[$c]['title'])) {
     			$log_handler=xoops_getModuleHandler('log', 'twitterbomb');
     			$log = $log_handler->create();
     			$log->setVar('cid', $cid);
@@ -291,7 +291,7 @@ if (!function_exists('twitterbomb_get_scheduler_rss')) {
 				$ret[$c]['link'] = XOOPS_URL.'/modules/twitterbomb/go.php?sid='.$sentence['sid'].'&cid='.$cid.'&catid='.$catid.'&uri='.urlencode( sprintf($url, urlencode(str_replace(['#', '@'], '', $sentence['tweet']))));
 				$ret[$c]['description'] = htmlspecialchars_decode((is_object($sourceuser)?'@'.$sourceuser->getVar('screen_name').' ':'').$sentence['tweet']);
 				$ret[$c]['sid'] = $sentence['sid'];
-				if (strlen($ret[$c]['title'])!=0) {
+				if (0 != strlen($ret[$c]['title'])) {
 					$log_handler=xoops_getModuleHandler('log', 'twitterbomb');
 	    			$log = $log_handler->create();
 	    			$log->setVar('provider', 'scheduler');
@@ -380,7 +380,7 @@ if (!function_exists('twitterbomb_get_retweet_rss')) {
 				    			$link = XOOPS_URL.'/modules/twitterbomb/go.php?rid='.$rid.'&cid='.$cid.'&lid='.$lid.'&catid='.$catid.'&uri='.urlencode( sprintf($url, urlencode(str_replace(['#', '@'], '', $tweet['text']))));
 					   			
 				    			$criteria = new Criteria('`screen_name`', $tweet['from_user']);
-				    			if ($usernames_handler->getCount($criteria)==0) {
+				    			if (0 == $usernames_handler->getCount($criteria)) {
 				    				$username = $usernames_handler->create();
 				    				$username->setVar('screen_name', $tweet['from_user']);
 				    				$username->setVar('type' , 'bomb');
@@ -432,7 +432,7 @@ if (!function_exists('twitterbomb_ExtractTags')) {
     			$ret[ucfirst(substr($node, 1, strlen($node)-1))] = ucfirst(substr($node, 1, strlen($node)-1)); 
     		}
     	}
-		if ($as_array==true)
+		if (true == $as_array)
 			return $ret;
 		else 
 			return implode($seperator, $ret);
@@ -442,11 +442,11 @@ if (!function_exists('twitterbomb_ExtractTags')) {
 	 
 if (!function_exists('twitterbomb_TweetString')) {
 	function twitterbomb_TweetString($title, $doit=false, $wordlen=4) {
-		if ($doit==true) {
+		if (true == $doit) {
 			$title_array = explode(' ', $title);
 			$title = '';
 			foreach($title_array as $item) {
-				if (strlen($item)>$wordlen && (substr($item, 0, 1)!='#' && substr($item, 0, 1)!='@')) 
+				if (strlen($item)>$wordlen && ('#' != substr($item, 0, 1) && '@' != substr($item, 0, 1)))
 					$title .= ' #'.$item;
 				else 
 					$title .= ' '.$item;
@@ -463,7 +463,7 @@ if (!function_exists('twitterbomb_checkmirc_log_line')) {
 		if ($parts[0]==$parts[sizeof($parts)]) {
 			return null;
 		}
-		if ($parts[0]=='Session') {
+		if ('Session' == $parts[0]) {
 			return null;
 		}
 		return $line;
@@ -498,10 +498,10 @@ if (!function_exists('tweetbomb_getFilterElement')) {
 		    	break;
 	    	case 'provider':
 		    case 'type':
-				 if ($op=='retweet') {
+				 if ('retweet' == $op) {
 					$ele = new TwitterBombFormSelectRetweetType('', 'filter_'.$field.'', $components['value'], 1, false, true);
 			    	$ele->setExtra('onchange="window.open(\''.$_SERVER['PHP_SELF'].'?'.$components['extra'].'&filter='.$components['filter'].(!empty($components['filter'])?'|':'').$field.',\'+this.options[this.selectedIndex].value'.(!empty($components['operator'])?'+\','.$components['operator'].'\'':'').',\'_self\')"');
-		    	} elseif ($op=='log') {
+		    	} elseif ('log' == $op) {
 					$ele = new TwitterBombFormSelectLogType('', 'filter_'.$field.'', $components['value'], 1, false, true);
 			    	$ele->setExtra('onchange="window.open(\''.$_SERVER['PHP_SELF'].'?'.$components['extra'].'&filter='.$components['filter'].(!empty($components['filter'])?'|':'').$field.',\'+this.options[this.selectedIndex].value'.(!empty($components['operator'])?'+\','.$components['operator'].'\'':'').',\'_self\')"');
 		    	} else {
@@ -576,7 +576,7 @@ if (!function_exists('tweetbomb_getFilterURLComponents')) {
 	    			$ele_value = $var[1];
 	    			if (isset($var[2]))
 	    				$operator = $var[2];
-	    		} elseif ($var[0]!=1) {
+	    		} elseif (1 != $var[0]) {
 	    			$ret[] = implode(',', $var);
 	    		}
     		}

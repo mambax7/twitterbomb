@@ -21,7 +21,7 @@ function b_twitterbomb_block_usernames_show( $options )
 	$criterib->add(new Criteria('`avarta`', 'NULL', 'NOT LIKE'));
 	$criteria->add($criterib, 'AND');
 		
-	if ($options[3]==true) {
+	if (true == $options[3]) {
 		$criteria->setSort('RAND()');
 		$criteria->setOrder('DESC');
 	} else {

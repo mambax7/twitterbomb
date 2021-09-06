@@ -226,7 +226,7 @@ abstract class OAuthSignatureMethod_RSA_SHA1 extends OAuthSignatureMethod {
     // Release the key resource
     openssl_free_key($publickeyid);
 
-    return $ok == 1;
+    return 1 == $ok;
   }
 }
 
@@ -255,7 +255,7 @@ class OAuthRequest
      */
     public static function from_request($http_method = null, $http_url = null, $parameters = null)
     {
-        $scheme = (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != 'on') ? 'http' : 'https';
+        $scheme = (!isset($_SERVER['HTTPS']) || 'on' != $_SERVER['HTTPS']) ? 'http' : 'https';
         @$http_url or $http_url = $scheme . '://' . $_SERVER['HTTP_HOST'] . ':' . $_SERVER['SERVER_PORT'] . $_SERVER['REQUEST_URI'];
         @$http_method or $http_method = $_SERVER['REQUEST_METHOD'];
 
@@ -272,7 +272,7 @@ class OAuthRequest
 
             // It's a POST request of the proper content-type, so parse POST
             // parameters and add those overriding any duplicates from GET
-            if ($http_method == 'POST'
+            if ('POST' == $http_method
                 && @strstr(
                     $request_headers['Content-Type'],
                     'application/x-www-form-urlencoded'
@@ -285,7 +285,7 @@ class OAuthRequest
 
             // We have a Authorization-header with OAuth data. Parse the header
             // and add those overriding any duplicates from GET or POST
-            if (@substr($request_headers['Authorization'], 0, 6) == 'OAuth ') {
+            if ('OAuth ' == @substr($request_headers['Authorization'], 0, 6)) {
                 $header_parameters = OAuthUtil::split_header(
                     $request_headers['Authorization']
                 );
@@ -407,10 +407,10 @@ class OAuthRequest
         $host   = $parts['host'];
         $path   = @$parts['path'];
 
-        $port or $port = ($scheme == 'https') ? '443' : '80';
+        $port or $port = ('https' == $scheme) ? '443' : '80';
 
-        if (($scheme == 'https' && $port != '443')
-            || ($scheme == 'http' && $port != '80')) {
+        if (('https' == $scheme && '443' != $port)
+            || ('http' == $scheme && '80' != $port)) {
             $host = "$host:$port";
         }
         return "$scheme://$host$path";
@@ -452,7 +452,7 @@ class OAuthRequest
 
         $total = [];
         foreach ($this->parameters as $k => $v) {
-            if (substr($k, 0, 5) != 'oauth') {
+            if ('oauth' != substr($k, 0, 5)) {
                 continue;
             }
             if (is_array($v)) {
@@ -838,7 +838,7 @@ class OAuthUtil {
         $out['Content-Type'] = $_ENV['CONTENT_TYPE'];
 
       foreach ($_SERVER as $key => $value) {
-        if (substr($key, 0, 5) == 'HTTP_') {
+        if ('HTTP_' == substr($key, 0, 5)) {
           // this is chaos, basically it is just there to capitalize the first
           // letter of every word that is not an initial HTTP and strip HTTP
           // code from przemek

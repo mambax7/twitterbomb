@@ -174,7 +174,7 @@
 					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 			
 					foreach (['cid', 'catid', 'type', 'name', 'description', 'start', 'end', 'timed', 'uid', 'created', 'updated', 'hits', 'active'] as $id => $key) {
-						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?($order=='DESC'?'ASC':'DESC'):$order).'&op='.$op.'&filter='.$filter.'">'.(defined('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key)))?constant('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))):'_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))).'</a>');
+						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?('DESC' == $order ?'ASC':'DESC'):$order) . '&op=' . $op . '&filter=' . $filter . '">' . (defined('_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key)))?constant('_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key))): '_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key))) . '</a>');
 						$GLOBALS['xoopsTpl']->assign('filter_'.strtolower(str_replace('-','_',$key)).'_th', $campaign_handler->getFilterForm($filter, $key, $sort, $op, $fct));
 					}
 					
@@ -210,7 +210,7 @@
 					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
 					$campaign_handler =& xoops_getModuleHandler('campaign', 'twitterbomb');
-					if ($id!=0) {
+					if (0 != $id) {
 						$campaign = $campaign_handler->get($id);
 					} else {
 						$campaign = $campaign_handler->create();
@@ -224,7 +224,7 @@
 					
 					$campaign_handler =& xoops_getModuleHandler('campaign', 'twitterbomb');
 					
-					if ($id!=0) {
+					if (0 != $id) {
 						$campaign = $campaign_handler->get($id);
 					} else {
 						$campaign = $campaign_handler->create();
@@ -269,7 +269,7 @@
 								
 					$campaign_handler =& xoops_getModuleHandler('campaign', 'twitterbomb');
 					
-					if (isset($_POST['id'])&&$id!=0) {
+					if (isset($_POST['id']) && 0 != $id) {
 						$campaign = $campaign_handler->get($id);
 						if (!$campaign_handler->delete($campaign)) {
 							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_REPLIES_FAILEDTODELETE);
@@ -304,7 +304,7 @@
 					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 			
 					foreach (['catid', 'pcatdid', 'name', 'uid', 'created', 'updated', 'hits', 'active'] as $id => $key) {
-						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?($order=='DESC'?'ASC':'DESC'):$order).'&op='.$op.'&filter='.$filter.'">'.(defined('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key)))?constant('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))):'_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))).'</a>');
+						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?('DESC' == $order ?'ASC':'DESC'):$order) . '&op=' . $op . '&filter=' . $filter . '">' . (defined('_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key)))?constant('_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key))): '_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key))) . '</a>');
 						$GLOBALS['xoopsTpl']->assign('filter_'.strtolower(str_replace('-','_',$key)).'_th', $category_handler->getFilterForm($filter, $key, $sort, $op, $fct));
 					}
 					
@@ -340,7 +340,7 @@
 					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
 					$category_handler =& xoops_getModuleHandler('category', 'twitterbomb');
-					if ($id!=0) {
+					if (0 != $id) {
 						$category = $category_handler->get($id);
 					} else {
 						$category = $category_handler->create();
@@ -354,7 +354,7 @@
 					
 					$category_handler =& xoops_getModuleHandler('category', 'twitterbomb');
 					
-					if ($id!=0) {
+					if (0 != $id) {
 						$category = $category_handler->get($id);
 					} else {
 						$category = $category_handler->create();
@@ -386,7 +386,7 @@
 								
 					$category_handler =& xoops_getModuleHandler('category', 'twitterbomb');
 					
-					if (isset($_POST['id'])&&$id!=0) {
+					if (isset($_POST['id']) && 0 != $id) {
 						$category = $category_handler->get($id);
 						if (!$category_handler->delete($category)) {
 							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_CATEGORY_FAILEDTODELETE);
@@ -420,7 +420,7 @@
 					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 					
 					foreach (['kid', 'cid', 'catid', 'base', 'keyword', 'uid', 'created', 'actioned', 'updated'] as $id => $key) {
-						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?($order=='DESC'?'ASC':'DESC'):$order).'&op='.$op.'&filter='.$filter.'">'.(defined('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key)))?constant('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))):'_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))).'</a>');
+						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?('DESC' == $order ?'ASC':'DESC'):$order) . '&op=' . $op . '&filter=' . $filter . '">' . (defined('_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key)))?constant('_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key))): '_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key))) . '</a>');
 						$GLOBALS['xoopsTpl']->assign('filter_'.strtolower(str_replace('-','_',$key)).'_th', $keywords_handler->getFilterForm($filter, $key, $sort, $op, $fct));
 					}
 					
@@ -457,7 +457,7 @@
 					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
 					$keywords_handler =& xoops_getModuleHandler('keywords', 'twitterbomb');
-					if ($id!=0) {
+					if (0 != $id) {
 						$keywords = $keywords_handler->get($id);
 					} else {
 						$keywords = $keywords_handler->create();
@@ -471,7 +471,7 @@
 					
 					$keywords_handler =& xoops_getModuleHandler('keywords', 'twitterbomb');
 					
-					if ($id!=0) {
+					if (0 != $id) {
 						$keywords = $keywords_handler->get($id);
 					} else {
 						$keywords = $keywords_handler->create();
@@ -503,7 +503,7 @@
 								
 					$keywords_handler =& xoops_getModuleHandler('keywords', 'twitterbomb');
 					
-					if (isset($_POST['id'])&&$id!=0) {
+					if (isset($_POST['id']) && 0 != $id) {
 						$keywords = $keywords_handler->get($id);
 						if (!$keywords_handler->delete($keywords)) {
 							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_KEYWORDS_FAILEDTODELETE);
@@ -538,7 +538,7 @@
 					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 			
 					foreach (['baseid', 'cid', 'catid', 'base1', 'base2', 'base3', 'base4', 'base5', 'base6', 'base7', 'uid', 'created', 'actioned', 'updated'] as $id => $key) {
-						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?($order=='DESC'?'ASC':'DESC'):$order).'&op='.$op.'&filter='.$filter.'">'.(defined('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key)))?constant('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))):'_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))).'</a>');
+						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?('DESC' == $order ?'ASC':'DESC'):$order) . '&op=' . $op . '&filter=' . $filter . '">' . (defined('_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key)))?constant('_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key))): '_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key))) . '</a>');
 						$GLOBALS['xoopsTpl']->assign('filter_'.strtolower(str_replace('-','_',$key)).'_th', $base_matrix_handler->getFilterForm($filter, $key, $sort, $op, $fct));
 					}
 					
@@ -574,7 +574,7 @@
 					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
 					$base_matrix_handler =& xoops_getModuleHandler('base_matrix', 'twitterbomb');
-					if ($id!=0) {
+					if (0 != $id) {
 						$base_matrix = $base_matrix_handler->get($id);
 					} else {
 						$base_matrix = $base_matrix_handler->create();
@@ -588,7 +588,7 @@
 					
 					$base_matrix_handler =& xoops_getModuleHandler('base_matrix', 'twitterbomb');
 					
-					if ($id!=0) {
+					if (0 != $id) {
 						$base_matrix = $base_matrix_handler->get($id);
 					} else {
 						$base_matrix = $base_matrix_handler->create();
@@ -620,7 +620,7 @@
 								
 					$base_matrix_handler =& xoops_getModuleHandler('base_matrix', 'twitterbomb');
 					
-					if (isset($_POST['id'])&&$id!=0) {
+					if (isset($_POST['id']) && 0 != $id) {
 						$base_matrix = $base_matrix_handler->get($id);
 						if (!$base_matrix_handler->delete($base_matrix)) {
 							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_BASEMATRIX_FAILEDTODELETE);
@@ -655,7 +655,7 @@
 					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 								
 					foreach (['tid', 'cid', 'catid', 'screen_name', 'uid', 'created', 'updated', 'type', 'source_nick', 'tweeted'] as $id => $key) {
-						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?($order=='DESC'?'ASC':'DESC'):$order).'&op='.$op.'&filter='.$filter.'">'.(defined('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key)))?constant('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))):'_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))).'</a>');
+						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?('DESC' == $order ?'ASC':'DESC'):$order) . '&op=' . $op . '&filter=' . $filter . '">' . (defined('_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key)))?constant('_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key))): '_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key))) . '</a>');
 						$GLOBALS['xoopsTpl']->assign('filter_'.strtolower(str_replace('-','_',$key)).'_th', $usernames_handler->getFilterForm($filter, $key, $sort, $op, $fct));
 					}
 					
@@ -691,7 +691,7 @@
 					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
 					$usernames_handler =& xoops_getModuleHandler('usernames', 'twitterbomb');
-					if ($id!=0) {
+					if (0 != $id) {
 						$usernames = $usernames_handler->get($id);
 					} else {
 						$usernames = $usernames_handler->create();
@@ -705,7 +705,7 @@
 					
 					$usernames_handler =& xoops_getModuleHandler('usernames', 'twitterbomb');
 					
-					if ($id!=0) {
+					if (0 != $id) {
 						$usernames = $usernames_handler->get($id);
 					} else {
 						$usernames = $usernames_handler->create();
@@ -737,7 +737,7 @@
 								
 					$usernames_handler =& xoops_getModuleHandler('usernames', 'twitterbomb');
 					
-					if (isset($_POST['id'])&&$id!=0) {
+					if (isset($_POST['id']) && 0 != $id) {
 						$usernames = $usernames_handler->get($id);
 						if (!$usernames_handler->delete($usernames)) {
 							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_USERNAMES_FAILEDTODELETE);
@@ -772,7 +772,7 @@
 					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 			
 					foreach (['urlid', 'cid', 'catid', 'surl', 'name', 'description', 'uid', 'created', 'updated'] as $id => $key) {
-						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?($order=='DESC'?'ASC':'DESC'):$order).'&op='.$op.'&filter='.$filter.'">'.(defined('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key)))?constant('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))):'_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))).'</a>');
+						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?('DESC' == $order ?'ASC':'DESC'):$order) . '&op=' . $op . '&filter=' . $filter . '">' . (defined('_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key)))?constant('_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key))): '_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key))) . '</a>');
 						$GLOBALS['xoopsTpl']->assign('filter_'.strtolower(str_replace('-','_',$key)).'_th', $urls_handler->getFilterForm($filter, $key, $sort, $op, $fct));
 					}
 					
@@ -808,7 +808,7 @@
 					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
 					$urls_handler =& xoops_getModuleHandler('urls', 'twitterbomb');
-					if ($id!=0) {
+					if (0 != $id) {
 						$urls = $urls_handler->get($id);
 					} else {
 						$urls = $urls_handler->create();
@@ -822,7 +822,7 @@
 					
 					$urls_handler =& xoops_getModuleHandler('urls', 'twitterbomb');
 					
-					if ($id!=0) {
+					if (0 != $id) {
 						$urls = $urls_handler->get($id);
 					} else {
 						$urls = $urls_handler->create();
@@ -854,7 +854,7 @@
 								
 					$urls_handler =& xoops_getModuleHandler('urls', 'twitterbomb');
 					
-					if (isset($_POST['id'])&&$id!=0) {
+					if (isset($_POST['id']) && 0 != $id) {
 						$urls = $urls_handler->get($id);
 						if (!$urls_handler->delete($urls)) {
 							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_URLS_FAILEDTODELETE);
@@ -890,7 +890,7 @@
 					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 			
 					foreach (['sid', 'cid', 'catid', 'mode', 'pre', 'text', 'hits', 'rank', 'uid', 'when', 'tweeted', 'created', 'updated'] as $id => $key) {
-						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?($order=='DESC'?'ASC':'DESC'):$order).'&op='.$op.'&filter='.$filter.'">'.(defined('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key)))?constant('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))):'_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))).'</a>');
+						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?('DESC' == $order ?'ASC':'DESC'):$order) . '&op=' . $op . '&filter=' . $filter . '">' . (defined('_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key)))?constant('_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key))): '_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key))) . '</a>');
 						$GLOBALS['xoopsTpl']->assign('filter_'.strtolower(str_replace('-','_',$key)).'_th', $scheduler_handler->getFilterForm($filter, $key, $sort, $op, $fct));
 					}
 					
@@ -928,7 +928,7 @@
 					include_once $GLOBALS['xoops']->path('/class/template.php');
 					
 					$scheduler_handler =& xoops_getModuleHandler('scheduler', 'twitterbomb');
-					if ($id!=0) {
+					if (0 != $id) {
 						$scheduler = $scheduler_handler->get($id);
 					} else {
 						$scheduler = $scheduler_handler->create();
@@ -943,7 +943,7 @@
 					
 					$scheduler_handler =& xoops_getModuleHandler('scheduler', 'twitterbomb');
 					
-					if ($id!=0) {
+					if (0 != $id) {
 						$scheduler = $scheduler_handler->get($id);
 					} else {
 						$scheduler = $scheduler_handler->create();
@@ -983,7 +983,7 @@
 								
 					$scheduler_handler =& xoops_getModuleHandler('scheduler', 'twitterbomb');
 					
-					if (isset($_POST['id'])&&$id!=0) {
+					if (isset($_POST['id']) && 0 != $id) {
 						$scheduler = $scheduler_handler->get($id);
 						if (!$scheduler_handler->delete($scheduler)) {
 							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_SCHEDULER_FAILEDTODELETE);
@@ -1024,7 +1024,7 @@
 					      	
 					      	foreach($lines as $line) {
 								
-					      		if ($_POST[0]['mode']=='mirc')
+					      		if ('mirc' == $_POST[0]['mode'])
 					      			$line = twitterbomb_checkmirc_log_line($line);
 					      			
 					      		if (!empty($line)) {
@@ -1074,7 +1074,7 @@
 			$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 	
 			foreach (['provider', 'date', 'alias', 'tweet', 'url', 'hits', 'rank', 'cid', 'catid', 'tags', 'active'] as $id => $key) {
-				$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?($order=='DESC'?'ASC':'DESC'):$order).'&op='.$op.'&filter='.$filter.'">'.(defined('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key)))?constant('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))):'_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))).'</a>');
+				$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?('DESC' == $order ?'ASC':'DESC'):$order) . '&op=' . $op . '&filter=' . $filter . '">' . (defined('_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key)))?constant('_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key))): '_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key))) . '</a>');
 				$GLOBALS['xoopsTpl']->assign('filter_'.strtolower(str_replace('-','_',$key)).'_th', $log_handler->getFilterForm($filter, $key, $sort, $op, $fct));
 			}
 			
@@ -1123,7 +1123,7 @@
                             'rid', 'search', 'skip', 'geocode', 'longitude', 'latitude', 'radius', 'measurement',
                             'language', 'type', 'uid', 'retweets', 'searched', 'created', 'updated', 'actioned', 'retweeted'
                         ] as $id => $key) {
-						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?($order=='DESC'?'ASC':'DESC'):$order).'&op='.$op.'&filter='.$filter.'">'.(defined('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key)))?constant('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))):'_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))).'</a>');
+						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?('DESC' == $order ?'ASC':'DESC'):$order) . '&op=' . $op . '&filter=' . $filter . '">' . (defined('_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key)))?constant('_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key))): '_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key))) . '</a>');
 						$GLOBALS['xoopsTpl']->assign('filter_'.strtolower(str_replace('-','_',$key)).'_th', $retweet_handler->getFilterForm($filter, $key, $sort, $op, $fct));
 					}
 					
@@ -1163,7 +1163,7 @@
 					
 					
 					$retweet_handler =& xoops_getModuleHandler('retweet', 'twitterbomb');
-					if ($id!=0) {
+					if (0 != $id) {
 						$retweet = $retweet_handler->get($id);
 					} else {
 						$retweet = $retweet_handler->create();
@@ -1177,13 +1177,13 @@
 					
 					$retweet_handler =& xoops_getModuleHandler('retweet', 'twitterbomb');
 					
-					if ($id!=0) {
+					if (0 != $id) {
 						$retweet = $retweet_handler->get($id);
 					} else {
 						$retweet = $retweet_handler->create();
 					}
 					$retweet->setVars($_POST[$id]);
-					if (!isset($_POST[$id]['geocode'])||empty($_POST[$id]['geocode'])||$_POST[$id]['geocode']!=1)
+					if (!isset($_POST[$id]['geocode'])||empty($_POST[$id]['geocode']) || 1 != $_POST[$id]['geocode'])
 						$retweet->setVar('geocode', false);
 					else 
 						$retweet->setVar('geocode', true);
@@ -1201,7 +1201,7 @@
 					foreach($id as $ids) {
 						$retweet = $retweet_handler->get($id);
 						$retweet->setVars($_POST[$ids]);
-						if (!isset($_POST[$ids]['geocode'])||empty($_POST[$ids]['geocode'])||$_POST[$ids]['geocode']!=1)
+						if (!isset($_POST[$ids]['geocode'])||empty($_POST[$ids]['geocode']) || 1 != $_POST[$ids]['geocode'])
 							$retweet->setVar('geocode', false);
 						else 
 							$retweet->setVar('geocode', true);
@@ -1218,7 +1218,7 @@
 								
 					$retweet_handler =& xoops_getModuleHandler('retweet', 'twitterbomb');
 					
-					if (isset($_POST['id'])&&$id!=0) {
+					if (isset($_POST['id']) && 0 != $id) {
 						$retweet = $retweet_handler->get($id);
 						if (!$retweet_handler->delete($retweet)) {
 							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_RETWEET_FAILEDTODELETE);
@@ -1253,7 +1253,7 @@
 					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 			
 					foreach (['cid', 'catid', 'mid', 'user', 'rpids', 'keywords', 'mentions', 'created', 'updated', 'mentioned', 'mentions', 'uid'] as $id => $key) {
-						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?($order=='DESC'?'ASC':'DESC'):$order).'&op='.$op.'&filter='.$filter.'">'.(defined('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key)))?constant('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))):'_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))).'</a>');
+						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?('DESC' == $order ?'ASC':'DESC'):$order) . '&op=' . $op . '&filter=' . $filter . '">' . (defined('_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key)))?constant('_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key))): '_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key))) . '</a>');
 						$GLOBALS['xoopsTpl']->assign('filter_'.strtolower(str_replace('-','_',$key)).'_th', $mentions_handler->getFilterForm($filter, $key, $sort, $op, $fct));
 					}
 					
@@ -1289,7 +1289,7 @@
 					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
 					$mentions_handler =& xoops_getModuleHandler('mentions', 'twitterbomb');
-					if ($id!=0) {
+					if (0 != $id) {
 						$mentions = $mentions_handler->get($id);
 					} else {
 						$mentions = $mentions_handler->create();
@@ -1303,7 +1303,7 @@
 					
 					$mentions_handler =& xoops_getModuleHandler('mentions', 'twitterbomb');
 					
-					if ($id!=0) {
+					if (0 != $id) {
 						$mentions = $mentions_handler->get($id);
 					} else {
 						$mentions = $mentions_handler->create();
@@ -1348,7 +1348,7 @@
 								
 					$mentions_handler =& xoops_getModuleHandler('mentions', 'twitterbomb');
 					
-					if (isset($_POST['id'])&&$id!=0) {
+					if (isset($_POST['id']) && 0 != $id) {
 						$mentions = $mentions_handler->get($id);
 						if (!$mentions_handler->delete($mentions)) {
 							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_REPLIES_FAILEDTODELETE);
@@ -1383,7 +1383,7 @@
 					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 			
 					foreach (['cid', 'catid', 'rpid', 'urlid', 'rcid', 'reply', 'keywords', 'uid', 'type', 'created', 'updated', 'replies', 'replied'] as $id => $key) {
-						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?($order=='DESC'?'ASC':'DESC'):$order).'&op='.$op.'&filter='.$filter.'">'.(defined('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key)))?constant('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))):'_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))).'</a>');
+						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?('DESC' == $order ?'ASC':'DESC'):$order) . '&op=' . $op . '&filter=' . $filter . '">' . (defined('_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key)))?constant('_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key))): '_AM_TWEETBOMB_TH_' . strtoupper(str_replace('-', '_', $key))) . '</a>');
 						$GLOBALS['xoopsTpl']->assign('filter_'.strtolower(str_replace('-','_',$key)).'_th', $replies_handler->getFilterForm($filter, $key, $sort, $op, $fct));
 					}
 					
@@ -1419,7 +1419,7 @@
 					include_once $GLOBALS['xoops']->path('/class/pagenav.php');
 					
 					$replies_handler =& xoops_getModuleHandler('replies', 'twitterbomb');
-					if ($id!=0) {
+					if (0 != $id) {
 						$replies = $replies_handler->get($id);
 					} else {
 						$replies = $replies_handler->create();
@@ -1433,7 +1433,7 @@
 					
 					$replies_handler =& xoops_getModuleHandler('replies', 'twitterbomb');
 					
-					if ($id!=0) {
+					if (0 != $id) {
 						$replies = $replies_handler->get($id);
 					} else {
 						$replies = $replies_handler->create();
@@ -1474,7 +1474,7 @@
 								
 					$replies_handler =& xoops_getModuleHandler('replies', 'twitterbomb');
 					
-					if (isset($_POST['id'])&&$id!=0) {
+					if (isset($_POST['id']) && 0 != $id) {
 						$replies = $replies_handler->get($id);
 						if (!$replies_handler->delete($replies)) {
 							redirect_header('index.php?op='.$op.'&fct=list&limit='.$limit.'&start='.$start.'&order='.$order.'&sort='.$sort.'&filter='.$filter, 10, _AM_MSG_REPLIES_FAILEDTODELETE);

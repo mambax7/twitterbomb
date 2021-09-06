@@ -281,7 +281,7 @@ class TwitterbombMentionsHandler extends XoopsPersistableObjectHandler
         $criteriac->add(new Criteria('catid', $catid), 'AND');
         $criteriad = new CriteriaCompo();
         foreach (explode(' ', $tweet) as $node) {
-            if (substr($node, 0, 1) == '@' || substr($node, 0, 1) == '#') {
+            if ('@' == substr($node, 0, 1) || '#' == substr($node, 0, 1)) {
                 $criteriad->add(new Criteria('`user`', strtolower($node), 'LIKE'), 'OR');
             }
         }
@@ -325,13 +325,13 @@ class TwitterbombMentionsHandler extends XoopsPersistableObjectHandler
             $var = explode(',', $part);
             if (!empty($var[1]) && !is_numeric($var[0])) {
                 $object = $this->create();
-                if ($object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_TXTBOX || $object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_TXTAREA) {
+                if (XOBJ_DTYPE_TXTBOX == $object->vars[$var[0]]['data_type'] || XOBJ_DTYPE_TXTAREA == $object->vars[$var[0]]['data_type']) {
                     $criteria->add(new Criteria('`' . $var[0] . '`', '%' . $var[1] . '%', ($var[2] ?? 'LIKE')));
-                } elseif ($object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_INT || $object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_DECIMAL || $object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_FLOAT) {
+                } elseif (XOBJ_DTYPE_INT == $object->vars[$var[0]]['data_type'] || XOBJ_DTYPE_DECIMAL == $object->vars[$var[0]]['data_type'] || XOBJ_DTYPE_FLOAT == $object->vars[$var[0]]['data_type']) {
                     $criteria->add(new Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
-                } elseif ($object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_ENUM) {
+                } elseif (XOBJ_DTYPE_ENUM == $object->vars[$var[0]]['data_type']) {
                     $criteria->add(new Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
-                } elseif ($object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_ARRAY) {
+                } elseif (XOBJ_DTYPE_ARRAY == $object->vars[$var[0]]['data_type']) {
                     $criteria->add(new Criteria('`' . $var[0] . '`', '%"' . $var[1] . '";%', ($var[2] ?? 'LIKE')));
                 }
             } elseif (!empty($var[1]) && is_numeric($var[0])) {
@@ -385,7 +385,7 @@ class TwitterbombMentionsHandler extends XoopsPersistableObjectHandler
                 $this->_modConfig['gather_on_search'],
                 $mention->getVar('user'),
                 explode(' ', trim($mention->getVar('keywords'))),
-                ($mention->getVar('geocode') == true ? $mention->getVar('longitude') . ',' . $mention->getVar('latitude') . ',' . $mention->getVar('radius') . $mention->getVar('measurement') : ''),
+                (true == $mention->getVar('geocode') ? $mention->getVar('longitude') . ',' . $mention->getVar('latitude') . ',' . $mention->getVar('radius') . $mention->getVar('measurement') : ''),
                 $mention->getVar('language'),
                 1,
                 $mention->getVar('type'),

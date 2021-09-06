@@ -103,7 +103,7 @@ class TwitterBombFormSelectScreenname extends XoopsFormElement
         if (isset($value)) {
             $this->setValue($value);
         }
-        if ($blank == true) {
+        if (true == $blank) {
             $this->addOption('', _MI_TWEETBOMB_NONE);
         }
         ini_set('memory_limit', '386M');
@@ -117,7 +117,7 @@ class TwitterBombFormSelectScreenname extends XoopsFormElement
         $criteria->setOrder('ASC');
 
         foreach ($usernames_handler->getObjects($criteria, true) as $tid => $user) {
-            if (intval($user->getVar('id')) <> 0) {
+            if (0 <> intval($user->getVar('id'))) {
                 $this->addOption($user->getVar('id'), $user->getVar('screen_name'));
             }
         }
@@ -185,7 +185,7 @@ class TwitterBombFormSelectScreenname extends XoopsFormElement
      */
     public function addOption($value, $name = '')
     {
-        if ($name != '') {
+        if ('' != $name) {
             $this->_options[$value] = $name;
         } else {
             $this->_options[$value] = $value;
@@ -238,7 +238,7 @@ class TwitterBombFormSelectScreenname extends XoopsFormElement
         $ele_value   = $this->getValue();
         $ele_options = $this->getOptions();
         $ret         = '<select size="' . $this->getSize() . '"' . $this->getExtra();
-        if ($this->isMultiple() != false) {
+        if (false != $this->isMultiple()) {
             $ret .= ' name="' . $ele_name . '[]" id="' . $ele_name . '" title="' . $ele_title . '" multiple="multiple">';
         } else {
             $ret .= ' name="' . $ele_name . '" id="' . $ele_name . '" title="' . $ele_title . '">';

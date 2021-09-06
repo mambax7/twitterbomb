@@ -152,7 +152,7 @@ class TwitterOAuth
     public function get($url, $parameters = [])
     {
         $response = $this->oAuthRequest($url, 'GET', $parameters);
-        if ($this->format === 'json' && $this->decode_json) {
+        if ('json' === $this->format && $this->decode_json) {
             return json_decode($response);
         }
         return $response;
@@ -164,7 +164,7 @@ class TwitterOAuth
     public function post($url, $parameters = [])
     {
         $response = $this->oAuthRequest($url, 'POST', $parameters);
-        if ($this->format === 'json' && $this->decode_json) {
+        if ('json' === $this->format && $this->decode_json) {
             return json_decode($response);
         }
         return $response;
@@ -176,7 +176,7 @@ class TwitterOAuth
     public function delete($url, $parameters = [])
     {
         $response = $this->oAuthRequest($url, 'DELETE', $parameters);
-        if ($this->format === 'json' && $this->decode_json) {
+        if ('json' === $this->format && $this->decode_json) {
             return json_decode($response);
         }
         return $response;
@@ -187,7 +187,7 @@ class TwitterOAuth
      */
     public function oAuthRequest($url, $method, $parameters)
     {
-        if (strrpos($url, 'https://') !== 0 && strrpos($url, 'http://') !== 0) {
+        if (0 !== strrpos($url, 'https://') && 0 !== strrpos($url, 'http://')) {
             $url = "{$this->host}{$url}.{$this->format}";
         }
         $request = OAuthRequest::from_consumer_and_token($this->consumer, $this->token, $method, $url, $parameters);

@@ -7,25 +7,25 @@
 	$catid = isset($_REQUEST['catid'])?intval($_REQUEST['catid']):0;
 	$uri = $_REQUEST['uri'] ?? '';
 	
-	if ($cid==0||$url=''||$catid==0) {
+	if (0 == $cid || $url= '' || 0 == $catid) {
 		header('HTTP/1.1 301 Moved Permanently');
 		header('Location: '.XOOPS_URL);
 		exit(0);
 	}
 	
-	if ($sid!=0) {
+	if (0 != $sid) {
 		$scheduler_handler =& xoops_getModuleHandler('scheduler', 'twitterbomb');
 		$scheduler_handler->plusHit($sid);
 	}           	
-	if ($lid!=0) {
+	if (0 != $lid) {
 		$log_handler =& xoops_getModuleHandler('log', 'twitterbomb');
 		$log_handler->plusHit($lid);
 	}
-	if ($cid!=0) {
+	if (0 != $cid) {
 		$campaign_handler =& xoops_getModuleHandler('campaign', 'twitterbomb');
 		$campaign_handler->plusHit($cid);
 	}
-	if ($catid!=0) {
+	if (0 != $catid) {
 		$category_handler =& xoops_getModuleHandler('category', 'twitterbomb');
 		$category_handler->plusHit($catid);
 	}	

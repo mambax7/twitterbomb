@@ -58,7 +58,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_gather']) {
 		$GLOBALS['execution_time'] = $GLOBALS['execution_time'] + 240;
 		set_time_limit($GLOBALS['execution_time']);
 		if ($oauth->getVar('friends')<time()&&$GLOBALS['twitterbombModuleConfig']['look_for_friends']>0) {
-			if ($oauth->getVar('id') == 0) {
+			if (0 == $oauth->getVar('id')) {
 				if ($user = $oauth->getUsers($oauth->getVar('username'), 'screen_name')) {
 					$oauth->setVar('id', $user[$oauth->getVar('username')]['id']);
 					$oauth_handler->insert($oauth, true);
@@ -66,7 +66,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_gather']) {
 			}
 			if ($ids = $oauth->getFriends($oauth->getVar('id'))) {
 				foreach($ids as $id) {
-					if ($usernames_handler->getCount(new Criteria('id', $id))==0) {
+					if (0 == $usernames_handler->getCount(new Criteria('id', $id))) {
 						$flid[$id] = $id;
 					}
 				}
@@ -97,7 +97,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_gather']) {
 		if ($oauth->getVar('mentions')<time()&&$GLOBALS['twitterbombModuleConfig']['look_for_mention']>0) {
 			$GLOBALS['execution_time'] = $GLOBALS['execution_time'] + 120;
 			set_time_limit($GLOBALS['execution_time']);
-			if ($oauth->getVar('id') == 0) {
+			if (0 == $oauth->getVar('id')) {
 				if ($user = $oauth->getUsers($oauth->getVar('username'), 'screen_name')) {
 					$oauth->setVar('id', $user[$oauth->getVar('username')]['id']);
 					$oauth_handler->insert($oauth, true);
@@ -108,7 +108,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_gather']) {
 					$ids[$mention['user']['id']] = $mention['user']['id'];
 				}		
 				foreach($ids as $id) {
-					if ($usernames_handler->getCount(new Criteria('id', $id))==0) {
+					if (0 == $usernames_handler->getCount(new Criteria('id', $id))) {
 						$flid[$id] = $id;
 					}
 				}
@@ -136,7 +136,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_gather']) {
 			$oids[$oid] = $oid;
 		}
 	}
-	if (count($oids)==0) {
+	if (0 == count($oids)) {
 		XoopsCache::delete('twitterbomb_oids_cron');
 	} else {
 		XoopsCache::write('twitterbomb_oids_cron', $oids);
@@ -158,7 +158,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_gather']) {
 			continue;
 		$GLOBALS['execution_time'] = $GLOBALS['execution_time'] + 60;
 		set_time_limit($GLOBALS['execution_time']);
-		if ($username->getVar('id') == 0) {
+		if (0 == $username->getVar('id')) {
 			$user = $oauth->getUsers($username->getVar('screen_name'), 'screen_name');
 			$oauth->getVar('id', $user['id']);
 			$username->setVar('id', $user['id']);		
@@ -169,7 +169,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_gather']) {
 		}
 		if ($ids = $oauth->getFriends($username->getVar('id'))) {
 			foreach($ids as $id) {
-				if ($usernames_handler->getCount(new Criteria('id', $id))==0) {
+				if (0 == $usernames_handler->getCount(new Criteria('id', $id))) {
 					$flid[$id] = $id;
 				}
 			}

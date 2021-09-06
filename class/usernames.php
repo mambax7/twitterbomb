@@ -149,7 +149,7 @@ class TwitterbombUsernamesHandler extends XoopsPersistableObjectHandler
                 return false;
             }
         } else {
-            if ($obj->vars['screen_name']['changed'] == true) {
+            if (true == $obj->vars['screen_name']['changed']) {
                 if ($this->getCount(new Criteria('`screen_name`', $obj->getVar('screen_name')))) {
                     return false;
                 }
@@ -158,17 +158,17 @@ class TwitterbombUsernamesHandler extends XoopsPersistableObjectHandler
         }
 
         $run_plugin = false;
-        if ($obj->vars['type']['changed'] == true) {
+        if (true == $obj->vars['type']['changed']) {
             $obj->setVar('actioned', time());
             $run_plugin = true;
         }
 
-        if ($run_plugin == true) {
+        if (true == $run_plugin) {
             $id  = parent::insert($obj, $force);
             $obj = parent::get($id);
             if (is_object($obj)) {
                 $ret = $obj->runInsertPlugin();
-                return ($ret != 0) ? $ret : $id;
+                return (0 != $ret) ? $ret : $id;
             } else {
                 return $id;
             }
@@ -283,17 +283,17 @@ class TwitterbombUsernamesHandler extends XoopsPersistableObjectHandler
         $result = $GLOBALS['xoopsDB']->queryF($sql);
         $ret    = [];
         while ($row = $GLOBALS['xoopsDB']->fetchArray($result)) {
-            if ($limit == 1) {
-                if ($as_object == false) {
+            if (1 == $limit) {
+                if (false == $as_object) {
                     return $row;
                 } else {
                     $object = new TwitterbombUsernames();
                     $object->assignVars($row);
                     return $object->runGetPlugin($for_tweet);
                 }
-            } elseif ($limit == 0 || $limit > 1) {
-                if ($as_object == false) {
-                    if ($id_as_key == true) {
+            } elseif (0 == $limit || $limit > 1) {
+                if (false == $as_object) {
+                    if (true == $id_as_key) {
                         $ret[$row['tid']] = $row;
                     } else {
                         $ret[] = $row;
@@ -301,7 +301,7 @@ class TwitterbombUsernamesHandler extends XoopsPersistableObjectHandler
                 } else {
                     $object = new TwitterbombUsernames();
                     $object->assignVars($row);
-                    if ($id_as_key == true) {
+                    if (true == $id_as_key) {
                         $ret[$row['tid']] = $object->runGetPlugin($for_tweet);
                     } else {
                         $ret[] = $object->runGetPlugin($for_tweet);
@@ -320,16 +320,16 @@ class TwitterbombUsernamesHandler extends XoopsPersistableObjectHandler
             $var = explode(',', $part);
             if (!empty($var[1]) && !is_numeric($var[0])) {
                 $object = $this->create();
-                if ($object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_TXTBOX
-                    || $object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_TXTAREA) {
+                if (XOBJ_DTYPE_TXTBOX == $object->vars[$var[0]]['data_type']
+                    || XOBJ_DTYPE_TXTAREA == $object->vars[$var[0]]['data_type']) {
                     $criteria->add(new Criteria('`' . $var[0] . '`', '%' . $var[1] . '%', ($var[2] ?? 'LIKE')));
-                } elseif ($object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_INT
-                          || $object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_DECIMAL
-                          || $object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_FLOAT) {
+                } elseif (XOBJ_DTYPE_INT == $object->vars[$var[0]]['data_type']
+                          || XOBJ_DTYPE_DECIMAL == $object->vars[$var[0]]['data_type']
+                          || XOBJ_DTYPE_FLOAT == $object->vars[$var[0]]['data_type']) {
                     $criteria->add(new Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
-                } elseif ($object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_ENUM) {
+                } elseif (XOBJ_DTYPE_ENUM == $object->vars[$var[0]]['data_type']) {
                     $criteria->add(new Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
-                } elseif ($object->vars[$var[0]]['data_type'] == XOBJ_DTYPE_ARRAY) {
+                } elseif (XOBJ_DTYPE_ARRAY == $object->vars[$var[0]]['data_type']) {
                     $criteria->add(new Criteria('`' . $var[0] . '`', '%"' . $var[1] . '";%', ($var[2] ?? 'LIKE')));
                 }
             } elseif (!empty($var[1]) && is_numeric($var[0])) {

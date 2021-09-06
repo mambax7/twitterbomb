@@ -103,7 +103,7 @@ class TwitterBombFormSelectBase extends XoopsFormElement
         if (isset($value)) {
             $this->setValue($value);
         }
-        if ($blank == true) {
+        if (true == $blank) {
             $this->addOption('', _MI_TWEETBOMB_NONE);
         }
 
@@ -115,7 +115,7 @@ class TwitterBombFormSelectBase extends XoopsFormElement
         $this->addOption('under', _MI_TWEETBOMB_BASE_TITLE_UNDER);
         $this->addOption('their', _MI_TWEETBOMB_BASE_TITLE_THEIR);
         $this->addOption('there', _MI_TWEETBOMB_BASE_TITLE_THERE);
-        if ($trend == true) {
+        if (true == $trend) {
             $this->addOption('trend', _MI_TWEETBOMB_BASE_TITLE_TREND);
         }
     }
@@ -182,7 +182,7 @@ class TwitterBombFormSelectBase extends XoopsFormElement
      */
     public function addOption($value, $name = '')
     {
-        if ($name != '') {
+        if ('' != $name) {
             $this->_options[$value] = $name;
         } else {
             $this->_options[$value] = $value;
@@ -235,7 +235,7 @@ class TwitterBombFormSelectBase extends XoopsFormElement
         $ele_value   = $this->getValue();
         $ele_options = $this->getOptions();
         $ret         = '<select size="' . $this->getSize() . '"' . $this->getExtra();
-        if ($this->isMultiple() != false) {
+        if (false != $this->isMultiple()) {
             $ret .= ' name="' . $ele_name . '[]" id="' . $ele_name . '" title="' . $ele_title . '" multiple="multiple">';
         } else {
             $ret .= ' name="' . $ele_name . '" id="' . $ele_name . '" title="' . $ele_title . '">';

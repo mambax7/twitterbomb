@@ -30,7 +30,7 @@ $xoopsLogger =& XoopsLogger::getInstance();
 $xoopsLogger->stopTime('Module init');
 $xoopsLogger->startTime('XOOPS output init');
 
-if ($xoopsConfig['theme_set'] != 'default' && file_exists(XOOPS_THEME_PATH . '/' . $xoopsConfig['theme_set'] . '/theme.php')) {
+if ('default' != $xoopsConfig['theme_set'] && file_exists(XOOPS_THEME_PATH . '/' . $xoopsConfig['theme_set'] . '/theme.php')) {
     require_once $GLOBALS['xoops']->path('include/xoops13_header.php');
 } else {
     global $xoopsOption, $xoopsConfig, $xoopsModule;
@@ -84,7 +84,7 @@ if ($xoopsConfig['theme_set'] != 'default' && file_exists(XOOPS_THEME_PATH . '/'
     if (!empty($xoopsModule)) {
         $xoTheme->contentCacheLifetime = @$xoopsConfig['module_cache'][$xoopsModule->getVar('mid', 'n')];
         // Tricky solution for setting cache time for homepage
-    } else if (!empty($xoopsOption['template_main']) && $xoopsOption['template_main'] == 'db:system_homepage.html') {
+    } else if (!empty($xoopsOption['template_main']) && 'db:system_homepage.html' == $xoopsOption['template_main']) {
         $xoTheme->contentCacheLifetime = 604800;
     }
 

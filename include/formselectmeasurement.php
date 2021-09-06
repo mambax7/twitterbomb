@@ -103,7 +103,7 @@ class TwitterBombFormSelectMeasurement extends XoopsFormElement
         if (isset($value)) {
             $this->setValue($value);
         }
-        if ($none == true) {
+        if (true == $none) {
             $this->addOption('', _MI_TWEETBOMB_NONE);
         }
         foreach (['mi' => 'Miles', 'km' => 'Kilometers'] as $key => $measurement) {
@@ -173,7 +173,7 @@ class TwitterBombFormSelectMeasurement extends XoopsFormElement
      */
     public function addOption($value, $name = '')
     {
-        if ($name != '') {
+        if ('' != $name) {
             $this->_options[$value] = $name;
         } else {
             $this->_options[$value] = $value;
@@ -226,7 +226,7 @@ class TwitterBombFormSelectMeasurement extends XoopsFormElement
         $ele_value   = $this->getValue();
         $ele_options = $this->getOptions();
         $ret         = '<select size="' . $this->getSize() . '"' . $this->getExtra();
-        if ($this->isMultiple() != false) {
+        if (false != $this->isMultiple()) {
             $ret .= ' name="' . $ele_name . '[]" id="' . $ele_name . '" title="' . $ele_title . '" multiple="multiple">';
         } else {
             $ret .= ' name="' . $ele_name . '" id="' . $ele_name . '" title="' . $ele_title . '">';

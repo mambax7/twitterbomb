@@ -27,7 +27,7 @@ function b_twitterbomb_block_mentions_show( $options )
 		}
 	}
 	
-	if ($campaign->getVar('timed')!=0) {
+	if (0 != $campaign->getVar('timed')) {
 		if ($campaign->getVar('start')<time()&&$campaign->getVar('end')>time()) {
 			if (!$block['tweets'] = XoopsCache::read('tweetbomb_mentions_'.$cacheid)) {
 				$log_handler =& xoops_getModuleHandler('log', 'twitterbomb');
