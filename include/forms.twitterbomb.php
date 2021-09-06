@@ -15,7 +15,7 @@
 		$id = $object->getVar('rid');
 		if (empty($id)) $id = '0';
 		
-		$ele = array();	
+		$ele = [];
 		$ele['op'] = new XoopsFormHidden('op', 'retweet');
 		$ele['fct'] = new XoopsFormHidden('fct', 'save');
 		$ele['id'] = new XoopsFormHidden('id', $id);
@@ -73,7 +73,7 @@
 		
 		$ele['submit'] = new XoopsFormButton('', 'submit', _SUBMIT, 'submit');
 		
-		$required = array('search', 'language', 'type', 'measurement');
+		$required = ['search', 'language', 'type', 'measurement'];
 		
 		foreach($ele as $id => $obj)			
 			if (in_array($id, $required))
@@ -138,7 +138,7 @@
 		}			
 		$ele['submit'] = new XoopsFormButton('', 'submit', _SUBMIT, 'submit');
 		
-		$required = array('base1', 'base2');
+		$required = ['base1', 'base2'];
 		
 		foreach($ele as $id => $obj)			
 			if (in_array($id, $required))
@@ -204,7 +204,7 @@
 		}						
 		$ele['submit'] = new XoopsFormButton('', 'submit', _SUBMIT, 'submit');
 		
-		$required = array('catid', 'type');
+		$required = ['catid', 'type'];
 		
 		foreach($ele as $id => $obj)			
 			if (in_array($id, $required))
@@ -280,7 +280,7 @@
 		}			
 		$ele['submit'] = new XoopsFormButton('', 'submit', _SUBMIT, 'submit');
 		
-		$required = array('name', 'catid', 'type');
+		$required = ['name', 'catid', 'type'];
 		
 		foreach($ele as $id => $obj)			
 			if (in_array($id, $required))
@@ -347,7 +347,7 @@
 		}			
 		$ele['submit'] = new XoopsFormButton('', 'submit', _SUBMIT, 'submit');
 		
-		$required = array('name', 'catid', 'type');
+		$required = ['name', 'catid', 'type'];
 		
 		foreach($ele as $id => $obj)			
 			if (in_array($id, $required))
@@ -397,7 +397,7 @@
 		}			
 		$ele['submit'] = new XoopsFormButton('', 'submit', _SUBMIT, 'submit');
 		
-		$required = array('name', 'description');
+		$required = ['name', 'description'];
 		
 		foreach($ele as $id => $obj)			
 			if (in_array($id, $required))
@@ -453,7 +453,7 @@
 		}			
 		$ele['submit'] = new XoopsFormButton('', 'submit', _SUBMIT, 'submit');
 		
-		$required = array('base', 'keyword');
+		$required = ['base', 'keyword'];
 		
 		foreach($ele as $id => $obj)			
 			if (in_array($id, $required))
@@ -504,7 +504,7 @@
 		}			
 		$ele['submit'] = new XoopsFormButton('', 'submit', _SUBMIT, 'submit');
 		
-		$required = array('screen_name');
+		$required = ['screen_name'];
 		
 		foreach($ele as $id => $obj)			
 			if (in_array($id, $required))
@@ -559,7 +559,7 @@
 		}			
 		$ele['submit'] = new XoopsFormButton('', 'submit', _SUBMIT, 'submit');
 		
-		$required = array('surl', 'name');
+		$required = ['surl', 'name'];
 		
 		foreach($ele as $id => $obj)			
 			if (in_array($id, $required))
@@ -591,7 +591,7 @@
 				
 		$ele['submit'] = new XoopsFormButton('', 'submit', _SUBMIT, 'submit');
 		
-		$required = array('screen_name');
+		$required = ['screen_name'];
 		
 		foreach($ele as $id => $obj)			
 			if (in_array($id, $required))
@@ -657,7 +657,7 @@
 		}			
 		$ele['submit'] = new XoopsFormButton('', 'submit', _SUBMIT, 'submit');
 		
-		$required = array('text', 'mode');
+		$required = ['text', 'mode'];
 		
 		foreach($ele as $id => $obj)			
 			if (in_array($id, $required))
@@ -720,7 +720,7 @@
 		}			
 		$ele['submit'] = new XoopsFormButton('', 'submit', _SUBMIT, 'submit');
 		
-		$required = array('file', 'mode');
+		$required = ['file', 'mode'];
 		
 		foreach($ele as $id => $obj)			
 			if (in_array($id, $required))

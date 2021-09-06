@@ -119,24 +119,28 @@
 			$paypalitemno='TWITTERBOMB125';
 			$aboutAdmin = new ModuleAdmin();
 			$about = $aboutAdmin->renderAbout($paypalitemno, false);
-			$donationform = array(	0 => '<form name="donation" id="donation" action="http://www.chronolabs.coop/modules/xpayment/" method="post" onsubmit="return xoopsFormValidate_donation();">',
-									1 => '<table class="outer" cellspacing="1" width="100%"><tbody><tr><th colspan="2">'.constant('_AM_TWITTERBOMB_ABOUT_MAKEDONATE').'</th></tr><tr align="left" valign="top"><td class="head"><div class="xoops-form-element-caption-required"><span class="caption-text">Donation Amount</span><span class="caption-marker">*</span></div></td><td class="even"><select size="1" name="item[A][amount]" id="item[A][amount]" title="Donation Amount"><option value="5">5.00 AUD</option><option value="10">10.00 AUD</option><option value="20">20.00 AUD</option><option value="40">40.00 AUD</option><option value="60">60.00 AUD</option><option value="80">80.00 AUD</option><option value="90">90.00 AUD</option><option value="100">100.00 AUD</option><option value="200">200.00 AUD</option></select></td></tr><tr align="left" valign="top"><td class="head"></td><td class="even"><input class="formButton" name="submit" id="submit" value="'._SUBMIT.'" title="'._SUBMIT.'" type="submit"></td></tr></tbody></table>',
-									2 => '<input name="op" id="op" value="createinvoice" type="hidden"><input name="plugin" id="plugin" value="donations" type="hidden"><input name="donation" id="donation" value="1" type="hidden"><input name="drawfor" id="drawfor" value="Chronolabs Co-Operative" type="hidden"><input name="drawto" id="drawto" value="%s" type="hidden"><input name="drawto_email" id="drawto_email" value="%s" type="hidden"><input name="key" id="key" value="%s" type="hidden"><input name="currency" id="currency" value="AUD" type="hidden"><input name="weight_unit" id="weight_unit" value="kgs" type="hidden"><input name="item[A][cat]" id="item[A][cat]" value="XDN%s" type="hidden"><input name="item[A][name]" id="item[A][name]" value="Donation for %s" type="hidden"><input name="item[A][quantity]" id="item[A][quantity]" value="1" type="hidden"><input name="item[A][shipping]" id="item[A][shipping]" value="0" type="hidden"><input name="item[A][handling]" id="item[A][handling]" value="0" type="hidden"><input name="item[A][weight]" id="item[A][weight]" value="0" type="hidden"><input name="item[A][tax]" id="item[A][tax]" value="0" type="hidden"><input name="return" id="return" value="http://www.chronolabs.coop/modules/donations/success.php" type="hidden"><input name="cancel" id="cancel" value="http://www.chronolabs.coop/modules/donations/success.php" type="hidden"></form>',																'D'=>'',
-									3 => '',
-									4 => '<!-- Start Form Validation JavaScript //-->
+			$donationform = [
+                0 => '<form name="donation" id="donation" action="http://www.chronolabs.coop/modules/xpayment/" method="post" onsubmit="return xoopsFormValidate_donation();">',
+                1 => '<table class="outer" cellspacing="1" width="100%"><tbody><tr><th colspan="2">'.constant('_AM_TWITTERBOMB_ABOUT_MAKEDONATE').'</th></tr><tr align="left" valign="top"><td class="head"><div class="xoops-form-element-caption-required"><span class="caption-text">Donation Amount</span><span class="caption-marker">*</span></div></td><td class="even"><select size="1" name="item[A][amount]" id="item[A][amount]" title="Donation Amount"><option value="5">5.00 AUD</option><option value="10">10.00 AUD</option><option value="20">20.00 AUD</option><option value="40">40.00 AUD</option><option value="60">60.00 AUD</option><option value="80">80.00 AUD</option><option value="90">90.00 AUD</option><option value="100">100.00 AUD</option><option value="200">200.00 AUD</option></select></td></tr><tr align="left" valign="top"><td class="head"></td><td class="even"><input class="formButton" name="submit" id="submit" value="'._SUBMIT.'" title="'._SUBMIT.'" type="submit"></td></tr></tbody></table>',
+                2 => '<input name="op" id="op" value="createinvoice" type="hidden"><input name="plugin" id="plugin" value="donations" type="hidden"><input name="donation" id="donation" value="1" type="hidden"><input name="drawfor" id="drawfor" value="Chronolabs Co-Operative" type="hidden"><input name="drawto" id="drawto" value="%s" type="hidden"><input name="drawto_email" id="drawto_email" value="%s" type="hidden"><input name="key" id="key" value="%s" type="hidden"><input name="currency" id="currency" value="AUD" type="hidden"><input name="weight_unit" id="weight_unit" value="kgs" type="hidden"><input name="item[A][cat]" id="item[A][cat]" value="XDN%s" type="hidden"><input name="item[A][name]" id="item[A][name]" value="Donation for %s" type="hidden"><input name="item[A][quantity]" id="item[A][quantity]" value="1" type="hidden"><input name="item[A][shipping]" id="item[A][shipping]" value="0" type="hidden"><input name="item[A][handling]" id="item[A][handling]" value="0" type="hidden"><input name="item[A][weight]" id="item[A][weight]" value="0" type="hidden"><input name="item[A][tax]" id="item[A][tax]" value="0" type="hidden"><input name="return" id="return" value="http://www.chronolabs.coop/modules/donations/success.php" type="hidden"><input name="cancel" id="cancel" value="http://www.chronolabs.coop/modules/donations/success.php" type="hidden"></form>', 'D' =>'',
+                3 => '',
+                4 => '<!-- Start Form Validation JavaScript //-->
 	<script type="text/javascript">
 	<!--//
 	function xoopsFormValidate_donation() { var myform = window.document.donation; 
 	var hasSelected = false; var selectBox = myform.item[A][amount];for (i = 0; i < selectBox.options.length; i++ ) { if (selectBox.options[i].selected == true && selectBox.options[i].value != \'\') { hasSelected = true; break; } }if (!hasSelected) { window.alert("Please enter Donation Amount"); selectBox.focus(); return false; }return true;
 	}
 	//--></script>
-	<!-- End Form Validation JavaScript //-->');
-			$paypalform = array(	0 => '<form action="https://www.paypal.com/cgi-bin/webscr" method="post">',
-									1 => '<input name="cmd" value="_s-xclick" type="hidden">',
-									2 => '<input name="hosted_button_id" value="%s" type="hidden">',
-									3 => '<img alt="" src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" height="1" border="0" width="1">',
-									4 => '<input src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!" border="0" type="image">',
-									5 => '</form>');
+	<!-- End Form Validation JavaScript //-->'
+            ];
+			$paypalform = [
+                0 => '<form action="https://www.paypal.com/cgi-bin/webscr" method="post">',
+                1 => '<input name="cmd" value="_s-xclick" type="hidden">',
+                2 => '<input name="hosted_button_id" value="%s" type="hidden">',
+                3 => '<img alt="" src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" height="1" border="0" width="1">',
+                4 => '<input src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!" border="0" type="image">',
+                5 => '</form>'
+            ];
 			for($key=0;$key<=4;$key++) {
 				switch ($key) {
 					case 2:
@@ -169,7 +173,7 @@
 					$pagenav = new XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
 					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 			
-					foreach (array(	'cid','catid','type','name','description','start','end','timed','uid','created','updated','hits','active') as $id => $key) {
+					foreach (['cid', 'catid', 'type', 'name', 'description', 'start', 'end', 'timed', 'uid', 'created', 'updated', 'hits', 'active'] as $id => $key) {
 						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?($order=='DESC'?'ASC':'DESC'):$order).'&op='.$op.'&filter='.$filter.'">'.(defined('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key)))?constant('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))):'_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))).'</a>');
 						$GLOBALS['xoopsTpl']->assign('filter_'.strtolower(str_replace('-','_',$key)).'_th', $campaign_handler->getFilterForm($filter, $key, $sort, $op, $fct));
 					}
@@ -276,7 +280,7 @@
 						}
 					} else {
 						$campaign = $campaign_handler->get($id);
-						xoops_confirm(array('id'=>$id, 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_REPLIES_DELETE, $campaign->getVar('name')));
+						xoops_confirm(['id' =>$id, 'op' => $_REQUEST['op'], 'fct' => $_REQUEST['fct'], 'limit' => $_REQUEST['limit'], 'start' => $_REQUEST['start'], 'order' => $_REQUEST['order'], 'sort' => $_REQUEST['sort'], 'filter' => $_REQUEST['filter']], 'index.php', sprintf(_AM_MSG_REPLIES_DELETE, $campaign->getVar('name')));
 					}
 					break;
 			}
@@ -299,7 +303,7 @@
 					$pagenav = new XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
 					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 			
-					foreach (array(	'catid','pcatdid','name','uid','created','updated','hits','active') as $id => $key) {
+					foreach (['catid', 'pcatdid', 'name', 'uid', 'created', 'updated', 'hits', 'active'] as $id => $key) {
 						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?($order=='DESC'?'ASC':'DESC'):$order).'&op='.$op.'&filter='.$filter.'">'.(defined('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key)))?constant('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))):'_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))).'</a>');
 						$GLOBALS['xoopsTpl']->assign('filter_'.strtolower(str_replace('-','_',$key)).'_th', $category_handler->getFilterForm($filter, $key, $sort, $op, $fct));
 					}
@@ -393,7 +397,7 @@
 						}
 					} else {
 						$category = $category_handler->get($id);
-						xoops_confirm(array('id'=>$id, 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_CATEGORY_DELETE, $category->getVar('name')));
+						xoops_confirm(['id' =>$id, 'op' => $_REQUEST['op'], 'fct' => $_REQUEST['fct'], 'limit' => $_REQUEST['limit'], 'start' => $_REQUEST['start'], 'order' => $_REQUEST['order'], 'sort' => $_REQUEST['sort'], 'filter' => $_REQUEST['filter']], 'index.php', sprintf(_AM_MSG_CATEGORY_DELETE, $category->getVar('name')));
 					}
 					break;
 			}
@@ -415,7 +419,7 @@
 					$pagenav = new XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
 					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 					
-					foreach (array(	'kid','cid','catid','base','keyword','uid','created','actioned','updated') as $id => $key) {
+					foreach (['kid', 'cid', 'catid', 'base', 'keyword', 'uid', 'created', 'actioned', 'updated'] as $id => $key) {
 						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?($order=='DESC'?'ASC':'DESC'):$order).'&op='.$op.'&filter='.$filter.'">'.(defined('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key)))?constant('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))):'_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))).'</a>');
 						$GLOBALS['xoopsTpl']->assign('filter_'.strtolower(str_replace('-','_',$key)).'_th', $keywords_handler->getFilterForm($filter, $key, $sort, $op, $fct));
 					}
@@ -510,7 +514,7 @@
 						}
 					} else {
 						$keywords = $keywords_handler->get($id);
-						xoops_confirm(array('id'=>$id, 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_KEYWORDS_DELETE, $keywords->getVar('name')));
+						xoops_confirm(['id' =>$id, 'op' => $_REQUEST['op'], 'fct' => $_REQUEST['fct'], 'limit' => $_REQUEST['limit'], 'start' => $_REQUEST['start'], 'order' => $_REQUEST['order'], 'sort' => $_REQUEST['sort'], 'filter' => $_REQUEST['filter']], 'index.php', sprintf(_AM_MSG_KEYWORDS_DELETE, $keywords->getVar('name')));
 					}
 					break;
 			}
@@ -533,7 +537,7 @@
 					$pagenav = new XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
 					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 			
-					foreach (array(	'baseid','cid','catid','base1','base2','base3','base4','base5','base6','base7','uid','created','actioned','updated') as $id => $key) {
+					foreach (['baseid', 'cid', 'catid', 'base1', 'base2', 'base3', 'base4', 'base5', 'base6', 'base7', 'uid', 'created', 'actioned', 'updated'] as $id => $key) {
 						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?($order=='DESC'?'ASC':'DESC'):$order).'&op='.$op.'&filter='.$filter.'">'.(defined('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key)))?constant('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))):'_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))).'</a>');
 						$GLOBALS['xoopsTpl']->assign('filter_'.strtolower(str_replace('-','_',$key)).'_th', $base_matrix_handler->getFilterForm($filter, $key, $sort, $op, $fct));
 					}
@@ -627,7 +631,7 @@
 						}
 					} else {
 						$base_matrix = $base_matrix_handler->get($id);
-						xoops_confirm(array('id'=>$id, 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_BASEMATRIX_DELETE, $base_matrix->getVar('name')));
+						xoops_confirm(['id' =>$id, 'op' => $_REQUEST['op'], 'fct' => $_REQUEST['fct'], 'limit' => $_REQUEST['limit'], 'start' => $_REQUEST['start'], 'order' => $_REQUEST['order'], 'sort' => $_REQUEST['sort'], 'filter' => $_REQUEST['filter']], 'index.php', sprintf(_AM_MSG_BASEMATRIX_DELETE, $base_matrix->getVar('name')));
 					}
 					break;
 			}
@@ -650,7 +654,7 @@
 					$pagenav = new XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
 					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 								
-					foreach (array(	'tid','cid','catid','screen_name','uid','created','updated', 'type', 'source_nick', 'tweeted') as $id => $key) {
+					foreach (['tid', 'cid', 'catid', 'screen_name', 'uid', 'created', 'updated', 'type', 'source_nick', 'tweeted'] as $id => $key) {
 						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?($order=='DESC'?'ASC':'DESC'):$order).'&op='.$op.'&filter='.$filter.'">'.(defined('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key)))?constant('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))):'_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))).'</a>');
 						$GLOBALS['xoopsTpl']->assign('filter_'.strtolower(str_replace('-','_',$key)).'_th', $usernames_handler->getFilterForm($filter, $key, $sort, $op, $fct));
 					}
@@ -744,7 +748,7 @@
 						}
 					} else {
 						$usernames = $usernames_handler->get($id);
-						xoops_confirm(array('id'=>$id, 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_USERNAMES_DELETE, $usernames->getVar('screen_name')));
+						xoops_confirm(['id' =>$id, 'op' => $_REQUEST['op'], 'fct' => $_REQUEST['fct'], 'limit' => $_REQUEST['limit'], 'start' => $_REQUEST['start'], 'order' => $_REQUEST['order'], 'sort' => $_REQUEST['sort'], 'filter' => $_REQUEST['filter']], 'index.php', sprintf(_AM_MSG_USERNAMES_DELETE, $usernames->getVar('screen_name')));
 					}
 					break;
 			}
@@ -767,7 +771,7 @@
 					$pagenav = new XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
 					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 			
-					foreach (array(	'urlid','cid','catid','surl','name','description','uid','created','updated') as $id => $key) {
+					foreach (['urlid', 'cid', 'catid', 'surl', 'name', 'description', 'uid', 'created', 'updated'] as $id => $key) {
 						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?($order=='DESC'?'ASC':'DESC'):$order).'&op='.$op.'&filter='.$filter.'">'.(defined('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key)))?constant('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))):'_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))).'</a>');
 						$GLOBALS['xoopsTpl']->assign('filter_'.strtolower(str_replace('-','_',$key)).'_th', $urls_handler->getFilterForm($filter, $key, $sort, $op, $fct));
 					}
@@ -861,7 +865,7 @@
 						}
 					} else {
 						$urls = $urls_handler->get($id);
-						xoops_confirm(array('id'=>$id, 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_URLS_DELETE, $urls->getVar('name')));
+						xoops_confirm(['id' =>$id, 'op' => $_REQUEST['op'], 'fct' => $_REQUEST['fct'], 'limit' => $_REQUEST['limit'], 'start' => $_REQUEST['start'], 'order' => $_REQUEST['order'], 'sort' => $_REQUEST['sort'], 'filter' => $_REQUEST['filter']], 'index.php', sprintf(_AM_MSG_URLS_DELETE, $urls->getVar('name')));
 					}
 					break;
 			}
@@ -885,7 +889,7 @@
 					$pagenav = new XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
 					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 			
-					foreach (array(	'sid', 'cid','catid','mode','pre','text','hits','rank','uid','when','tweeted','created','updated') as $id => $key) {
+					foreach (['sid', 'cid', 'catid', 'mode', 'pre', 'text', 'hits', 'rank', 'uid', 'when', 'tweeted', 'created', 'updated'] as $id => $key) {
 						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?($order=='DESC'?'ASC':'DESC'):$order).'&op='.$op.'&filter='.$filter.'">'.(defined('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key)))?constant('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))):'_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))).'</a>');
 						$GLOBALS['xoopsTpl']->assign('filter_'.strtolower(str_replace('-','_',$key)).'_th', $scheduler_handler->getFilterForm($filter, $key, $sort, $op, $fct));
 					}
@@ -990,7 +994,7 @@
 						}
 					} else {
 						$scheduler = $scheduler_handler->get($id);
-						xoops_confirm(array('id'=>$id, 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_SCHEDULER_DELETE, $scheduler->getVar('text')));
+						xoops_confirm(['id' =>$id, 'op' => $_REQUEST['op'], 'fct' => $_REQUEST['fct'], 'limit' => $_REQUEST['limit'], 'start' => $_REQUEST['start'], 'order' => $_REQUEST['order'], 'sort' => $_REQUEST['sort'], 'filter' => $_REQUEST['filter']], 'index.php', sprintf(_AM_MSG_SCHEDULER_DELETE, $scheduler->getVar('text')));
 					}
 					break;
 				case "importfile":
@@ -999,8 +1003,8 @@
 					
 			  		include_once $GLOBALS['xoops']->path('/modules/twitterbomb/class/myuploader.php');
 			  		
-					  $allowed_mimetypes = array('application/octet-stream', 'text/plain');
-					  $allowed_exts = array('txt', 'log');
+					  $allowed_mimetypes = ['application/octet-stream', 'text/plain'];
+					  $allowed_exts = ['txt', 'log'];
 					  $maxfilesize = 1024*1024*10;
 					  
 					  $uploader = new MyXoopsMediaUploader(XOOPS_UPLOAD_PATH, $allowed_mimetypes, $maxfilesize, 0, 0, $allowed_exts);
@@ -1069,7 +1073,7 @@
 			$pagenav = new XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter);
 			$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 	
-			foreach (array(	'provider','date','alias','tweet','url','hits', 'rank', 'cid', 'catid', 'tags', 'active') as $id => $key) {
+			foreach (['provider', 'date', 'alias', 'tweet', 'url', 'hits', 'rank', 'cid', 'catid', 'tags', 'active'] as $id => $key) {
 				$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?($order=='DESC'?'ASC':'DESC'):$order).'&op='.$op.'&filter='.$filter.'">'.(defined('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key)))?constant('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))):'_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))).'</a>');
 				$GLOBALS['xoopsTpl']->assign('filter_'.strtolower(str_replace('-','_',$key)).'_th', $log_handler->getFilterForm($filter, $key, $sort, $op, $fct));
 			}
@@ -1114,8 +1118,11 @@
 					$pagenav = new XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
 					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 					
-					foreach (array(	'rid','search','skip','geocode','longitude','latitude','radius','measurement',
-									'language', 'type', 'uid', 'retweets', 'searched', 'created', 'updated', 'actioned', 'retweeted') as $id => $key) {
+					foreach (
+                        [
+                            'rid', 'search', 'skip', 'geocode', 'longitude', 'latitude', 'radius', 'measurement',
+                            'language', 'type', 'uid', 'retweets', 'searched', 'created', 'updated', 'actioned', 'retweeted'
+                        ] as $id => $key) {
 						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?($order=='DESC'?'ASC':'DESC'):$order).'&op='.$op.'&filter='.$filter.'">'.(defined('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key)))?constant('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))):'_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))).'</a>');
 						$GLOBALS['xoopsTpl']->assign('filter_'.strtolower(str_replace('-','_',$key)).'_th', $retweet_handler->getFilterForm($filter, $key, $sort, $op, $fct));
 					}
@@ -1222,7 +1229,7 @@
 						}
 					} else {
 						$retweet = $retweet_handler->get($id);
-						xoops_confirm(array('id'=>$id, 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_RETWEET_DELETE, $retweet->getVar('search')));
+						xoops_confirm(['id' =>$id, 'op' => $_REQUEST['op'], 'fct' => $_REQUEST['fct'], 'limit' => $_REQUEST['limit'], 'start' => $_REQUEST['start'], 'order' => $_REQUEST['order'], 'sort' => $_REQUEST['sort'], 'filter' => $_REQUEST['filter']], 'index.php', sprintf(_AM_MSG_RETWEET_DELETE, $retweet->getVar('search')));
 					}
 					break;
 			}
@@ -1245,7 +1252,7 @@
 					$pagenav = new XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
 					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 			
-					foreach (array(	'cid','catid','mid','user','rpids','keywords','mentions','created','updated','mentioned','mentions','uid') as $id => $key) {
+					foreach (['cid', 'catid', 'mid', 'user', 'rpids', 'keywords', 'mentions', 'created', 'updated', 'mentioned', 'mentions', 'uid'] as $id => $key) {
 						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?($order=='DESC'?'ASC':'DESC'):$order).'&op='.$op.'&filter='.$filter.'">'.(defined('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key)))?constant('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))):'_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))).'</a>');
 						$GLOBALS['xoopsTpl']->assign('filter_'.strtolower(str_replace('-','_',$key)).'_th', $mentions_handler->getFilterForm($filter, $key, $sort, $op, $fct));
 					}
@@ -1352,7 +1359,7 @@
 						}
 					} else {
 						$mentions = $mentions_handler->get($id);
-						xoops_confirm(array('id'=>$id, 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_REPLIES_DELETE, $mentions->getVar('user')));
+						xoops_confirm(['id' =>$id, 'op' => $_REQUEST['op'], 'fct' => $_REQUEST['fct'], 'limit' => $_REQUEST['limit'], 'start' => $_REQUEST['start'], 'order' => $_REQUEST['order'], 'sort' => $_REQUEST['sort'], 'filter' => $_REQUEST['filter']], 'index.php', sprintf(_AM_MSG_REPLIES_DELETE, $mentions->getVar('user')));
 					}
 					break;
 			}
@@ -1375,7 +1382,7 @@
 					$pagenav = new XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
 					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 			
-					foreach (array(	'cid','catid','rpid','urlid','rcid','reply','keywords','uid','type','created','updated','replies','replied') as $id => $key) {
+					foreach (['cid', 'catid', 'rpid', 'urlid', 'rcid', 'reply', 'keywords', 'uid', 'type', 'created', 'updated', 'replies', 'replied'] as $id => $key) {
 						$GLOBALS['xoopsTpl']->assign(strtolower(str_replace('-','_',$key).'_th'), '<a href="'.$_SERVER['PHP_SELF'].'?start='.$start.'&limit='.$limit.'&sort='.str_replace('_','-',$key).'&order='.((str_replace('_','-',$key)==$sort)?($order=='DESC'?'ASC':'DESC'):$order).'&op='.$op.'&filter='.$filter.'">'.(defined('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key)))?constant('_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))):'_AM_TWEETBOMB_TH_'.strtoupper(str_replace('-','_',$key))).'</a>');
 						$GLOBALS['xoopsTpl']->assign('filter_'.strtolower(str_replace('-','_',$key)).'_th', $replies_handler->getFilterForm($filter, $key, $sort, $op, $fct));
 					}
@@ -1478,7 +1485,7 @@
 						}
 					} else {
 						$replies = $replies_handler->get($id);
-						xoops_confirm(array('id'=>$id, 'op'=>$_REQUEST['op'], 'fct'=>$_REQUEST['fct'], 'limit'=>$_REQUEST['limit'], 'start'=>$_REQUEST['start'], 'order'=>$_REQUEST['order'], 'sort'=>$_REQUEST['sort'], 'filter'=>$_REQUEST['filter']), 'index.php', sprintf(_AM_MSG_REPLIES_DELETE, $replies->getVar('reply')));
+						xoops_confirm(['id' =>$id, 'op' => $_REQUEST['op'], 'fct' => $_REQUEST['fct'], 'limit' => $_REQUEST['limit'], 'start' => $_REQUEST['start'], 'order' => $_REQUEST['order'], 'sort' => $_REQUEST['sort'], 'filter' => $_REQUEST['filter']], 'index.php', sprintf(_AM_MSG_REPLIES_DELETE, $replies->getVar('reply')));
 					}
 					break;
 			}

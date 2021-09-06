@@ -13,7 +13,7 @@ function b_twitterbomb_block_tweet_show( $options )
 	if (empty($options[1]))
 		$options[1] = 'horizontal';
 		
-	$GLOBALS['xoTheme']->addScript("http://platform.twitter.com/widgets.js", array("type"=>"text/javascript"));
+	$GLOBALS['xoTheme']->addScript("http://platform.twitter.com/widgets.js", ["type" =>"text/javascript"]);
 	
 	$block['data_via'] = $options[0];
 	$block['data_count'] = $options[1];

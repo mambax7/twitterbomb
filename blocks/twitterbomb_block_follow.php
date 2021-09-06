@@ -9,7 +9,7 @@ function b_twitterbomb_block_follow_show( $options )
 		$xoConfig = $config_handler->getConfigList($xoModule->getVar('mid'));
 		$options[0] = $xoConfig['root_tweeter']; 
 	}
-	$GLOBALS['xoTheme']->addScript("http://platform.twitter.com/widgets.js", array("type"=>"text/javascript"));
+	$GLOBALS['xoTheme']->addScript("http://platform.twitter.com/widgets.js", ["type" =>"text/javascript"]);
 	$block['tweeter'] = $options[0];
 	return $block ;
 }

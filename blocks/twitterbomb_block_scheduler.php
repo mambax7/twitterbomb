@@ -5,7 +5,7 @@ function b_twitterbomb_block_scheduler_show( $options )
 	if (empty($options[0]))
 		return false;
 		
-	$block['tweets']=array();				
+	$block['tweets']= [];
 	$campaign_handler =& xoops_getModuleHandler('campaign', 'twitterbomb');
 	$campaign = $campaign_handler->get($options[0]);
 	if (!is_object($campaign)) {
@@ -27,7 +27,7 @@ function b_twitterbomb_block_scheduler_show( $options )
 		}
 	}
 	
-	$block['tweets']=array();
+	$block['tweets']= [];
 	if ($campaign->getVar('timed')!=0) {
 		if ($campaign->getVar('start')<time()&&$campaign->getVar('end')>time()) {
 			if (!$block['tweets'] = XoopsCache::read('tweetbomb_scheduler_'.$cacheid)) {

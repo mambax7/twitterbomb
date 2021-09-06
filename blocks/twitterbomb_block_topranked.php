@@ -22,7 +22,7 @@ function b_twitterbomb_block_topranked_show( $options )
 		
 		$schedulers = $scheduler_handler->getObjects($criteria, true);
 		
-		$block['tweets']=array();
+		$block['tweets']= [];
 		foreach($schedulers as $key => $scheduler) {
 			$block['tweets'][$key]['title'] = $scheduler->getTweet();
 			$block['tweets'][$key]['link'] = XOOPS_URL;

@@ -3,8 +3,8 @@
 
 function xoops_module_update_twitterbomb(&$module) {
 	
-	$recovery = array();
-	$sql = array();
+	$recovery = [];
+	$sql = [];
 	
 	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_campaign')."` ADD COLUMN `hits` INT(13) UNSIGNED DEFAULT '0'";
 	$sql[] = "ALTER TABLE `".$GLOBALS['xoopsDB']->prefix('twitterbomb_campaign')."` ADD COLUMN `active` INT(13) UNSIGNED DEFAULT '0'";

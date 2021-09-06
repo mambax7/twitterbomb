@@ -75,7 +75,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 		$criteria = new CriteriaCompo($criteria_a);
 		$criteria->add($criteria_b, 'OR');
 	}
-	$types = array();
+	$types = [];
 	if ($GLOBALS['twitterbombModuleConfig']['cron_reply']) {
 		$types[] = 'reply';
 	}
@@ -120,7 +120,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 			return endtweeter($cids);
 		}
 		$loopsb++;
-		$cids=array();
+		$cids= [];
 		foreach($campaigns as $cid => $campaign) {
 			$cids[$cid] = $cid;	
 		}
@@ -146,7 +146,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 						}
 						$ret = XoopsCache::read('tweetbomb_channel_last');
 						if (!isset($ret['last']))
-							$ret = array('last'=>time()-(60*65));
+							$ret = ['last' => time() - (60 * 65)];
 						if (isset($ret['last']))
 							if ($ret['last']+(60*60)<time()) {
 								$item=0;
@@ -176,7 +176,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 								  		$log->setVar('tags', twitterbomb_ExtractTags($tweet));
 								   		$lid = $log_handler->insert($log, true);
 								   		$log = $log_handler->get($lid, true);
-								   		$link = XOOPS_URL.'/modules/twitterbomb/go.php?cid='.$cid.'&lid='.$lid.'&catid='.$catid.'&uri='.urlencode( sprintf($url, urlencode(str_replace(array('#', '@'), '',$sentence))));
+								   		$link = XOOPS_URL.'/modules/twitterbomb/go.php?cid='.$cid.'&lid='.$lid.'&catid='.$catid.'&uri='.urlencode( sprintf($url, urlencode(str_replace(['#', '@'], '', $sentence))));
 								   		$link = twitterbomb_shortenurl($link);
 								   		$log->setVar('url', $link);
 								   		$log = $log_handler->get($lid = $log_handler->insert($log, true));
@@ -222,7 +222,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 						$item=0;
 						$ret = XoopsCache::read('tweetbomb_channel_last');
 						if (!isset($ret['last']))
-							$ret = array('last'=>time()-(60*65));
+							$ret = ['last' => time() - (60 * 65)];
 						if (isset($ret['last']))
 							if ($ret['last']+(60*60)<time()) {
 								$ret = XoopsCache::read('tweetbomb_'.$campaign->getVar('type').'_'.md5($cid.$catid));
@@ -237,7 +237,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 										$sourceuser = $usernames_handler->getSourceUser($cid, $catid, $sentence['tweet']);
 										$url = $urls_handler->getUrl($cid, $catid);
 										$tweet = (is_object($sourceuser)?'@'.$sourceuser->getVar('screen_name').' ':'').str_replace('#@', '@', str_replace('#(', '(#', str_replace('##', '#', $sentence['tweet'])));	  
-										$link = XOOPS_URL.'/modules/twitterbomb/go.php?sid='.$sentence['sid'].'&cid='.$cid.'&catid='.$catid.'&uri='.urlencode( sprintf($url, urlencode(str_replace(array('#', '@'), '',$tweet))));
+										$link = XOOPS_URL.'/modules/twitterbomb/go.php?sid='.$sentence['sid'].'&cid='.$cid.'&catid='.$catid.'&uri='.urlencode( sprintf($url, urlencode(str_replace(['#', '@'], '', $tweet))));
 										if (strlen($tweet)!=0) {
 											$log_handler=xoops_getModuleHandler('log', 'twitterbomb');
 							    			$log = $log_handler->create();
@@ -250,7 +250,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 							    			$log->setVar('tags', twitterbomb_ExtractTags($tweet));
 							    			$lid = $log_handler->insert($log, true);
 											$log = $log_handler->get($lid, true);
-									   		$link = XOOPS_URL.'/modules/twitterbomb/go.php?sid='.$sentence['sid'].'&cid='.$cid.'&lid='.$lid.'&catid='.$catid.'&uri='.urlencode( sprintf($url, urlencode(str_replace(array('#', '@'), '',$sentence['tweet']))));
+									   		$link = XOOPS_URL.'/modules/twitterbomb/go.php?sid='.$sentence['sid'].'&cid='.$cid.'&lid='.$lid.'&catid='.$catid.'&uri='.urlencode( sprintf($url, urlencode(str_replace(['#', '@'], '', $sentence['tweet']))));
 									   		$link = twitterbomb_shortenurl($link);
 									   		$log->setVar('url', $link);
 									   		$log = $log_handler->get($lid = $log_handler->insert($log, true));
@@ -300,7 +300,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 						$item=0;
 						$ret = XoopsCache::read('tweetbomb_channel_last');
 						if (!isset($ret['last']))
-							$ret = array('last'=>time()-(60*65));
+							$ret = ['last' => time() - (60 * 65)];
 						if (isset($ret['last']))
 							if ($ret['last']+(60*60)<time()) { 
 
@@ -348,7 +348,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 																$tag_handler->updateByItem(twitterbomb_ExtractTags($tweet['text']), $lid, $GLOBALS['twitterbombModule']->getVar("dirname"), $catid);
 															}
 															$url = $urls_handler->getUrl($cid, $catid);
-															$link = XOOPS_URL.'/modules/twitterbomb/go.php?rid='.$rid.'&cid='.$cid.'&lid='.$lid.'&catid='.$catid.'&uri='.urlencode( sprintf($url, urlencode(str_replace(array('#', '@'), '',$tweet['text']))));
+															$link = XOOPS_URL.'/modules/twitterbomb/go.php?rid='.$rid.'&cid='.$cid.'&lid='.$lid.'&catid='.$catid.'&uri='.urlencode( sprintf($url, urlencode(str_replace(['#', '@'], '', $tweet['text']))));
 															$criteria = new Criteria('`screen_name`', $tweet['from_user']);
 															if ($usernames_handler->getCount($criteria)==0) {
 																$username = $usernames_handler->create();
@@ -409,7 +409,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 						$item=0;
 						$ret = XoopsCache::read('tweetbomb_channel_last');
 						if (!isset($ret['last']))
-							$ret = array('last'=>time()-(60*65));
+							$ret = ['last' => time() - (60 * 65)];
 						if (isset($ret['last']))
 							if ($ret['last']+(60*60)<time()) { 
 
@@ -439,7 +439,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 														$replytweet = $reply->getTweet();
 														$urlobj = $urls_handler->get($reply->getVar('urlid'));
 														if (is_object($urlobj)) {
-															$url = sprintf($urlobj->getVar('surl'), urlencode(str_replace(array('#', '@'), '',$replytweet)));
+															$url = sprintf($urlobj->getVar('surl'), urlencode(str_replace(['#', '@'], '', $replytweet)));
 														}
 														$link = XOOPS_URL.'/modules/twitterbomb/go.php?rpid='.$rid.'&cid='.$cid.'&lid='.$lid.'&catid='.$catid.'&uri='.urlencode($url);  
 														$log_handler=xoops_getModuleHandler('log', 'twitterbomb');
@@ -527,7 +527,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 						$item=0;
 						$ret = XoopsCache::read('tweetbomb_channel_last');
 						if (!isset($ret['last']))
-							$ret = array('last'=>time()-(60*65));
+							$ret = ['last' => time() - (60 * 65)];
 						if (isset($ret['last']))
 							if ($ret['last']+(60*60)<time()) { 
 
@@ -558,7 +558,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 														$replytweet = $reply->getTweet();
 														$urlobj = $urls_handler->get($reply->getVar('urlid'));
 														if (is_object($urlobj)) {
-															$url = sprintf($urlobj->getVar('surl'), urlencode(str_replace(array('#', '@'), '',$replytweet)));
+															$url = sprintf($urlobj->getVar('surl'), urlencode(str_replace(['#', '@'], '', $replytweet)));
 														}
 														$link = XOOPS_URL.'/modules/twitterbomb/go.php?rpid='.$rid.'&cid='.$cid.'&lid='.$lid.'&catid='.$catid.'&uri='.urlencode($url);  
 														$log_handler=xoops_getModuleHandler('log', 'twitterbomb');
@@ -664,7 +664,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 				$criteria->add($criteria_b, 'OR');
 				$criteria->setSort('RAND()');
 			}
-			$types = array();
+			$types = [];
 			if ($GLOBALS['twitterbombModuleConfig']['cron_reply']) {
 				$types[] = 'reply';
 			}
@@ -692,7 +692,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 				$criteria_b->add(new Criteria('end', time(), '>'));
 				$criteria = new CriteriaCompo($criteria_a);
 				$criteria->add($criteria_b, 'OR');
-				$types = array();
+				$types = [];
 				if ($GLOBALS['twitterbombModuleConfig']['cron_reply']) {
 					$types[] = 'reply';
 				}

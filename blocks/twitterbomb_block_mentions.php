@@ -5,7 +5,7 @@ function b_twitterbomb_block_mentions_show( $options )
 	if (empty($options[0]))
 		return false;
 				
-	$block['tweets']=array();				
+	$block['tweets']= [];
 	$campaign_handler =& xoops_getModuleHandler('campaign', 'twitterbomb');
 	$campaign = $campaign_handler->get($options[0]);
 	if (!is_object($campaign)) {
@@ -48,7 +48,7 @@ function b_twitterbomb_block_mentions_show( $options )
 				}
 		    }
 		} else {
-			$block['tweets']=array();
+			$block['tweets']= [];
 			$block['tweets'][0]['title'] = sprintf(_BL_TWEETBOMB_RSS_TIMED_TITLE, date('Y-m-d', $campaign->getVar('start')), date('Y-m-d', $campaign->getVar('end')));
 			$block['tweets'][0]['link'] = XOOPS_URL;
 			$block['tweets'][0]['description'] = sprintf(_BL_TWEETBOMB_RSS_TIMED_DESCRIPTION, date('Y-m-d', $campaign->getVar('start')), date('Y-m-d', $campaign->getVar('end')));		

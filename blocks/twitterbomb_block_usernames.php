@@ -2,7 +2,7 @@
 
 function b_twitterbomb_block_usernames_show( $options )
 {
-	$block = array();
+	$block = [];
 				
 	$usernames_handler =& xoops_getModuleHandler('usernames', 'twitterbomb');
 	$following_handler =& xoops_getModuleHandler('following', 'twitterbomb');

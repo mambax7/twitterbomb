@@ -15,12 +15,12 @@
 				$nickstart = strpos($text, '&lt;', 0);
 				$convostart = strpos($text, '&gt;', $nickstart+1);
 				if ($convostart!=0&&$nickstart!=0) {
-					$nick = str_replace(array('@', '%', '+'), '', trim(substr($text, $nickstart+4, $convostart-$nickstart-4)));
+					$nick = str_replace(['@', '%', '+'], '', trim(substr($text, $nickstart + 4, $convostart - $nickstart - 4)));
 					$tweet = trim(substr($text, $convostart+4, strlen($text)-$convostart-4));
 				} else {
 					$nickstart = strpos($text, ': ', 0);
 					$convostart = strpos($text, ' ', $nickstart+3);
-					$nick = str_replace(array('@', '%', '+'), '',trim(substr($text, $nickstart+2, $convostart-$nickstart-2)));
+					$nick = str_replace(['@', '%', '+'], '', trim(substr($text, $nickstart + 2, $convostart - $nickstart - 2)));
 					$cut = strpos($text, ')', $convostart);
 					if ($cut!=0)
 						$tweet = trim(substr($text, $cut+1, strlen($text)-$cut));
@@ -41,7 +41,7 @@
 				switch($value){
 					case '%username%':
 						if (isset($parts[$key])&&$pass==true)
-							$screen_name = str_replace(array('@', '#'), '', $parts[$key]);
+							$screen_name = str_replace(['@', '#'], '', $parts[$key]);
 						break;
 					default:
 						if (isset($parts[$key]))

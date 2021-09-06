@@ -51,7 +51,7 @@ function b_twitterbomb_block_widget_show( $options )
 	if (empty($options[14]))
 		$options[14] = 'true';
 		
-	$GLOBALS['xoTheme']->addScript("http://widgets.twimg.com/j/2/widget.js", array("type"=>"text/javascript"));
+	$GLOBALS['xoTheme']->addScript("http://widgets.twimg.com/j/2/widget.js", ["type" =>"text/javascript"]);
 	
 	$block['tweeter'] = $options[0];
 	$block['rpp'] = $options[1];
@@ -153,7 +153,7 @@ function b_twitterbomb_block_widget_edit( $options )
 	$tweets_link = new XoopsFormText('', 'options[]', 7, 8, $options[8]);
 	$form .= ""._BL_TWITTERBOMB_TWEET_LINK.$tweets_link->render().'<br/>';	
 	
-	$opt = array('true'=>_YES, 'false'=>_NO);
+	$opt = ['true' =>_YES, 'false' =>_NO];
 	
 	$features_scrollbar = new XoopsFormSelect('', 'options[]', $options[9]);
 	$features_scrollbar->addOptionArray($opt);

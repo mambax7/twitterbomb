@@ -70,7 +70,7 @@ if (!empty($_GET['start'])) {
     $start = intval($_POST['start']);
 }
 
-$queries = array();
+$queries = [];
 
 if ($action == "results") {
     if ($query == "") {
@@ -106,7 +106,7 @@ if ($andor != "OR" && $andor != "exact" && $andor != "AND") {
 $myts =& MyTextSanitizer::getInstance();
 if ($action != 'showallbyuser') {
     if ($andor != "exact") {
-        $ignored_queries = array(); // holds kewords that are shorter than allowed minmum length
+        $ignored_queries = []; // holds kewords that are shorter than allowed minmum length
         $temp_queries = preg_split('/[\s,]+/', $query);
         foreach ($temp_queries as $q) {
             $q = trim($q);
@@ -126,7 +126,7 @@ if ($action != 'showallbyuser') {
             redirect_header('search.php', 2, sprintf(_SR_KEYTOOSHORT, $xoopsConfigSearch['keyword_min']));
             exit();
         }
-        $queries = array($myts->addSlashes($query));
+        $queries = [$myts->addSlashes($query)];
     }
 }
 switch ($action) {

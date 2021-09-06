@@ -99,7 +99,7 @@ $tpl = new XoopsTpl();
 		    }
 		    
 		} else {
-			$sarray=array();
+			$sarray= [];
 			$sarray[0]['title'] = sprintf(_MN_TWEETBOMB_RSS_TIMED_TITLE, date('Y-m-d', $campaign->getVar('start')), date('Y-m-d', $campaign->getVar('end')));
 			$sarray[0]['link'] = XOOPS_URL;
 			$sarray[0]['description'] = sprintf(_MN_TWEETBOMB_RSS_TIMED_DESCRIPTION, date('Y-m-d', $campaign->getVar('start')), date('Y-m-d', $campaign->getVar('end')));		
@@ -129,12 +129,13 @@ $tpl = new XoopsTpl();
 	
     if (!empty($sarray) && is_array($sarray)) {
         foreach ($sarray as $story) {
-            $tpl->append('items', array(
+            $tpl->append('items', [
                 'title' => XoopsLocal::convert_encoding(htmlspecialchars($story['title'], ENT_QUOTES)) ,
                 'link' => XoopsLocal::convert_encoding(htmlspecialchars($story['link'], ENT_QUOTES)) ,
                 'guid' => XoopsLocal::convert_encoding(htmlspecialchars($story['link'], ENT_QUOTES)) ,
                 'pubdate' => formatTimestamp(time(), 'rss') ,
-                'description' => XoopsLocal::convert_encoding(htmlspecialchars($story['description'], ENT_QUOTES))));
+                'description' => XoopsLocal::convert_encoding(htmlspecialchars($story['description'], ENT_QUOTES))
+            ]);
 
             if ($story['sid']!=0){
             	$scheduler_handler = &xoops_getModuleHandler('scheduler','twitterbomb');

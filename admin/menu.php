@@ -10,7 +10,7 @@
 
 
 global $adminmenu;
-$adminmenu=array();
+$adminmenu= [];
 $adminmenu[0]['title'] = _MI_TWEETBOMB_TITLE_ADMENU0;
 $adminmenu[0]['icon'] = _MI_TWEETBOMB_ICON_ADMENU0;
 $adminmenu[0]['image'] = _MI_TWEETBOMB_ICON_ADMENU0;

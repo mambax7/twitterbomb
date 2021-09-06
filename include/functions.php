@@ -31,7 +31,7 @@ if (!function_exists("twitterbomb_getuser_id")) {
 
 if (!function_exists("twitterbomb_object2array")) {
 	function twitterbomb_object2array($objects) {
-		$ret = array();
+		$ret = [];
 		foreach((array)$objects as $key => $value) {
 			if (is_object($value)) {
 				$ret[$key] = twitterbomb_object2array($value);
@@ -80,14 +80,14 @@ if (!function_exists("twitterbomb_shortenurl")) {
 }
 
 if (!function_exists("twitterbomb_searchtwitter")) {
-	function twitterbomb_searchtwitter($numberofresults = 10, $q='', $exceptions = array(), $geocode='', $lang='en', $page=1, $result_type = 'mixed', $rpp = '100', $show_user = 'true', $until='', $since_id ='', $gathered=0, $next_url = '') {
+	function twitterbomb_searchtwitter($numberofresults = 10, $q='', $exceptions = [], $geocode='', $lang='en', $page=1, $result_type = 'mixed', $rpp = '100', $show_user = 'true', $until='', $since_id ='', $gathered=0, $next_url = '') {
 		$module_handler = xoops_getHandler('module');
 		$config_handler = xoops_getHandler('config');
 		$GLOBALS['twitterbombModule'] = $module_handler->getByDirname('twitterbomb');
 		$GLOBALS['twitterbombModuleConfig'] = $config_handler->getConfigList($GLOBALS['twitterbombModule']->getVar('mid'));
 		$GLOBALS['execution_time'] = $GLOBALS['execution_time'] + 15;
 		set_time_limit($GLOBALS['execution_time']);
-		$ret = array();
+		$ret = [];
 		if (!empty($GLOBALS['twitterbombModuleConfig']['search_url'])) {
 			if (empty($next_url))
 				$source_url = $GLOBALS['twitterbombModuleConfig']['search_url'].'?q='.$q.(!empty($geocode)?'&geocode='.$geocode:'').(!empty($lang)?'&lang='.$lang:'').(!empty($page)?'&page='.$page:'').(!empty($result_type)?'&result_type='.$result_type:'').(!empty($rpp)?'&rpp='.$rpp:'').(!empty($show_user)?'&show_user='.$show_user:'').(!empty($until)?'&until='.$until:'').(!empty($since_id)?'&since_id='.$since_id:'');
@@ -196,7 +196,7 @@ if (!function_exists('twitterbomb_getSubCategoriesIn')) {
 	function twitterbomb_getSubCategoriesIn($catid=0){
 		$category_handler =& xoops_getModuleHandler('category', 'twitterbomb');
 		$categories = $category_handler->getObjects(new Criteria('pcatdid', $catid), true);
-		$in_array = twitterbomb_getCategoryTree(array(), $categories, -1, $catid);
+		$in_array = twitterbomb_getCategoryTree([], $categories, -1, $catid);
 		$in_array[$catid]=$catid;
 		return $in_array;
 	}
@@ -237,7 +237,7 @@ if (!function_exists('twitterbomb_get_rss')) {
 			$c = sizeof($ret)+1;
 			$mtr=mt_rand($GLOBALS['twitterbombModuleConfig']['odds_lower'],$GLOBALS['twitterbombModuleConfig']['odds_higher']);
 			$ret[$c]['title'] = (is_object($sourceuser)?'@'.$sourceuser->getVar('screen_name').' ':'').(strlen($username)>0&&($mtr<=$GLOBALS['twitterbombModuleConfig']['odds_minimum']||$mtr>=$GLOBALS['twitterbombModuleConfig']['odds_maximum'])?'@'.$username.' ':'').str_replace('#@', '@', str_replace('#(', '(#', str_replace('##', '#', twitterbomb_TweetString(htmlspecialchars_decode($sentence), $GLOBALS['twitterbombModuleConfig']['aggregate'], $GLOBALS['twitterbombModuleConfig']['wordlength']))));	  
-			$ret[$c]['link'] = XOOPS_URL.'/modules/twitterbomb/go.php?cid='.$cid.'&catid='.$catid.'&uri='.urlencode( sprintf($url, urlencode(str_replace(array('#', '@'), '',$sentence))));
+			$ret[$c]['link'] = XOOPS_URL.'/modules/twitterbomb/go.php?cid='.$cid.'&catid='.$catid.'&uri='.urlencode( sprintf($url, urlencode(str_replace(['#', '@'], '', $sentence))));
 			$ret[$c]['description'] = (is_object($sourceuser)?'@'.$sourceuser->getVar('screen_name').' ':'').(strlen($username)>0&&($mtr<=$GLOBALS['twitterbombModuleConfig']['odds_minimum']||$mtr>=$GLOBALS['twitterbombModuleConfig']['odds_maximum'])?'@'.$username.' ':'').htmlspecialchars_decode($sentence);
 			if (strlen($ret[$c]['title'])!=0) {
     			$log_handler=xoops_getModuleHandler('log', 'twitterbomb');
@@ -249,7 +249,7 @@ if (!function_exists('twitterbomb_get_rss')) {
     			$log->setVar('tweet', substr($ret[$c]['title'],0,139));
     			$log->setVar('tags', twitterbomb_ExtractTags($ret[$c]['title']));
     			$ret[$c]['lid'] = $log_handler->insert($log, true);
-    			$ret[$c]['link'] = twitterbomb_shortenurl(XOOPS_URL.'/modules/twitterbomb/go.php?cid='.$cid.'&lid='.$ret[$c]['lid'].'&catid='.$catid.'&uri='.urlencode( sprintf($url, urlencode(str_replace(array('#', '@'), '',$sentence)))));
+    			$ret[$c]['link'] = twitterbomb_shortenurl(XOOPS_URL.'/modules/twitterbomb/go.php?cid='.$cid.'&lid='.$ret[$c]['lid'].'&catid='.$catid.'&uri='.urlencode( sprintf($url, urlencode(str_replace(['#', '@'], '', $sentence)))));
     			if ($GLOBALS['twitterbombModuleConfig']['tags']) {
     				$tag_handler = xoops_getModuleHandler('tag', 'tag');
 					$tag_handler->updateByItem($log->getVar('tags'), $ret[$c]['lid'], $GLOBALS['twitterbombModule']->getVar("dirname"), $catid);
@@ -288,7 +288,7 @@ if (!function_exists('twitterbomb_get_scheduler_rss')) {
 				$sourceuser = $usernames_handler->getSourceUser($cid, $catid, $sentence['tweet']);
 				$url = $urls_handler->getUrl($cid, $catid);
 				$ret[$c]['title'] = (is_object($sourceuser)?'@'.$sourceuser->getVar('screen_name').' ':'').str_replace('#@', '@', str_replace('#(', '(#', str_replace('##', '#', twitterbomb_TweetString(htmlspecialchars_decode($sentence['tweet']), $GLOBALS['twitterbombModuleConfig']['scheduler_aggregate'], $GLOBALS['twitterbombModuleConfig']['scheduler_wordlength']))));	  
-				$ret[$c]['link'] = XOOPS_URL.'/modules/twitterbomb/go.php?sid='.$sentence['sid'].'&cid='.$cid.'&catid='.$catid.'&uri='.urlencode( sprintf($url, urlencode(str_replace(array('#', '@'), '',$sentence['tweet']))));
+				$ret[$c]['link'] = XOOPS_URL.'/modules/twitterbomb/go.php?sid='.$sentence['sid'].'&cid='.$cid.'&catid='.$catid.'&uri='.urlencode( sprintf($url, urlencode(str_replace(['#', '@'], '', $sentence['tweet']))));
 				$ret[$c]['description'] = htmlspecialchars_decode((is_object($sourceuser)?'@'.$sourceuser->getVar('screen_name').' ':'').$sentence['tweet']);
 				$ret[$c]['sid'] = $sentence['sid'];
 				if (strlen($ret[$c]['title'])!=0) {
@@ -302,7 +302,7 @@ if (!function_exists('twitterbomb_get_scheduler_rss')) {
 	    			$log->setVar('tweet', substr($ret[$c]['title'],0,139));
 	    			$log->setVar('tags', twitterbomb_ExtractTags($ret[$c]['title']));
 	    			$ret[$c]['lid'] = $log_handler->insert($log, true);
-	    			$ret[$c]['link'] = twitterbomb_shortenurl(XOOPS_URL.'/modules/twitterbomb/go.php?sid='.$sentence['sid'].'&lid='.$ret[$c]['lid'].'&cid='.$cid.'&catid='.$catid.'&uri='.urlencode( sprintf($url, urlencode(str_replace(array('#', '@'), '',$sentence['tweet'])))));
+	    			$ret[$c]['link'] = twitterbomb_shortenurl(XOOPS_URL.'/modules/twitterbomb/go.php?sid='.$sentence['sid'].'&lid='.$ret[$c]['lid'].'&cid='.$cid.'&catid='.$catid.'&uri='.urlencode( sprintf($url, urlencode(str_replace(['#', '@'], '', $sentence['tweet'])))));
 	    			if ($GLOBALS['twitterbombModuleConfig']['tags']) {
 						$tag_handler = xoops_getModuleHandler('tag', 'tag');
 						$tag_handler->updateByItem($log->getVar('tags'), $ret[$c]['lid'], $GLOBALS['twitterbombModule']->getVar("dirname"), $catid);
@@ -319,7 +319,7 @@ if (!function_exists('twitterbomb_get_scheduler_rss')) {
 						unset($ret[$key]);
 				}
 			}	
-		return is_array($ret)?$ret:array();
+		return is_array($ret)?$ret: [];
 	}
 }
 
@@ -343,11 +343,11 @@ if (!function_exists('twitterbomb_get_retweet_rss')) {
 		
 		$oauth = $oauth_handler->getRootOauth(true);
 		if (!is_object($oauth))
-			return array();
+			return [];
 		
 		$campaign = $campaign_handler->get($cid);
 		if (!is_object($campaign))
-			return array();
+			return [];
 		
 		$item = 0;
 		$ret = XoopsCache::read('tweetbomb_scheduler_'.md5($cid.$catid));
@@ -377,7 +377,7 @@ if (!function_exists('twitterbomb_get_retweet_rss')) {
 									$tag_handler->updateByItem(twitterbomb_ExtractTags($tweet['text']), $lid, $GLOBALS['twitterbombModule']->getVar("dirname"), $catid);
 				    			}
 				    			$url = $urls_handler->getUrl($cid, $catid);
-				    			$link = XOOPS_URL.'/modules/twitterbomb/go.php?rid='.$rid.'&cid='.$cid.'&lid='.$lid.'&catid='.$catid.'&uri='.urlencode( sprintf($url, urlencode(str_replace(array('#', '@'), '',$tweet['text']))));
+				    			$link = XOOPS_URL.'/modules/twitterbomb/go.php?rid='.$rid.'&cid='.$cid.'&lid='.$lid.'&catid='.$catid.'&uri='.urlencode( sprintf($url, urlencode(str_replace(['#', '@'], '', $tweet['text']))));
 					   			
 				    			$criteria = new Criteria('`screen_name`', $tweet['from_user']);
 				    			if ($usernames_handler->getCount($criteria)==0) {
@@ -420,15 +420,15 @@ if (!function_exists('twitterbomb_get_retweet_rss')) {
 						unset($ret[$key]);
 				}
 			}	
-		return is_array($ret)?$ret:array();
+		return is_array($ret)?$ret: [];
 	}
 }
 
 if (!function_exists('twitterbomb_ExtractTags')) {
 	function twitterbomb_ExtractTags($tweet='', $as_array = false, $seperator=', ') {
-		$ret = array();
+		$ret = [];
 		foreach(explode(' ', $tweet) as $node) {
-    		if (in_array(substr($node, 0, 1), array('@','#'))) {
+    		if (in_array(substr($node, 0, 1), ['@', '#'])) {
     			$ret[ucfirst(substr($node, 1, strlen($node)-1))] = ucfirst(substr($node, 1, strlen($node)-1)); 
     		}
     	}
@@ -567,7 +567,7 @@ if (!function_exists('tweetbomb_getFilterElement')) {
 if (!function_exists('tweetbomb_getFilterURLComponents')) {
 	function tweetbomb_getFilterURLComponents($filter, $field, $sort='created') {
 		$parts = explode('|', $filter);
-		$ret = array();
+		$ret = [];
 		$value = '';
     	foreach($parts as $part) {
     		$var = explode(',', $part);
@@ -581,18 +581,18 @@ if (!function_exists('tweetbomb_getFilterURLComponents')) {
 	    		}
     		}
     	}
-    	$pagenav = array();
+    	$pagenav = [];
     	$pagenav['op'] = $_REQUEST['op'] ?? "campaign";
 		$pagenav['fct'] = $_REQUEST['fct'] ?? "list";
 		$pagenav['limit'] = !empty($_REQUEST['limit'])?intval($_REQUEST['limit']):30;
 		$pagenav['start'] = 0;
 		$pagenav['order'] = !empty($_REQUEST['order'])?$_REQUEST['order']:'DESC';
 		$pagenav['sort'] = !empty($_REQUEST['sort'])?''.$_REQUEST['sort'].'':$sort;
-    	$retb = array();
+    	$retb = [];
 		foreach($pagenav as $key=>$value) {
 			$retb[] = "$key=$value";
 		}
-		return array('value' =>($ele_value ?? ''), 'field' =>($field ?? ''), 'operator' =>($operator ?? ''), 'filter' =>implode('|', (isset($ret) && is_array($ret)?$ret:array())), 'extra' =>implode('&', (isset($retb) && is_array($retb)?$retb:array())));
+		return ['value' =>($ele_value ?? ''), 'field' =>($field ?? ''), 'operator' =>($operator ?? ''), 'filter' =>implode('|', (isset($ret) && is_array($ret)?$ret: [])), 'extra' =>implode('&', (isset($retb) && is_array($retb)?$retb: []))];
 	}
 }
 ?>

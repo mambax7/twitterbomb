@@ -124,23 +124,25 @@ $modversion['blocks'][3]['edit_func'] = "b_twitterbomb_block_topranked_edit";
 $modversion['blocks'][3]['options'] = "10";
 $modversion['blocks'][3]['template'] = "twitterbomb_block_tweets_ranked.html" ;
 
-$modversion["blocks"][4]	=	array(	"file"           => "twitterbomb_block_tag.php",
-    									"name"           => "TwitterBomb Tag Cloud",
-    									"description"    => "Show tag cloud",
-    									"show_func"      => "twitterbomb_tag_block_cloud_show",
-    									"edit_func"      => "twitterbomb_tag_block_cloud_edit",
-    									"options"        => "100|0|150|80",
-    									"template"       => "twitterbomb_tag_block_cloud.html"
-    							);
+$modversion["blocks"][4]	=	[
+    "file"        => "twitterbomb_block_tag.php",
+    "name"        => "TwitterBomb Tag Cloud",
+    "description" => "Show tag cloud",
+    "show_func"   => "twitterbomb_tag_block_cloud_show",
+    "edit_func"   => "twitterbomb_tag_block_cloud_edit",
+    "options"     => "100|0|150|80",
+    "template"    => "twitterbomb_tag_block_cloud.html"
+];
     
-$modversion["blocks"][5]	= 	array(	"file"           => "twitterbomb_block_tag.php",
-								    	"name"           => "TwitterBomb Top Tags",
-								    	"description"    => "Show top tags",
-								    	"show_func"      => "twitterbomb_tag_block_top_show",
-								    	"edit_func"      => "twitterbomb_tag_block_top_edit",
-								    	"options"        => "50|30|c",
-								    	"template"       => "twitterbomb_tag_block_top.html"
-    							);
+$modversion["blocks"][5]	= 	[
+    "file"        => "twitterbomb_block_tag.php",
+    "name"        => "TwitterBomb Top Tags",
+    "description" => "Show top tags",
+    "show_func"   => "twitterbomb_tag_block_top_show",
+    "edit_func"   => "twitterbomb_tag_block_top_edit",
+    "options"     => "50|30|c",
+    "template"    => "twitterbomb_tag_block_top.html"
+];
 
 $modversion['blocks'][6]['file'] = "twitterbomb_block_follow.php";
 $modversion['blocks'][6]['name'] = 'Follow Me on Twitter' ;
@@ -462,10 +464,12 @@ $modversion['config'][$i]['description'] = '_MI_TWEETBOMB_LOGDROPS_DESC';
 $modversion['config'][$i]['formtype'] = 'select';
 $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = (60*60*24*7*4*1);
-$modversion['config'][$i]['options'] = array(_MI_TWEETBOMB_LOGDROPS_24HOURS => (60*60*24), _MI_TWEETBOMB_LOGDROPS_1WEEK => (60*60*24*7), _MI_TWEETBOMB_LOGDROPS_FORTNIGHT => (60*60*24*7*2), 
-											 _MI_TWEETBOMB_LOGDROPS_1MONTH => (60*60*24*7*4*1), _MI_TWEETBOMB_LOGDROPS_2MONTHS => (60*60*24*7*4*2), _MI_TWEETBOMB_LOGDROPS_3MONTHS => (60*60*24*7*4*3), 
-											 _MI_TWEETBOMB_LOGDROPS_4MONTHS => (60*60*24*7*4*4), _MI_TWEETBOMB_LOGDROPS_5MONTHS => (60*60*24*7*4*5), _MI_TWEETBOMB_LOGDROPS_6MONTHS => (60*60*24*7*4*6),
-											 _MI_TWEETBOMB_LOGDROPS_12MONTHS => (60*60*24*7*4*12), _MI_TWEETBOMB_LOGDROPS_24MONTHS => (60*60*24*7*4*24));
+$modversion['config'][$i]['options'] = [
+    _MI_TWEETBOMB_LOGDROPS_24HOURS  => (60 * 60 * 24), _MI_TWEETBOMB_LOGDROPS_1WEEK => (60 * 60 * 24 * 7), _MI_TWEETBOMB_LOGDROPS_FORTNIGHT => (60 * 60 * 24 * 7 * 2),
+    _MI_TWEETBOMB_LOGDROPS_1MONTH   => (60*60*24*7*4*1), _MI_TWEETBOMB_LOGDROPS_2MONTHS => (60*60*24*7*4*2), _MI_TWEETBOMB_LOGDROPS_3MONTHS => (60*60*24*7*4*3),
+    _MI_TWEETBOMB_LOGDROPS_4MONTHS  => (60*60*24*7*4*4), _MI_TWEETBOMB_LOGDROPS_5MONTHS => (60*60*24*7*4*5), _MI_TWEETBOMB_LOGDROPS_6MONTHS => (60*60*24*7*4*6),
+    _MI_TWEETBOMB_LOGDROPS_12MONTHS => (60*60*24*7*4*12), _MI_TWEETBOMB_LOGDROPS_24MONTHS => (60*60*24*7*4*24)
+];
 											 
 $i++;
 $modversion['config'][$i]['name'] = 'scheduler_usernames';
@@ -625,11 +629,13 @@ $modversion['config'][$i]['description'] = '_MI_TWEETBOMB_KEEPTRENDFOR_DESC';
 $modversion['config'][$i]['formtype'] = 'select';
 $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = 3600;
-$modversion['config'][$i]['options'] = array(_MI_TWEETBOMB_CACHE_30SECONDS => 30, _MI_TWEETBOMB_CACHE_60SECONDS => 60, _MI_TWEETBOMB_CACHE_120SECONDS => 120, 
-											 _MI_TWEETBOMB_CACHE_240SECONDS => 240, _MI_TWEETBOMB_CACHE_480SECONDS => 480, _MI_TWEETBOMB_CACHE_960SECONDS => 960,
-											 _MI_TWEETBOMB_CACHE_1820SECONDS => (60*32), _MI_TWEETBOMB_CACHE_1HOUR => (60*60), _MI_TWEETBOMB_CACHE_3HOUR => (60*60*3),
-											 _MI_TWEETBOMB_CACHE_6HOURS => (60*60*6), _MI_TWEETBOMB_CACHE_12HOURS => (60*60*12), _MI_TWEETBOMB_CACHE_24HOURS => (60*60*24), 
-											 _MI_TWEETBOMB_CACHE_1WEEK => (60*60*24*7), _MI_TWEETBOMB_CACHE_FORTNIGHT => (60*60*24*7*2), _MI_TWEETBOMB_CACHE_1MONTH => (60*60*24*7*4));
+$modversion['config'][$i]['options'] = [
+    _MI_TWEETBOMB_CACHE_30SECONDS   => 30, _MI_TWEETBOMB_CACHE_60SECONDS => 60, _MI_TWEETBOMB_CACHE_120SECONDS => 120,
+    _MI_TWEETBOMB_CACHE_240SECONDS  => 240, _MI_TWEETBOMB_CACHE_480SECONDS => 480, _MI_TWEETBOMB_CACHE_960SECONDS => 960,
+    _MI_TWEETBOMB_CACHE_1820SECONDS => (60*32), _MI_TWEETBOMB_CACHE_1HOUR => (60*60), _MI_TWEETBOMB_CACHE_3HOUR => (60*60*3),
+    _MI_TWEETBOMB_CACHE_6HOURS      => (60*60*6), _MI_TWEETBOMB_CACHE_12HOURS => (60*60*12), _MI_TWEETBOMB_CACHE_24HOURS => (60*60*24),
+    _MI_TWEETBOMB_CACHE_1WEEK       => (60*60*24*7), _MI_TWEETBOMB_CACHE_FORTNIGHT => (60*60*24*7*2), _MI_TWEETBOMB_CACHE_1MONTH => (60*60*24*7*4)
+];
 
 											 
 $i++;
@@ -639,8 +645,10 @@ $modversion['config'][$i]['description'] = '_MI_TWEETBOMB_TRENDTYPE_DESC';
 $modversion['config'][$i]['formtype'] = 'select';
 $modversion['config'][$i]['valuetype'] = 'text';
 $modversion['config'][$i]['default'] = 'current';
-$modversion['config'][$i]['options'] = array(_MI_TWEETBOMB_TREND_STANDARD => '', _MI_TWEETBOMB_TREND_CURRENT => 'current', 
-											 _MI_TWEETBOMB_TREND_DAILY => 'daily', _MI_TWEETBOMB_TREND_WEEKLY => 'weekly');
+$modversion['config'][$i]['options'] = [
+    _MI_TWEETBOMB_TREND_STANDARD => '', _MI_TWEETBOMB_TREND_CURRENT => 'current',
+    _MI_TWEETBOMB_TREND_DAILY    => 'daily', _MI_TWEETBOMB_TREND_WEEKLY => 'weekly'
+];
 											 
 $i++;
 $modversion['config'][$i]['name'] = 'crontype';
@@ -649,11 +657,12 @@ $modversion['config'][$i]['description'] = '_MI_TWEETBOMB_CRONTYPE_DESC';
 $modversion['config'][$i]['formtype'] = 'select';
 $modversion['config'][$i]['valuetype'] = 'text';
 $modversion['config'][$i]['default'] = 'rss';
-$modversion['config'][$i]['options'] = 	array(	_MI_TWEETBOMB_CRONTYPE_RSS => 'rss', 
-												_MI_TWEETBOMB_CRONTYPE_PRELOADER => 'preloader', 
-												_MI_TWEETBOMB_CRONTYPE_CRONTAB => 'crontab', 
-												_MI_TWEETBOMB_CRONTYPE_SCHEDULER => 'scheduler'
-										);
+$modversion['config'][$i]['options'] = 	[
+    _MI_TWEETBOMB_CRONTYPE_RSS       => 'rss',
+    _MI_TWEETBOMB_CRONTYPE_PRELOADER => 'preloader',
+    _MI_TWEETBOMB_CRONTYPE_CRONTAB   => 'crontab',
+    _MI_TWEETBOMB_CRONTYPE_SCHEDULER => 'scheduler'
+];
 
 $i++;
 $modversion['config'][$i]['name'] = 'cron_follow';
@@ -662,7 +671,7 @@ $modversion['config'][$i]['description'] = '_MI_TWEETBOMB_CRON_FOLLOW';
 $modversion['config'][$i]['formtype'] = 'yesno';
 $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = true;
-$modversion['config'][$i]['options'] = 	array();
+$modversion['config'][$i]['options'] = 	[];
 
 $i++;
 $modversion['config'][$i]['name'] = 'cron_gather';
@@ -671,7 +680,7 @@ $modversion['config'][$i]['description'] = '_MI_TWEETBOMB_CRON_GATHER';
 $modversion['config'][$i]['formtype'] = 'yesno';
 $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = true;
-$modversion['config'][$i]['options'] = 	array();
+$modversion['config'][$i]['options'] = 	[];
 
 $i++;
 $modversion['config'][$i]['name'] = 'cron_tweet';
@@ -680,7 +689,7 @@ $modversion['config'][$i]['description'] = '_MI_TWEETBOMB_CRON_TWEET';
 $modversion['config'][$i]['formtype'] = 'yesno';
 $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = true;
-$modversion['config'][$i]['options'] = 	array();
+$modversion['config'][$i]['options'] = 	[];
 
 $i++;
 $modversion['config'][$i]['name'] = 'cron_retweet';
@@ -689,7 +698,7 @@ $modversion['config'][$i]['description'] = '_MI_TWEETBOMB_CRON_RETWEET';
 $modversion['config'][$i]['formtype'] = 'yesno';
 $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = true;
-$modversion['config'][$i]['options'] = 	array();
+$modversion['config'][$i]['options'] = 	[];
 
 $i++;
 $modversion['config'][$i]['name'] = 'cron_reply';
@@ -698,7 +707,7 @@ $modversion['config'][$i]['description'] = '_MI_TWEETBOMB_CRON_REPLIES';
 $modversion['config'][$i]['formtype'] = 'yesno';
 $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = true;
-$modversion['config'][$i]['options'] = 	array();
+$modversion['config'][$i]['options'] = 	[];
 
 
 $i++;
@@ -708,7 +717,7 @@ $modversion['config'][$i]['description'] = '_MI_TWEETBOMB_CRON_MENTIONS';
 $modversion['config'][$i]['formtype'] = 'yesno';
 $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = true;
-$modversion['config'][$i]['options'] = 	array();
+$modversion['config'][$i]['options'] = 	[];
 
 $i++;
 $modversion['config'][$i]['name'] = 'interval_of_cron';
@@ -774,7 +783,7 @@ $modversion['config'][$i]['formtype'] = 'text';
 $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = 10;
 
-$percentiles = array();
+$percentiles = [];
 for($c=100;$c!=0;$c=$c-1)
 	$percentiles[$c.'%'] = $c;
 $i++;
