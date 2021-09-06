@@ -126,56 +126,56 @@ function b_twitterbomb_block_widget_edit( $options )
 	if (empty($options[14]))
 		$options[14] = 'true';
 		
-	$tweeter = new XoopsFormText('', 'options[]', 26, 45, $options[0]);
+	$tweeter = new \XoopsFormText('', 'options[]', 26, 45, $options[0]);
 	$form = '' . _BL_TWITTERBOMB_TWEETER . $tweeter->render() . '<br/>';
 	
-	$rpp = new XoopsFormText('', 'options[]', 4, 5, $options[1]);
+	$rpp = new \XoopsFormText('', 'options[]', 4, 5, $options[1]);
 	$form .= '' . _BL_TWITTERBOMB_RPP . $rpp->render() . '<br/>';
 		
-	$interval = new XoopsFormText('', 'options[]', 8, 8, $options[2]);
+	$interval = new \XoopsFormText('', 'options[]', 8, 8, $options[2]);
 	$form .= '' . _BL_TWITTERBOMB_INTERVAL . $interval->render() . '<br/>';
 		
-	$height = new XoopsFormText('', 'options[]', 8, 8, $options[3]);
+	$height = new \XoopsFormText('', 'options[]', 8, 8, $options[3]);
 	$form .= '' . _BL_TWITTERBOMB_HEIGHT . $height->render() . '<br/>';
 		
-	$shell_background = new XoopsFormText('', 'options[]', 7, 8, $options[4]);
+	$shell_background = new \XoopsFormText('', 'options[]', 7, 8, $options[4]);
 	$form .= '' . _BL_TWITTERBOMB_SHELL_BACKGROUND . $shell_background->render() . '<br/>';
 
-	$shell_colour = new XoopsFormText('', 'options[]', 7, 8, $options[5]);
+	$shell_colour = new \XoopsFormText('', 'options[]', 7, 8, $options[5]);
 	$form .= '' . _BL_TWITTERBOMB_SHELL_COLOUR . $shell_colour->render() . '<br/>';
 	
-	$tweets_background = new XoopsFormText('', 'options[]', 7, 8, $options[6]);
+	$tweets_background = new \XoopsFormText('', 'options[]', 7, 8, $options[6]);
 	$form .= '' . _BL_TWITTERBOMB_TWEET_BACKGROUND . $tweets_background->render() . '<br/>';
 		
-	$tweets_colour = new XoopsFormText('', 'options[]', 7, 8, $options[7]);
+	$tweets_colour = new \XoopsFormText('', 'options[]', 7, 8, $options[7]);
 	$form .= '' . _BL_TWITTERBOMB_TWEET_COLOUR . $tweets_colour->render() . '<br/>';
 
-	$tweets_link = new XoopsFormText('', 'options[]', 7, 8, $options[8]);
+	$tweets_link = new \XoopsFormText('', 'options[]', 7, 8, $options[8]);
 	$form .= '' . _BL_TWITTERBOMB_TWEET_LINK . $tweets_link->render() . '<br/>';
 	
 	$opt = ['true' =>_YES, 'false' =>_NO];
 	
-	$features_scrollbar = new XoopsFormSelect('', 'options[]', $options[9]);
+	$features_scrollbar = new \XoopsFormSelect('', 'options[]', $options[9]);
 	$features_scrollbar->addOptionArray($opt);
 	$form .= '' . _BL_TWITTERBOMB_FEATURE_SCROLLBAR . $features_scrollbar->render() . '<br/>';
 
-	$features_loop = new XoopsFormSelect('', 'options[]', $options[10]);
+	$features_loop = new \XoopsFormSelect('', 'options[]', $options[10]);
 	$features_loop->addOptionArray($opt);
 	$form .= '' . _BL_TWITTERBOMB_FEATURE_LOOP . $features_loop->render() . '<br/>';
 	
-	$features_live = new XoopsFormSelect('', 'options[]', $options[11]);
+	$features_live = new \XoopsFormSelect('', 'options[]', $options[11]);
 	$features_live->addOptionArray($opt);
 	$form .= '' . _BL_TWITTERBOMB_FEATURE_LIVE . $features_live->render() . '<br/>';
 	
-	$features_hashtags = new XoopsFormSelect('', 'options[]', $options[12]);
+	$features_hashtags = new \XoopsFormSelect('', 'options[]', $options[12]);
 	$features_hashtags->addOptionArray($opt);
 	$form .= '' . _BL_TWITTERBOMB_FEATURE_HASHTAGS . $features_hashtags->render() . '<br/>';
 	
-	$features_timestamp = new XoopsFormSelect('', 'options[]', $options[13]);
+	$features_timestamp = new \XoopsFormSelect('', 'options[]', $options[13]);
 	$features_timestamp->addOptionArray($opt);
 	$form .= '' . _BL_TWITTERBOMB_FEATURE_TIMESTAMP . $features_timestamp->render() . '<br/>';
 	
-	$features_avatars = new XoopsFormSelect('', 'options[]', $options[14]);
+	$features_avatars = new \XoopsFormSelect('', 'options[]', $options[14]);
 	$features_avatars->addOptionArray($opt);
 	$form .= '' . _BL_TWITTERBOMB_FEATURE_AVATARS . $features_avatars->render() . '<br/>';
 	

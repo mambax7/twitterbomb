@@ -43,7 +43,7 @@
 	
 	if (!isset($GLOBALS['xoopsTpl']) || !is_object($GLOBALS['xoopsTpl'])) {
 		include_once(XOOPS_ROOT_PATH . '/class/template.php');
-		$GLOBALS['xoopsTpl'] = new XoopsTpl();
+		$GLOBALS['xoopsTpl'] = new \XoopsTpl();
 	}
 	
 	$GLOBALS['xoopsTpl']->assign('pathImageIcon', $GLOBALS['twitterbombImageIcon']);

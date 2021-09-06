@@ -39,7 +39,7 @@ if (function_exists('mb_http_output')) {
 }
 
 include_once $GLOBALS['xoops']->path('class/template.php');
-$tpl = new XoopsTpl();
+$tpl = new \XoopsTpl();
 
 	xoops_load('XoopsLocal');
     $tpl->assign('channel_title', XoopsLocal::convert_encoding(htmlspecialchars($xoopsConfig['sitename'], ENT_QUOTES)));

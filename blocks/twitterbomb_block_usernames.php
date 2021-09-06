@@ -10,15 +10,15 @@ function b_twitterbomb_block_usernames_show( $options )
 	if (!empty($options[0]))
 		$criteria = $following_handler->criteriaAssocWithID($options[0]);
 	else 
-		$criteria = new Criteria('1','1');
+		$criteria = new \Criteria('1','1');
 
-	$criteria = new CriteriaCompo($criteria);
-	$criterib = new CriteriaCompo(new Criteria('`name`', '', 'NOT LIKE'));
-	$criterib->add(new Criteria('`description`', '', 'NOT LIKE'));
-	$criterib->add(new Criteria('`avarta`', '', 'NOT LIKE'));
-	$criterib->add(new Criteria('`name`', 'NULL', 'NOT LIKE'));
-	$criterib->add(new Criteria('`description`', 'NULL', 'NOT LIKE'));
-	$criterib->add(new Criteria('`avarta`', 'NULL', 'NOT LIKE'));
+	$criteria = new \CriteriaCompo($criteria);
+	$criterib = new \CriteriaCompo(new \Criteria('`name`', '', 'NOT LIKE'));
+	$criterib->add(new \Criteria('`description`', '', 'NOT LIKE'));
+	$criterib->add(new \Criteria('`avarta`', '', 'NOT LIKE'));
+	$criterib->add(new \Criteria('`name`', 'NULL', 'NOT LIKE'));
+	$criterib->add(new \Criteria('`description`', 'NULL', 'NOT LIKE'));
+	$criterib->add(new \Criteria('`avarta`', 'NULL', 'NOT LIKE'));
 	$criteria->add($criterib, 'AND');
 		
 	if (true == $options[3]) {
@@ -85,31 +85,31 @@ function b_twitterbomb_block_usernames_edit( $options )
 	$users = new TwitterBombFormSelectScreenname('', 'options[0]', $options[0], 1, false, true);
 	$form .= '' . _BL_TWITTERBOMB_USERS . '&nbsp;' . $users->render();
 	$form .= '</td></tr><tr><td>';
-	$columns = new XoopsFormText('', 'options[1]', 10,15, $options[1]);
+	$columns = new \XoopsFormText('', 'options[1]', 10,15, $options[1]);
 	$form .= '<br/>' . _BL_TWITTERBOMB_COLUMNS . '&nbsp;' . $columns->render();
 	$form .= '</td></tr><tr><td>';
-	$rows = new XoopsFormText('', 'options[2]', 10,15, $options[2]);
+	$rows = new \XoopsFormText('', 'options[2]', 10,15, $options[2]);
 	$form .= '<br/>' . _BL_TWITTERBOMB_ROWS . '&nbsp;' . $rows->render();
 	$form .= '</td></tr><tr><td>';
-	$random = new XoopsFormRadioYN('', 'options[3]', $options[3]);
+	$random = new \XoopsFormRadioYN('', 'options[3]', $options[3]);
 	$form .= '<br/>' . _BL_TWITTERBOMB_RANDOM . '&nbsp;' . $random->render();
 	$form .= '</td></tr><tr><td>';
-	$name = new XoopsFormRadioYN('', 'options[4]', $options[4]);
+	$name = new \XoopsFormRadioYN('', 'options[4]', $options[4]);
 	$form .= '<br/>' . _BL_TWITTERBOMB_NAME . '&nbsp;' . $name->render();
 	$form .= '</td></tr><tr><td>';
-	$description = new XoopsFormRadioYN('', 'options[5]', $options[5]);
+	$description = new \XoopsFormRadioYN('', 'options[5]', $options[5]);
 	$form .= '<br/>' . _BL_TWITTERBOMB_DESCRIPTION . '&nbsp;' . $description->render();
 	$form .= '</td></tr><tr><td>';
-	$username = new XoopsFormRadioYN('', 'options[6]', $options[6]);
+	$username = new \XoopsFormRadioYN('', 'options[6]', $options[6]);
 	$form .= '<br/>' . _BL_TWITTERBOMB_SCREENNAME . '&nbsp;' . $username->render();
 	$form .= '</td></tr><tr><td>';
-	$picture = new XoopsFormRadioYN('', 'options[7]', $options[7]);
+	$picture = new \XoopsFormRadioYN('', 'options[7]', $options[7]);
 	$form .= '<br/>' . _BL_TWITTERBOMB_PICTURE . '&nbsp;' . $picture->render();
 	$form .= '</td></tr><tr><td>';
-	$width = new XoopsFormText('', 'options[8]', 10,15, $options[8]);
+	$width = new \XoopsFormText('', 'options[8]', 10,15, $options[8]);
 	$form .= '<br/>' . _BL_TWITTERBOMB_WIDTH . '&nbsp;' . $width->render();
 	$form .= '</td></tr><tr><td>';
-	$url = new XoopsFormText('', 'options[9]', 30,128, $options[9]);
+	$url = new \XoopsFormText('', 'options[9]', 30,128, $options[9]);
 	$form .= '<br/>' . _BL_TWITTERBOMB_URL . '&nbsp;' . $url->render();
 	$form .= '</td></tr></table>';
 	return $form ;

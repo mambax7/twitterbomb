@@ -71,7 +71,7 @@ class TwitterbombFormCheckBoxRetweet extends XoopsFormElement
         $this->setFormType('checkbox');
 
         $retweet_handler = xoops_getModuleHandler('retweet', 'twitterbomb');
-        $criteria        = new Criteria('1', '1');
+        $criteria        = new \Criteria('1', '1');
         $criteria->setSort('`created`');
         $criteria->setOrder('ASC');
 

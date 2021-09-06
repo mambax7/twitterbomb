@@ -33,15 +33,15 @@
 
 		 	$indexAdmin = new ModuleAdmin();	
 		    $indexAdmin->addInfoBox(_AM_TWEETBOMB_ADMIN_COUNTS);
-		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_REPLIESSBOMB . '</label>', $campaign_handler->getCount(new Criteria('`type`', 'bomb', '=')), 'Green');
-		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_REPLIESSSCHEDULER . '</label>', $campaign_handler->getCount(new Criteria('`type`', 'scheduler', '=')), 'Green');
-		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_REPLIESSRETWEET . '</label>', $campaign_handler->getCount(new Criteria('`type`', 'retweet', '=')), 'Green');
+		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_REPLIESSBOMB . '</label>', $campaign_handler->getCount(new \Criteria('`type`', 'bomb', '=')), 'Green');
+		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_REPLIESSSCHEDULER . '</label>', $campaign_handler->getCount(new \Criteria('`type`', 'scheduler', '=')), 'Green');
+		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_REPLIESSRETWEET . '</label>', $campaign_handler->getCount(new \Criteria('`type`', 'retweet', '=')), 'Green');
 
-		    $criteria_a = new CriteriaCompo(new Criteria('timed', '0'));
-			$criteria_b = new CriteriaCompo(new Criteria('timed', '1'));
-			$criteria_b->add(new Criteria('start', time(), '<'));
-			$criteria_b->add(new Criteria('end', time(), '>'));
-			$criteria = new CriteriaCompo($criteria_a);
+		    $criteria_a = new \CriteriaCompo(new \Criteria('timed', '0'));
+			$criteria_b = new \CriteriaCompo(new \Criteria('timed', '1'));
+			$criteria_b->add(new \Criteria('start', time(), '<'));
+			$criteria_b->add(new \Criteria('end', time(), '>'));
+			$criteria = new \CriteriaCompo($criteria_a);
 			$criteria->add($criteria_b, 'OR');
 
 		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_REPLIESSACTIVE . '</label>', $campaign_handler->getCount($criteria), 'Orange');
@@ -51,21 +51,21 @@
 			$indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_URLS . '</label>', $urls_handler->getCount(NULL), 'Green');
 		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_RETWEETS . '</label>', $retweet_handler->getCount(NULL), 'Green');
 		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_SCHEDULERTOTAL . '</label>', $scheduler_handler->getCount(NULL), 'Green');
-		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_SCHEDULERWAITING . '</label>', $scheduler_handler->getCount(new Criteria('`tweeted`', '0', '=')), 'Green');
-		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_SCHEDULERTWEETED . '</label>', $scheduler_handler->getCount(new Criteria('`tweeted`', '0', '!=')), 'Green');
+		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_SCHEDULERWAITING . '</label>', $scheduler_handler->getCount(new \Criteria('`tweeted`', '0', '=')), 'Green');
+		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_SCHEDULERTWEETED . '</label>', $scheduler_handler->getCount(new \Criteria('`tweeted`', '0', '!=')), 'Green');
 			$indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_LOGTOTAL . '</label>', $log_handler->getCount(NULL), 'Orange');
-		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_LOGBOMB . '</label>', $log_handler->getCount(new Criteria('`provider`', 'bomb', '=')), 'Orange');
-		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_LOGSCHEDULER . '</label>', $log_handler->getCount(new Criteria('`provider`', 'scheduler', '=')), 'Orange');
-		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_LOGRETWEET . '</label>', $log_handler->getCount(new Criteria('`provider`', 'retweet', '=')), 'Orange');
+		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_LOGBOMB . '</label>', $log_handler->getCount(new \Criteria('`provider`', 'bomb', '=')), 'Orange');
+		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_LOGSCHEDULER . '</label>', $log_handler->getCount(new \Criteria('`provider`', 'scheduler', '=')), 'Orange');
+		    $indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_LOGRETWEET . '</label>', $log_handler->getCount(new \Criteria('`provider`', 'retweet', '=')), 'Orange');
 
-		    $criteria = new CriteriaCompo(new Criteria('`provider`', 'bomb', '='));
+		    $criteria = new \CriteriaCompo(new \Criteria('`provider`', 'bomb', '='));
 		    $criteria->setSort('`date`');
 		    $criteria->setOrder('DESC');
 		    $criteria->setLimit(1);
 		    $logs = $log_handler->getObjects($criteria, false);
 		    if (is_object($logs[0])) {
 		    	$indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_LOGLASTBOMB . '</label>', date(_DATESTRING, $logs[0]->getVar('date')), 'Green');
-			    $criteria = new CriteriaCompo(new Criteria('`provider`', 'bomb', '='));
+			    $criteria = new \CriteriaCompo(new \Criteria('`provider`', 'bomb', '='));
 			    $criteria->setSort('`date`');
 			    $criteria->setOrder('ASC');
 			    $criteria->setLimit(1);
@@ -75,7 +75,7 @@
 			    }
 		    }
 			    		
-		    $criteria = new CriteriaCompo(new Criteria('`provider`', 'scheduler', '='));
+		    $criteria = new \CriteriaCompo(new \Criteria('`provider`', 'scheduler', '='));
 		    $criteria->setSort('`date`');
 		    $criteria->setOrder('DESC');
 		    $criteria->setLimit(1);
@@ -83,7 +83,7 @@
 		    if (isset($logs[0]))
 			    if (is_object($logs[0])) {
 			    	$indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_LOGLASTSCHEDULE . '</label>', date(_DATESTRING, $logs[0]->getVar('date')), 'Green');
-				    $criteria = new CriteriaCompo(new Criteria('`provider`', 'scheduler', '='));
+				    $criteria = new \CriteriaCompo(new \Criteria('`provider`', 'scheduler', '='));
 				    $criteria->setSort('`date`');
 				    $criteria->setOrder('ASC');
 				    $criteria->setLimit(1);
@@ -93,7 +93,7 @@
 				    }
 			    }
 
-		    $criteria = new CriteriaCompo(new Criteria('`provider`', 'retweet', '='));
+		    $criteria = new \CriteriaCompo(new \Criteria('`provider`', 'retweet', '='));
 		    $criteria->setSort('`date`');
 		    $criteria->setOrder('DESC');
 		    $criteria->setLimit(1);
@@ -101,7 +101,7 @@
 		    if (isset($logs[0]))
 			    if (is_object($logs[0])) {
 			    	$indexAdmin->addInfoBoxLine(_AM_TWEETBOMB_ADMIN_COUNTS, '<label>' . _AM_TWEETBOMB_ADMIN_THEREARE_LOGLASTRETWEET . '</label>', date(_DATESTRING, $logs[0]->getVar('date')), 'Green');
-				    $criteria = new CriteriaCompo(new Criteria('`provider`', 'retweet', '='));
+				    $criteria = new \CriteriaCompo(new \Criteria('`provider`', 'retweet', '='));
 				    $criteria->setSort('`date`');
 				    $criteria->setOrder('ASC');
 				    $criteria->setLimit(1);
@@ -170,7 +170,7 @@
 					$ttl = $campaign_handler->getCount($criteria);
 					$sort = !empty($_REQUEST['sort'])?''.$_REQUEST['sort'].'':'created';
 					
-					$pagenav = new XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
+					$pagenav = new \XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
 					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 			
 					foreach (['cid', 'catid', 'type', 'name', 'description', 'start', 'end', 'timed', 'uid', 'created', 'updated', 'hits', 'active'] as $id => $key) {
@@ -300,7 +300,7 @@
 					$ttl = $category_handler->getCount($criteria);
 					$sort = !empty($_REQUEST['sort'])?''.$_REQUEST['sort'].'':'created';
 										
-					$pagenav = new XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
+					$pagenav = new \XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
 					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 			
 					foreach (['catid', 'pcatdid', 'name', 'uid', 'created', 'updated', 'hits', 'active'] as $id => $key) {
@@ -416,7 +416,7 @@
 					$ttl = $keywords_handler->getCount($criteria);
 					$sort = !empty($_REQUEST['sort'])?''.$_REQUEST['sort'].'':'created';
 					
-					$pagenav = new XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
+					$pagenav = new \XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
 					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 					
 					foreach (['kid', 'cid', 'catid', 'base', 'keyword', 'uid', 'created', 'actioned', 'updated'] as $id => $key) {
@@ -534,7 +534,7 @@
 					$ttl = $base_matrix_handler->getCount($criteria);
 					$sort = !empty($_REQUEST['sort'])?''.$_REQUEST['sort'].'':'created';
 					
-					$pagenav = new XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
+					$pagenav = new \XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
 					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 			
 					foreach (['baseid', 'cid', 'catid', 'base1', 'base2', 'base3', 'base4', 'base5', 'base6', 'base7', 'uid', 'created', 'actioned', 'updated'] as $id => $key) {
@@ -651,7 +651,7 @@
 					$ttl = $usernames_handler->getCount($criteria);
 					$sort = !empty($_REQUEST['sort'])?''.$_REQUEST['sort'].'':'created';
 					
-					$pagenav = new XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
+					$pagenav = new \XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
 					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 								
 					foreach (['tid', 'cid', 'catid', 'screen_name', 'uid', 'created', 'updated', 'type', 'source_nick', 'tweeted'] as $id => $key) {
@@ -768,7 +768,7 @@
 					$ttl = $urls_handler->getCount($criteria);
 					$sort = !empty($_REQUEST['sort'])?''.$_REQUEST['sort'].'':'created';
 					
-					$pagenav = new XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
+					$pagenav = new \XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
 					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 			
 					foreach (['urlid', 'cid', 'catid', 'surl', 'name', 'description', 'uid', 'created', 'updated'] as $id => $key) {
@@ -886,7 +886,7 @@
 					$ttl = $scheduler_handler->getCount($criteria);
 					$sort = !empty($_REQUEST['sort'])?''.$_REQUEST['sort'].'':'sid';
 										
-					$pagenav = new XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
+					$pagenav = new \XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
 					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 			
 					foreach (['sid', 'cid', 'catid', 'mode', 'pre', 'text', 'hits', 'rank', 'uid', 'when', 'tweeted', 'created', 'updated'] as $id => $key) {
@@ -1070,7 +1070,7 @@
 			$ttl = $log_handler->getCount($criteria);
 			$sort = !empty($_REQUEST['sort'])?''.$_REQUEST['sort'].'':'date';
 	
-			$pagenav = new XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter);
+			$pagenav = new \XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter);
 			$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 	
 			foreach (['provider', 'date', 'alias', 'tweet', 'url', 'hits', 'rank', 'cid', 'catid', 'tags', 'active'] as $id => $key) {
@@ -1115,7 +1115,7 @@
 					$ttl = $retweet_handler->getCount($criteria);
 					$sort = !empty($_REQUEST['sort'])?''.$_REQUEST['sort'].'':'created';
 					
-					$pagenav = new XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
+					$pagenav = new \XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
 					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 					
 					foreach (
@@ -1249,7 +1249,7 @@
 					$ttl = $mentions_handler->getCount($criteria);
 					$sort = !empty($_REQUEST['sort'])?''.$_REQUEST['sort'].'':'created';
 					
-					$pagenav = new XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
+					$pagenav = new \XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
 					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 			
 					foreach (['cid', 'catid', 'mid', 'user', 'rpids', 'keywords', 'mentions', 'created', 'updated', 'mentioned', 'mentions', 'uid'] as $id => $key) {
@@ -1379,7 +1379,7 @@
 					$ttl = $replies_handler->getCount($criteria);
 					$sort = !empty($_REQUEST['sort'])?''.$_REQUEST['sort'].'':'created';
 					
-					$pagenav = new XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
+					$pagenav = new \XoopsPageNav($ttl, $limit, $start, 'start', 'limit='.$limit.'&sort='.$sort.'&order='.$order.'&op='.$op.'&fct='.$fct.'&filter='.$filter.'&fct='.$fct.'&filter='.$filter);
 					$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
 			
 					foreach (['cid', 'catid', 'rpid', 'urlid', 'rcid', 'reply', 'keywords', 'uid', 'type', 'created', 'updated', 'replies', 'replied'] as $id => $key) {

@@ -43,7 +43,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_follow']) {
 	$GLOBALS['execution_time'] = $GLOBALS['execution_time'] + 120;
 	set_time_limit($GLOBALS['execution_time']);
 	
-	$criteria = new Criteria('followed', 0, '=');
+	$criteria = new \Criteria('followed', 0, '=');
 	$criteria->setLimit($GLOBALS['twitterbombModuleConfig']['follow_per_session']);
 	$usernames = $usernames_handler->getObjects($criteria, true);
 	foreach($usernames as $uid => $username) {

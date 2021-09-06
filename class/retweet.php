@@ -205,13 +205,13 @@ class TwitterBombRetweet extends XoopsObject
         }
 
         $ele                = [];
-        $ele['id']          = new XoopsFormHidden('id[' . $ret['rid'] . ']', $this->getVar('rid'));
-        $ele['search']      = new XoopsFormText('', $ret['rid'] . '[search]', 26, 64, $this->getVar('search'));
-        $ele['skip']        = new XoopsFormText('', $ret['rid'] . '[skip]', 26, 64, $this->getVar('skip'));
-        $ele['geocode']     = new XoopsFormRadioYN('', $ret['rid'] . '[geocode]', $this->getVar('geocode'));
-        $ele['longitude']   = new XoopsFormText('', $ret['rid'] . '[longitude]', 10, 24, $this->getVar('longitude'));
-        $ele['latitude']    = new XoopsFormText('', $ret['rid'] . '[latitude]', 10, 24, $this->getVar('latitude'));
-        $ele['radius']      = new XoopsFormText('', $ret['rid'] . '[radius]', 8, 24, $this->getVar('radius'));
+        $ele['id']          = new \XoopsFormHidden('id[' . $ret['rid'] . ']', $this->getVar('rid'));
+        $ele['search']      = new \XoopsFormText('', $ret['rid'] . '[search]', 26, 64, $this->getVar('search'));
+        $ele['skip']        = new \XoopsFormText('', $ret['rid'] . '[skip]', 26, 64, $this->getVar('skip'));
+        $ele['geocode']     = new \XoopsFormRadioYN('', $ret['rid'] . '[geocode]', $this->getVar('geocode'));
+        $ele['longitude']   = new \XoopsFormText('', $ret['rid'] . '[longitude]', 10, 24, $this->getVar('longitude'));
+        $ele['latitude']    = new \XoopsFormText('', $ret['rid'] . '[latitude]', 10, 24, $this->getVar('latitude'));
+        $ele['radius']      = new \XoopsFormText('', $ret['rid'] . '[radius]', 8, 24, $this->getVar('radius'));
         $ele['measurement'] = new TwitterbombFormSelectMeasurement('', $ret['rid'] . '[measurement]', $this->getVar('measurement'));
         $ele['language']    = new TwitterbombFormSelectLanguage('', $ret['rid'] . '[language]', $this->getVar('language'));
         $ele['type']        = new TwitterbombFormSelectRetweetType('', $ret['rid'] . '[type]', $this->getVar('type'));
@@ -219,9 +219,9 @@ class TwitterBombRetweet extends XoopsObject
         if ($ret['uid'] > 0) {
             $member_handler = xoops_getHandler('member');
             $user           = $member_handler->getUser($ret['uid']);
-            $ele['uid']     = new XoopsFormLabel('', '<a href="' . XOOPS_URL . '/userinfo.php?uid=' . $ret['uid'] . '">' . $user->getVar('uname') . '</a>');
+            $ele['uid']     = new \XoopsFormLabel('', '<a href="' . XOOPS_URL . '/userinfo.php?uid=' . $ret['uid'] . '">' . $user->getVar('uname') . '</a>');
         } else {
-            $ele['uid'] = new XoopsFormLabel('', _MI_TWEETBOMB_ANONYMOUS);
+            $ele['uid'] = new \XoopsFormLabel('', _MI_TWEETBOMB_ANONYMOUS);
         }
 
         foreach ($ele as $key => $obj) {
@@ -332,22 +332,22 @@ class TwitterBombRetweetHandler extends XoopsPersistableObjectHandler
     public function getFilterCriteria($filter)
     {
         $parts    = explode('|', $filter);
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
         foreach ($parts as $part) {
             $var = explode(',', $part);
             if (!empty($var[1]) && !is_numeric($var[0])) {
                 $object = $this->create();
                 if (XOBJ_DTYPE_TXTBOX == $object->vars[$var[0]]['data_type'] || XOBJ_DTYPE_TXTAREA == $object->vars[$var[0]]['data_type']) {
-                    $criteria->add(new Criteria('`' . $var[0] . '`', '%' . $var[1] . '%', ($var[2] ?? 'LIKE')));
+                    $criteria->add(new \Criteria('`' . $var[0] . '`', '%' . $var[1] . '%', ($var[2] ?? 'LIKE')));
                 } elseif (XOBJ_DTYPE_INT == $object->vars[$var[0]]['data_type'] || XOBJ_DTYPE_DECIMAL == $object->vars[$var[0]]['data_type'] || XOBJ_DTYPE_FLOAT == $object->vars[$var[0]]['data_type']) {
-                    $criteria->add(new Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
+                    $criteria->add(new \Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
                 } elseif (XOBJ_DTYPE_ENUM == $object->vars[$var[0]]['data_type']) {
-                    $criteria->add(new Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
+                    $criteria->add(new \Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
                 } elseif (XOBJ_DTYPE_ARRAY == $object->vars[$var[0]]['data_type']) {
-                    $criteria->add(new Criteria('`' . $var[0] . '`', '%"' . $var[1] . '";%', ($var[2] ?? 'LIKE')));
+                    $criteria->add(new \Criteria('`' . $var[0] . '`', '%"' . $var[1] . '";%', ($var[2] ?? 'LIKE')));
                 }
             } elseif (!empty($var[1]) && is_numeric($var[0])) {
-                $criteria->add(new Criteria($var[0], $var[1]));
+                $criteria->add(new \Criteria($var[0], $var[1]));
             }
         }
         return $criteria;
@@ -366,9 +366,9 @@ class TwitterBombRetweetHandler extends XoopsPersistableObjectHandler
     public function doSearchForTweet($cid, $catid, $rids)
     {
         if (is_array($rids)) {
-            $criteria = new CriteriaCompo(new Criteria('rid', '(' . implode(',', $rids) . ')', 'IN'));
+            $criteria = new \CriteriaCompo(new \Criteria('rid', '(' . implode(',', $rids) . ')', 'IN'));
         } else {
-            $criteria = new CriteriaCompo(new Criteria('rid', $rids));
+            $criteria = new \CriteriaCompo(new \Criteria('rid', $rids));
         }
         $criteria->setSort('RAND()');
         $criteria->setOrder('ASC');
@@ -378,9 +378,9 @@ class TwitterBombRetweetHandler extends XoopsPersistableObjectHandler
         $terms       = $this->getObjects($criteria, true);
         foreach ($terms as $rid => $retweet) {
             // Get Since ID
-            $criteria_log = new CriteriaCompo(new Criteria('rid', $rid));
-            $criteria_log->add(new Criteria('cid', $cid));
-            $criteria_log->add(new Criteria('catid', $catid));
+            $criteria_log = new \CriteriaCompo(new \Criteria('rid', $rid));
+            $criteria_log->add(new \Criteria('cid', $cid));
+            $criteria_log->add(new \Criteria('catid', $catid));
             $criteria_log->setSort('`date`');
             $criteria_log->setOrder('DESC');
             $criteria_log->setStart(0);
@@ -477,7 +477,7 @@ class TwitterBombRetweetHandler extends XoopsPersistableObjectHandler
     public function delete($id_or_object, $force = true)
     {
         if (is_numeric($id_or_object)) {
-            return $this->deleteAll(new Criteria('`' . $this->keyName . '`', $id_or_object), $force);
+            return $this->deleteAll(new \Criteria('`' . $this->keyName . '`', $id_or_object), $force);
         } elseif (is_object($id_or_object)) {
             return parent::delete($id_or_object, $force);
         }

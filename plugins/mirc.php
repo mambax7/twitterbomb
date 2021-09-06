@@ -54,11 +54,11 @@
 			}
 			
 			if (true == $pass && !empty($screen_name)) {
-				$criteria= new CriteriaCompo(new Criteria('screen_name', $screen_name, 'LIKE'));
-				$criteria->add(new Criteria('source_nick', strtolower($nick), 'LIKE'));
-				$criteria->add(new Criteria('type', 'scheduler'));
-				$criteria->add(new Criteria('cid', $object->getVar('cid')));
-				$criteria->add(new Criteria('catid', $object->getVar('catid')));
+				$criteria= new \CriteriaCompo(new \Criteria('screen_name', $screen_name, 'LIKE'));
+				$criteria->add(new \Criteria('source_nick', strtolower($nick), 'LIKE'));
+				$criteria->add(new \Criteria('type', 'scheduler'));
+				$criteria->add(new \Criteria('cid', $object->getVar('cid')));
+				$criteria->add(new \Criteria('catid', $object->getVar('catid')));
 				if (0 == $usernames_handler->getCount($criteria)) {
 					$username = $usernames_handler->create();
 					$username->setVars($object->toArray());

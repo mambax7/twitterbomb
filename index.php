@@ -29,26 +29,26 @@
 				$category_handler = xoops_getModuleHandler('category', 'twitterbomb');
 		
 				if ($catid>0)
-					$criteriaa = new CriteriaCompo(new Criteria('catid', '('.implode(',',twitterbomb_getSubCategoriesIn($catid)).')', 'IN'), 'AND');
+					$criteriaa = new \CriteriaCompo(new \Criteria('catid', '('.implode(',',twitterbomb_getSubCategoriesIn($catid)).')', 'IN'), 'AND');
 				else 
-					$criteriaa = new CriteriaCompo(new Criteria('catid', '('.implode(',',twitterbomb_getSubCategoriesIn(0)).')', 'IN'), 'AND');
+					$criteriaa = new \CriteriaCompo(new \Criteria('catid', '('.implode(',',twitterbomb_getSubCategoriesIn(0)).')', 'IN'), 'AND');
 		    	
-				$criteriaa->add(new Criteria('timed', '0'), 'AND');
+				$criteriaa->add(new \Criteria('timed', '0'), 'AND');
 		    	
 				if ($catid>0)
-					$criteriab = new CriteriaCompo(new Criteria('catid', '('.implode(',',twitterbomb_getSubCategoriesIn($catid)).')', 'IN'), 'AND');
+					$criteriab = new \CriteriaCompo(new \Criteria('catid', '('.implode(',',twitterbomb_getSubCategoriesIn($catid)).')', 'IN'), 'AND');
 				else 
-					$criteriab = new CriteriaCompo(new Criteria('catid', '('.implode(',',twitterbomb_getSubCategoriesIn($catid)).')', 'IN'), 'AND');
-		    	$criteriab->add(new Criteria('timed', '1'), 'AND');
-				$criteriab->add(new Criteria('`start`', time(), '<='), 'AND');
-				$criteriab->add(new Criteria('`end`', time(), '>='), 'AND');
-				$criteria = new CriteriaCompo($criteriaa, 'OR');
+					$criteriab = new \CriteriaCompo(new \Criteria('catid', '('.implode(',',twitterbomb_getSubCategoriesIn($catid)).')', 'IN'), 'AND');
+		    	$criteriab->add(new \Criteria('timed', '1'), 'AND');
+				$criteriab->add(new \Criteria('`start`', time(), '<='), 'AND');
+				$criteriab->add(new \Criteria('`end`', time(), '>='), 'AND');
+				$criteria = new \CriteriaCompo($criteriaa, 'OR');
 				$criteria->add($criteriab, 'OR');
 				
 				$total = $campaign_handler->getCount($criteria);
 				
 				xoops_load('pagenav');
-				$pagenav = new XoopsPageNav($total, $limit, $start, 'start', 'num='.$limit.'&op='.$op.'&fct='.$fct.'&cid='.$cid.'&catid='.$catid);
+				$pagenav = new \XoopsPageNav($total, $limit, $start, 'start', 'num='.$limit.'&op='.$op.'&fct='.$fct.'&cid='.$cid.'&catid='.$catid);
 				
 				$xoopsOption['template_main'] = 'twitterbomb_index.html';
 				

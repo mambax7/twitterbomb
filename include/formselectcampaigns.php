@@ -110,14 +110,14 @@ class TwitterBombFormSelectCampaigns extends XoopsFormElement
     public function GetCampaign($ownid, $type)
     {
         $campaign_handler = xoops_getModuleHandler('campaign', 'twitterbomb');
-        $criteriaa        = new CriteriaCompo(new Criteria('timed', '0', '='), 'OR');
-        $criteriab        = new CriteriaCompo(new Criteria('timed', '1', '='), 'AND');
-        $criteriab->add(new Criteria('`start`', time(), '<'));
-        $criteriab->add(new Criteria('`end`', time(), '>'));
-        $crtieriac = new CriteriaCompo($criteriaa, 'OR');
+        $criteriaa        = new \CriteriaCompo(new \Criteria('timed', '0', '='), 'OR');
+        $criteriab        = new \CriteriaCompo(new \Criteria('timed', '1', '='), 'AND');
+        $criteriab->add(new \Criteria('`start`', time(), '<'));
+        $criteriab->add(new \Criteria('`end`', time(), '>'));
+        $crtieriac = new \CriteriaCompo($criteriaa, 'OR');
         $crtieriac->add($criteriab, 'OR');
-        $crtieria = new CriteriaCompo($criteriac, 'AND');
-        $crtieria->add(new Criteria('`type`', '("' . implode('","', explode(',', $type)) . '")', 'IN'));
+        $crtieria = new \CriteriaCompo($criteriac, 'AND');
+        $crtieria->add(new \Criteria('`type`', '("' . implode('","', explode(',', $type)) . '")', 'IN'));
         $campaigns = $campaign_handler->getObjects($crtieria, true);
         foreach ($campaigns as $cid => $campaign) {
             if ($cid != $ownid) {

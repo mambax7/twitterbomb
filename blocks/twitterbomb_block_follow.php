@@ -26,7 +26,7 @@ function b_twitterbomb_block_follow_edit( $options )
 		$xoConfig = $config_handler->getConfigList($xoModule->getVar('mid'));
 		$options[0] = $xoConfig['root_tweeter']; 
 	}
-	$number = new XoopsFormText('', 'options[]', 26, 45, $options[0]);
+	$number = new \XoopsFormText('', 'options[]', 26, 45, $options[0]);
 	$form = '' . _BL_TWITTERBOMB_TWEETER . $number->render() . '<br/>';
 	
 	return $form ;

@@ -31,7 +31,7 @@ function b_twitterbomb_block_replies_show( $options )
 		if ($campaign->getVar('start')<time()&&$campaign->getVar('end')>time()) {
 			if (!$block['tweets'] = XoopsCache::read('tweetbomb_reply_'.$cacheid)) {
 				$log_handler = xoops_getModuleHandler('log', 'twitterbomb');
-				$criteria    = new CriteriaCompo(new Criteria('cid', $cid));
+				$criteria    = new \CriteriaCompo(new \Criteria('cid', $cid));
 				$criteria->setSort('`date`');
 				$criteria->setOrder('DESC');
 				$criteria->setLimit($options[1]);
@@ -56,7 +56,7 @@ function b_twitterbomb_block_replies_show( $options )
 	} else {
 		if (!$block['tweets']  = XoopsCache::read('tweetbomb_reply_'.$cacheid)) {
 			$log_handler = xoops_getModuleHandler('log', 'twitterbomb');
-			$criteria    = new CriteriaCompo(new Criteria('cid', $cid));
+			$criteria    = new \CriteriaCompo(new \Criteria('cid', $cid));
 			$criteria->setSort('`date`');
 			$criteria->setOrder('DESC');
 			$criteria->setLimit($options[1]);
@@ -89,7 +89,7 @@ function b_twitterbomb_block_replies_edit( $options )
 
 	$campaign = new TwitterBombFormSelectCampaigns('', 'options[]', $options[0], 1, false, false, 'reply');
 	$form = '' . _BL_TWITTERBOMB_CID . '&nbsp;' . $campaign->render();
-	$display = new XoopsFormText('', 'options[]', 10,15, $options[1]);
+	$display = new \XoopsFormText('', 'options[]', 10,15, $options[1]);
 	$form .= '<br/>' . _BL_TWITTERBOMB_DISPLAY . '&nbsp;' . $display->render();
 	
 	return $form ;

@@ -61,23 +61,23 @@ class TwitterbombScheduler extends XoopsObject
     {
         $ret                      = parent::toArray();
         $ele                      = [];
-        $ele['id']                = new XoopsFormHidden('id[' . $ret['sid'] . ']', $this->getVar('sid'));
+        $ele['id']                = new \XoopsFormHidden('id[' . $ret['sid'] . ']', $this->getVar('sid'));
         $ele['cid']               = new TwitterBombFormSelectCampaigns('', $ret['sid'] . '[cid]', $this->getVar('cid'), 1, false, false, 'scheduler');
         $ele['catid']             = new TwitterBombFormSelectCategories('', $ret['sid'] . '[catid]', $this->getVar('catid'));
         $ele['mode']              = new TwitterBombFormSelectMode('', $ret['sid'] . '[mode]', $this->getVar('mode'), 1, false, false);
-        $ele['text']              = new XoopsFormText('', $ret['sid'] . '[text]', 38, 500, $this->getVar('text'));
-        $ele['pre']               = new XoopsFormText('', $ret['sid'] . '[pre]', 25, 35, $this->getVar('pre'));
-        $ele['replace']           = new XoopsFormText('', $ret['sid'] . '[replace]', 25, 200, implode('|', $this->getVar('replace')));
-        $ele['strip']             = new XoopsFormText('', $ret['sid'] . '[strip]', 25, 200, implode('|', $this->getVar('strip')));
-        $ele['search']            = new XoopsFormText('', $ret['sid'] . '[search]', 25, 200, implode('|', $this->getVar('search')));
-        $ele['pregmatch']         = new XoopsFormText('', $ret['sid'] . '[pregmatch]', 25, 500, $this->getVar('pregmatch'));
-        $ele['pregmatch_replace'] = new XoopsFormText('', $ret['sid'] . '[pregmatch_replace]', 25, 500, $this->getVar('pregmatch_replace'));
-        $ele['hits']              = new XoopsFormLabel('', $ret['hits']);
-        $ele['rank']              = new XoopsFormLabel('', number_format(($this->getVar('rank') / $this->_modConfig['number_to_rank']) * 100, 2) . '%');
+        $ele['text']              = new \XoopsFormText('', $ret['sid'] . '[text]', 38, 500, $this->getVar('text'));
+        $ele['pre']               = new \XoopsFormText('', $ret['sid'] . '[pre]', 25, 35, $this->getVar('pre'));
+        $ele['replace']           = new \XoopsFormText('', $ret['sid'] . '[replace]', 25, 200, implode('|', $this->getVar('replace')));
+        $ele['strip']             = new \XoopsFormText('', $ret['sid'] . '[strip]', 25, 200, implode('|', $this->getVar('strip')));
+        $ele['search']            = new \XoopsFormText('', $ret['sid'] . '[search]', 25, 200, implode('|', $this->getVar('search')));
+        $ele['pregmatch']         = new \XoopsFormText('', $ret['sid'] . '[pregmatch]', 25, 500, $this->getVar('pregmatch'));
+        $ele['pregmatch_replace'] = new \XoopsFormText('', $ret['sid'] . '[pregmatch_replace]', 25, 500, $this->getVar('pregmatch_replace'));
+        $ele['hits']              = new \XoopsFormLabel('', $ret['hits']);
+        $ele['rank']              = new \XoopsFormLabel('', number_format(($this->getVar('rank') / $this->_modConfig['number_to_rank']) * 100, 2) . '%');
         if ($this->_modConfig['tags']) {
             $log_handler = xoops_getModuleHandler('log', 'twitterbomb');
-            if ($log_handler->getCount(new Criteria('sid', $this->getVar('sid'))) > 0) {
-                $logs = $log_handler->getObjects(new Criteria('sid', $this->getVar('sid')), false);
+            if ($log_handler->getCount(new \Criteria('sid', $this->getVar('sid'))) > 0) {
+                $logs = $log_handler->getObjects(new \Criteria('sid', $this->getVar('sid')), false);
                 if (is_object($logs[0])) {
                     include_once XOOPS_ROOT_PATH . '/modules/tag/include/tagbar.php';
                     $ret['tagbar'] = tagBar($logs[0]->getVar('lid'), $logs[0]->getVar('catid'));
@@ -87,34 +87,34 @@ class TwitterbombScheduler extends XoopsObject
         if ($ret['uid'] > 0) {
             $member_handler = xoops_getHandler('member');
             $user           = $member_handler->getUser($ret['uid']);
-            $ele['uid']     = new XoopsFormLabel('', '<a href="' . XOOPS_URL . '/userinfo.php?uid=' . $ret['uid'] . '">' . $user->getVar('uname') . '</a>');
+            $ele['uid']     = new \XoopsFormLabel('', '<a href="' . XOOPS_URL . '/userinfo.php?uid=' . $ret['uid'] . '">' . $user->getVar('uname') . '</a>');
         } else {
-            $ele['uid'] = new XoopsFormLabel('', _MI_TWEETBOMB_ANONYMOUS);
+            $ele['uid'] = new \XoopsFormLabel('', _MI_TWEETBOMB_ANONYMOUS);
         }
         if ($ret['when'] > 0) {
-            $ele['when'] = new XoopsFormLabel('', date(_DATESTRING, $ret['when']));
+            $ele['when'] = new \XoopsFormLabel('', date(_DATESTRING, $ret['when']));
         } else {
-            $ele['when'] = new XoopsFormLabel('', '');
+            $ele['when'] = new \XoopsFormLabel('', '');
         }
         if ($ret['tweeted'] > 0) {
-            $ele['tweeted'] = new XoopsFormLabel('', date(_DATESTRING, $ret['tweeted']));
+            $ele['tweeted'] = new \XoopsFormLabel('', date(_DATESTRING, $ret['tweeted']));
         } else {
-            $ele['tweeted'] = new XoopsFormLabel('', '');
+            $ele['tweeted'] = new \XoopsFormLabel('', '');
         }
         if ($ret['created'] > 0) {
-            $ele['created'] = new XoopsFormLabel('', date(_DATESTRING, $ret['created']));
+            $ele['created'] = new \XoopsFormLabel('', date(_DATESTRING, $ret['created']));
         } else {
-            $ele['created'] = new XoopsFormLabel('', '');
+            $ele['created'] = new \XoopsFormLabel('', '');
         }
         if ($ret['actioned'] > 0) {
-            $ele['actioned'] = new XoopsFormLabel('', date(_DATESTRING, $ret['actioned']));
+            $ele['actioned'] = new \XoopsFormLabel('', date(_DATESTRING, $ret['actioned']));
         } else {
-            $ele['actioned'] = new XoopsFormLabel('', '');
+            $ele['actioned'] = new \XoopsFormLabel('', '');
         }
         if ($ret['updated'] > 0) {
-            $ele['updated'] = new XoopsFormLabel('', date(_DATESTRING, $ret['updated']));
+            $ele['updated'] = new \XoopsFormLabel('', date(_DATESTRING, $ret['updated']));
         } else {
-            $ele['updated'] = new XoopsFormLabel('', '');
+            $ele['updated'] = new \XoopsFormLabel('', '');
         }
         foreach ($ele as $key => $obj) {
             $ret['form'][$key] = $obj->render();
@@ -270,18 +270,18 @@ class TwitterbombSchedulerHandler extends XoopsPersistableObjectHandler
     public function getTweet($cid = '0', $catid = '0', $when = '0', $tweeted = '0')
     {
         $this->recalc();
-        $criteriaa = new CriteriaCompo(new Criteria('cid', 0), 'OR');
-        $criteriaa->add(new Criteria('catid', 0), 'OR');
-        $criteriab = new CriteriaCompo(new Criteria('cid', $cid), 'AND');
-        $criteriab->add(new Criteria('catid', $catid), 'OR');
-        $criteriac = new CriteriaCompo(new Criteria('cid', $cid), 'AND');
-        $criteriac->add(new Criteria('catid', $catid), 'AND');
-        $criteriad = new CriteriaCompo($criteriaa, 'OR');
+        $criteriaa = new \CriteriaCompo(new \Criteria('cid', 0), 'OR');
+        $criteriaa->add(new \Criteria('catid', 0), 'OR');
+        $criteriab = new \CriteriaCompo(new \Criteria('cid', $cid), 'AND');
+        $criteriab->add(new \Criteria('catid', $catid), 'OR');
+        $criteriac = new \CriteriaCompo(new \Criteria('cid', $cid), 'AND');
+        $criteriac->add(new \Criteria('catid', $catid), 'AND');
+        $criteriad = new \CriteriaCompo($criteriaa, 'OR');
         $criteriad->add($criteriab, 'OR');
         $criteriad->add($criteriac, 'OR');
-        $criteria = new CriteriaCompo($criteriad, 'OR');
-        $criteria->add(new Criteria('`when`', $when, '='), 'AND');
-        $criteria->add(new Criteria('`tweeted`', $tweeted, '='), 'AND');
+        $criteria = new \CriteriaCompo($criteriad, 'OR');
+        $criteria->add(new \Criteria('`when`', $when, '='), 'AND');
+        $criteria->add(new \Criteria('`tweeted`', $tweeted, '='), 'AND');
         $criteria->setOrder('ASC');
         $criteria->setSort('`created`, `sid`, `when`, `tweeted`');
         $criteria->setLimit(1);
@@ -345,7 +345,7 @@ class TwitterbombSchedulerHandler extends XoopsPersistableObjectHandler
             $sql = 'UPDATE ' . $GLOBALS['xoopsDB']->prefix('twitterbomb_scheduler') . ' SET `rank` = 0 WHERE `rank` <> 0';
             @$GLOBALS['xoopsDB']->queryF($sql);
             //Recalculate rank
-            $criteria = new CriteriaCompo(new Criteria('`hits`', 0, '>'));
+            $criteria = new \CriteriaCompo(new \Criteria('`hits`', 0, '>'));
             $criteria->setOrder('DESC');
             $criteria->setSort('`hits`');
             $criteria->setStart(0);
@@ -361,11 +361,11 @@ class TwitterbombSchedulerHandler extends XoopsPersistableObjectHandler
 
         // Kill Old Tweets
         if (0 != $this->_modConfig['kill_tweeted']) {
-            $criteria = new CriteriaCompo(new Criteria('tweeted', time() - $this->_modConfig['kill_tweeted'], '<'));
-            $criteria->add(new Criteria('when', time() - $this->_modConfig['kill_tweeted'], '<'));
-            $criteria->add(new Criteria('rank', 0, '='));
-            $criteria->add(new Criteria('when', 0, '>'));
-            $criteria->add(new Criteria('tweeted', 0, '>'));
+            $criteria = new \CriteriaCompo(new \Criteria('tweeted', time() - $this->_modConfig['kill_tweeted'], '<'));
+            $criteria->add(new \Criteria('when', time() - $this->_modConfig['kill_tweeted'], '<'));
+            $criteria->add(new \Criteria('rank', 0, '='));
+            $criteria->add(new \Criteria('when', 0, '>'));
+            $criteria->add(new \Criteria('tweeted', 0, '>'));
             @$this->deleteAll($criteria, $force);
         }
     }
@@ -373,25 +373,25 @@ class TwitterbombSchedulerHandler extends XoopsPersistableObjectHandler
     public function getFilterCriteria($filter)
     {
         $parts    = explode('|', $filter);
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
         foreach ($parts as $part) {
             $var = explode(',', $part);
             if (!empty($var[1]) && !is_numeric($var[0])) {
                 $object = $this->create();
                 if (XOBJ_DTYPE_TXTBOX == $object->vars[$var[0]]['data_type']
                     || XOBJ_DTYPE_TXTAREA == $object->vars[$var[0]]['data_type']) {
-                    $criteria->add(new Criteria('`' . $var[0] . '`', '%' . $var[1] . '%', ($var[2] ?? 'LIKE')));
+                    $criteria->add(new \Criteria('`' . $var[0] . '`', '%' . $var[1] . '%', ($var[2] ?? 'LIKE')));
                 } elseif (XOBJ_DTYPE_INT == $object->vars[$var[0]]['data_type']
                           || XOBJ_DTYPE_DECIMAL == $object->vars[$var[0]]['data_type']
                           || XOBJ_DTYPE_FLOAT == $object->vars[$var[0]]['data_type']) {
-                    $criteria->add(new Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
+                    $criteria->add(new \Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
                 } elseif (XOBJ_DTYPE_ENUM == $object->vars[$var[0]]['data_type']) {
-                    $criteria->add(new Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
+                    $criteria->add(new \Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
                 } elseif (XOBJ_DTYPE_ARRAY == $object->vars[$var[0]]['data_type']) {
-                    $criteria->add(new Criteria('`' . $var[0] . '`', '%"' . $var[1] . '";%', ($var[2] ?? 'LIKE')));
+                    $criteria->add(new \Criteria('`' . $var[0] . '`', '%"' . $var[1] . '";%', ($var[2] ?? 'LIKE')));
                 }
             } elseif (!empty($var[1]) && is_numeric($var[0])) {
-                $criteria->add(new Criteria($var[0], $var[1]));
+                $criteria->add(new \Criteria($var[0], $var[1]));
             }
         }
         return $criteria;
@@ -410,7 +410,7 @@ class TwitterbombSchedulerHandler extends XoopsPersistableObjectHandler
     public function delete($id_or_object, $force = true)
     {
         if (is_numeric($id_or_object)) {
-            return $this->deleteAll(new Criteria('`' . $this->keyName . '`', $id_or_object), $force);
+            return $this->deleteAll(new \Criteria('`' . $this->keyName . '`', $id_or_object), $force);
         } elseif (is_object($id_or_object)) {
             return parent::delete($id_or_object, $force);
         }

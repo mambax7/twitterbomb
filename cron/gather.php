@@ -45,9 +45,9 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_gather']) {
 		return false;
 	}
 	if (!$oids = XoopsCache::read('twitterbomb_oids_cron')) {
-		$criteria = new CriteriaCompo(new Criteria('1', '1'));
+		$criteria = new \CriteriaCompo(new \Criteria('1', '1'));
 	} else {
-		$criteria = new CriteriaCompo(new Criteria('oid', '('.implode(',', $oids).')', 'IN'));
+		$criteria = new \CriteriaCompo(new \Criteria('oid', '('.implode(',', $oids).')', 'IN'));
 	}
 	$criteria->setOrder('DESC');
 	$criteria->setSort('RAND()');
@@ -66,7 +66,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_gather']) {
 			}
 			if ($ids = $oauth->getFriends($oauth->getVar('id'))) {
 				foreach($ids as $id) {
-					if (0 == $usernames_handler->getCount(new Criteria('id', $id))) {
+					if (0 == $usernames_handler->getCount(new \Criteria('id', $id))) {
 						$flid[$id] = $id;
 					}
 				}
@@ -108,7 +108,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_gather']) {
 					$ids[$mention['user']['id']] = $mention['user']['id'];
 				}		
 				foreach($ids as $id) {
-					if (0 == $usernames_handler->getCount(new Criteria('id', $id))) {
+					if (0 == $usernames_handler->getCount(new \Criteria('id', $id))) {
 						$flid[$id] = $id;
 					}
 				}
@@ -148,7 +148,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_gather']) {
 	$GLOBALS['execution_time'] = $GLOBALS['execution_time'] + 120;
 	set_time_limit($GLOBALS['execution_time']);
 
-	$criteria = new Criteria('indexed', time(), '<=');
+	$criteria = new \Criteria('indexed', time(), '<=');
 	$criteria->setSort(`indexed`);
 	$criteria->setOrder('ASC');
 	$criteria->setLimit($GLOBALS['twitterbombModuleConfig']['gather_per_session']);
@@ -169,7 +169,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_gather']) {
 		}
 		if ($ids = $oauth->getFriends($username->getVar('id'))) {
 			foreach($ids as $id) {
-				if (0 == $usernames_handler->getCount(new Criteria('id', $id))) {
+				if (0 == $usernames_handler->getCount(new \Criteria('id', $id))) {
 					$flid[$id] = $id;
 				}
 			}

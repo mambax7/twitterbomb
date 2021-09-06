@@ -38,46 +38,46 @@ class TwitterbombReplies extends XoopsObject
     {
         $ret             = parent::toArray();
         $ele             = [];
-        $ele['id']       = new XoopsFormHidden('id[' . $ret['rpid'] . ']', $this->getVar('rpid'));
+        $ele['id']       = new \XoopsFormHidden('id[' . $ret['rpid'] . ']', $this->getVar('rpid'));
         $ele['cid']      = new TwitterBombFormSelectCampaigns('', $ret['rpid'] . '[cid]', $this->getVar('cid'), 1, false, true, 'reply');
         $ele['catid']    = new TwitterBombFormSelectCategories('', $ret['rpid'] . '[catid]', $this->getVar('catid'));
         $ele['urlid']    = new TwitterBombFormSelectUrls('', $ret['rpid'] . '[urlid]', $this->getVar('urlid'));
         $ele['rcid']     = new TwitterBombFormSelectCampaigns('', $ret['rpid'] . '[rcid]', $this->getVar('rcid'), 1, false, true, 'bomb');
         $ele['type']     = new TwitterBombFormSelectType('', $ret['rpid'] . '[type]', $this->getVar('type'), 1, false, false, 'bomb,reply');
-        $ele['reply']    = new XoopsFormText('', $ret['rpid'] . '[reply]', 26, 140, $this->getVar('reply'));
-        $ele['keywords'] = new XoopsFormTextArea('', $ret['rpid'] . '[keywords]', $this->getVar('keywords'), 4, 26);
+        $ele['reply']    = new \XoopsFormText('', $ret['rpid'] . '[reply]', 26, 140, $this->getVar('reply'));
+        $ele['keywords'] = new \XoopsFormTextArea('', $ret['rpid'] . '[keywords]', $this->getVar('keywords'), 4, 26);
 
         if ($ret['uid'] > 0) {
             $member_handler = xoops_getHandler('member');
             $user           = $member_handler->getUser($ret['uid']);
-            $ele['uid']     = new XoopsFormLabel('', '<a href="' . XOOPS_URL . '/userinfo.php?uid=' . $ret['uid'] . '">' . $user->getVar('uname') . '</a>');
+            $ele['uid']     = new \XoopsFormLabel('', '<a href="' . XOOPS_URL . '/userinfo.php?uid=' . $ret['uid'] . '">' . $user->getVar('uname') . '</a>');
         } else {
-            $ele['uid'] = new XoopsFormLabel('', _MI_TWEETBOMB_ANONYMOUS);
+            $ele['uid'] = new \XoopsFormLabel('', _MI_TWEETBOMB_ANONYMOUS);
         }
         if ($ret['replies'] > 0) {
-            $ele['replies'] = new XoopsFormLabel('', $ret['replies']);
+            $ele['replies'] = new \XoopsFormLabel('', $ret['replies']);
         } else {
-            $ele['replies'] = new XoopsFormLabel('', '');
+            $ele['replies'] = new \XoopsFormLabel('', '');
         }
         if ($ret['replied'] > 0) {
-            $ele['replied'] = new XoopsFormLabel('', date(_DATESTRING, $ret['replied']));
+            $ele['replied'] = new \XoopsFormLabel('', date(_DATESTRING, $ret['replied']));
         } else {
-            $ele['replied'] = new XoopsFormLabel('', '');
+            $ele['replied'] = new \XoopsFormLabel('', '');
         }
         if ($ret['created'] > 0) {
-            $ele['created'] = new XoopsFormLabel('', date(_DATESTRING, $ret['created']));
+            $ele['created'] = new \XoopsFormLabel('', date(_DATESTRING, $ret['created']));
         } else {
-            $ele['created'] = new XoopsFormLabel('', '');
+            $ele['created'] = new \XoopsFormLabel('', '');
         }
         if ($ret['actioned'] > 0) {
-            $ele['actioned'] = new XoopsFormLabel('', date(_DATESTRING, $ret['actioned']));
+            $ele['actioned'] = new \XoopsFormLabel('', date(_DATESTRING, $ret['actioned']));
         } else {
-            $ele['actioned'] = new XoopsFormLabel('', '');
+            $ele['actioned'] = new \XoopsFormLabel('', '');
         }
         if ($ret['updated'] > 0) {
-            $ele['updated'] = new XoopsFormLabel('', date(_DATESTRING, $ret['updated']));
+            $ele['updated'] = new \XoopsFormLabel('', date(_DATESTRING, $ret['updated']));
         } else {
-            $ele['updated'] = new XoopsFormLabel('', '');
+            $ele['updated'] = new \XoopsFormLabel('', '');
         }
         foreach ($ele as $key => $obj) {
             $ret['form'][$key] = $obj->render();
@@ -238,33 +238,33 @@ class TwitterbombRepliesHandler extends XoopsPersistableObjectHandler
 
     public function getObject($cid, $catid, $tweet, $rpids = null)
     {
-        $criteriaa = new CriteriaCompo(new Criteria('cid', 0), 'OR');
-        $criteriaa->add(new Criteria('catid', 0), 'OR');
-        $criteriab = new CriteriaCompo(new Criteria('cid', $cid), 'OR');
-        $criteriab->add(new Criteria('catid', $catid), 'OR');
-        $criteriac = new CriteriaCompo(new Criteria('cid', $cid), 'AND');
-        $criteriac->add(new Criteria('catid', $catid), 'AND');
+        $criteriaa = new \CriteriaCompo(new \Criteria('cid', 0), 'OR');
+        $criteriaa->add(new \Criteria('catid', 0), 'OR');
+        $criteriab = new \CriteriaCompo(new \Criteria('cid', $cid), 'OR');
+        $criteriab->add(new \Criteria('catid', $catid), 'OR');
+        $criteriac = new \CriteriaCompo(new \Criteria('cid', $cid), 'AND');
+        $criteriac->add(new \Criteria('catid', $catid), 'AND');
         $tweet     = str_replace(['@', '#'], '', $tweet);
-        $criteriad = new CriteriaCompo();
+        $criteriad = new \CriteriaCompo();
         foreach (explode(' ', $tweet) as $node) {
-            $criteriad->add(new Criteria('`keywords`', '%' . strtolower($node) . '%', 'LIKE'), 'OR');
+            $criteriad->add(new \Criteria('`keywords`', '%' . strtolower($node) . '%', 'LIKE'), 'OR');
         }
-        $criteriad->add(new Criteria('`keywords`', '', 'LIKE'), 'OR');
-        $criteriad->add(new Criteria('`keywords`', null, 'LIKE'), 'OR');
-        $criteriae = new CriteriaCompo();
+        $criteriad->add(new \Criteria('`keywords`', '', 'LIKE'), 'OR');
+        $criteriad->add(new \Criteria('`keywords`', null, 'LIKE'), 'OR');
+        $criteriae = new \CriteriaCompo();
         foreach (explode(' ', $tweet) as $node) {
-            $criteriae->add(new Criteria('`keywords`', '%-' . strtolower($node) . '%', 'NOT LIKE'), 'AND');
+            $criteriae->add(new \Criteria('`keywords`', '%-' . strtolower($node) . '%', 'NOT LIKE'), 'AND');
         }
-        $criteriae->add(new Criteria('`keywords`', '', 'LIKE'), 'OR');
-        $criteriae->add(new Criteria('`keywords`', null, 'LIKE'), 'OR');
-        $criteriaf = new CriteriaCompo($criteriaa, 'OR');
+        $criteriae->add(new \Criteria('`keywords`', '', 'LIKE'), 'OR');
+        $criteriae->add(new \Criteria('`keywords`', null, 'LIKE'), 'OR');
+        $criteriaf = new \CriteriaCompo($criteriaa, 'OR');
         $criteriaf->add($criteriab, 'OR');
         $criteriaf->add($criteriac, 'OR');
         $criteriaf->add($criteriad, 'AND');
         $criteriaf->add($criteriae, 'AND');
-        $criteria = new CriteriaCompo($criteriaf, 'AND');
+        $criteria = new \CriteriaCompo($criteriaf, 'AND');
         if (is_array($rpids) && count($rpids) > 0) {
-            $criteria->add(new Criteria('`rpid`', '(' . implode(',', $rpids) . ')', 'IN'), 'AND');
+            $criteria->add(new \Criteria('`rpid`', '(' . implode(',', $rpids) . ')', 'IN'), 'AND');
         }
         $criteria->setOrder('DESC');
         $criteria->setSort('RAND()');
@@ -281,25 +281,25 @@ class TwitterbombRepliesHandler extends XoopsPersistableObjectHandler
     public function getFilterCriteria($filter)
     {
         $parts    = explode('|', $filter);
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
         foreach ($parts as $part) {
             $var = explode(',', $part);
             if (!empty($var[1]) && !is_numeric($var[0])) {
                 $object = $this->create();
                 if (XOBJ_DTYPE_TXTBOX == $object->vars[$var[0]]['data_type']
                     || XOBJ_DTYPE_TXTAREA == $object->vars[$var[0]]['data_type']) {
-                    $criteria->add(new Criteria('`' . $var[0] . '`', '%' . $var[1] . '%', ($var[2] ?? 'LIKE')));
+                    $criteria->add(new \Criteria('`' . $var[0] . '`', '%' . $var[1] . '%', ($var[2] ?? 'LIKE')));
                 } elseif (XOBJ_DTYPE_INT == $object->vars[$var[0]]['data_type']
                           || XOBJ_DTYPE_DECIMAL == $object->vars[$var[0]]['data_type']
                           || XOBJ_DTYPE_FLOAT == $object->vars[$var[0]]['data_type']) {
-                    $criteria->add(new Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
+                    $criteria->add(new \Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
                 } elseif (XOBJ_DTYPE_ENUM == $object->vars[$var[0]]['data_type']) {
-                    $criteria->add(new Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
+                    $criteria->add(new \Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
                 } elseif (XOBJ_DTYPE_ARRAY == $object->vars[$var[0]]['data_type']) {
-                    $criteria->add(new Criteria('`' . $var[0] . '`', '%"' . $var[1] . '";%', ($var[2] ?? 'LIKE')));
+                    $criteria->add(new \Criteria('`' . $var[0] . '`', '%"' . $var[1] . '";%', ($var[2] ?? 'LIKE')));
                 }
             } elseif (!empty($var[1]) && is_numeric($var[0])) {
-                $criteria->add(new Criteria($var[0], $var[1]));
+                $criteria->add(new \Criteria($var[0], $var[1]));
             }
         }
         return $criteria;
@@ -318,7 +318,7 @@ class TwitterbombRepliesHandler extends XoopsPersistableObjectHandler
     public function delete($id_or_object, $force = true)
     {
         if (is_numeric($id_or_object)) {
-            return $this->deleteAll(new Criteria('`' . $this->keyName . '`', $id_or_object), $force);
+            return $this->deleteAll(new \Criteria('`' . $this->keyName . '`', $id_or_object), $force);
         } elseif (is_object($id_or_object)) {
             return parent::delete($id_or_object, $force);
         }

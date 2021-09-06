@@ -132,9 +132,9 @@ if ('showallbyuser' != $action) {
 switch ($action) {
     case 'results':
         $module_handler = xoops_getHandler('module');
-        $criteria       = new CriteriaCompo(new Criteria('hassearch', 1));
-        $criteria->add(new Criteria('isactive', 1));
-        $criteria->add(new Criteria('mid', '(' . implode(',', $available_modules) . ')', 'IN'));
+        $criteria       = new \CriteriaCompo(new \Criteria('hassearch', 1));
+        $criteria->add(new \Criteria('isactive', 1));
+        $criteria->add(new \Criteria('mid', '(' . implode(',', $available_modules) . ')', 'IN'));
         $modules = $module_handler->getObjects($criteria, true);
         $mids = $_REQUEST['mids'] ?? [];
         if (empty($mids) || ! is_array($mids)) {

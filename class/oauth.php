@@ -469,36 +469,36 @@ class TwitterbombOauth extends XoopsObject
     {
         $ret           = parent::toArray();
         $ele           = [];
-        $ele['id']     = new XoopsFormHidden('id[' . $ret['oid'] . ']', $this->getVar('oid'));
+        $ele['id']     = new \XoopsFormHidden('id[' . $ret['oid'] . ']', $this->getVar('oid'));
         $ele['cids']   = new TwitterBombFormSelectCampaigns('', $ret['oid'] . '[cids]', $this->getVar('cids'), 6, true);
         $ele['catids'] = new TwitterBombFormSelectCategories('', $ret['oid'] . '[catids]', $this->getVar('catids'), 6, true);
         $ele['type']   = new TwitterBombFormSelectOAuthMode('', $ret['oid'] . '[mode]', $this->getVar('mode'));
         if ($ret['uid'] > 0) {
             $member_handler = xoops_getHandler('member');
             $user           = $member_handler->getUser($ret['uid']);
-            $ele['uid']     = new XoopsFormLabel('', '<a href="' . XOOPS_URL . '/userinfo.php?uid=' . $ret['uid'] . '">' . $user->getVar('uname') . '</a>');
+            $ele['uid']     = new \XoopsFormLabel('', '<a href="' . XOOPS_URL . '/userinfo.php?uid=' . $ret['uid'] . '">' . $user->getVar('uname') . '</a>');
         } else {
-            $ele['uid'] = new XoopsFormLabel('', _MI_TWEETBOMB_ANONYMOUS);
+            $ele['uid'] = new \XoopsFormLabel('', _MI_TWEETBOMB_ANONYMOUS);
         }
         if ($ret['created'] > 0) {
-            $ele['created'] = new XoopsFormLabel('', date(_DATESTRING, $ret['created']));
+            $ele['created'] = new \XoopsFormLabel('', date(_DATESTRING, $ret['created']));
         } else {
-            $ele['created'] = new XoopsFormLabel('', '');
+            $ele['created'] = new \XoopsFormLabel('', '');
         }
         if ($ret['actioned'] > 0) {
-            $ele['actioned'] = new XoopsFormLabel('', date(_DATESTRING, $ret['actioned']));
+            $ele['actioned'] = new \XoopsFormLabel('', date(_DATESTRING, $ret['actioned']));
         } else {
-            $ele['actioned'] = new XoopsFormLabel('', '');
+            $ele['actioned'] = new \XoopsFormLabel('', '');
         }
         if ($ret['updated'] > 0) {
-            $ele['updated'] = new XoopsFormLabel('', date(_DATESTRING, $ret['updated']));
+            $ele['updated'] = new \XoopsFormLabel('', date(_DATESTRING, $ret['updated']));
         } else {
-            $ele['updated'] = new XoopsFormLabel('', '');
+            $ele['updated'] = new \XoopsFormLabel('', '');
         }
         if ($ret['tweeted'] > 0) {
-            $ele['tweeted'] = new XoopsFormLabel('', date(_DATESTRING, $ret['tweeted']));
+            $ele['tweeted'] = new \XoopsFormLabel('', date(_DATESTRING, $ret['tweeted']));
         } else {
-            $ele['tweeted'] = new XoopsFormLabel('', '');
+            $ele['tweeted'] = new \XoopsFormLabel('', '');
         }
         foreach ($ele as $key => $obj) {
             $ret['form'][$key] = $obj->render();
@@ -647,10 +647,10 @@ class TwitterbombOauthHandler extends XoopsPersistableObjectHandler
         if (!empty($this->_modConfig['consumer_key']) && !empty($this->_modConfig['consumer_secret'])
             && !empty($this->_modConfig['access_token'])
             && !empty($this->_modConfig['access_token_secret'])) {
-            $criteria = new CriteriaCompo(new Criteria('consumer_key', $this->_modConfig['consumer_key']));
-            $criteria->add(new Criteria('consumer_secret', $this->_modConfig['consumer_secret']));
-            $criteria->add(new Criteria('oauth_token', $this->_modConfig['access_token']));
-            $criteria->add(new Criteria('oauth_token_secret', $this->_modConfig['access_token_secret']));
+            $criteria = new \CriteriaCompo(new \Criteria('consumer_key', $this->_modConfig['consumer_key']));
+            $criteria->add(new \Criteria('consumer_secret', $this->_modConfig['consumer_secret']));
+            $criteria->add(new \Criteria('oauth_token', $this->_modConfig['access_token']));
+            $criteria->add(new \Criteria('oauth_token_secret', $this->_modConfig['access_token_secret']));
 
             if ($this->getCount($criteria) > 0) {
                 $oauths = parent::getObjects($criteria, false);
@@ -677,25 +677,25 @@ class TwitterbombOauthHandler extends XoopsPersistableObjectHandler
     public function getFilterCriteria($filter)
     {
         $parts    = explode('|', $filter);
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
         foreach ($parts as $part) {
             $var = explode(',', $part);
             if (!empty($var[1]) && !is_numeric($var[0])) {
                 $object = $this->create();
                 if (XOBJ_DTYPE_TXTBOX == $object->vars[$var[0]]['data_type']
                     || XOBJ_DTYPE_TXTAREA == $object->vars[$var[0]]['data_type']) {
-                    $criteria->add(new Criteria('`' . $var[0] . '`', '%' . $var[1] . '%', ($var[2] ?? 'LIKE')));
+                    $criteria->add(new \Criteria('`' . $var[0] . '`', '%' . $var[1] . '%', ($var[2] ?? 'LIKE')));
                 } elseif (XOBJ_DTYPE_INT == $object->vars[$var[0]]['data_type']
                           || XOBJ_DTYPE_DECIMAL == $object->vars[$var[0]]['data_type']
                           || XOBJ_DTYPE_FLOAT == $object->vars[$var[0]]['data_type']) {
-                    $criteria->add(new Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
+                    $criteria->add(new \Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
                 } elseif (XOBJ_DTYPE_ENUM == $object->vars[$var[0]]['data_type']) {
-                    $criteria->add(new Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
+                    $criteria->add(new \Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
                 } elseif (XOBJ_DTYPE_ARRAY == $object->vars[$var[0]]['data_type']) {
-                    $criteria->add(new Criteria('`' . $var[0] . '`', '%"' . $var[1] . '";%', ($var[2] ?? 'LIKE')));
+                    $criteria->add(new \Criteria('`' . $var[0] . '`', '%"' . $var[1] . '";%', ($var[2] ?? 'LIKE')));
                 }
             } elseif (!empty($var[1]) && is_numeric($var[0])) {
-                $criteria->add(new Criteria($var[0], $var[1]));
+                $criteria->add(new \Criteria($var[0], $var[1]));
             }
         }
         return $criteria;

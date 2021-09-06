@@ -112,7 +112,7 @@ class TwitterBombFormSelectCategories extends XoopsFormElement
     public function GetCategories($ownid)
     {
         $category_handler = xoops_getModuleHandler('category', 'twitterbomb');
-        $categories       = $category_handler->getObjects(new Criteria('pcatdid', 0), true);
+        $categories       = $category_handler->getObjects(new \Criteria('pcatdid', 0), true);
         $langs_array      = $this->TreeMenu([], $categories, -1, $ownid);
         return $langs_array;
     }
@@ -124,7 +124,7 @@ class TwitterBombFormSelectCategories extends XoopsFormElement
         foreach ($categories as $catid => $category) {
             if ($catid != $ownid) {
                 $langs_array[$catid] = str_repeat('--', $level) . $category->getVar('name');
-                if ($categoriesb = $category_handler->getObjects(new Criteria('pcatdid', $catid), true)) {
+                if ($categoriesb = $category_handler->getObjects(new \Criteria('pcatdid', $catid), true)) {
                     $langs_array = $this->TreeMenu($langs_array, $categoriesb, $level, $ownid);
                 }
             }

@@ -109,9 +109,9 @@ class TwitterBombFormSelectScreenname extends XoopsFormElement
         ini_set('memory_limit', '386M');
         $usernames_handler = xoops_getModuleHandler('usernames', 'twitterbomb');
         if (is_array($ids)) {
-            $criteria = new Criteria('id', '(' . implode(',', $ids) . ')', 'IN');
+            $criteria = new \Criteria('id', '(' . implode(',', $ids) . ')', 'IN');
         } else {
-            $criteria = new Criteria('1', '1');
+            $criteria = new \Criteria('1', '1');
         }
         $criteria->setSort('`screen_name`');
         $criteria->setOrder('ASC');

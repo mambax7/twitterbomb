@@ -26,24 +26,24 @@ class TwitterbombFollowing extends XoopsObject
     {
         $ret = parent::toArray();
         if ($ret['created'] > 0) {
-            $ele['created'] = new XoopsFormLabel('', date(_DATESTRING, $ret['created']));
+            $ele['created'] = new \XoopsFormLabel('', date(_DATESTRING, $ret['created']));
         } else {
-            $ele['created'] = new XoopsFormLabel('', '');
+            $ele['created'] = new \XoopsFormLabel('', '');
         }
         if ($ret['actioned'] > 0) {
-            $ele['actioned'] = new XoopsFormLabel('', date(_DATESTRING, $ret['actioned']));
+            $ele['actioned'] = new \XoopsFormLabel('', date(_DATESTRING, $ret['actioned']));
         } else {
-            $ele['actioned'] = new XoopsFormLabel('', '');
+            $ele['actioned'] = new \XoopsFormLabel('', '');
         }
         if ($ret['updated'] > 0) {
-            $ele['updated'] = new XoopsFormLabel('', date(_DATESTRING, $ret['updated']));
+            $ele['updated'] = new \XoopsFormLabel('', date(_DATESTRING, $ret['updated']));
         } else {
-            $ele['updated'] = new XoopsFormLabel('', '');
+            $ele['updated'] = new \XoopsFormLabel('', '');
         }
         if ($ret['followed'] > 0) {
-            $ele['followed'] = new XoopsFormLabel('', date(_DATESTRING, $ret['followed']));
+            $ele['followed'] = new \XoopsFormLabel('', date(_DATESTRING, $ret['followed']));
         } else {
-            $ele['followed'] = new XoopsFormLabel('', '');
+            $ele['followed'] = new \XoopsFormLabel('', '');
         }
         foreach ($ele as $key => $obj) {
             $ret['form'][$key] = $obj->render();
@@ -82,55 +82,55 @@ class TwitterbombFollowingHandler extends XoopsPersistableObjectHandler
     public function criteriaAssocWithID($ids, $field = 'id')
     {
         if (is_array($ids)) {
-            $criteria = new Criteria('id', '(' . implode(',', $ids) . ')', 'IN');
+            $criteria = new \Criteria('id', '(' . implode(',', $ids) . ')', 'IN');
             $ret      = [];
             foreach ($this->getObjects($criteria, true) as $fid => $following) {
                 $ret[$following->getVar('flid')] = $following->getVar('flid');
                 $ret[$following->getVar('id')]   = $following->getVar('id');
             }
             if (is_array($ret) && !empty($ret)) {
-                return new Criteria($field, '(' . implode(',', $ret) . ')', 'IN');
+                return new \Criteria($field, '(' . implode(',', $ret) . ')', 'IN');
             } else {
-                return new Criteria('1', '1', '=');
+                return new \Criteria('1', '1', '=');
             }
         } elseif (is_numeric($ids) && 0 != (int)$ids) {
-            $criteria = new Criteria('id', $ids, '=');
+            $criteria = new \Criteria('id', $ids, '=');
             $ret      = [];
             foreach ($this->getObjects($criteria, true) as $fid => $following) {
                 $ret[$following->getVar('flid')] = $following->getVar('flid');
                 $ret[$following->getVar('id')]   = $following->getVar('id');
             }
             if (is_array($ret) && !empty($ret)) {
-                return new Criteria($field, '(' . implode(',', $ret) . ')', 'IN');
+                return new \Criteria($field, '(' . implode(',', $ret) . ')', 'IN');
             } else {
-                return new Criteria('1', '1', '=');
+                return new \Criteria('1', '1', '=');
             }
         }
-        return new Criteria('1', '1', '=');
+        return new \Criteria('1', '1', '=');
     }
 
     public function getFilterCriteria($filter)
     {
         $parts    = explode('|', $filter);
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
         foreach ($parts as $part) {
             $var = explode(',', $part);
             if (!empty($var[1]) && !is_numeric($var[0])) {
                 $object = $this->create();
                 if (XOBJ_DTYPE_TXTBOX == $object->vars[$var[0]]['data_type']
                     || XOBJ_DTYPE_TXTAREA == $object->vars[$var[0]]['data_type']) {
-                    $criteria->add(new Criteria('`' . $var[0] . '`', '%' . $var[1] . '%', ($var[2] ?? 'LIKE')));
+                    $criteria->add(new \Criteria('`' . $var[0] . '`', '%' . $var[1] . '%', ($var[2] ?? 'LIKE')));
                 } elseif (XOBJ_DTYPE_INT == $object->vars[$var[0]]['data_type']
                           || XOBJ_DTYPE_DECIMAL == $object->vars[$var[0]]['data_type']
                           || XOBJ_DTYPE_FLOAT == $object->vars[$var[0]]['data_type']) {
-                    $criteria->add(new Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
+                    $criteria->add(new \Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
                 } elseif (XOBJ_DTYPE_ENUM == $object->vars[$var[0]]['data_type']) {
-                    $criteria->add(new Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
+                    $criteria->add(new \Criteria('`' . $var[0] . '`', $var[1], ($var[2] ?? '=')));
                 } elseif (XOBJ_DTYPE_ARRAY == $object->vars[$var[0]]['data_type']) {
-                    $criteria->add(new Criteria('`' . $var[0] . '`', '%"' . $var[1] . '";%', ($var[2] ?? 'LIKE')));
+                    $criteria->add(new \Criteria('`' . $var[0] . '`', '%"' . $var[1] . '";%', ($var[2] ?? 'LIKE')));
                 }
             } elseif (!empty($var[1]) && is_numeric($var[0])) {
-                $criteria->add(new Criteria($var[0], $var[1]));
+                $criteria->add(new \Criteria($var[0], $var[1]));
             }
         }
         return $criteria;
@@ -149,7 +149,7 @@ class TwitterbombFollowingHandler extends XoopsPersistableObjectHandler
     public function delete($id_or_object, $force = true)
     {
         if (is_numeric($id_or_object)) {
-            return $this->deleteAll(new Criteria('`' . $this->keyName . '`', $id_or_object), $force);
+            return $this->deleteAll(new \Criteria('`' . $this->keyName . '`', $id_or_object), $force);
         } elseif (is_object($id_or_object)) {
             return parent::delete($id_or_object, $force);
         }

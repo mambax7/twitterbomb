@@ -195,7 +195,7 @@ if (!function_exists('twitterbomb_adminMenu')) {
 if (!function_exists('twitterbomb_getSubCategoriesIn')) {
 	function twitterbomb_getSubCategoriesIn($catid=0){
 		$category_handler = xoops_getModuleHandler('category', 'twitterbomb');
-		$categories       = $category_handler->getObjects(new Criteria('pcatdid', $catid), true);
+		$categories       = $category_handler->getObjects(new \Criteria('pcatdid', $catid), true);
 		$in_array = twitterbomb_getCategoryTree([], $categories, -1, $catid);
 		$in_array[$catid]=$catid;
 		return $in_array;
@@ -207,7 +207,7 @@ if (!function_exists('twitterbomb_getCategoryTree')) {
 		$category_handler = xoops_getModuleHandler('category', 'twitterbomb');
 		foreach($categories as $catid => $category) {
 			$in_array[$catid] = $catid;
-			if ($categoriesb = $category_handler->getObjects(new Criteria('pcatdid', $catid), true)){
+			if ($categoriesb = $category_handler->getObjects(new \Criteria('pcatdid', $catid), true)){
 				$in_array = twitterbomb_getCategoryTree($in_array, $categoriesb, $ownid);
 			}
 		}
@@ -379,7 +379,7 @@ if (!function_exists('twitterbomb_get_retweet_rss')) {
 				    			$url = $urls_handler->getUrl($cid, $catid);
 				    			$link = XOOPS_URL.'/modules/twitterbomb/go.php?rid='.$rid.'&cid='.$cid.'&lid='.$lid.'&catid='.$catid.'&uri='.urlencode( sprintf($url, urlencode(str_replace(['#', '@'], '', $tweet['text']))));
 					   			
-				    			$criteria = new Criteria('`screen_name`', $tweet['from_user']);
+				    			$criteria = new \Criteria('`screen_name`', $tweet['from_user']);
 				    			if (0 == $usernames_handler->getCount($criteria)) {
 				    				$username = $usernames_handler->create();
 				    				$username->setVar('screen_name', $tweet['from_user']);
@@ -545,18 +545,18 @@ if (!function_exists('tweetbomb_getFilterElement')) {
 			case 'user':
 			case 'reply':
 			case 'keywords':		    	
-		    	$ele = new XoopsFormElementTray('');
-				$ele->addElement(new XoopsFormText('', 'filter_'.$field.'', 11, 40, $components['value']));
-				$button = new XoopsFormButton('', 'button_'.$field.'', '[+]');
+		    	$ele = new \XoopsFormElementTray('');
+				$ele->addElement(new \XoopsFormText('', 'filter_'.$field.'', 11, 40, $components['value']));
+				$button = new \XoopsFormButton('', 'button_'.$field.'', '[+]');
 		    	$button->setExtra('onclick="window.open(\''.$_SERVER['PHP_SELF'].'?'.$components['extra'].'&filter='.$components['filter'].(!empty($components['filter'])?'|':'').$field.',\'+$(\'#filter_'.$field.'\').val()'.(!empty($components['operator'])?'+\','.$components['operator'].'\'':'').',\'_self\')"');
 		    	$ele->addElement($button);
 		    	break;
 		    case 'radius':
 		    	$measurement = tweetbomb_getFilterURLComponents($components['filter'], 'measurement', $sort);
-				$ele = new XoopsFormElementTray('');
-				$ele->addElement(new XoopsFormText('', 'filter_radius', 8, 40, $components['value']));
+				$ele = new \XoopsFormElementTray('');
+				$ele->addElement(new \XoopsFormText('', 'filter_radius', 8, 40, $components['value']));
 				$ele->addElement(new TwitterBombFormSelectMeasurement('', 'filter_measurement', $measurement['value']));
-				$button = new XoopsFormButton('', 'button_'.$field.'', '[+]');
+				$button = new \XoopsFormButton('', 'button_'.$field.'', '[+]');
 		    	$button->setExtra('onclick="window.open(\''.$_SERVER['PHP_SELF'].'?'.$measurement['extra'].'&filter='.$measurement['filter'].(!empty($measurement['filter'])?'|':'').'radius'.',\'+$(\'#filter_radius\').val()'.(!empty($components['operator'])?'+\','.$components['operator'].'\'':'').'+\'|'.'measurement'.',\'+$(\'#filter_measurement'.'\').val()'.(!empty($measurement['operator'])?'+\','.$measurement['operator'].'\'':'').',\'_self\')"');
 		    	$ele->addElement($button);		    	
 		}

@@ -15,7 +15,7 @@ function b_twitterbomb_block_topranked_show( $options )
 		$scheduler_handler = xoops_getModuleHandler('scheduler', 'twitterbomb');
 		$scheduler_handler->recalc();
 		
-		$criteria = new CriteriaCompo(new Criteria('`rank`', '0', '>'));
+		$criteria = new \CriteriaCompo(new \Criteria('`rank`', '0', '>'));
 		$criteria->setSort('`rank` DESC, `sid`');
 		$criteria->setOrder('`ASC`'); 
 		$criteria->setLimit($options[0]);
@@ -40,7 +40,7 @@ function b_twitterbomb_block_topranked_edit( $options )
 {
 	include_once($GLOBALS['xoops']->path('/modules/twitterbomb/include/formobjects.twitterbomb.php'));
 	
-	$number = new XoopsFormText('', 'options[]', 10, 15, $options[0]);
+	$number = new \XoopsFormText('', 'options[]', 10, 15, $options[0]);
 	$form = '' . _BL_TWITTERBOMB_NUMBER . '&nbsp;' . $number->render() . '<br/>';
 	
 	return $form ;

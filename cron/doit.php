@@ -50,29 +50,29 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 	$oauth_handler = xoops_getModuleHandler('oauth', 'twitterbomb');
 	@$oauth = $oauth_handler->getRootOauth(true);
 	if (!$cids = XoopsCache::read('twitterbomb_cids_cron')) {
-		$criteria_a = new CriteriaCompo(new Criteria('timed', '0'));
-		$criteria_b = new CriteriaCompo(new Criteria('timed', '1'));
-		$criteria_b->add(new Criteria('start', time(), '<'));
-		$criteria_b->add(new Criteria('end', time(), '>'));
-		$criteria = new CriteriaCompo($criteria_a);
+		$criteria_a = new \CriteriaCompo(new \Criteria('timed', '0'));
+		$criteria_b = new \CriteriaCompo(new \Criteria('timed', '1'));
+		$criteria_b->add(new \Criteria('start', time(), '<'));
+		$criteria_b->add(new \Criteria('end', time(), '>'));
+		$criteria = new \CriteriaCompo($criteria_a);
 		$criteria->add($criteria_b, 'OR');
 	} else {
 		XoopsCache::delete('twitterbomb_cids_cron');
-		$criteria_a = new CriteriaCompo(new Criteria('timed', '0'));
-		$criteria_a->add(new Criteria('cid', '('.implode(',', $cids).')', 'IN'));
-		$criteria_b = new CriteriaCompo(new Criteria('timed', '1'));
-		$criteria_b->add(new Criteria('start', time(), '<'));
-		$criteria_b->add(new Criteria('end', time(), '>'));
-		$criteria_b->add(new Criteria('cid', '('.implode(',', $cids).')', 'IN'));
-		$criteria = new CriteriaCompo($criteria_a);
+		$criteria_a = new \CriteriaCompo(new \Criteria('timed', '0'));
+		$criteria_a->add(new \Criteria('cid', '('.implode(',', $cids).')', 'IN'));
+		$criteria_b = new \CriteriaCompo(new \Criteria('timed', '1'));
+		$criteria_b->add(new \Criteria('start', time(), '<'));
+		$criteria_b->add(new \Criteria('end', time(), '>'));
+		$criteria_b->add(new \Criteria('cid', '('.implode(',', $cids).')', 'IN'));
+		$criteria = new \CriteriaCompo($criteria_a);
 		$criteria->add($criteria_b, 'OR');
 	}
 	if ($GLOBALS['twitterbombModuleConfig']['cron_retweet']&&$GLOBALS['twitterbombModuleConfig']['cron_tweet']) {
-		$criteria->add(new Criteria('`type`', '("scheduler", "bomber", "retweet")', 'IN'));
+		$criteria->add(new \Criteria('`type`', '("scheduler", "bomber", "retweet")', 'IN'));
 	} elseif ($GLOBALS['twitterbombModuleConfig']['cron_tweet']) {
-		$criteria->add(new Criteria('`type`', '("scheduler", "bomber")', 'IN'));
+		$criteria->add(new \Criteria('`type`', '("scheduler", "bomber")', 'IN'));
 	} elseif ($GLOBALS['twitterbombModuleConfig']['cron_retweet']) {
-		$criteria->add(new Criteria('`type`', '("retweet")', 'IN'));		
+		$criteria->add(new \Criteria('`type`', '("retweet")', 'IN'));		
 	}
 	$criteria->setOrder('DESC');
 	$criteria->setSort('RAND()');
@@ -279,7 +279,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 											if (is_array($tweet)) {
 												$log_handler=xoops_getModuleHandler('log', 'twitterbomb');
 												$pass=true;
-												$criteria = new Criteria('id', $id);
+												$criteria = new \Criteria('id', $id);
 												if (0 == $log_handler->getCount($criteria) && true == $pass) {
 									    			$log = $log_handler->create();
 									    			$log->setVar('provider', 'retweet');
@@ -301,7 +301,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 										    			}
 										    			$url = $urls_handler->getUrl($cid, $catid);
 										    			$link = XOOPS_URL.'/modules/twitterbomb/go.php?rid='.$rid.'&cid='.$cid.'&lid='.$lid.'&catid='.$catid.'&uri='.urlencode( sprintf($url, urlencode(str_replace(['#', '@'], '', $tweet['text']))));
-										    			$criteria = new Criteria('`screen_name`', $tweet['from_user']);
+										    			$criteria = new \Criteria('`screen_name`', $tweet['from_user']);
 										    			if (0 == $usernames_handler->getCount($criteria)) {
 										    				$username = $usernames_handler->create();
 										    				$username->setVar('screen_name', $tweet['from_user']);
@@ -360,31 +360,31 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 		}
 		if ($c<=(($GLOBALS['twitterbombModuleConfig']['tweets_per_session']+$GLOBALS['twitterbombModuleConfig']['retweets_per_session']))) {
 			if (0 == count($cids)) {
-				$criteria_a = new CriteriaCompo(new Criteria('timed', '0'));
-				$criteria_b = new CriteriaCompo(new Criteria('timed', '1'));
-				$criteria_b->add(new Criteria('start', time(), '<'));
-				$criteria_b->add(new Criteria('end', time(), '>'));
-				$criteria = new CriteriaCompo($criteria_a);
+				$criteria_a = new \CriteriaCompo(new \Criteria('timed', '0'));
+				$criteria_b = new \CriteriaCompo(new \Criteria('timed', '1'));
+				$criteria_b->add(new \Criteria('start', time(), '<'));
+				$criteria_b->add(new \Criteria('end', time(), '>'));
+				$criteria = new \CriteriaCompo($criteria_a);
 				$criteria->add($criteria_b, 'OR');
 				$criteria->setSort('RAND()');
 			} else {
 				
-				$criteria_a = new CriteriaCompo(new Criteria('timed', '0'));
-				$criteria_a->add(new Criteria('cid', '('.implode(',', $cids).')', 'IN'));
-				$criteria_b = new CriteriaCompo(new Criteria('timed', '1'));
-				$criteria_b->add(new Criteria('start', time(), '<'));
-				$criteria_b->add(new Criteria('end', time(), '>'));
-				$criteria_b->add(new Criteria('cid', '('.implode(',', $cids).')', 'IN'));
-				$criteria = new CriteriaCompo($criteria_a);
+				$criteria_a = new \CriteriaCompo(new \Criteria('timed', '0'));
+				$criteria_a->add(new \Criteria('cid', '('.implode(',', $cids).')', 'IN'));
+				$criteria_b = new \CriteriaCompo(new \Criteria('timed', '1'));
+				$criteria_b->add(new \Criteria('start', time(), '<'));
+				$criteria_b->add(new \Criteria('end', time(), '>'));
+				$criteria_b->add(new \Criteria('cid', '('.implode(',', $cids).')', 'IN'));
+				$criteria = new \CriteriaCompo($criteria_a);
 				$criteria->add($criteria_b, 'OR');
 				$criteria->setSort('RAND()');
 			}
 			if ($GLOBALS['twitterbombModuleConfig']['cron_retweet']&&$GLOBALS['twitterbombModuleConfig']['cron_tweet']) {
-				$criteria->add(new Criteria('`type`', '("scheduler", "bomber", "retweet")', 'IN'));
+				$criteria->add(new \Criteria('`type`', '("scheduler", "bomber", "retweet")', 'IN'));
 			} elseif ($GLOBALS['twitterbombModuleConfig']['cron_tweet']) {
-				$criteria->add(new Criteria('`type`', '("scheduler", "bomber")', 'IN'));
+				$criteria->add(new \Criteria('`type`', '("scheduler", "bomber")', 'IN'));
 			} elseif ($GLOBALS['twitterbombModuleConfig']['cron_retweet']) {
-				$criteria->add(new Criteria('`type`', '("retweet")', 'IN'));		
+				$criteria->add(new \Criteria('`type`', '("retweet")', 'IN'));		
 			}
 			$criteria->setOrder('ASC');
 			$criteria->setSort('cron');
