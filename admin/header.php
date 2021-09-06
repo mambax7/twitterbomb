@@ -9,8 +9,8 @@
 		
 	$GLOBALS['myts'] = MyTextSanitizer::getInstance();
 	
-	$module_handler = xoops_gethandler('module');
-	$config_handler = xoops_gethandler('config');
+	$module_handler = xoops_getHandler('module');
+	$config_handler = xoops_getHandler('config');
 	$GLOBALS['twitterbombModule'] = $module_handler->getByDirname('twitterbomb');
 	$GLOBALS['twitterbombModuleConfig'] = $config_handler->getConfigList($GLOBALS['twitterbombModule']->getVar('mid')); 
 		
@@ -31,7 +31,7 @@
 	$GLOBALS['twitterbombImageAdmin'] = XOOPS_URL .'/'. $GLOBALS['twitterbombModule']->getInfo('icons32');
 	
 	if ($GLOBALS['xoopsUser']) {
-	    $moduleperm_handler =& xoops_gethandler('groupperm');
+	    $moduleperm_handler =& xoops_getHandler('groupperm');
 	    if (!$moduleperm_handler->checkRight('module_admin', $GLOBALS['twitterbombModule']->getVar( 'mid' ), $GLOBALS['xoopsUser']->getGroups())) {
 	        redirect_header(XOOPS_URL, 1, _NOPERM);
 	        exit();

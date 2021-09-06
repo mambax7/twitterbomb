@@ -21,8 +21,8 @@ ini_set("error_log" , XOOPS_ROOT_PATH."/uploads/cron.errors.log.".md5(XOOPS_ROOT
 ini_set("display_errors" , "1");
 
 
-$module_handler = xoops_gethandler('module');
-$config_handler = xoops_gethandler('config');
+$module_handler = xoops_getHandler('module');
+$config_handler = xoops_getHandler('config');
 $GLOBALS['twitterbombModule'] = $module_handler->getByDirname('twitterbomb');
 $GLOBALS['twitterbombModuleConfig'] = $config_handler->getConfigList($GLOBALS['twitterbombModule']->getVar('mid'));
 if (!isset($GLOBALS['cron_run_for']))
@@ -40,16 +40,16 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 		}
 	}
 	
-	$scheduler_handler=&xoops_getmodulehandler('scheduler', 'twitterbomb');
-	$base_matrix_handler=&xoops_getmodulehandler('base_matrix', 'twitterbomb');
-	$usernames_handler=&xoops_getmodulehandler('usernames', 'twitterbomb');
-	$urls_handler=&xoops_getmodulehandler('urls', 'twitterbomb');
-	$campaign_handler = xoops_getmodulehandler('campaign', 'twitterbomb');
-	$retweet_handler=&xoops_getmodulehandler('retweet', 'twitterbomb');
-	$replies_handler=&xoops_getmodulehandler('replies', 'twitterbomb');
-	$mention_handler=&xoops_getmodulehandler('mentions', 'twitterbomb');
+	$scheduler_handler=&xoops_getModuleHandler('scheduler', 'twitterbomb');
+	$base_matrix_handler=&xoops_getModuleHandler('base_matrix', 'twitterbomb');
+	$usernames_handler=&xoops_getModuleHandler('usernames', 'twitterbomb');
+	$urls_handler=&xoops_getModuleHandler('urls', 'twitterbomb');
+	$campaign_handler = xoops_getModuleHandler('campaign', 'twitterbomb');
+	$retweet_handler=&xoops_getModuleHandler('retweet', 'twitterbomb');
+	$replies_handler=&xoops_getModuleHandler('replies', 'twitterbomb');
+	$mention_handler=&xoops_getModuleHandler('mentions', 'twitterbomb');
 	
-	$oauth_handler = xoops_getmodulehandler('oauth', 'twitterbomb');
+	$oauth_handler = xoops_getModuleHandler('oauth', 'twitterbomb');
 	@$oauth = $oauth_handler->getRootOauth(true);
 	if (!is_object($oauth)) {
 		xoops_error('Critical Error: No OAuth Root Object');
@@ -166,7 +166,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 									if (strlen($sentence)>0) {
 										$mtr=mt_rand($GLOBALS['twitterbombModuleConfig']['odds_lower'],$GLOBALS['twitterbombModuleConfig']['odds_higher']);
 										$tweet = (is_object($sourceuser)?'@'.$sourceuser->getVar('screen_name').' ':'').(strlen($username)>0&&($mtr<=$GLOBALS['twitterbombModuleConfig']['odds_minimum']||$mtr>=$GLOBALS['twitterbombModuleConfig']['odds_maximum'])?'#'.$username.' ':'').str_replace('#@', '@', str_replace('#(', '(#', str_replace('##', '#', twitterbomb_TweetString(htmlspecialchars_decode($sentence), $GLOBALS['twitterbombModuleConfig']['aggregate'], $GLOBALS['twitterbombModuleConfig']['wordlength']))));
-										$log_handler=xoops_getmodulehandler('log', 'twitterbomb');
+										$log_handler=xoops_getModuleHandler('log', 'twitterbomb');
 								   		$log = $log_handler->create();
 								   		$log->setVar('cid', $cid);
 								   		$log->setVar('catid', $catid);
@@ -183,7 +183,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 								   		if ($id = $oauth->sendTweet($tweet, $link, true)) {
 								   			echo 'Tweet Sent: '.$tweet.' - '.$link.NLB;
 									   		if ($GLOBALS['twitterbombModuleConfig']['tags']) {
-									   			$tag_handler = xoops_getmodulehandler('tag', 'tag');
+									   			$tag_handler = xoops_getModuleHandler('tag', 'tag');
 												$tag_handler->updateByItem(twitterbomb_ExtractTags($tweet), $lid, $GLOBALS['twitterbombModule']->getVar("dirname"), $catid);
 									   		}
 									   		$log->setVar('id', $id);
@@ -239,7 +239,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 										$tweet = (is_object($sourceuser)?'@'.$sourceuser->getVar('screen_name').' ':'').str_replace('#@', '@', str_replace('#(', '(#', str_replace('##', '#', $sentence['tweet'])));	  
 										$link = XOOPS_URL.'/modules/twitterbomb/go.php?sid='.$sentence['sid'].'&cid='.$cid.'&catid='.$catid.'&uri='.urlencode( sprintf($url, urlencode(str_replace(array('#', '@'), '',$tweet))));
 										if (strlen($tweet)!=0) {
-											$log_handler=xoops_getmodulehandler('log', 'twitterbomb');
+											$log_handler=xoops_getModuleHandler('log', 'twitterbomb');
 							    			$log = $log_handler->create();
 							    			$log->setVar('provider', 'scheduler');
 							    			$log->setVar('cid', $cid);
@@ -257,7 +257,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 									   		if ($id = $oauth->sendTweet($tweet, $link, true)) {
 									   			echo 'Tweet Sent: '.$tweet.' - '.$link.NLB;
 										   		if ($GLOBALS['twitterbombModuleConfig']['tags']) {
-													$tag_handler = xoops_getmodulehandler('tag', 'tag');
+													$tag_handler = xoops_getModuleHandler('tag', 'tag');
 													$tag_handler->updateByItem(twitterbomb_ExtractTags($tweet), $lid, $GLOBALS['twitterbombModule']->getVar("dirname"), $catid);
 								    			}
 								    			$log->setVar('id', $id);
@@ -325,7 +325,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 												$GLOBALS['execution_time'] = $GLOBALS['execution_time'] + 15;
 												set_time_limit($GLOBALS['execution_time']);
 												if (is_array($tweet)) {
-													$log_handler=xoops_getmodulehandler('log', 'twitterbomb');
+													$log_handler=xoops_getModuleHandler('log', 'twitterbomb');
 													$pass=true;
 													$criteria = new Criteria('id', $id);
 													if ($log_handler->getCount($criteria)==0&&$pass==true) {
@@ -344,7 +344,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 															$retweet_handler->setReweeted($rid);
 															echo 'Retweet Sent: '.$id.' - '.$tweet['text'].NLB;
 															if ($GLOBALS['twitterbombModuleConfig']['tags']) {
-																$tag_handler = xoops_getmodulehandler('tag', 'tag');
+																$tag_handler = xoops_getModuleHandler('tag', 'tag');
 																$tag_handler->updateByItem(twitterbomb_ExtractTags($tweet['text']), $lid, $GLOBALS['twitterbombModule']->getVar("dirname"), $catid);
 															}
 															$url = $urls_handler->getUrl($cid, $catid);
@@ -442,7 +442,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 															$url = sprintf($urlobj->getVar('surl'), urlencode(str_replace(array('#', '@'), '',$replytweet)));
 														}
 														$link = XOOPS_URL.'/modules/twitterbomb/go.php?rpid='.$rid.'&cid='.$cid.'&lid='.$lid.'&catid='.$catid.'&uri='.urlencode($url);  
-														$log_handler=xoops_getmodulehandler('log', 'twitterbomb');
+														$log_handler=xoops_getModuleHandler('log', 'twitterbomb');
 														$pass=true;
 														$criteria = new Criteria('id', $id);
 														if ($log_handler->getCount($criteria)==0&&$pass==true) {
@@ -463,7 +463,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 																$replies_handler->insert($reply);
 																echo 'Reply Sent: '.$replied['id_str'].' - '.$replytweet.NLB;
 																if ($GLOBALS['twitterbombModuleConfig']['tags']) {
-																	$tag_handler = xoops_getmodulehandler('tag', 'tag');
+																	$tag_handler = xoops_getModuleHandler('tag', 'tag');
 																	$tag_handler->updateByItem(twitterbomb_ExtractTags($replytweet), $lid, $GLOBALS['twitterbombModule']->getVar("dirname"), $catid);
 																}
 																$criteria = new Criteria('`screen_name`', $tweet['from_user']);
@@ -561,7 +561,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 															$url = sprintf($urlobj->getVar('surl'), urlencode(str_replace(array('#', '@'), '',$replytweet)));
 														}
 														$link = XOOPS_URL.'/modules/twitterbomb/go.php?rpid='.$rid.'&cid='.$cid.'&lid='.$lid.'&catid='.$catid.'&uri='.urlencode($url);  
-														$log_handler=xoops_getmodulehandler('log', 'twitterbomb');
+														$log_handler=xoops_getModuleHandler('log', 'twitterbomb');
 														$pass=true;
 														$criteria = new Criteria('id', $id);
 														if ($log_handler->getCount($criteria)==0&&$pass==true) {
@@ -582,7 +582,7 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_tweet']||$GLOBALS['twitterbombModu
 																$mention_handler->insert($mention);
 																echo 'Reply Sent: '.$replied['id_str'].' - '.$replytweet.NLB;
 																if ($GLOBALS['twitterbombModuleConfig']['tags']) {
-																	$tag_handler = xoops_getmodulehandler('tag', 'tag');
+																	$tag_handler = xoops_getModuleHandler('tag', 'tag');
 																	$tag_handler->updateByItem(twitterbomb_ExtractTags($replytweet), $lid, $GLOBALS['twitterbombModule']->getVar("dirname"), $catid);
 																}
 																$criteria = new Criteria('`screen_name`', $tweet['from_user']);

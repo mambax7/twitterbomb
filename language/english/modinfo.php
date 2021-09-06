@@ -399,8 +399,8 @@
 	
 	// Version 1.25
 	// Admin Menus
-	$module_handler = xoops_gethandler('module');
-	$config_handler = xoops_gethandler('config');
+	$module_handler = xoops_getHandler('module');
+	$config_handler = xoops_getHandler('config');
 	$GLOBALS['twitterbombModule'] = $module_handler->getByDirname('twitterbomb');
 
 	if (is_object($GLOBALS['twitterbombModule'])) {

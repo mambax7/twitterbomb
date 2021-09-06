@@ -9,8 +9,8 @@
 		
 	$GLOBALS['myts'] = MyTextSanitizer::getInstance();
 	
-	$module_handler = xoops_gethandler('module');
-	$config_handler = xoops_gethandler('config');
+	$module_handler = xoops_getHandler('module');
+	$config_handler = xoops_getHandler('config');
 	$GLOBALS['twitterbombModule'] = $module_handler->getByDirname('twitterbomb');
 	$GLOBALS['twitterbombModuleConfig'] = $config_handler->getConfigList($GLOBALS['twitterbombModule']->getVar('mid')); 
 	

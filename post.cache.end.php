@@ -8,8 +8,8 @@
 			include_once XOOPS_ROOT_PATH.'/class/cache/xoopscache.php';
 		}
 	}
-    $module_handler = xoops_gethandler('module');
-    $config_handler = xoops_gethandler('config');
+    $module_handler = xoops_getHandler('module');
+    $config_handler = xoops_getHandler('config');
     $GLOBALS['twitterbombModule'] = $module_handler->getByDirname('twitterbomb');
     if (is_object($GLOBALS['twitterbombModule'])) {
     	$GLOBALS['twitterbombModuleConfig'] = $config_handler->getConfigList($GLOBALS['twitterbombModule']->getVar('mid'));

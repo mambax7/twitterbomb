@@ -41,7 +41,7 @@ class TwitterbombOauth extends XoopsObject
         $this->initVar('api_resets', XOBJ_DTYPE_INT, null, false);
         $this->initVar('reset', XOBJ_DTYPE_INT, null, false);
 
-        $this->_handler   = xoops_getmodulehandler('oauth', 'twitterbomb');
+        $this->_handler   = xoops_getModuleHandler('oauth', 'twitterbomb');
         $this->_modConfig = $this->_handler->_modConfig;
     }
 
@@ -114,7 +114,7 @@ class TwitterbombOauth extends XoopsObject
 
     public function shortenURL($url)
     {
-        return twitterbomb_shortenURL($url);
+        return twitterbomb_shortenurl($url);
     }
 
     public function setHandler($handler)
@@ -474,7 +474,7 @@ class TwitterbombOauth extends XoopsObject
         $ele['catids'] = new TwitterBombFormSelectCategories('', $ret['oid'] . '[catids]', $this->getVar('catids'), 6, true);
         $ele['type']   = new TwitterBombFormSelectOAuthMode('', $ret['oid'] . '[mode]', $this->getVar('mode'));
         if ($ret['uid'] > 0) {
-            $member_handler = xoops_gethandler('member');
+            $member_handler = xoops_getHandler('member');
             $user           = $member_handler->getUser($ret['uid']);
             $ele['uid']     = new XoopsFormLabel('', '<a href="' . XOOPS_URL . '/userinfo.php?uid=' . $ret['uid'] . '">' . $user->getVar('uname') . '</a>');
         } else {
@@ -584,8 +584,8 @@ class TwitterbombOauthHandler extends XoopsPersistableObjectHandler
 
         $this->_user = twitterbomb_getuser_id();
 
-        $module_handler   = xoops_gethandler('module');
-        $config_handler   = xoops_gethandler('config');
+        $module_handler   = xoops_getHandler('module');
+        $config_handler   = xoops_getHandler('config');
         $this->_mod       = $module_handler->getByDirname('twitterbomb');
         $this->_modConfig = $config_handler->getConfigList($this->_mod->getVar('mid'));
     }

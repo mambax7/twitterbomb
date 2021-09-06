@@ -107,7 +107,7 @@ class TwitterBombFormSelectScreenname extends XoopsFormElement
             $this->addOption('', _MI_TWEETBOMB_NONE);
         }
         ini_set('memory_limit', '386M');
-        $usernames_handler = xoops_getmodulehandler('usernames', 'twitterbomb');
+        $usernames_handler = xoops_getModuleHandler('usernames', 'twitterbomb');
         if (is_array($ids)) {
             $criteria = new Criteria('id', '(' . implode(',', $ids) . ')', 'IN');
         } else {

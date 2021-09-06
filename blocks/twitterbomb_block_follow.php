@@ -3,8 +3,8 @@
 function b_twitterbomb_block_follow_show( $options )
 {
 	if (empty($options[0])) {
-		$module_handler = xoops_gethandler('module');
-		$config_handler = xoops_gethandler('config');
+		$module_handler = xoops_getHandler('module');
+		$config_handler = xoops_getHandler('config');
 		$xoModule = $module_handler->getByDirname('twitterbomb');
 		$xoConfig = $config_handler->getConfigList($xoModule->getVar('mid'));
 		$options[0] = $xoConfig['root_tweeter']; 
@@ -20,8 +20,8 @@ function b_twitterbomb_block_follow_edit( $options )
 	include_once($GLOBALS['xoops']->path('/modules/twitterbomb/include/formobjects.twitterbomb.php'));
 	
 	if (empty($options[0])) {
-		$module_handler = xoops_gethandler('module');
-		$config_handler = xoops_gethandler('config');
+		$module_handler = xoops_getHandler('module');
+		$config_handler = xoops_getHandler('config');
 		$xoModule = $module_handler->getByDirname('twitterbomb');
 		$xoConfig = $config_handler->getConfigList($xoModule->getVar('mid'));
 		$options[0] = $xoConfig['root_tweeter']; 

@@ -49,7 +49,7 @@ class TwitterbombBase_matrix extends XoopsObject
         $ele['base6'] = new TwitterBombFormSelectBase('', $ret['baseid'] . '[base6]', $this->getVar('base6'), 1, false, true, true);
         $ele['base7'] = new TwitterBombFormSelectBase('', $ret['baseid'] . '[base7]', $this->getVar('base7'), 1, false, true, true);
         if ($ret['uid'] > 0) {
-            $member_handler = xoops_gethandler('member');
+            $member_handler = xoops_getHandler('member');
             $user           = $member_handler->getUser($ret['uid']);
             $ele['uid']     = new XoopsFormLabel('', '<a href="' . XOOPS_URL . '/userinfo.php?uid=' . $ret['uid'] . '">' . $user->getVar('uname') . '</a>');
         } else {
@@ -230,7 +230,7 @@ class TwitterbombBase_matrixHandler extends XoopsPersistableObjectHandler
 
     public function getSentence($cid, $catid)
     {
-        $keywords_handler =& xoops_getmodulehandler('keywords', 'twitterbomb');
+        $keywords_handler =& xoops_getModuleHandler('keywords', 'twitterbomb');
 
         $criteriaa = new CriteriaCompo(new Criteria('cid', 0), 'OR');
         $criteriaa->add(new Criteria('catid', 0), 'OR');

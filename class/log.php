@@ -53,14 +53,14 @@ class TwitterBombLog extends XoopsObject
             $ret['active_datetime'] = date(_DATESTRING, $this->getVar('active'));
         }
         $ret['provider']  = ucfirst($this->getVar('provider'));
-        $campaign_handler =& xoops_getmodulehandler('campaign', 'twitterbomb');
+        $campaign_handler =& xoops_getModuleHandler('campaign', 'twitterbomb');
         if ($this->getVar('cid') <> 0) {
             $campaign = $campaign_handler->get($this->getVar('cid'));
             if (is_object($campaign)) {
                 $ret['cid_text'] = $campaign->getVar('name');
             }
         }
-        $category_handler =& xoops_getmodulehandler('category', 'twitterbomb');
+        $category_handler =& xoops_getModuleHandler('category', 'twitterbomb');
         if ($this->getVar('catid') <> 0) {
             $category = $category_handler->get($this->getVar('cid'));
             if (is_object($category)) {
@@ -138,8 +138,8 @@ class TwitterBombLogHandler extends XoopsPersistableObjectHandler
         $this->db = $db;
         parent::__construct($db, 'twitterbomb_log', 'TwitterBombLog', "lid", "tweet");
 
-        $module_handler   = xoops_gethandler('module');
-        $config_handler   = xoops_gethandler('config');
+        $module_handler   = xoops_getHandler('module');
+        $config_handler   = xoops_getHandler('config');
         $this->_mod       = $module_handler->getByDirname('twitterbomb');
         $this->_modConfig = $config_handler->getConfigList($this->_mod->getVar('mid'));
     }

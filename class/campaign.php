@@ -51,7 +51,7 @@ class TwitterbombCampaign extends XoopsObject
         $ele['end']         = new XoopsFormTextDateSelect('', $ret['cid'] . '[end]', 15, $this->getVar('end'));
         $ele['timed']       = new XoopsFormRadioYN('', $ret['cid'] . '[timed]', $this->getVar('timed'));
         if ($ret['uid'] > 0) {
-            $member_handler = xoops_gethandler('member');
+            $member_handler = xoops_getHandler('member');
             $user           = $member_handler->getUser($ret['uid']);
             if (is_object($user)) {
                 $ele['uid'] = new XoopsFormLabel('', '<a href="' . XOOPS_URL . '/userinfo.php?uid=' . $ret['uid'] . '">' . $user->getVar('uname') . '</a>');

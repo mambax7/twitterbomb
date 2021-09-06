@@ -4,8 +4,8 @@ function b_twitterbomb_block_usernames_show( $options )
 {
 	$block = array();
 				
-	$usernames_handler =& xoops_getmodulehandler('usernames', 'twitterbomb');
-	$following_handler =& xoops_getmodulehandler('following', 'twitterbomb');
+	$usernames_handler =& xoops_getModuleHandler('usernames', 'twitterbomb');
+	$following_handler =& xoops_getModuleHandler('following', 'twitterbomb');
 	
 	if (!empty($options[0]))
 		$criteria = $following_handler->criteriaAssocWithID($options[0]);

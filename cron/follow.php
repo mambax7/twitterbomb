@@ -9,8 +9,8 @@ if (!defined('NLB')) {
 		define('NLB', "<br/>");
 }
 
-$module_handler = xoops_gethandler('module');
-$config_handler = xoops_gethandler('config');
+$module_handler = xoops_getHandler('module');
+$config_handler = xoops_getHandler('config');
 $GLOBALS['twitterbombModule'] = $module_handler->getByDirname('twitterbomb');
 $GLOBALS['twitterbombModuleConfig'] = $config_handler->getConfigList($GLOBALS['twitterbombModule']->getVar('mid'));
 
@@ -29,10 +29,10 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_follow']) {
 		}
 	}
 	
-	$campaign_handler = xoops_getmodulehandler('campaign', 'twitterbomb');
-	$following_handler=&xoops_getmodulehandler('following', 'twitterbomb');
-	$usernames_handler=&xoops_getmodulehandler('usernames', 'twitterbomb');
-	$oauth_handler=&xoops_getmodulehandler('oauth', 'twitterbomb');
+	$campaign_handler = xoops_getModuleHandler('campaign', 'twitterbomb');
+	$following_handler=&xoops_getModuleHandler('following', 'twitterbomb');
+	$usernames_handler=&xoops_getModuleHandler('usernames', 'twitterbomb');
+	$oauth_handler=&xoops_getModuleHandler('oauth', 'twitterbomb');
 	
 	$oauth = $oauth_handler->getRootOauth(true);
 	if (!is_object($oauth)) {

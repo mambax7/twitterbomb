@@ -49,7 +49,7 @@ class TwitterbombUsernames extends XoopsObject
         $ele['screen_name'] = new XoopsFormText('', $ret['tid'] . '[screen_name]', 45, 64, $this->getVar('screen_name'));
         $ele['source_nick'] = new XoopsFormText('', $ret['tid'] . '[source_nick]', 45, 64, $this->getVar('source_nick'));
         if ($ret['uid'] > 0) {
-            $member_handler = xoops_gethandler('member');
+            $member_handler = xoops_getHandler('member');
             $user           = $member_handler->getUser($ret['uid']);
             $ele['uid']     = new XoopsFormLabel('', '<a href="' . XOOPS_URL . '/userinfo.php?uid=' . $ret['uid'] . '">' . $user->getVar('uname') . '</a>');
         } else {

@@ -5,14 +5,14 @@ function b_twitterbomb_block_topranked_show( $options )
 	if (empty($options[0]))
 		return false;
 
-	$module_handler = xoops_gethandler('module');
-	$config_handler = xoops_gethandler('config');
+	$module_handler = xoops_getHandler('module');
+	$config_handler = xoops_getHandler('config');
 	$xoModule = $module_handler->getByDirname('twitterbomb');
 	if (is_object($xoModule)) {
 		
 		$xoModuleConfig = $config_handler->getConfigList($xoModule->getVar('mid'));
 		
-		$scheduler_handler =& xoops_getmodulehandler('scheduler', 'twitterbomb');
+		$scheduler_handler =& xoops_getModuleHandler('scheduler', 'twitterbomb');
 		$scheduler_handler->recalc();
 		
 		$criteria = new CriteriaCompo(new Criteria('`rank`', '0', '>'));

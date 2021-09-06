@@ -36,7 +36,7 @@ class TwitterbombCategory extends XoopsObject
         $ele['pcatdid'] = new TwitterBombFormSelectCategories('', $ret['catid'] . '[pcatdid]', $this->getVar('pcatdid'), 1, false, $this->getVar('catid'));
         $ele['name']    = new XoopsFormText('', $ret['catid'] . '[name]', 26, 64, $this->getVar('name'));
         if ($ret['uid'] > 0) {
-            $member_handler = xoops_gethandler('member');
+            $member_handler = xoops_getHandler('member');
             $user           = $member_handler->getUser($ret['uid']);
             $ele['uid']     = new XoopsFormLabel('', '<a href="' . XOOPS_URL . '/userinfo.php?uid=' . $ret['uid'] . '">' . $user->getVar('uname') . '</a>');
         } else {

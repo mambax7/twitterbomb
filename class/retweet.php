@@ -217,7 +217,7 @@ class TwitterBombRetweet extends XoopsObject
         $ele['type']        = new TwitterbombFormSelectRetweetType('', $ret['rid'] . '[type]', $this->getVar('type'));
 
         if ($ret['uid'] > 0) {
-            $member_handler = xoops_gethandler('member');
+            $member_handler = xoops_getHandler('member');
             $user           = $member_handler->getUser($ret['uid']);
             $ele['uid']     = new XoopsFormLabel('', '<a href="' . XOOPS_URL . '/userinfo.php?uid=' . $ret['uid'] . '">' . $user->getVar('uname') . '</a>');
         } else {
@@ -323,8 +323,8 @@ class TwitterBombRetweetHandler extends XoopsPersistableObjectHandler
         $this->db = $db;
         parent::__construct($db, 'twitterbomb_retweet', 'TwitterBombRetweet', "rid", "search");
 
-        $module_handler   = xoops_gethandler('module');
-        $config_handler   = xoops_gethandler('config');
+        $module_handler   = xoops_getHandler('module');
+        $config_handler   = xoops_getHandler('config');
         $this->_mod       = $module_handler->getByDirname('twitterbomb');
         $this->_modConfig = $config_handler->getConfigList($this->_mod->getVar('mid'));
     }
@@ -373,7 +373,7 @@ class TwitterBombRetweetHandler extends XoopsPersistableObjectHandler
         $criteria->setSort('RAND()');
         $criteria->setOrder('ASC');
 
-        $log_handler = xoops_getmodulehandler('log', 'twitterbomb');
+        $log_handler = xoops_getModuleHandler('log', 'twitterbomb');
         $ret         = [];
         $terms       = $this->getObjects($criteria, true);
         foreach ($terms as $rid => $retweet) {

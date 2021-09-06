@@ -41,7 +41,7 @@ class TwitterbombUrls extends XoopsObject
         $ele['description'] = new XoopsFormTextArea('', $ret['urlid'] . '[catid]', 26, 4, $this->getVar('description'));
 
         if ($ret['uid'] > 0) {
-            $member_handler = xoops_gethandler('member');
+            $member_handler = xoops_getHandler('member');
             $user           = $member_handler->getUser($ret['uid']);
             $ele['uid']     = new XoopsFormLabel('', '<a href="' . XOOPS_URL . '/userinfo.php?uid=' . $ret['uid'] . '">' . $user->getVar('uname') . '</a>');
         } else {

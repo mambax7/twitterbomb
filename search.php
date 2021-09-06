@@ -28,7 +28,7 @@ include('header.php');
 
 xoops_loadLanguage('search');
 
-$config_handler =& xoops_gethandler('config');
+$config_handler =& xoops_getHandler('config');
 $xoopsConfigSearch = $config_handler->getConfigsByCat(XOOPS_CONF_SEARCH);
 
 if ($xoopsConfigSearch['enable_search'] != 1) {
@@ -90,7 +90,7 @@ if ($action == "results") {
 }
 
 $groups = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-$gperm_handler =& xoops_gethandler('groupperm');
+$gperm_handler =& xoops_getHandler('groupperm');
 $available_modules = $gperm_handler->getItemIds('module_read', $groups);
 if ($action == 'search') {
     include $GLOBALS['xoops']->path('header.php');
@@ -131,7 +131,7 @@ if ($action != 'showallbyuser') {
 }
 switch ($action) {
     case "results":
-        $module_handler =& xoops_gethandler('module');
+        $module_handler =& xoops_getHandler('module');
         $criteria = new CriteriaCompo(new Criteria('hassearch', 1));
         $criteria->add(new Criteria('isactive', 1));
         $criteria->add(new Criteria('mid', "(" . implode(',', $available_modules) . ")", 'IN'));
@@ -179,7 +179,7 @@ switch ($action) {
                         if (!preg_match("/^http[s]*:\/\//i", $results[$i]['link'])) {
                             $results[$i]['link'] = "modules/" . $module->getVar('dirname') . "/" . $results[$i]['link'];
                         }
-                        echo "<strong><a href='" . $results[$i]['link'] . "' title=''>" . $myts->htmlspecialchars($results[$i]['title']) . "</a></strong><br />\n";
+                        echo "<strong><a href='" . $results[$i]['link'] . "' title=''>" . $myts->htmlSpecialChars($results[$i]['title']) . "</a></strong><br />\n";
                         echo "<span class='x-small'>";
                         $results[$i]['uid'] = @intval($results[$i]['uid']);
                         if (!empty($results[$i]['uid'])) {
@@ -209,7 +209,7 @@ switch ($action) {
     case "showall":
     case 'showallbyuser':
         include $GLOBALS['xoops']->path('header.php');
-        $module_handler =& xoops_gethandler('module');
+        $module_handler =& xoops_getHandler('module');
         $module =& $module_handler->get($mid);
         $results = $module->search($queries, $andor, 20, $start, $uid);
         $count = count($results);
@@ -243,7 +243,7 @@ switch ($action) {
                 if (!preg_match("/^http[s]*:\/\//i", $results[$i]['link'])) {
                     $results[$i]['link'] = "modules/" . $module->getVar('dirname') . "/" . $results[$i]['link'];
                 }
-                echo "<strong><a href='" . $results[$i]['link'] . "'>" . $myts->htmlspecialchars($results[$i]['title']) . "</a></strong><br />\n";
+                echo "<strong><a href='" . $results[$i]['link'] . "'>" . $myts->htmlSpecialChars($results[$i]['title']) . "</a></strong><br />\n";
                 echo "<span class='x-small'>";
                 $results[$i]['uid'] = @intval($results[$i]['uid']);
                 if (!empty($results[$i]['uid'])) {

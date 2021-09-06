@@ -14,19 +14,19 @@
 	}
 	
 	if ($sid!=0) {
-		$scheduler_handler =& xoops_getmodulehandler('scheduler', 'twitterbomb');
+		$scheduler_handler =& xoops_getModuleHandler('scheduler', 'twitterbomb');
 		$scheduler_handler->plusHit($sid);
 	}           	
 	if ($lid!=0) {
-		$log_handler =& xoops_getmodulehandler('log', 'twitterbomb');
+		$log_handler =& xoops_getModuleHandler('log', 'twitterbomb');
 		$log_handler->plusHit($lid);
 	}
 	if ($cid!=0) {
-		$campaign_handler =& xoops_getmodulehandler('campaign', 'twitterbomb');
+		$campaign_handler =& xoops_getModuleHandler('campaign', 'twitterbomb');
 		$campaign_handler->plusHit($cid);
 	}
 	if ($catid!=0) {
-		$category_handler =& xoops_getmodulehandler('category', 'twitterbomb');
+		$category_handler =& xoops_getModuleHandler('category', 'twitterbomb');
 		$category_handler->plusHit($catid);
 	}	
 	header( "HTTP/1.1 301 Moved Permanently" ); 

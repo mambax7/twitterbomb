@@ -48,7 +48,7 @@ class TwitterbombReplies extends XoopsObject
         $ele['keywords'] = new XoopsFormTextArea('', $ret['rpid'] . '[keywords]', $this->getVar('keywords'), 4, 26);
 
         if ($ret['uid'] > 0) {
-            $member_handler = xoops_gethandler('member');
+            $member_handler = xoops_getHandler('member');
             $user           = $member_handler->getUser($ret['uid']);
             $ele['uid']     = new XoopsFormLabel('', '<a href="' . XOOPS_URL . '/userinfo.php?uid=' . $ret['uid'] . '">' . $user->getVar('uname') . '</a>');
         } else {
@@ -156,8 +156,8 @@ class TwitterbombReplies extends XoopsObject
                 return $this->getVar('reply');
                 break;
             case 'bomb':
-                $base_matrix_handler =& xoops_getmodulehandler('base_matrix', 'twitterbomb');
-                $campaign_handler    =& xoops_getmodulehandler('campaign', 'twitterbomb');
+                $base_matrix_handler =& xoops_getModuleHandler('base_matrix', 'twitterbomb');
+                $campaign_handler    =& xoops_getModuleHandler('campaign', 'twitterbomb');
                 $campaign            = $campaign_handler->get($this->getVar('rcid'));
                 if (is_object($campaign)) {
                     return $base_matrix_handler->getSentence($campaign->getVar('cid'), $campaign->getVar('catid'));

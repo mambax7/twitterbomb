@@ -3,7 +3,7 @@
 	function tweetbomb_retweet_get_form($object) {
 		
 		if (!is_object($object)) {
-			$handler = xoops_getmodulehandler('retweet', 'twitterbomb');
+			$handler = xoops_getModuleHandler('retweet', 'twitterbomb');
 			$object = $handler->create(); 
 		}
 		
@@ -43,7 +43,7 @@
 		$ele['type']->setDescription(_AM_TWEETBOMB_FORM_DESC_TYPE_RETWEET);
 		
 		if ($object->getVar('uid')>0) {
-			$member_handler=xoops_gethandler('member');
+			$member_handler=xoops_getHandler('member');
 			$user = $member_handler->getUser($object->getVar('uid'));
 			$ele['uid'] = new XoopsFormLabel(_AM_TWEETBOMB_FORM_UID_RETWEET, '<a href="'.XOOPS_URL.'/userinfo.php?uid='.$object->getVar('uid').'">'.$user->getVar('uname').'</a>');
 		} else {
@@ -87,7 +87,7 @@
 	function tweetbomb_base_matrix_get_form($object) {
 		
 		if (!is_object($object)) {
-			$handler = xoops_getmodulehandler('base_matrix', 'twitterbomb');
+			$handler = xoops_getModuleHandler('base_matrix', 'twitterbomb');
 			$object = $handler->create(); 
 		}
 
@@ -121,7 +121,7 @@
 		$ele['base7'] = new TwitterBombFormSelectBase(_AM_TWEETBOMB_FORM_BASEG_BASEMATRIX, $id.'[base7]', $object->getVar('base7'), 1, false, true, true);
 		$ele['base7']->setDescription(_AM_TWEETBOMB_FORM_DESC_BASEG_BASEMATRIX);
 		if ($object->getVar('uid')>0) {
-			$member_handler=xoops_gethandler('member');
+			$member_handler=xoops_getHandler('member');
 			$user = $member_handler->getUser($object->getVar('uid'));
 			$ele['uid'] = new XoopsFormLabel(_AM_TWEETBOMB_FORM_UID_BASEMATRIX, '<a href="'.XOOPS_URL.'/userinfo.php?uid='.$object->getVar('uid').'">'.$user->getVar('uname').'</a>');
 		} else {
@@ -153,7 +153,7 @@
 	function tweetbomb_replies_get_form($object) {
 		
 		if (!is_object($object)) {
-			$handler = xoops_getmodulehandler('replies', 'twitterbomb');
+			$handler = xoops_getModuleHandler('replies', 'twitterbomb');
 			$object = $handler->create(); 
 		}
 
@@ -184,7 +184,7 @@
 		$ele['rcid']->setDescription(_AM_TWEETBOMB_FORM_DESC_RCID_REPLIES);
 						
 		if ($object->getVar('uid')>0) {
-			$member_handler=xoops_gethandler('member');
+			$member_handler=xoops_getHandler('member');
 			$user = $member_handler->getUser($object->getVar('uid'));
 			$ele['uid'] = new XoopsFormLabel(_AM_TWEETBOMB_FORM_UID_REPLIES, '<a href="'.XOOPS_URL.'/userinfo.php?uid='.$object->getVar('uid').'">'.$user->getVar('uname').'</a>');
 		} else {
@@ -219,7 +219,7 @@
 	function tweetbomb_mentions_get_form($object) {
 		
 		if (!is_object($object)) {
-			$handler = xoops_getmodulehandler('mentions', 'twitterbomb');
+			$handler = xoops_getModuleHandler('mentions', 'twitterbomb');
 			$object = $handler->create(); 
 		}
 
@@ -260,7 +260,7 @@
 		$ele['type']->setDescription(_AM_TWEETBOMB_FORM_DESC_TYPE_MENTIONS);
 				
 		if ($object->getVar('uid')>0) {
-			$member_handler=xoops_gethandler('member');
+			$member_handler=xoops_getHandler('member');
 			$user = $member_handler->getUser($object->getVar('uid'));
 			$ele['uid'] = new XoopsFormLabel(_AM_TWEETBOMB_FORM_UID_MENTIONS, '<a href="'.XOOPS_URL.'/userinfo.php?uid='.$object->getVar('uid').'">'.$user->getVar('uname').'</a>');
 		} else {
@@ -294,7 +294,7 @@
 	function tweetbomb_campaign_get_form($object) {
 		
 		if (!is_object($object)) {
-			$handler = xoops_getmodulehandler('campaign', 'twitterbomb');
+			$handler = xoops_getModuleHandler('campaign', 'twitterbomb');
 			$object = $handler->create(); 
 		}
 
@@ -333,7 +333,7 @@
 		$ele['cron']->setDescription(_AM_TWEETBOMB_FORM_DESC_CRON_CAMPAIGN);
 		
 		if ($object->getVar('uid')>0) {
-			$member_handler=xoops_gethandler('member');
+			$member_handler=xoops_getHandler('member');
 			$user = $member_handler->getUser($object->getVar('uid'));
 			$ele['uid'] = new XoopsFormLabel(_AM_TWEETBOMB_FORM_UID_CAMPAIGN, '<a href="'.XOOPS_URL.'/userinfo.php?uid='.$object->getVar('uid').'">'.$user->getVar('uname').'</a>');
 		} else {
@@ -362,7 +362,7 @@
 	function tweetbomb_category_get_form($object) {
 		
 		if (!is_object($object)) {
-			$handler = xoops_getmodulehandler('category', 'twitterbomb');
+			$handler = xoops_getModuleHandler('category', 'twitterbomb');
 			$object = $handler->create(); 
 		}
 
@@ -383,7 +383,7 @@
 		$ele['name']->setDescription(_AM_TWEETBOMB_FORM_DESC_NAME_CATEGORY);
 		
 		if ($object->getVar('uid')>0) {
-			$member_handler=xoops_gethandler('member');
+			$member_handler=xoops_getHandler('member');
 			$user = $member_handler->getUser($object->getVar('uid'));
 			$ele['uid'] = new XoopsFormLabel(_AM_TWEETBOMB_FORM_UID_CATEGORY, '<a href="'.XOOPS_URL.'/userinfo.php?uid='.$object->getVar('uid').'">'.$user->getVar('uname').'</a>');
 		} else {
@@ -412,7 +412,7 @@
 	function tweetbomb_keywords_get_form($object) {
 		
 		if (!is_object($object)) {
-			$handler = xoops_getmodulehandler('keywords', 'twitterbomb');
+			$handler = xoops_getModuleHandler('keywords', 'twitterbomb');
 			$object = $handler->create(); 
 		}
 
@@ -436,7 +436,7 @@
 		$ele['keyword'] = new XoopsFormText(_AM_TWEETBOMB_FORM_KEYWORD_KEYWORDS, $id.'[keyword]', 30,35, $object->getVar('keyword'));
 		$ele['keyword']->setDescription(_AM_TWEETBOMB_FORM_DESC_KEYWORD_KEYWORDS);
 		if ($object->getVar('uid')>0) {
-			$member_handler=xoops_gethandler('member');
+			$member_handler=xoops_getHandler('member');
 			$user = $member_handler->getUser($object->getVar('uid'));
 			$ele['uid'] = new XoopsFormLabel(_AM_TWEETBOMB_FORM_UID_KEYWORDS, '<a href="'.XOOPS_URL.'/userinfo.php?uid='.$object->getVar('uid').'">'.$user->getVar('uname').'</a>');
 		} else {
@@ -468,7 +468,7 @@
 	function tweetbomb_usernames_get_form($object) {
 		
 		if (!is_object($object)) {
-			$handler = xoops_getmodulehandler('usernames', 'twitterbomb');
+			$handler = xoops_getModuleHandler('usernames', 'twitterbomb');
 			$object = $handler->create(); 
 		}
 
@@ -490,7 +490,7 @@
 		$ele['screen_name'] = new XoopsFormText(_AM_TWEETBOMB_FORM_USERNAME_USERNAMES, $id.'[screen_name]', 30,64, $object->getVar('screen_name'));
 		$ele['screen_name']->setDescription(_AM_TWEETBOMB_FORM_DESC_USERNAME_USERNAMES);
 		if ($object->getVar('uid')>0) {
-			$member_handler=xoops_gethandler('member');
+			$member_handler=xoops_getHandler('member');
 			$user = $member_handler->getUser($object->getVar('uid'));
 			$ele['uid'] = new XoopsFormLabel(_AM_TWEETBOMB_FORM_UID_USERNAMES, '<a href="'.XOOPS_URL.'/userinfo.php?uid='.$object->getVar('uid').'">'.$user->getVar('uname').'</a>');
 		} else {
@@ -519,7 +519,7 @@
 	function tweetbomb_urls_get_form($object) {
 		
 		if (!is_object($object)) {
-			$handler = xoops_getmodulehandler('urls', 'twitterbomb');
+			$handler = xoops_getModuleHandler('urls', 'twitterbomb');
 			$object = $handler->create(); 
 		}
 
@@ -545,7 +545,7 @@
 		$ele['description'] = new XoopsFormTextArea(_AM_TWEETBOMB_FORM_DESCRIPTION_URLS, $id.'[description]', $object->getVar('description'), 4, 26);
 		$ele['description']->setDescription(_AM_TWEETBOMB_FORM_DESC_DESCRIPTION_URLS);
 		if ($object->getVar('uid')>0) {
-			$member_handler=xoops_gethandler('member');
+			$member_handler=xoops_getHandler('member');
 			$user = $member_handler->getUser($object->getVar('uid'));
 			$ele['uid'] = new XoopsFormLabel(_AM_TWEETBOMB_FORM_UID_URLS, '<a href="'.XOOPS_URL.'/userinfo.php?uid='.$object->getVar('uid').'">'.$user->getVar('uname').'</a>');
 		} else {
@@ -606,7 +606,7 @@
 	function tweetbomb_scheduler_get_form($object) {
 		
 		if (!is_object($object)) {
-			$handler = xoops_getmodulehandler('scheduler', 'twitterbomb');
+			$handler = xoops_getModuleHandler('scheduler', 'twitterbomb');
 			$object = $handler->create(); 
 		}
 
@@ -643,7 +643,7 @@
 		$ele['pregmatch_replace']->setDescription(_AM_TWEETBOMB_FORM_DESC_PREGMATCH_REPLACE_SCHEDULER);		
 		
 		if ($object->getVar('uid')>0) {
-			$member_handler=xoops_gethandler('member');
+			$member_handler=xoops_getHandler('member');
 			$user = $member_handler->getUser($object->getVar('uid'));
 			$ele['uid'] = new XoopsFormLabel(_AM_TWEETBOMB_FORM_UID_SCHEDULER, '<a href="'.XOOPS_URL.'/userinfo.php?uid='.$object->getVar('uid').'">'.$user->getVar('uname').'</a>');
 		} else {
@@ -672,7 +672,7 @@
 	function tweetbomb_scheduler_get_upload_form($handler) {
 		
 		if (!is_object($handler)) {
-			$handler = xoops_getmodulehandler('scheduler', 'twitterbomb');
+			$handler = xoops_getModuleHandler('scheduler', 'twitterbomb');
 		}
 		
 		$object = $handler->create();
@@ -706,7 +706,7 @@
 		$ele['file']->setDescription(_AM_TWEETBOMB_FORM_DESC_FILE_SCHEDULER);
 
 		if ($object->getVar('uid')>0) {
-			$member_handler=xoops_gethandler('member');
+			$member_handler=xoops_getHandler('member');
 			$user = $member_handler->getUser($object->getVar('uid'));
 			$ele['uid'] = new XoopsFormLabel(_AM_TWEETBOMB_FORM_UID_SCHEDULER, '<a href="'.XOOPS_URL.'/userinfo.php?uid='.$object->getVar('uid').'">'.$user->getVar('uname').'</a>');
 		} else {

@@ -70,8 +70,8 @@ class TwitterbombFormCheckBoxReplies extends XoopsFormElement
         $this->_delimeter = $delimeter;
         $this->setFormType('checkbox');
 
-        $campaign_handler =& xoops_getmodulehandler('campaign', 'twitterbomb');
-        $replies_handler  =& xoops_getmodulehandler('replies', 'twitterbomb');
+        $campaign_handler =& xoops_getModuleHandler('campaign', 'twitterbomb');
+        $replies_handler  =& xoops_getModuleHandler('replies', 'twitterbomb');
         $criteria         = new Criteria('1', '1');
         $criteria->setSort('`type`, `created`');
         $criteria->setOrder('ASC');

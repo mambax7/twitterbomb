@@ -2,7 +2,7 @@
 
 include('header.php');
 
-$oauth_handler = xoops_getmodulehandler('oauth', 'twitterbomb');
+$oauth_handler = xoops_getModuleHandler('oauth', 'twitterbomb');
 
 $oauth_handler->getTempAuthentication();
 

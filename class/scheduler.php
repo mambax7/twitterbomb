@@ -75,7 +75,7 @@ class TwitterbombScheduler extends XoopsObject
         $ele['hits']              = new XoopsFormLabel('', $ret['hits']);
         $ele['rank']              = new XoopsFormLabel('', number_format(($this->getVar('rank') / $this->_modConfig['number_to_rank']) * 100, 2) . '%');
         if ($this->_modConfig['tags']) {
-            $log_handler = xoops_getmodulehandler('log', 'twitterbomb');
+            $log_handler = xoops_getModuleHandler('log', 'twitterbomb');
             if ($log_handler->getCount(new Criteria('sid', $this->getVar('sid'))) > 0) {
                 $logs = $log_handler->getObjects(new Criteria('sid', $this->getVar('sid')), false);
                 if (is_object($logs[0])) {
@@ -85,7 +85,7 @@ class TwitterbombScheduler extends XoopsObject
             }
         }
         if ($ret['uid'] > 0) {
-            $member_handler = xoops_gethandler('member');
+            $member_handler = xoops_getHandler('member');
             $user           = $member_handler->getUser($ret['uid']);
             $ele['uid']     = new XoopsFormLabel('', '<a href="' . XOOPS_URL . '/userinfo.php?uid=' . $ret['uid'] . '">' . $user->getVar('uname') . '</a>');
         } else {
@@ -230,8 +230,8 @@ class TwitterbombSchedulerHandler extends XoopsPersistableObjectHandler
     {
         parent::__construct($db, "twitterbomb_scheduler", 'TwitterbombScheduler', "sid", "text");
 
-        $module_handler   = xoops_gethandler('module');
-        $config_handler   = xoops_gethandler('config');
+        $module_handler   = xoops_getHandler('module');
+        $config_handler   = xoops_getHandler('config');
         $this->_mod       = $module_handler->getByDirname('twitterbomb');
         $this->_modConfig = $config_handler->getConfigList($this->_mod->getVar('mid'));
     }

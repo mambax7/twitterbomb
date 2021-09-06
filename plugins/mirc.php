@@ -32,7 +32,7 @@
 		
 		$parts = explode(' ', strtolower($tweet));
 		$common = explode(' ', strtolower($GLOBALS['xoopsModuleConfig']['scheduler_usernames']));
-		$usernames_handler = xoops_getmodulehandler('usernames', 'twitterbomb');
+		$usernames_handler = xoops_getModuleHandler('usernames', 'twitterbomb');
 		
 		if (count($common)==count($parts)&&sizeof($common)==sizeof($parts)) {
 			

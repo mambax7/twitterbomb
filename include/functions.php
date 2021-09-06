@@ -19,8 +19,8 @@ if (!function_exists("twitterbomb_getuser_id")) {
 		}
 		$ret['netbios'] = $net;
 		
-		$module_handler = xoops_gethandler('module');
-		$config_handler = xoops_gethandler('config');
+		$module_handler = xoops_getHandler('module');
+		$config_handler = xoops_getHandler('config');
 		$GLOBALS['twitterbombModule'] = $module_handler->getByDirname('twitterbomb');
 		$GLOBALS['twitterbombModuleConfig'] = $config_handler->getConfigList($GLOBALS['twitterbombModule']->getVar('mid'));
 		
@@ -47,8 +47,8 @@ if (!function_exists("twitterbomb_object2array")) {
 
 if (!function_exists("twitterbomb_shortenurl")) {
 	function twitterbomb_shortenurl($url) {
-		$module_handler = xoops_gethandler('module');
-		$config_handler = xoops_gethandler('config');
+		$module_handler = xoops_getHandler('module');
+		$config_handler = xoops_getHandler('config');
 		$GLOBALS['twitterbombModule'] = $module_handler->getByDirname('twitterbomb');
 		$GLOBALS['twitterbombModuleConfig'] = $config_handler->getConfigList($GLOBALS['twitterbombModule']->getVar('mid'));
 	
@@ -81,8 +81,8 @@ if (!function_exists("twitterbomb_shortenurl")) {
 
 if (!function_exists("twitterbomb_searchtwitter")) {
 	function twitterbomb_searchtwitter($numberofresults = 10, $q='', $exceptions = array(), $geocode='', $lang='en', $page=1, $result_type = 'mixed', $rpp = '100', $show_user = 'true', $until='', $since_id ='', $gathered=0, $next_url = '') {
-		$module_handler = xoops_gethandler('module');
-		$config_handler = xoops_gethandler('config');
+		$module_handler = xoops_getHandler('module');
+		$config_handler = xoops_getHandler('config');
 		$GLOBALS['twitterbombModule'] = $module_handler->getByDirname('twitterbomb');
 		$GLOBALS['twitterbombModuleConfig'] = $config_handler->getConfigList($GLOBALS['twitterbombModule']->getVar('mid'));
 		$GLOBALS['execution_time'] = $GLOBALS['execution_time'] + 15;
@@ -194,7 +194,7 @@ if (!function_exists("twitterbomb_adminMenu")) {
 
 if (!function_exists('twitterbomb_getSubCategoriesIn')) {
 	function twitterbomb_getSubCategoriesIn($catid=0){
-		$category_handler =& xoops_getmodulehandler('category', 'twitterbomb');
+		$category_handler =& xoops_getModuleHandler('category', 'twitterbomb');
 		$categories = $category_handler->getObjects(new Criteria('pcatdid', $catid), true);
 		$in_array = twitterbomb_getCategoryTree(array(), $categories, -1, $catid);
 		$in_array[$catid]=$catid;
@@ -204,7 +204,7 @@ if (!function_exists('twitterbomb_getSubCategoriesIn')) {
 
 if (!function_exists('twitterbomb_getCategoryTree')) {
 	function twitterbomb_getCategoryTree($in_array, $categories, $ownid) {
-		$category_handler =& xoops_getmodulehandler('category', 'twitterbomb');
+		$category_handler =& xoops_getModuleHandler('category', 'twitterbomb');
 		foreach($categories as $catid => $category) {
 			$in_array[$catid] = $catid;
 			if ($categoriesb = $category_handler->getObjects(new Criteria('pcatdid', $catid), true)){
@@ -217,9 +217,9 @@ if (!function_exists('twitterbomb_getCategoryTree')) {
 
 if (!function_exists('twitterbomb_get_rss')) {
 	function twitterbomb_get_rss($items, $cid, $catid) {
-		$base_matrix_handler=&xoops_getmodulehandler('base_matrix', 'twitterbomb');
-		$usernames_handler=&xoops_getmodulehandler('usernames', 'twitterbomb');
-		$urls_handler=&xoops_getmodulehandler('urls', 'twitterbomb');
+		$base_matrix_handler=&xoops_getModuleHandler('base_matrix', 'twitterbomb');
+		$usernames_handler=&xoops_getModuleHandler('usernames', 'twitterbomb');
+		$urls_handler=&xoops_getModuleHandler('urls', 'twitterbomb');
 		xoops_load('xoopscache');
 		if (!class_exists('XoopsCache')) {
 			// XOOPS 2.4 Compliance
@@ -240,7 +240,7 @@ if (!function_exists('twitterbomb_get_rss')) {
 			$ret[$c]['link'] = XOOPS_URL.'/modules/twitterbomb/go.php?cid='.$cid.'&catid='.$catid.'&uri='.urlencode( sprintf($url, urlencode(str_replace(array('#', '@'), '',$sentence))));
 			$ret[$c]['description'] = (is_object($sourceuser)?'@'.$sourceuser->getVar('screen_name').' ':'').(strlen($username)>0&&($mtr<=$GLOBALS['twitterbombModuleConfig']['odds_minimum']||$mtr>=$GLOBALS['twitterbombModuleConfig']['odds_maximum'])?'@'.$username.' ':'').htmlspecialchars_decode($sentence);
 			if (strlen($ret[$c]['title'])!=0) {
-    			$log_handler=xoops_getmodulehandler('log', 'twitterbomb');
+    			$log_handler=xoops_getModuleHandler('log', 'twitterbomb');
     			$log = $log_handler->create();
     			$log->setVar('cid', $cid);
     			$log->setVar('catid', $catid);
@@ -251,7 +251,7 @@ if (!function_exists('twitterbomb_get_rss')) {
     			$ret[$c]['lid'] = $log_handler->insert($log, true);
     			$ret[$c]['link'] = twitterbomb_shortenurl(XOOPS_URL.'/modules/twitterbomb/go.php?cid='.$cid.'&lid='.$ret[$c]['lid'].'&catid='.$catid.'&uri='.urlencode( sprintf($url, urlencode(str_replace(array('#', '@'), '',$sentence)))));
     			if ($GLOBALS['twitterbombModuleConfig']['tags']) {
-    				$tag_handler = xoops_getmodulehandler('tag', 'tag');
+    				$tag_handler = xoops_getModuleHandler('tag', 'tag');
 					$tag_handler->updateByItem($log->getVar('tags'), $ret[$c]['lid'], $GLOBALS['twitterbombModule']->getVar("dirname"), $catid);
     			}
     		}
@@ -270,9 +270,9 @@ if (!function_exists('twitterbomb_get_rss')) {
 
 if (!function_exists('twitterbomb_get_scheduler_rss')) {
 	function twitterbomb_get_scheduler_rss($items, $cid, $catid) {
-		$scheduler_handler=&xoops_getmodulehandler('scheduler', 'twitterbomb');
-		$urls_handler=&xoops_getmodulehandler('urls', 'twitterbomb');
-		$usernames_handler=&xoops_getmodulehandler('usernames', 'twitterbomb');
+		$scheduler_handler=&xoops_getModuleHandler('scheduler', 'twitterbomb');
+		$urls_handler=&xoops_getModuleHandler('urls', 'twitterbomb');
+		$usernames_handler=&xoops_getModuleHandler('usernames', 'twitterbomb');
 		xoops_load('xoopscache');
 		if (!class_exists('XoopsCache')) {
 			// XOOPS 2.4 Compliance
@@ -292,7 +292,7 @@ if (!function_exists('twitterbomb_get_scheduler_rss')) {
 				$ret[$c]['description'] = htmlspecialchars_decode((is_object($sourceuser)?'@'.$sourceuser->getVar('screen_name').' ':'').$sentence['tweet']);
 				$ret[$c]['sid'] = $sentence['sid'];
 				if (strlen($ret[$c]['title'])!=0) {
-					$log_handler=xoops_getmodulehandler('log', 'twitterbomb');
+					$log_handler=xoops_getModuleHandler('log', 'twitterbomb');
 	    			$log = $log_handler->create();
 	    			$log->setVar('provider', 'scheduler');
 	    			$log->setVar('cid', $cid);
@@ -304,7 +304,7 @@ if (!function_exists('twitterbomb_get_scheduler_rss')) {
 	    			$ret[$c]['lid'] = $log_handler->insert($log, true);
 	    			$ret[$c]['link'] = twitterbomb_shortenurl(XOOPS_URL.'/modules/twitterbomb/go.php?sid='.$sentence['sid'].'&lid='.$ret[$c]['lid'].'&cid='.$cid.'&catid='.$catid.'&uri='.urlencode( sprintf($url, urlencode(str_replace(array('#', '@'), '',$sentence['tweet'])))));
 	    			if ($GLOBALS['twitterbombModuleConfig']['tags']) {
-						$tag_handler = xoops_getmodulehandler('tag', 'tag');
+						$tag_handler = xoops_getModuleHandler('tag', 'tag');
 						$tag_handler->updateByItem($log->getVar('tags'), $ret[$c]['lid'], $GLOBALS['twitterbombModule']->getVar("dirname"), $catid);
 	    			}
 		    	}
@@ -325,12 +325,12 @@ if (!function_exists('twitterbomb_get_scheduler_rss')) {
 
 if (!function_exists('twitterbomb_get_retweet_rss')) {
 	function twitterbomb_get_retweet_rss($items, $cid, $catid) {
-		$campaign_handler=&xoops_getmodulehandler('campaign', 'twitterbomb');
-		$retweet_handler=&xoops_getmodulehandler('retweet', 'twitterbomb');
-		$urls_handler=&xoops_getmodulehandler('urls', 'twitterbomb');
-		$usernames_handler=&xoops_getmodulehandler('usernames', 'twitterbomb');
-		$log_handler=&xoops_getmodulehandler('log', 'twitterbomb');
-		$oauth_handler=&xoops_getmodulehandler('oauth', 'twitterbomb');
+		$campaign_handler=&xoops_getModuleHandler('campaign', 'twitterbomb');
+		$retweet_handler=&xoops_getModuleHandler('retweet', 'twitterbomb');
+		$urls_handler=&xoops_getModuleHandler('urls', 'twitterbomb');
+		$usernames_handler=&xoops_getModuleHandler('usernames', 'twitterbomb');
+		$log_handler=&xoops_getModuleHandler('log', 'twitterbomb');
+		$oauth_handler=&xoops_getModuleHandler('oauth', 'twitterbomb');
 
 		xoops_load('xoopscache');
 		if (!class_exists('XoopsCache')) {
@@ -358,7 +358,7 @@ if (!function_exists('twitterbomb_get_retweet_rss')) {
 				foreach ($search as $rid => $results) {
 					foreach($results as $id => $tweet) {
 						if (is_array($tweet)&&item<$items) {
-							$log_handler=xoops_getmodulehandler('log', 'twitterbomb');
+							$log_handler=xoops_getModuleHandler('log', 'twitterbomb');
 			    			$log = $log_handler->create();
 			    			$log->setVar('provider', 'retweet');
 			    			$log->setVar('cid', $cid);
@@ -373,7 +373,7 @@ if (!function_exists('twitterbomb_get_retweet_rss')) {
 					   		if ($retweet = $oauth->sendRetweet($id, true)) {
 					   			$retweet_handler->setReweeted($rid);
 						   		if ($GLOBALS['twitterbombModuleConfig']['tags']) {
-									$tag_handler = xoops_getmodulehandler('tag', 'tag');
+									$tag_handler = xoops_getModuleHandler('tag', 'tag');
 									$tag_handler->updateByItem(twitterbomb_ExtractTags($tweet['text']), $lid, $GLOBALS['twitterbombModule']->getVar("dirname"), $catid);
 				    			}
 				    			$url = $urls_handler->getUrl($cid, $catid);

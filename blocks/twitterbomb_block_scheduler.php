@@ -6,7 +6,7 @@ function b_twitterbomb_block_scheduler_show( $options )
 		return false;
 		
 	$block['tweets']=array();				
-	$campaign_handler =& xoops_getmodulehandler('campaign', 'twitterbomb');
+	$campaign_handler =& xoops_getModuleHandler('campaign', 'twitterbomb');
 	$campaign = $campaign_handler->get($options[0]);
 	if (!is_object($campaign)) {
 		$block['tweets'][0]['title'] = sprintf(_BL_TWEETBOMB_NO_CAMPAIGN, date('Y-m-d H:i:s', time()));
@@ -31,7 +31,7 @@ function b_twitterbomb_block_scheduler_show( $options )
 	if ($campaign->getVar('timed')!=0) {
 		if ($campaign->getVar('start')<time()&&$campaign->getVar('end')>time()) {
 			if (!$block['tweets'] = XoopsCache::read('tweetbomb_scheduler_'.$cacheid)) {
-				$log_handler =& xoops_getmodulehandler('log', 'twitterbomb');
+				$log_handler =& xoops_getModuleHandler('log', 'twitterbomb');
 				$criteria = new CriteriaCompo(new Criteria('cid', $cid));
 				$criteria->setSort('`date`');
 				$criteria->setOrder('DESC');
@@ -55,7 +55,7 @@ function b_twitterbomb_block_scheduler_show( $options )
 		}
 	} else {
 		if (!$block['tweets']  = XoopsCache::read('tweetbomb_scheduler_'.$cacheid)) {
-			$log_handler =& xoops_getmodulehandler('log', 'twitterbomb');
+			$log_handler =& xoops_getModuleHandler('log', 'twitterbomb');
 			$criteria = new CriteriaCompo(new Criteria('cid', $cid));
 			$criteria->setSort('`date`');
 			$criteria->setOrder('DESC');
@@ -76,7 +76,7 @@ function b_twitterbomb_block_scheduler_show( $options )
 	}
 	foreach($block['tweets'] as $key => $tweet) {
 		if (!empty($tweet['sid'])) {
-			$scheduler_handler =& xoops_getmodulehandler('scheduler', 'twitterbomb');
+			$scheduler_handler =& xoops_getModuleHandler('scheduler', 'twitterbomb');
 			$scheduler = $scheduler_handler->get($tweet['sid']);
 			if (is_object($scheduler))
 				$block['tweets'][$key]['hits'] = $scheduler->getVar('hits');

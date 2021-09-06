@@ -9,8 +9,8 @@ if (!defined('NLB')) {
 		define('NLB', "<br/>");
 }
 
-$module_handler = xoops_gethandler('module');
-$config_handler = xoops_gethandler('config');
+$module_handler = xoops_getHandler('module');
+$config_handler = xoops_getHandler('config');
 $GLOBALS['twitterbombModule'] = $module_handler->getByDirname('twitterbomb');
 $GLOBALS['twitterbombModuleConfig'] = $config_handler->getConfigList($GLOBALS['twitterbombModule']->getVar('mid'));
 
@@ -34,11 +34,11 @@ if ($GLOBALS['twitterbombModuleConfig']['cron_gather']) {
 		}
 	}
 	
-	$campaign_handler = xoops_getmodulehandler('campaign', 'twitterbomb');
-	$following_handler=&xoops_getmodulehandler('following', 'twitterbomb');
-	$usernames_handler=&xoops_getmodulehandler('usernames', 'twitterbomb');
+	$campaign_handler = xoops_getModuleHandler('campaign', 'twitterbomb');
+	$following_handler=&xoops_getModuleHandler('following', 'twitterbomb');
+	$usernames_handler=&xoops_getModuleHandler('usernames', 'twitterbomb');
 	
-	$oauth_handler = xoops_getmodulehandler('oauth', 'twitterbomb');
+	$oauth_handler = xoops_getModuleHandler('oauth', 'twitterbomb');
 	if (!is_object($oauth)) {
 		xoops_error('Critical Error: No OAuth Root Object');
 		echo 'Gather Cron Ended: '.date('Y-m-d D H:i:s', time()).NLB;

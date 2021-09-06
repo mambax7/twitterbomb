@@ -39,7 +39,7 @@ class TwitterbombKeywords extends XoopsObject
         $ele['base']    = new TwitterBombFormSelectBase('', $ret['kid'] . '[base]', $this->getVar('base'), 1, false, false);
         $ele['keyword'] = new XoopsFormText('', $ret['kid'] . '[keyword]', 26, 35, $this->getVar('keyword'));
         if ($ret['uid'] > 0) {
-            $member_handler = xoops_gethandler('member');
+            $member_handler = xoops_getHandler('member');
             $user           = $member_handler->getUser($ret['uid']);
             $ele['uid']     = new XoopsFormLabel('', '<a href="' . XOOPS_URL . '/userinfo.php?uid=' . $ret['uid'] . '">' . $user->getVar('uname') . '</a>');
         } else {
@@ -146,8 +146,8 @@ class TwitterbombKeywordsHandler extends XoopsPersistableObjectHandler
             }
         }
 
-        $module_handler   = xoops_gethandler('module');
-        $config_handler   = xoops_gethandler('config');
+        $module_handler   = xoops_getHandler('module');
+        $config_handler   = xoops_getHandler('config');
         $this->_mod       = $module_handler->getByDirname('twitterbomb');
         $this->_modConfig = $config_handler->getConfigList($this->_mod->getVar('mid'));
     }
@@ -226,7 +226,7 @@ class TwitterbombKeywordsHandler extends XoopsPersistableObjectHandler
                 break;
             case 'trend':
                 if (!$trend = XoopsCache::read('twitterbomb_trends_' . $this->_modConfig['trend_type'])) {
-                    $oauth_handler = xoops_getmodulehandler('oauth', 'twitterbomb');
+                    $oauth_handler = xoops_getModuleHandler('oauth', 'twitterbomb');
                     $trend         = $oauth_handler->getTrend($this->_modConfig['trend_type']);
                     if (!empty($trend)) {
                         XoopsCache::write('twitterbomb_trends_' . $this->_modConfig['trend_type'], $trend, $this->_modConfig['keep_trend_for']);

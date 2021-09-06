@@ -111,7 +111,7 @@ class TwitterBombFormSelectCategories extends XoopsFormElement
 
     public function GetCategories($ownid)
     {
-        $category_handler =& xoops_getmodulehandler('category', 'twitterbomb');
+        $category_handler =& xoops_getModuleHandler('category', 'twitterbomb');
         $categories       = $category_handler->getObjects(new Criteria('pcatdid', 0), true);
         $langs_array      = $this->TreeMenu([], $categories, -1, $ownid);
         return $langs_array;
@@ -120,7 +120,7 @@ class TwitterBombFormSelectCategories extends XoopsFormElement
     public function TreeMenu($langs_array, $categories, $level, $ownid)
     {
         $level++;
-        $category_handler =& xoops_getmodulehandler('category', 'twitterbomb');
+        $category_handler =& xoops_getModuleHandler('category', 'twitterbomb');
         foreach ($categories as $catid => $category) {
             if ($catid != $ownid) {
                 $langs_array[$catid] = str_repeat('--', $level) . $category->getVar('name');
