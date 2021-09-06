@@ -93,7 +93,7 @@ class TwitterbombFollowingHandler extends XoopsPersistableObjectHandler
             } else {
                 return new Criteria('1', '1', '=');
             }
-        } elseif (is_numeric($ids) && 0 != intval($ids)) {
+        } elseif (is_numeric($ids) && 0 != (int)$ids) {
             $criteria = new Criteria('id', $ids, '=');
             $ret      = [];
             foreach ($this->getObjects($criteria, true) as $fid => $following) {

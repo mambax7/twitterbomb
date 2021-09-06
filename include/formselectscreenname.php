@@ -117,7 +117,7 @@ class TwitterBombFormSelectScreenname extends XoopsFormElement
         $criteria->setOrder('ASC');
 
         foreach ($usernames_handler->getObjects($criteria, true) as $tid => $user) {
-            if (0 <> intval($user->getVar('id'))) {
+            if (0 <> (int)$user->getVar('id')) {
                 $this->addOption($user->getVar('id'), $user->getVar('screen_name'));
             }
         }
